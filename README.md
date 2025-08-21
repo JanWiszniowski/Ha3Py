@@ -1,4 +1,4 @@
-![Alt text](https://github.com/JanWiszniowski/Ha3Py/blob/master/docs/imgs/logo_hapy.png)
+![Alt text](https://github.com/JanWiszniowski/Ha3Py/blob/master/docs/imgs/catalogues1.png)
 # Ha3Py
 
 Hy3Py is the Python package for
