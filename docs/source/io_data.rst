@@ -1,0 +1,234 @@
+.. _io_data:
+
+#################
+Input/Output data
+#################
+
+The principal are JSON files containing all the necessary data.
+Input and output files have the same structure,
+both for seismic hazard calculation and catalogue simulation.
+Different parameters are required and set then.
+In addition, you can use other catalogue files.
+
+Catalogue formats converted to input data
+#########################################
+
+HA3 catalogues
+==============
+
+They are text files FREE Format.
+
+Pre-historic catalogue
+----------------------
+
+:Line 1: y1, m1, d1 = year, month, day of the BEGINNING of PRE-HISTORIC part of the catalogue (e.g. -10000, 1, 1).
+:Line 2: y2, m2, d2 = year, month, day of the END of PREHISTORIC part of the catalogue (e.g. 800, 12, 31).
+:Lines 3 - n: For each earthquake year1, year2, magnitude, magnitude uncertainty,
+    where year1 and year2 are lower and upper bounds of estimated occurrence time,
+    the magnitude of the event and its uncertainty.
+
+Example::
+
+    -10000   1   1
+     1799  12  31
+    -9850 -9450   6.02   0.5
+    -9087 -8687   6.01   0.25
+    -7555 -7155   6.03   0.25
+    -6530 -6130   5.95   0.25
+    -6045 -5645   5.94   0.05
+    -4703 -4303   6.03   0.25
+    -3288 -2888   6.01   0.25
+    -2542 -2142   6.02   0.25
+    -1457 -1057   6.01   0.25
+     -448   -48   6.01   0.25
+      756  1156   6.08   0.25
+     1003  1403   6.08   0.25
+
+
+Historic catalogue
+------------------
+
+:Line 1: y1, m1, d1 = year, month, day of the BEGINNING of the
+    HISTORIC part of the catalogue (e.g. 1550, 1, 1).
+:Line 2: y2, m2, d2 = year, month, day of the END of the HISTORIC
+    part of the catalogue (e.g. 1550, 1, 1).
+:Line 3: Level of completeness for a magnitude (e.g. 5.0)
+:Line 4: SE = STANDARD ERROR of magnitude determination (magnitude uncertainty).
+    It is assumed that STANDARD ERRORS for each earthquake are the same (e.g. 0.25)
+:Lines 5 - n: For each earthquake: year, month, day, magnitude.
+
+Example::
+
+     1550   1   1
+     1799  12  31
+     5.0
+     0.25
+     1570   3  29   5.8
+     1590   4  11   5.7
+     1633  11  28   5.2
+     1635   1   7   5.2
+     1668  11   2   5.1
+     1672   6  20   5.5
+     1680   5  10   5.0
+     1684   8  27   5.2
+     1692   6  24   5.3
+     1692   8   9   5.0
+     1711   8  27   5.3
+     1713   3  20   5.4
+     1716   1  10   5.4
+     1725   5   7   5.2
+     1744  10  14   5.1
+     1758   9   7   5.1
+     1764   4   6   5.3
+     1793   3  25   5.2
+
+Complete catalogue
+------------------
+
+:Line 1: y1, m1, d1 = year, month, day of the BEGINNING of the
+    COMPLETE part of the catalogue (e.g. 1800, 1, 1).
+:Line 2: y2, m2, d2 = year, month, day of the END of the COMPLETE
+    part of the catalogue (e.g. 1899 12 31).
+:Line 3: Level of completeness for a magnitude (e.g. 3.5)
+:Line 4: SE = STANDARD ERROR of magnitude determination (magnitude uncertainty).
+    It is assumed that for each earthquake in the file, SE-s are the same. (e.g. 0.2)
+:Lines 5 - n: For each earthquake magnitude.
+
+Example::
+
+    1800  1  1
+    1899 12 31
+    3.5
+    0.1
+    3.6
+    4.8
+    3.6
+    3.7
+    3.9
+    4.2
+    ...
+    ...
+    ...
+
+ObsPy formats of catalogues
+===========================
+The program imports catalogues <imported_catalogue.extension> in all `ObsPy catalogues formats`_.
+They are formats:
+
+:CMTSOLUTION: Format of the `Global Centroid-Moment-Tensor (CMT) Project`
+:EVT: `SeismicHandler`_ EVT file format
+:FNETMT: Format of moment tensor files (TEXT format) provided for the F-net broadband seismograph network
+    operated by the National Research Institute for Earth Science and Disaster Prevention in Japan (`NIED`_)
+:FOCMEC: Format used to store data for focal mechanism determinations
+:GSE2: GSE2.1 Format first developed for use in the GSE's Technical Test 3 (GSETT-3),
+    which was a trial starting on 1st January 1995
+    for a system of global monitoring of nuclear explosions.
+    Based on experience during GSETT-3,
+    a new format was developed for use with the International Monitoring System (IMS)
+    of the Comprehensive Nuclear Test Ban Treaty.
+    Here is documentation of `GSE2.1`_.
+:HYPODDPHA: HypoDD format.
+:IMS10BULLETIN: (IASPEI Seismic bulletin Format)
+    ISF is the IASPEI approved standard format for the exchange of parametric seismological data
+    (hypocentres, magnitudes, phase arrivals, moment tensors, etc.).
+    It was adopted as standard in August 2001 by IASPEI's Commission on Seismic Observation
+    and Interpretation at the Scientific Assembly in Hanoi, Vietnam.
+    The format is an extension of IMS1.0.
+    here is available the brief online description of `IASPEI Seismic Format (ISF)`_.
+:MCHEDR: Machine-readable Earthquake Data Report format used to transmit data to the ISC
+    by only the U.S. National Earthquake Information Service and is thus an agency-specific format.
+:NDK: File format used to store
+    and distribute the Global Centroid-Moment-Tensor (CMT) catalog
+    (formerly the `Harvard CMT catalog`_)
+:NLLOC_HYP: File format generated by the `NonLinLoc`_ events location format
+:NORDIC: NORDIC format was one of the first attempts to create
+    a more complete format for data exchange and processing.
+    The initiative came from the need to exchange and store data in Nordic countries
+    and the so called Nordic format was agreed upon among the 5 Nordic countries.
+    The format later became the standard format used in the SEISAN database
+    and processing system and is now widely used.
+    The format tried to address some of the shortcomings in HYPO71 format by being able
+    to store nearly all parameters used,
+    having space for extensions and useful for both input and output.
+:QUAKEML: QuakeML is a flexible,
+    extensible and modular XML representation of seismological data.
+    The full documentation may be found at `QuakeML page`_.
+:SC3ML: The `SeisComp`_ catalog
+:SCARDEC: The `SCARDEC`_ Source Time Functions Database
+:ZMAP: The format of the written the MATLAB set of tools for the analysis of earthquake catalogues.
+
+EPISODES Platform format
+========================
+
+EPISODES Platform of the Anthropogenic hazard keeps catalogues
+in MATLAB file described at `Anthropogenic hazard EPISODES Platform`_.
+
+Output text format
+##################
+
+The output is a text file containing the based information estimated seismic hazard parameters,
+e.g. lambda, beta, m_max, and table with magnitude exceedance : lambda, return period (RP),
+and probability in chosen period years.
+
+Example::
+
+    ==================================================================
+    Final results
+    ------------------------------------------------------------------
+    Area: Pretoria
+    Created on 2025-05-23 07:06:40
+    Computed on 2025-05-23 07:34:22
+    ------------------------------------------------------------------
+    lambda     =   4.887 +/- 0.812, (for m_min = 3.00)
+    m_max      =   5.860 +/- 0.260
+    ------------------------------------------------------------------
+    COV = [    0.660 ]
+    =================================================================================
+    |                                SEISMIC HAZARD                                 |
+    =================================================================================
+    | Mag  |Lambda(sf)|   RP    | pr. T=    1| pr. T=   50| pr. T=  100| pr. T= 1000|
+    |------|----------|---------|------------|------------|------------|------------|
+    | 3.00 | 4.89e+00 |     0.2 |  0.985942  |  1.000000  |  1.000000  |  1.000000  |
+    | 3.10 | 4.31e+00 |     0.2 |  0.977959  |  1.000000  |  1.000000  |  1.000000  |
+    | 3.20 | 3.66e+00 |     0.3 |  0.963076  |  1.000000  |  1.000000  |  1.000000  |
+    | 3.30 | 3.08e+00 |     0.3 |  0.940332  |  1.000000  |  1.000000  |  1.000000  |
+    | 3.40 | 2.60e+00 |     0.4 |  0.909838  |  1.000000  |  1.000000  |  1.000000  |
+    | 3.50 | 2.16e+00 |     0.5 |  0.868554  |  1.000000  |  1.000000  |  1.000000  |
+    | 3.60 | 1.76e+00 |     0.6 |  0.811631  |  1.000000  |  1.000000  |  1.000000  |
+    | 3.70 | 1.41e+00 |     0.7 |  0.740174  |  1.000000  |  1.000000  |  1.000000  |
+    | 3.80 | 1.13e+00 |     0.9 |  0.663117  |  1.000000  |  1.000000  |  1.000000  |
+    | 3.90 | 9.14e-01 |     1.1 |  0.588700  |  1.000000  |  1.000000  |  1.000000  |
+    | 4.00 | 7.44e-01 |     1.3 |  0.516762  |  1.000000  |  1.000000  |  1.000000  |
+    | 4.10 | 5.97e-01 |     1.7 |  0.443337  |  1.000000  |  1.000000  |  1.000000  |
+    | 4.20 | 4.70e-01 |     2.1 |  0.370768  |  0.999999  |  1.000000  |  1.000000  |
+    | 4.30 | 3.70e-01 |     2.7 |  0.306214  |  0.999995  |  1.000000  |  1.000000  |
+    | 4.40 | 2.94e-01 |     3.4 |  0.252915  |  0.999971  |  1.000000  |  1.000000  |
+    | 4.50 | 2.37e-01 |     4.2 |  0.209866  |  0.999860  |  1.000000  |  1.000000  |
+    | 4.60 | 1.94e-01 |     5.2 |  0.175365  |  0.999490  |  0.999997  |  1.000000  |
+    | 4.70 | 1.61e-01 |     6.2 |  0.147608  |  0.998503  |  0.999985  |  1.000000  |
+    | 4.80 | 1.33e-01 |     7.5 |  0.124281  |  0.996191  |  0.999938  |  1.000000  |
+    | 4.90 | 1.10e-01 |     9.1 |  0.103561  |  0.991051  |  0.999765  |  1.000000  |
+    | 5.00 | 8.89e-02 |    11.3 |  0.084827  |  0.980197  |  0.999149  |  1.000000  |
+    | 5.10 | 6.96e-02 |    14.4 |  0.067056  |  0.957027  |  0.996899  |  1.000000  |
+    | 5.20 | 5.06e-02 |    19.7 |  0.049309  |  0.904710  |  0.987724  |  1.000000  |
+    | 5.30 | 3.39e-02 |    29.5 |  0.033249  |  0.799882  |  0.953607  |  1.000000  |
+    | 5.40 | 2.17e-02 |    46.1 |  0.021449  |  0.649946  |  0.869279  |  0.999999  |
+    | 5.50 | 1.42e-02 |    70.6 |  0.014056  |  0.499859  |  0.742560  |  0.999961  |
+    | 5.60 | 9.27e-03 |   107.9 |  0.009223  |  0.366706  |  0.593820  |  0.999332  |
+    | 5.70 | 5.27e-03 |   189.6 |  0.005260  |  0.230155  |  0.404839  |  0.989523  |
+    | 5.80 | 1.71e-03 |   583.5 |  0.001712  |  0.081916  |  0.156739  |  0.803712  |
+    =================================================================================
+
+.. File format links:
+.. _ObsPy catalogues formats: https://docs.obspy.org/packages/autogen/obspy.core.event.catalog.read_events.html#supported-formats
+.. _QuakeML page: https://quake.ethz.ch/quakeml/
+.. _Anthropogenic hazard EPISODES Platform: https://docs.cyfronet.pl/display/ISDOC/Catalog+-+description
+.. _IASPEI Seismic Format (ISF): https://www.isc.ac.uk/standards/isf/
+.. _GSE2.1: http://www.seismo.ethz.ch/export/sites/sedsite/research-and-teaching/.galleries/pdf_products_software/provisional_GSE2.1.pdf_2063069299.pdf
+.. _NonLinLoc: http://alomax.free.fr/nlloc/
+.. _SeisComp: https://www.seiscomp.de/
+.. _SCARDEC: http://scardec.projects.sismo.ipgp.fr/
+.. _Harvard CMT catalog: https://www.globalcmt.org/
+.. _SeismicHandler: https://archive.ph/20120910115544/http://www.seismic-handler.org/portal
+.. _Global Centroid-Moment-Tensor (CMT) Project: https://www.globalcmt.org/CMTsearch.html
+.. _NIED: http://www.fnet.bosai.go.jp/
