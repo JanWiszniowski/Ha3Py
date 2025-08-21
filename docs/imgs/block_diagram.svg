@@ -1,0 +1,1519 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="210mm"
+   height="297mm"
+   viewBox="0 0 210 297"
+   version="1.1"
+   id="svg8"
+   inkscape:version="0.92.1 r15371"
+   sodipodi:docname="block_diagram.svg"
+   inkscape:export-filename="C:\Users\Janek\bitmap.png"
+   inkscape:export-xdpi="599.98627"
+   inkscape:export-ydpi="599.98627">
+  <defs
+     id="defs2">
+    <marker
+       inkscape:stockid="EmptyTriangleInL"
+       orient="auto"
+       refY="0.0"
+       refX="0.0"
+       id="EmptyTriangleInL"
+       style="overflow:visible"
+       inkscape:isstock="true">
+      <path
+         id="path4788"
+         d="M 5.77,0.0 L -2.88,5.0 L -2.88,-5.0 L 5.77,0.0 z "
+         style="fill-rule:evenodd;fill:#ffffff;stroke:#000000;stroke-width:1pt;stroke-opacity:1"
+         transform="scale(-0.8) translate(-6,0)" />
+    </marker>
+    <marker
+       inkscape:isstock="true"
+       style="overflow:visible;"
+       id="marker8278"
+       refX="0.0"
+       refY="0.0"
+       orient="auto"
+       inkscape:stockid="Arrow2Mend">
+      <path
+         transform="scale(0.6) rotate(180) translate(0,0)"
+         d="M 8.7185878,4.0337352 L -2.2072895,0.016013256 L 8.7185884,-4.0017078 C 6.9730900,-1.6296469 6.9831476,1.6157441 8.7185878,4.0337352 z "
+         style="fill-rule:evenodd;stroke-width:0.625;stroke-linejoin:round;stroke:#000000;stroke-opacity:1;fill:#000000;fill-opacity:1"
+         id="path8276" />
+    </marker>
+    <marker
+       inkscape:isstock="true"
+       id="marker8148"
+       refX="5.0"
+       refY="3.0"
+       orient="auto-start-reverse"
+       inkscape:stockid="ExperimentalArrow">
+      <path
+         style="fill:context-stroke;stroke:#000000;stroke-opacity:1"
+         d="m 10,3 -10,3 0,-6 z"
+         id="path8146" />
+    </marker>
+    <marker
+       inkscape:stockid="EmptyDiamondLend"
+       orient="auto"
+       refY="0.0"
+       refX="0.0"
+       id="EmptyDiamondLend"
+       style="overflow:visible"
+       inkscape:isstock="true">
+      <path
+         id="path4761"
+         d="M 0,-7.0710768 L -7.0710894,0 L 0,7.0710589 L 7.0710462,0 L 0,-7.0710768 z "
+         style="fill-rule:evenodd;fill:#ffffff;stroke:#000000;stroke-width:1pt;stroke-opacity:1"
+         transform="scale(0.8) translate(-7,0)" />
+    </marker>
+    <marker
+       inkscape:stockid="EmptyDiamondM"
+       orient="auto"
+       refY="0.0"
+       refX="0.0"
+       id="EmptyDiamondM"
+       style="overflow:visible"
+       inkscape:isstock="true">
+      <path
+         id="path4746"
+         d="M 0,-7.0710768 L -7.0710894,0 L 0,7.0710589 L 7.0710462,0 L 0,-7.0710768 z "
+         style="fill-rule:evenodd;fill:#ffffff;stroke:#000000;stroke-width:1pt;stroke-opacity:1"
+         transform="scale(0.4)" />
+    </marker>
+    <marker
+       inkscape:stockid="Arrow2Lstart"
+       orient="auto"
+       refY="0.0"
+       refX="0.0"
+       id="Arrow2Lstart"
+       style="overflow:visible"
+       inkscape:isstock="true">
+      <path
+         id="path4655"
+         style="fill-rule:evenodd;stroke-width:0.625;stroke-linejoin:round;stroke:#000000;stroke-opacity:1;fill:#000000;fill-opacity:1"
+         d="M 8.7185878,4.0337352 L -2.2072895,0.016013256 L 8.7185884,-4.0017078 C 6.9730900,-1.6296469 6.9831476,1.6157441 8.7185878,4.0337352 z "
+         transform="scale(1.1) translate(1,0)" />
+    </marker>
+    <marker
+       inkscape:stockid="Arrow2Lend"
+       orient="auto"
+       refY="0.0"
+       refX="0.0"
+       id="marker6117"
+       style="overflow:visible;"
+       inkscape:isstock="true">
+      <path
+         id="path6115"
+         style="fill-rule:evenodd;stroke-width:0.625;stroke-linejoin:round;stroke:#000000;stroke-opacity:1;fill:#000000;fill-opacity:1"
+         d="M 8.7185878,4.0337352 L -2.2072895,0.016013256 L 8.7185884,-4.0017078 C 6.9730900,-1.6296469 6.9831476,1.6157441 8.7185878,4.0337352 z "
+         transform="scale(1.1) rotate(180) translate(1,0)" />
+    </marker>
+    <marker
+       inkscape:stockid="Arrow2Lend"
+       orient="auto"
+       refY="0.0"
+       refX="0.0"
+       id="Arrow2Lend"
+       style="overflow:visible;"
+       inkscape:isstock="true">
+      <path
+         id="path4658"
+         style="fill-rule:evenodd;stroke-width:0.625;stroke-linejoin:round;stroke:#000000;stroke-opacity:1;fill:#000000;fill-opacity:1"
+         d="M 8.7185878,4.0337352 L -2.2072895,0.016013256 L 8.7185884,-4.0017078 C 6.9730900,-1.6296469 6.9831476,1.6157441 8.7185878,4.0337352 z "
+         transform="scale(1.1) rotate(180) translate(1,0)" />
+    </marker>
+    <marker
+       inkscape:stockid="Arrow1Mend"
+       orient="auto"
+       refY="0.0"
+       refX="0.0"
+       id="Arrow1Mend"
+       style="overflow:visible;"
+       inkscape:isstock="true">
+      <path
+         id="path4646"
+         d="M 0.0,0.0 L 5.0,-5.0 L -12.5,0.0 L 5.0,5.0 L 0.0,0.0 z "
+         style="fill-rule:evenodd;stroke:#000000;stroke-width:1pt;stroke-opacity:1;fill:#000000;fill-opacity:1"
+         transform="scale(0.4) rotate(180) translate(10,0)" />
+    </marker>
+    <marker
+       inkscape:stockid="EmptyDiamondLstart"
+       orient="auto"
+       refY="0.0"
+       refX="0.0"
+       id="EmptyDiamondLstart"
+       style="overflow:visible"
+       inkscape:isstock="true">
+      <path
+         id="path4752"
+         d="M 0,-7.0710768 L -7.0710894,0 L 0,7.0710589 L 7.0710462,0 L 0,-7.0710768 z "
+         style="fill-rule:evenodd;fill:#ffffff;stroke:#000000;stroke-width:1pt;stroke-opacity:1"
+         transform="scale(0.8) translate(7,0)" />
+    </marker>
+    <marker
+       inkscape:stockid="EmptyDiamondMstart"
+       orient="auto"
+       refY="0.0"
+       refX="0.0"
+       id="EmptyDiamondMstart"
+       style="overflow:visible"
+       inkscape:isstock="true">
+      <path
+         id="path4755"
+         d="M 0,-7.0710768 L -7.0710894,0 L 0,7.0710589 L 7.0710462,0 L 0,-7.0710768 z "
+         style="fill-rule:evenodd;fill:#ffffff;stroke:#000000;stroke-width:1pt;stroke-opacity:1"
+         transform="scale(0.4) translate(6.5,0)" />
+    </marker>
+    <marker
+       inkscape:stockid="DiamondLstart"
+       orient="auto"
+       refY="0.0"
+       refX="0.0"
+       id="DiamondLstart"
+       style="overflow:visible"
+       inkscape:isstock="true">
+      <path
+         id="path4725"
+         d="M 0,-7.0710768 L -7.0710894,0 L 0,7.0710589 L 7.0710462,0 L 0,-7.0710768 z "
+         style="fill-rule:evenodd;stroke:#000000;stroke-width:1pt;stroke-opacity:1;fill:#000000;fill-opacity:1"
+         transform="scale(0.8) translate(7,0)" />
+    </marker>
+    <pattern
+       y="0"
+       x="0"
+       height="6"
+       width="6"
+       patternUnits="userSpaceOnUse"
+       id="EMFhbasepattern" />
+    <pattern
+       y="0"
+       x="0"
+       height="6"
+       width="6"
+       patternUnits="userSpaceOnUse"
+       id="EMFhbasepattern-2" />
+    <pattern
+       y="0"
+       x="0"
+       height="6"
+       width="6"
+       patternUnits="userSpaceOnUse"
+       id="EMFhbasepattern-7" />
+    <pattern
+       y="0"
+       x="0"
+       height="6"
+       width="6"
+       patternUnits="userSpaceOnUse"
+       id="EMFhbasepattern-70" />
+    <pattern
+       y="0"
+       x="0"
+       height="6"
+       width="6"
+       patternUnits="userSpaceOnUse"
+       id="EMFhbasepattern-5" />
+    <marker
+       inkscape:stockid="EmptyDiamondLend"
+       orient="auto"
+       refY="0"
+       refX="0"
+       id="EmptyDiamondLend-7"
+       style="overflow:visible"
+       inkscape:isstock="true">
+      <path
+         inkscape:connector-curvature="0"
+         id="path4761-3"
+         d="M 0,-7.0710768 -7.0710894,0 0,7.0710589 7.0710462,0 Z"
+         style="fill:#ffffff;fill-rule:evenodd;stroke:#000000;stroke-width:1.00000003pt;stroke-opacity:1"
+         transform="matrix(0.8,0,0,0.8,-5.6,0)" />
+    </marker>
+    <marker
+       inkscape:stockid="EmptyDiamondLend"
+       orient="auto"
+       refY="0"
+       refX="0"
+       id="EmptyDiamondLend-7-7"
+       style="overflow:visible"
+       inkscape:isstock="true">
+      <path
+         inkscape:connector-curvature="0"
+         id="path4761-3-8"
+         d="M 0,-7.0710768 -7.0710894,0 0,7.0710589 7.0710462,0 Z"
+         style="fill:#ffffff;fill-rule:evenodd;stroke:#000000;stroke-width:1.00000003pt;stroke-opacity:1"
+         transform="matrix(0.8,0,0,0.8,-5.6,0)" />
+    </marker>
+    <marker
+       inkscape:stockid="ExperimentalArrow"
+       orient="auto-start-reverse"
+       refY="3"
+       refX="5"
+       id="ExperimentalArrow-5"
+       inkscape:isstock="true">
+      <path
+         inkscape:connector-curvature="0"
+         id="path4890-5"
+         d="M 10,3 0,6 V 0 Z"
+         style="fill:context-stroke;stroke:#000000;stroke-opacity:1" />
+    </marker>
+    <marker
+       inkscape:isstock="true"
+       style="overflow:visible"
+       id="marker8278-3"
+       refX="0"
+       refY="0"
+       orient="auto"
+       inkscape:stockid="Arrow2Mend">
+      <path
+         inkscape:connector-curvature="0"
+         transform="scale(-0.6)"
+         d="M 8.7185878,4.0337352 -2.2072895,0.01601326 8.7185884,-4.0017078 c -1.7454984,2.3720609 -1.7354408,5.6174519 -6e-7,8.035443 z"
+         style="fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:0.625;stroke-linejoin:round;stroke-opacity:1"
+         id="path8276-6" />
+    </marker>
+    <marker
+       inkscape:stockid="Arrow2Mend"
+       orient="auto"
+       refY="0"
+       refX="0"
+       id="Arrow2Mend-3"
+       style="overflow:visible"
+       inkscape:isstock="true"
+       inkscape:collect="always">
+      <path
+         inkscape:connector-curvature="0"
+         id="path4664-7"
+         style="fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:0.625;stroke-linejoin:round;stroke-opacity:1"
+         d="M 8.7185878,4.0337352 -2.2072895,0.01601326 8.7185884,-4.0017078 c -1.7454984,2.3720609 -1.7354408,5.6174519 -6e-7,8.035443 z"
+         transform="scale(-0.6)" />
+    </marker>
+    <marker
+       inkscape:stockid="EmptyTriangleInL"
+       orient="auto"
+       refY="0"
+       refX="0"
+       id="EmptyTriangleInL-4"
+       style="overflow:visible"
+       inkscape:isstock="true">
+      <path
+         inkscape:connector-curvature="0"
+         id="path4788-4"
+         d="M 5.77,0 -2.88,5 V -5 Z"
+         style="fill:#ffffff;fill-rule:evenodd;stroke:#000000;stroke-width:1.00000003pt;stroke-opacity:1"
+         transform="matrix(-0.8,0,0,-0.8,4.8,0)" />
+    </marker>
+    <marker
+       inkscape:stockid="Arrow2Mend"
+       orient="auto"
+       refY="0"
+       refX="0"
+       id="Arrow2Mend-3-4"
+       style="overflow:visible"
+       inkscape:isstock="true"
+       inkscape:collect="always">
+      <path
+         inkscape:connector-curvature="0"
+         id="path4664-7-5"
+         style="fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:0.625;stroke-linejoin:round;stroke-opacity:1"
+         d="M 8.7185878,4.0337352 -2.2072895,0.01601326 8.7185884,-4.0017078 c -1.7454984,2.3720609 -1.7354408,5.6174519 -6e-7,8.035443 z"
+         transform="scale(-0.6)" />
+    </marker>
+    <marker
+       inkscape:stockid="EmptyTriangleInL"
+       orient="auto"
+       refY="0"
+       refX="0"
+       id="EmptyTriangleInL-4-3"
+       style="overflow:visible"
+       inkscape:isstock="true">
+      <path
+         inkscape:connector-curvature="0"
+         id="path4788-4-8"
+         d="M 5.77,0 -2.88,5 V -5 Z"
+         style="fill:#ffffff;fill-rule:evenodd;stroke:#000000;stroke-width:1.00000003pt;stroke-opacity:1"
+         transform="matrix(-0.8,0,0,-0.8,4.8,0)" />
+    </marker>
+    <pattern
+       y="0"
+       x="0"
+       height="6"
+       width="6"
+       patternUnits="userSpaceOnUse"
+       id="EMFhbasepattern-29" />
+  </defs>
+  <sodipodi:namedview
+     id="base"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageopacity="0.0"
+     inkscape:pageshadow="2"
+     inkscape:zoom="0.98994949"
+     inkscape:cx="379.66321"
+     inkscape:cy="718.89856"
+     inkscape:document-units="mm"
+     inkscape:current-layer="layer1"
+     showgrid="true"
+     showguides="false"
+     inkscape:snap-bbox="true"
+     objecttolerance="10000"
+     inkscape:window-width="1920"
+     inkscape:window-height="1137"
+     inkscape:window-x="-8"
+     inkscape:window-y="-8"
+     inkscape:window-maximized="1">
+    <inkscape:grid
+       type="xygrid"
+       id="grid4485"
+       empspacing="1" />
+  </sodipodi:namedview>
+  <metadata
+     id="metadata5">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1">
+    <path
+       style="fill:#000000;fill-opacity:0.07843137;stroke:#000000;stroke-width:0.26458332px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="M 7.5,51.999999 V 102 h 70 v 40 H 190 L 190,67 77.5,67 V 51.999999 Z"
+       id="path4722"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="ccccccccc"
+       inkscape:export-filename="C:\Users\Janek\path4487.png"
+       inkscape:export-xdpi="599"
+       inkscape:export-ydpi="599" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:0.26458332px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="M 10,57.000037 H 70 V 67 H 10 Z"
+       id="path4487"
+       inkscape:connector-curvature="0"
+       inkscape:export-filename="C:\Users\Janek\path4487.png"
+       inkscape:export-xdpi="599"
+       inkscape:export-ydpi="599" />
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:3.88055563px;line-height:124.00000095%;font-family:sans-serif;-inkscape-font-specification:'sans-serif, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:justify;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
+       x="12.188988"
+       y="60.636181"
+       id="text4519"
+       inkscape:export-filename="C:\Users\Janek\path4487.png"
+       inkscape:export-xdpi="599"
+       inkscape:export-ydpi="599"><tspan
+         sodipodi:role="line"
+         id="tspan4517"
+         x="12.188988"
+         y="60.636181"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:3.88055563px;font-family:sans-serif;-inkscape-font-specification:'sans-serif, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:justify;writing-mode:lr-tb;text-anchor:start;stroke-width:0.26458332">Magnitude distribution class</tspan><tspan
+         sodipodi:role="line"
+         x="12.188988"
+         y="65.448067"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:3.88055563px;font-family:sans-serif;-inkscape-font-specification:'sans-serif, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:justify;writing-mode:lr-tb;text-anchor:start;stroke-width:0.26458332"
+         id="tspan4521">: ScyPy.rv_continuous</tspan></text>
+    <path
+       style="fill:none;stroke:#000000;stroke-width:0.26458332px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="M 10,67 V 86.999886 H 69.999998 V 67 Z"
+       id="path4523"
+       inkscape:connector-curvature="0"
+       inkscape:export-filename="C:\Users\Janek\path4487.png"
+       inkscape:export-xdpi="599"
+       inkscape:export-ydpi="599" />
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:3.88055563px;line-height:124.00000095%;font-family:sans-serif;-inkscape-font-specification:'sans-serif, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:justify;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:0.49019608;stroke:none;stroke-width:0.26458332"
+       x="84.056503"
+       y="109.40543"
+       id="text4527"
+       inkscape:export-filename="C:\Users\Janek\path4487.png"
+       inkscape:export-xdpi="599"
+       inkscape:export-ydpi="599"><tspan
+         sodipodi:role="line"
+         id="tspan4819"
+         x="84.056503"
+         y="109.40543">+ not occurrence pdf + not occurrence cdf</tspan><tspan
+         sodipodi:role="line"
+         id="tspan4821"
+         x="84.056503"
+         y="114.21732">+  n events probality pmf +  n events probality cdf</tspan><tspan
+         sodipodi:role="line"
+         id="tspan4823"
+         x="84.056503"
+         y="119.02921">+ not occurrence survive gradient</tspan><tspan
+         sodipodi:role="line"
+         id="tspan4825"
+         x="84.056503"
+         y="123.8411">+ n events probality survive gradient</tspan><tspan
+         sodipodi:role="line"
+         id="tspan4827"
+         x="84.056503"
+         y="128.65298"></tspan></text>
+    <path
+       style="fill:none;stroke:#000000;stroke-width:0.26458332px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 80,94.5 h 107.5 v 10 H 80 Z"
+       id="path4487-6"
+       inkscape:connector-curvature="0"
+       inkscape:export-filename="C:\Users\Janek\path4487.png"
+       inkscape:export-xdpi="599"
+       inkscape:export-ydpi="599" />
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:3.88055563px;line-height:124.00000095%;font-family:sans-serif;-inkscape-font-specification:'sans-serif, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:justify;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
+       x="82.456261"
+       y="98.765282"
+       id="text4519-4"
+       inkscape:export-filename="C:\Users\Janek\path4487.png"
+       inkscape:export-xdpi="599"
+       inkscape:export-ydpi="599"><tspan
+         sodipodi:role="line"
+         id="tspan4807"
+         x="82.456261"
+         y="98.765282">Magn. not occurrence and n events probality class</tspan><tspan
+         sodipodi:role="line"
+         id="tspan4809"
+         x="82.456261"
+         y="103.57717">: ScyPy.rv_continuous (not occurrence)</tspan></text>
+    <path
+       style="fill:none;stroke:#000000;stroke-width:0.26458332px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="M 80.000003,104.5 V 127 H 187.5 v -22.5 z"
+       id="path4523-5"
+       inkscape:connector-curvature="0"
+       inkscape:export-filename="C:\Users\Janek\path4487.png"
+       inkscape:export-xdpi="599"
+       inkscape:export-ydpi="599" />
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:3.88055563px;line-height:124.00000095%;font-family:sans-serif;-inkscape-font-specification:sans-serif;font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:justify;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:0.49019608;stroke:none;stroke-width:0.26458332"
+       x="11.513187"
+       y="72.168602"
+       id="text4527-3"
+       inkscape:export-filename="C:\Users\Janek\path4487.png"
+       inkscape:export-xdpi="599"
+       inkscape:export-ydpi="599"><tspan
+         sodipodi:role="line"
+         id="tspan4525-7"
+         x="11.513187"
+         y="72.168602"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:sans-serif;-inkscape-font-specification:sans-serif;fill:#000000;fill-opacity:0.49019608;stroke-width:0.26458332">+ pdf</tspan><tspan
+         sodipodi:role="line"
+         x="11.513187"
+         y="76.980492"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:sans-serif;-inkscape-font-specification:sans-serif;fill:#000000;fill-opacity:0.49019608;stroke-width:0.26458332"
+         id="tspan4535-1">+ cdf</tspan><tspan
+         sodipodi:role="line"
+         x="11.513187"
+         y="81.792381"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:sans-serif;-inkscape-font-specification:sans-serif;fill:#000000;fill-opacity:0.49019608;stroke-width:0.26458332"
+         id="tspan4537-4">+ survive gradient</tspan><tspan
+         sodipodi:role="line"
+         x="11.513187"
+         y="86.604271"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:sans-serif;-inkscape-font-specification:sans-serif;fill:#000000;fill-opacity:0.49019608;stroke-width:0.26458332"
+         id="tspan4539-8" /></text>
+    <path
+       style="fill:none;stroke:#000000;stroke-width:0.26458332px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;marker-end:url(#Arrow2Lend)"
+       d="M 69.999998,77 H 90 v 17.5"
+       id="path6011"
+       inkscape:connector-curvature="0"
+       inkscape:export-filename="C:\Users\Janek\path4487.png"
+       inkscape:export-xdpi="599"
+       inkscape:export-ydpi="599" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:0.26458332px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;marker-end:url(#marker6117)"
+       d="m 90,77 h 70 v 17.5"
+       id="path6013"
+       inkscape:connector-curvature="0"
+       inkscape:export-filename="C:\Users\Janek\path4487.png"
+       inkscape:export-xdpi="599"
+       inkscape:export-ydpi="599" />
+    <path
+       style="fill:none;stroke:#640000;stroke-width:0.5;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       d="M 10,4.5000361 H 70.000001 V 14.499999 H 10 Z"
+       id="path4487-3"
+       inkscape:connector-curvature="0"
+       inkscape:export-filename="C:\Users\Janek\path4487.png"
+       inkscape:export-xdpi="599"
+       inkscape:export-ydpi="599" />
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:3.88055563px;line-height:124.00000095%;font-family:sans-serif;-inkscape-font-specification:'sans-serif, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:justify;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
+       x="11.188988"
+       y="8.136179"
+       id="text4519-0"
+       inkscape:export-filename="C:\Users\Janek\path4487.png"
+       inkscape:export-xdpi="599"
+       inkscape:export-ydpi="599"><tspan
+         sodipodi:role="line"
+         id="tspan6215"
+         x="11.188988"
+         y="8.136179">G-R distribution</tspan><tspan
+         sodipodi:role="line"
+         id="tspan6217"
+         x="11.188988"
+         y="12.948068">: Magnitude distribution class</tspan><tspan
+         sodipodi:role="line"
+         id="tspan6219"
+         x="11.188988"
+         y="17.759956" /></text>
+    <path
+       style="fill:none;stroke:#640000;stroke-width:0.5;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       d="M 10,14.5 V 34.500037 H 69.999999 V 14.5 Z"
+       id="path4523-6"
+       inkscape:connector-curvature="0"
+       inkscape:export-filename="C:\Users\Janek\path4487.png"
+       inkscape:export-xdpi="599"
+       inkscape:export-ydpi="599" />
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:3.88055563px;line-height:124.00000095%;font-family:sans-serif;-inkscape-font-specification:sans-serif;font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:justify;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
+       x="11.513187"
+       y="19.6686"
+       id="text4527-3-7"
+       inkscape:export-filename="C:\Users\Janek\path4487.png"
+       inkscape:export-xdpi="599"
+       inkscape:export-ydpi="599"><tspan
+         sodipodi:role="line"
+         id="tspan4525-7-2"
+         x="11.513187"
+         y="19.6686"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:sans-serif;-inkscape-font-specification:sans-serif;stroke-width:0.26458332">+ pdf</tspan><tspan
+         sodipodi:role="line"
+         x="11.513187"
+         y="24.48049"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:sans-serif;-inkscape-font-specification:sans-serif;stroke-width:0.26458332"
+         id="tspan4535-1-3">+ cdf</tspan><tspan
+         sodipodi:role="line"
+         x="11.513187"
+         y="29.292377"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:sans-serif;-inkscape-font-specification:sans-serif;stroke-width:0.26458332"
+         id="tspan4537-4-0">+ survive gradient</tspan><tspan
+         sodipodi:role="line"
+         x="11.513187"
+         y="34.104267"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:sans-serif;-inkscape-font-specification:sans-serif;stroke-width:0.26458332"
+         id="tspan4539-8-7" /></text>
+    <path
+       style="fill:none;stroke:#640000;stroke-width:0.5;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       d="M 10,44.500036 V 34.500035 h 59.999998 v 10.000001 z"
+       id="path6240"
+       inkscape:connector-curvature="0"
+       inkscape:export-filename="C:\Users\Janek\path4487.png"
+       inkscape:export-xdpi="599"
+       inkscape:export-ydpi="599" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:0.26458332px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 10,87.000037 v 9.999998 h 59.999998 v -9.999998 z"
+       id="path6242"
+       inkscape:connector-curvature="0"
+       inkscape:export-filename="C:\Users\Janek\path4487.png"
+       inkscape:export-xdpi="599"
+       inkscape:export-ydpi="599" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:0.26458332px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="M 79.999995,137 H 187.5 V 127 H 79.999995 Z"
+       id="path6244"
+       inkscape:connector-curvature="0"
+       inkscape:export-filename="C:\Users\Janek\path4487.png"
+       inkscape:export-xdpi="599"
+       inkscape:export-ydpi="599" />
+    <text
+       id="text6259"
+       y="-30.798584"
+       x="-0.12557372"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:3.17499995px;font-family:'Times New Roman';-inkscape-font-specification:'Times New Roman, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
+       xml:space="preserve"
+       inkscape:export-filename="C:\Users\Janek\path4487.png"
+       inkscape:export-xdpi="599"
+       inkscape:export-ydpi="599"><tspan
+         sodipodi:role="line"
+         id="tspan6275"
+         x="-0.12557372"
+         y="-27.980389" /></text>
+    <text
+       id="text6334"
+       y="41.729729 41.729729 41.729729 41.729729 41.729729 41.729729 41.729729"
+       x="33.107742 33.107742 33.107742 33.107742 33.107742 33.107742 33.107742"
+       style="font-style:italic;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:5.64444447px;font-family:'Times New Roman';-inkscape-font-specification:'Times New Roman, Italic';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
+       xml:space="preserve"
+       inkscape:transform-center-x="6.3311012"
+       inkscape:transform-center-y="-1.984375"
+       inkscape:export-filename="C:\Users\Janek\path4487.png"
+       inkscape:export-xdpi="599"
+       inkscape:export-ydpi="599"><tspan
+         id="tspan6332"
+         y="41.729729 41.729729 41.729729 41.729729 41.729729 41.729729 41.729729"
+         x="33.107742 33.107742 33.107742 33.107742 33.107742 33.107742 33.107742"
+         sodipodi:role="line"
+         style="font-style:italic;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:5.64444447px;font-family:'Times New Roman';-inkscape-font-specification:'Times New Roman, Italic';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;writing-mode:lr-tb;text-anchor:start;stroke-width:0.26458332"><tspan
+           id="tspan6328"
+           style="font-style:italic;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:5.64444447px;font-family:'Times New Roman';-inkscape-font-specification:'Times New Roman, Italic';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;writing-mode:lr-tb;text-anchor:start;fill:#000000;stroke-width:0.26458332"
+           dy="0 0 0 0 0 0 0"
+           dx="0 0 0 0 0 0 0">     β</tspan><tspan
+           id="tspan6330"
+           style="font-style:italic;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:5.64444447px;font-family:'Times New Roman';-inkscape-font-specification:'Times New Roman, Italic';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;writing-mode:lr-tb;text-anchor:start;fill:#000000;stroke-width:0.26458332"
+           dy="0 0"
+           dx="0 174338.72" /></tspan></text>
+    <text
+       id="text6356"
+       y="41.646362 41.646362"
+       x="148.5631 148.5631"
+       style="font-style:italic;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:5.64444447px;font-family:'Times New Roman';-inkscape-font-specification:'Times New Roman, Italic';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
+       xml:space="preserve"
+       inkscape:export-filename="C:\Users\Janek\path4487.png"
+       inkscape:export-xdpi="599"
+       inkscape:export-ydpi="599"><tspan
+         id="tspan6354"
+         y="41.646362 41.646362"
+         x="148.5631 148.5631"
+         sodipodi:role="line"
+         style="font-style:italic;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:5.64444447px;font-family:'Times New Roman';-inkscape-font-specification:'Times New Roman, Italic';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;writing-mode:lr-tb;text-anchor:start;stroke-width:0.26458332"><tspan
+           id="tspan6350"
+           style="font-style:italic;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:5.64444447px;font-family:'Times New Roman';-inkscape-font-specification:'Times New Roman, Italic';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;writing-mode:lr-tb;text-anchor:start;fill:#000000;stroke-width:0.26458332"
+           dy="0 0"
+           dx="0 0">λ</tspan><tspan
+           id="tspan6352"
+           style="font-style:italic;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:5.64444447px;font-family:'Times New Roman';-inkscape-font-specification:'Times New Roman, Italic';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;writing-mode:lr-tb;text-anchor:start;fill:#000000;stroke-width:0.26458332"
+           dy="0 0"
+           dx="0.26458332 11041.062" /></tspan></text>
+    <text
+       id="text6312-7"
+       y="93.630028 93.630028"
+       x="30.317879 30.317879"
+       style="font-style:italic;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:5.64444447px;font-family:'Times New Roman';-inkscape-font-specification:'Times New Roman, Italic';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
+       xml:space="preserve"
+       inkscape:export-filename="C:\Users\Janek\path4487.png"
+       inkscape:export-xdpi="599"
+       inkscape:export-ydpi="599"><tspan
+         id="tspan6310-3"
+         y="93.630028 93.630028"
+         x="30.317879 30.317879"
+         sodipodi:role="line"
+         style="font-style:italic;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:5.64444447px;font-family:'Times New Roman';-inkscape-font-specification:'Times New Roman, Italic';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;writing-mode:lr-tb;text-anchor:start;stroke-width:0.26458332"><tspan
+           id="tspan6306-6"
+           style="font-style:italic;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:5.64444447px;font-family:'Times New Roman';-inkscape-font-specification:'Times New Roman, Italic';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;writing-mode:lr-tb;text-anchor:start;fill:#000000;stroke-width:0.26458332"
+           dy="0 0"
+           dx="0 0">θ</tspan><tspan
+           id="tspan6308-7"
+           style="font-style:italic;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:5.64444447px;font-family:'Times New Roman';-inkscape-font-specification:'Times New Roman, Italic';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;writing-mode:lr-tb;text-anchor:start;fill:#000000;stroke-width:0.26458332"
+           dy="0 0"
+           dx="0 173435.7" /></tspan></text>
+    <text
+       id="text6334-1"
+       y="94.196999 94.196999 94.196999 94.196999 94.196999 94.196999 94.196999"
+       x="33.485718 33.485718 33.485718 33.485718 33.485718 33.485718 33.485718"
+       style="font-style:italic;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:3.52777767px;font-family:'Times New Roman';-inkscape-font-specification:'Times New Roman, Italic';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
+       xml:space="preserve"
+       inkscape:transform-center-x="6.3311012"
+       inkscape:transform-center-y="-1.984375"
+       inkscape:export-filename="C:\Users\Janek\path4487.png"
+       inkscape:export-xdpi="599"
+       inkscape:export-ydpi="599"><tspan
+         id="tspan6332-5"
+         y="94.196999 94.196999 94.196999 94.196999 94.196999 94.196999 94.196999"
+         x="33.485718 33.485718 33.485718 33.485718 33.485718 33.485718 33.485718"
+         sodipodi:role="line"
+         style="font-style:italic;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:3.52777767px;font-family:'Times New Roman';-inkscape-font-specification:'Times New Roman, Italic';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;writing-mode:lr-tb;text-anchor:start;stroke-width:0.26458332"><tspan
+           id="tspan6328-1"
+           style="font-style:italic;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:3.52777767px;font-family:'Times New Roman';-inkscape-font-specification:'Times New Roman, Italic';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;writing-mode:lr-tb;text-anchor:start;fill:#000000;stroke-width:0.26458332"
+           dy="0 0 0 0 0 0 0"
+           dx="0 0 0 0 0 0 0">     β</tspan><tspan
+           id="tspan6330-2"
+           style="font-style:italic;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:3.52777767px;font-family:'Times New Roman';-inkscape-font-specification:'Times New Roman, Italic';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;writing-mode:lr-tb;text-anchor:start;fill:#000000;stroke-width:0.26458332"
+           dy="0 0"
+           dx="0 174338.72" /></tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:italic;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:5.64444447px;line-height:124.00000095%;font-family:'Times New Roman';-inkscape-font-specification:'Times New Roman, Italic';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:justify;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
+       x="36.598213"
+       y="41.098248"
+       id="text6413"
+       inkscape:export-filename="C:\Users\Janek\path4487.png"
+       inkscape:export-xdpi="599"
+       inkscape:export-ydpi="599"><tspan
+         sodipodi:role="line"
+         id="tspan6419"
+         x="36.598213"
+         y="41.098248">, m</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:italic;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:4.23333311px;line-height:124.00000095%;font-family:'Times New Roman';-inkscape-font-specification:'Times New Roman, Italic';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:justify;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
+       x="43.714287"
+       y="42.626518"
+       id="text6417"
+       inkscape:export-filename="C:\Users\Janek\path4487.png"
+       inkscape:export-xdpi="599"
+       inkscape:export-ydpi="599"><tspan
+         sodipodi:role="line"
+         id="tspan6415"
+         x="43.714287"
+         y="42.626518"
+         style="font-style:italic;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:4.23333311px;font-family:'Times New Roman';-inkscape-font-specification:'Times New Roman, Italic';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:justify;writing-mode:lr-tb;text-anchor:start;stroke-width:0.26458332">max</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:italic;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:5.64444447px;line-height:124.00000095%;font-family:'Times New Roman';-inkscape-font-specification:'Times New Roman, Italic';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:justify;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
+       x="36.220238"
+       y="93.869087"
+       id="text6413-5"
+       inkscape:export-filename="C:\Users\Janek\path4487.png"
+       inkscape:export-xdpi="599"
+       inkscape:export-ydpi="599"><tspan
+         style="stroke-width:0.26458332"
+         sodipodi:role="line"
+         id="tspan6419-3"
+         x="36.220238"
+         y="93.869087">, m</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:italic;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:4.23333311px;line-height:124.00000095%;font-family:'Times New Roman';-inkscape-font-specification:'Times New Roman, Italic';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:justify;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
+       x="43.336311"
+       y="95.397354"
+       id="text6417-8"
+       inkscape:export-filename="C:\Users\Janek\path4487.png"
+       inkscape:export-xdpi="599"
+       inkscape:export-ydpi="599"><tspan
+         sodipodi:role="line"
+         id="tspan6415-4"
+         x="43.336311"
+         y="95.397354"
+         style="font-style:italic;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:4.23333311px;font-family:'Times New Roman';-inkscape-font-specification:'Times New Roman, Italic';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:justify;writing-mode:lr-tb;text-anchor:start;stroke-width:0.26458332">max</tspan></text>
+    <path
+       style="fill:none;stroke:#000000;stroke-width:0.26458332;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:0.13229166, 0.13229166;stroke-dashoffset:0;stroke-opacity:1;marker-end:url(#EmptyDiamondLend)"
+       d="m 40,47.000038 v 9.999998"
+       id="path6445"
+       inkscape:connector-curvature="0"
+       inkscape:export-filename="C:\Users\Janek\path4487.png"
+       inkscape:export-xdpi="599"
+       inkscape:export-ydpi="599" />
+    <path
+       style="fill:none;stroke:#550000;stroke-width:0.5;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       d="m 71.999998,6.500035 v 40.000001 h -60 v 0"
+       id="path6682"
+       inkscape:connector-curvature="0"
+       inkscape:export-filename="C:\Users\Janek\path4487.png"
+       inkscape:export-xdpi="599"
+       inkscape:export-ydpi="599" />
+    <path
+       style="fill:none;stroke:#550000;stroke-width:0.5;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       d="m 73.999998,8.500034 v 40.000002 h -60 v 0"
+       id="path6682-1"
+       inkscape:connector-curvature="0"
+       inkscape:export-filename="C:\Users\Janek\path4487.png"
+       inkscape:export-xdpi="599"
+       inkscape:export-ydpi="599" />
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:3.88055556px;line-height:124.00000095%;font-family:sans-serif;-inkscape-font-specification:'sans-serif, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:justify;letter-spacing:0px;word-spacing:0px;writing-mode:lr;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332;"
+       x="125.66011"
+       y="20.112669"
+       id="text4527-1"
+       inkscape:export-filename="C:\Users\Janek\path4487.png"
+       inkscape:export-xdpi="599"
+       inkscape:export-ydpi="599"><tspan
+         sodipodi:role="line"
+         id="tspan4829">+ pdf/pmf</tspan><tspan
+         sodipodi:role="line"
+         id="tspan4831">+ cdf's</tspan><tspan
+         sodipodi:role="line"
+         id="tspan4833">+ survive gradient's</tspan><tspan
+         sodipodi:role="line"
+         id="tspan4835"></tspan></text>
+    <path
+       style="fill:none;stroke:#000064;stroke-width:0.5;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       d="m 120,4.5 h 60 v 10 h -60 z"
+       id="path4487-6-4"
+       inkscape:connector-curvature="0"
+       inkscape:export-filename="C:\Users\Janek\path4487.png"
+       inkscape:export-xdpi="599"
+       inkscape:export-ydpi="599" />
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:3.88055563px;line-height:124.00000095%;font-family:sans-serif;-inkscape-font-specification:'sans-serif, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:justify;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
+       x="120.189"
+       y="8.1361656"
+       id="text4519-4-1"
+       inkscape:export-filename="C:\Users\Janek\path4487.png"
+       inkscape:export-xdpi="599"
+       inkscape:export-ydpi="599"><tspan
+         sodipodi:role="line"
+         id="tspan4722"
+         x="120.189"
+         y="8.1361656">Occurrence probability class</tspan><tspan
+         sodipodi:role="line"
+         id="tspan4724"
+         x="120.189"
+         y="12.948054">: ScyPy.rv_continuous/discrete</tspan></text>
+    <path
+       style="fill:none;stroke:#000064;stroke-width:0.5;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       d="m 120,14.5 v 20 h 60 v -20 z"
+       id="path4523-5-1"
+       inkscape:connector-curvature="0"
+       inkscape:export-filename="C:\Users\Janek\path4487.png"
+       inkscape:export-xdpi="599"
+       inkscape:export-ydpi="599" />
+    <path
+       style="fill:none;stroke:#000064;stroke-width:0.5;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       d="m 120,44.5 h 60 v -10 h -60 z"
+       id="path6244-7"
+       inkscape:connector-curvature="0"
+       inkscape:export-filename="C:\Users\Janek\path4487.png"
+       inkscape:export-xdpi="599"
+       inkscape:export-ydpi="599" />
+    <path
+       style="fill:none;stroke:#000064;stroke-width:0.5;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       d="M 182,6.499998 V 46.5 h -60 v 0"
+       id="path6682-1-2"
+       inkscape:connector-curvature="0"
+       inkscape:export-filename="C:\Users\Janek\path4487.png"
+       inkscape:export-xdpi="599"
+       inkscape:export-ydpi="599" />
+    <path
+       style="fill:none;stroke:#000064;stroke-width:0.5;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       d="M 184,8.499998 V 48.5 h -60 v 0"
+       id="path6682-1-3"
+       inkscape:connector-curvature="0"
+       inkscape:export-filename="C:\Users\Janek\path4487.png"
+       inkscape:export-xdpi="599"
+       inkscape:export-ydpi="599" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:0.26458332;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:0.13229165, 0.13229165;stroke-dashoffset:0;stroke-opacity:1;marker-end:url(#EmptyDiamondLend-7)"
+       d="M 130,46.999999 V 94.5"
+       id="path6445-3"
+       inkscape:connector-curvature="0"
+       inkscape:export-filename="C:\Users\Janek\path4487.png"
+       inkscape:export-xdpi="599"
+       inkscape:export-ydpi="599" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:0.26458332;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:0.13229165, 0.13229165;stroke-dashoffset:0;stroke-opacity:1;marker-end:url(#EmptyDiamondLend-7-7)"
+       d="M 170,47.000001 V 94.5"
+       id="path6445-3-3"
+       inkscape:connector-curvature="0"
+       inkscape:export-filename="C:\Users\Janek\path4487.png"
+       inkscape:export-xdpi="599"
+       inkscape:export-ydpi="599" />
+    <rect
+       style="opacity:1;vector-effect:none;fill:#000000;fill-opacity:0.07843138;fill-rule:evenodd;stroke:#000000;stroke-width:0.49999997;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       id="rect7609"
+       width="100"
+       height="20.000006"
+       x="90"
+       y="157"
+       rx="10"
+       ry="10"
+       inkscape:export-filename="C:\Users\Janek\path4487.png"
+       inkscape:export-xdpi="599"
+       inkscape:export-ydpi="599" />
+    <text
+       id="text6312-7-3"
+       y="133.69981 133.69981"
+       x="129.78333 129.78333"
+       style="font-style:italic;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:5.64444447px;font-family:'Times New Roman';-inkscape-font-specification:'Times New Roman, Italic';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
+       xml:space="preserve"
+       inkscape:export-filename="C:\Users\Janek\path4487.png"
+       inkscape:export-xdpi="599"
+       inkscape:export-ydpi="599"><tspan
+         id="tspan6310-3-7"
+         y="133.69981 133.69981"
+         x="129.78333 129.78333"
+         sodipodi:role="line"
+         style="font-style:italic;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:5.64444447px;font-family:'Times New Roman';-inkscape-font-specification:'Times New Roman, Italic';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;writing-mode:lr-tb;text-anchor:start;stroke-width:0.26458332"><tspan
+           id="tspan6306-6-2"
+           style="font-style:italic;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:5.64444447px;font-family:'Times New Roman';-inkscape-font-specification:'Times New Roman, Italic';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;writing-mode:lr-tb;text-anchor:start;fill:#000000;stroke-width:0.26458332"
+           dy="0 0"
+           dx="0 0">θ</tspan><tspan
+           id="tspan6308-7-7"
+           style="font-style:italic;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:5.64444447px;font-family:'Times New Roman';-inkscape-font-specification:'Times New Roman, Italic';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;writing-mode:lr-tb;text-anchor:start;fill:#000000;stroke-width:0.26458332"
+           dy="0 0"
+           dx="0 173435.7" /></tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:5.64444447px;line-height:124.00000095%;font-family:sans-serif;-inkscape-font-specification:'sans-serif, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:justify;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
+       x="99.331825"
+       y="165.19283"
+       id="text7673"
+       inkscape:export-filename="C:\Users\Janek\path4487.png"
+       inkscape:export-xdpi="599"
+       inkscape:export-ydpi="599"><tspan
+         sodipodi:role="line"
+         id="tspan14590"
+         x="99.331825"
+         y="165.19283">Estimation of the magnitude</tspan><tspan
+         sodipodi:role="line"
+         id="tspan14592"
+         x="99.331825"
+         y="172.19194">exceedance parameters</tspan></text>
+    <path
+       style="fill:none;stroke:#000000;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;marker-end:url(#marker8278)"
+       d="m 110,137 v 20"
+       id="path7677-5"
+       inkscape:connector-curvature="0"
+       inkscape:transform-center-x="-0.39680262"
+       inkscape:transform-center-y="-8.4608466"
+       inkscape:export-filename="C:\Users\Janek\path4487.png"
+       inkscape:export-xdpi="599"
+       inkscape:export-ydpi="599" />
+    <g
+       id="g8016-2"
+       transform="matrix(1,0,0,0.81412405,69.999999,1.0412837)"
+       style="stroke-width:1.10829329"
+       inkscape:export-filename="C:\Users\Janek\path4487.png"
+       inkscape:export-xdpi="599"
+       inkscape:export-ydpi="599">
+      <path
+         sodipodi:nodetypes="cscc"
+         inkscape:connector-curvature="0"
+         id="path8008-6"
+         d="m -10,187 c 0,0 -10,-10 -30,0 -20,10 -30,0 -30,0 v 0"
+         style="fill:none;stroke:#000000;stroke-width:0.29323593px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
+      <path
+         inkscape:connector-curvature="0"
+         id="path8012-4"
+         d="M -69.999999,187 V 167 H -10 v 20 0"
+         style="fill:none;stroke:#000000;stroke-width:0.29323593px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
+    </g>
+    <g
+       id="g8016-7"
+       transform="matrix(1,0,0,0.81412405,69.999999,31.041284)"
+       style="stroke-width:1.10829329"
+       inkscape:export-filename="C:\Users\Janek\path4487.png"
+       inkscape:export-xdpi="599"
+       inkscape:export-ydpi="599">
+      <path
+         sodipodi:nodetypes="cscc"
+         inkscape:connector-curvature="0"
+         id="path8008-0"
+         d="m -10,187 c 0,0 -10,-10 -30,0 -20,10 -30,0 -30,0 v 0"
+         style="fill:none;stroke:#000000;stroke-width:0.29323593px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
+      <path
+         inkscape:connector-curvature="0"
+         id="path8012-5"
+         d="M -69.999999,187 V 167 H -10 v 20 0"
+         style="fill:none;stroke:#000000;stroke-width:0.29323593px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
+    </g>
+    <g
+       id="g8016-74"
+       transform="matrix(1,0,0,0.81412405,69.999999,61.041284)"
+       style="stroke-width:1.10829329"
+       inkscape:export-filename="C:\Users\Janek\path4487.png"
+       inkscape:export-xdpi="599"
+       inkscape:export-ydpi="599">
+      <path
+         sodipodi:nodetypes="cscc"
+         inkscape:connector-curvature="0"
+         id="path8008-4"
+         d="m -10,187 c 0,0 -10,-10 -30,0 -20,10 -30,0 -30,0 v 0"
+         style="fill:none;stroke:#000000;stroke-width:0.29323593px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
+      <path
+         inkscape:connector-curvature="0"
+         id="path8012-9"
+         d="M -69.999999,187 V 167 H -10 v 20 0"
+         style="fill:none;stroke:#000000;stroke-width:0.29323593px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
+    </g>
+    <g
+       transform="translate(71.999999,32.000031)"
+       id="g8075-7"
+       inkscape:export-filename="C:\Users\Janek\path4487.png"
+       inkscape:export-xdpi="599"
+       inkscape:export-ydpi="599">
+      <path
+         sodipodi:nodetypes="cscc"
+         inkscape:connector-curvature="0"
+         id="path8008-1"
+         d="m -10,183.28245 c 0,0 -10,-8.14124 -30,0 -20,8.14124 -30,0 -30,0 v 0"
+         style="fill:none;stroke:#000000;stroke-width:0.26458332px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
+      <path
+         inkscape:connector-curvature="0"
+         id="path8071-0"
+         d="m -10,167 v 16.28245 0"
+         style="fill:none;stroke:#000000;stroke-width:0.26458332px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
+    </g>
+    <g
+       transform="translate(73.999999,34.000031)"
+       id="g8075-6"
+       inkscape:export-filename="C:\Users\Janek\path4487.png"
+       inkscape:export-xdpi="599"
+       inkscape:export-ydpi="599">
+      <path
+         sodipodi:nodetypes="cscc"
+         inkscape:connector-curvature="0"
+         id="path8008-3"
+         d="m -10,183.28245 c 0,0 -10,-8.14124 -30,0 -20,8.14124 -30,0 -30,0 v 0"
+         style="fill:none;stroke:#000000;stroke-width:0.26458332px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
+      <path
+         inkscape:connector-curvature="0"
+         id="path8071-4"
+         d="m -10,167 v 16.28245 0"
+         style="fill:none;stroke:#000000;stroke-width:0.26458332px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
+    </g>
+    <text
+       xml:space="preserve"
+       style="font-style:italic;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:5.64444447px;line-height:124.00000095%;font-family:'Times New Roman';-inkscape-font-specification:'Times New Roman, Italic';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:justify;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
+       x="22.91272"
+       y="114.51462"
+       id="text6413-5-9"
+       inkscape:export-filename="C:\Users\Janek\path4487.png"
+       inkscape:export-xdpi="599"
+       inkscape:export-ydpi="599"><tspan
+         sodipodi:role="line"
+         id="tspan8132"
+         x="22.91272"
+         y="114.51462">proposed</tspan><tspan
+         sodipodi:role="line"
+         id="tspan8134"
+         x="22.91272"
+         y="121.51373">θ and m</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:italic;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:4.23333311px;line-height:124.00000095%;font-family:'Times New Roman';-inkscape-font-specification:'Times New Roman, Italic';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:justify;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
+       x="41.160732"
+       y="122.61595"
+       id="text6417-8-7"
+       inkscape:export-filename="C:\Users\Janek\path4487.png"
+       inkscape:export-xdpi="599"
+       inkscape:export-ydpi="599"><tspan
+         sodipodi:role="line"
+         id="tspan6415-4-9"
+         x="41.160732"
+         y="122.61595"
+         style="font-style:italic;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:4.23333311px;font-family:'Times New Roman';-inkscape-font-specification:'Times New Roman, Italic';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:justify;writing-mode:lr-tb;text-anchor:start;stroke-width:0.26458332">max</tspan></text>
+    <path
+       style="fill:none;stroke:#000000;stroke-width:0.26499999;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:0.52999997, 0.52999997;stroke-dashoffset:0;stroke-opacity:1"
+       d="m 20,107 h 30 v 20 H 20 Z"
+       id="path8136"
+       inkscape:connector-curvature="0"
+       inkscape:export-filename="C:\Users\Janek\path4487.png"
+       inkscape:export-xdpi="599"
+       inkscape:export-ydpi="599" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;marker-end:url(#marker8278-3)"
+       d="m 170,137 v 20"
+       id="path7677-5-5"
+       inkscape:connector-curvature="0"
+       inkscape:transform-center-x="-0.39680262"
+       inkscape:transform-center-y="-8.4608466"
+       inkscape:export-filename="C:\Users\Janek\path4487.png"
+       inkscape:export-xdpi="599"
+       inkscape:export-ydpi="599" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:2.00000008, 1.00000004;stroke-dashoffset:0;stroke-opacity:1;marker-end:url(#Arrow2Mend-3)"
+       d="m 70,207 v 20 h 20"
+       id="path8138-3"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="ccc"
+       inkscape:export-filename="C:\Users\Janek\path4487.png"
+       inkscape:export-xdpi="599"
+       inkscape:export-ydpi="599" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:0.26458332px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 110,187 h 60 v 10 h -60 z"
+       id="path4487-6-7"
+       inkscape:connector-curvature="0"
+       inkscape:export-filename="C:\Users\Janek\path4487.png"
+       inkscape:export-xdpi="599"
+       inkscape:export-ydpi="599" />
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:3.88055563px;line-height:124.00000095%;font-family:sans-serif;-inkscape-font-specification:'sans-serif, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:justify;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
+       x="110.18903"
+       y="190.63617"
+       id="text4519-4-4"
+       inkscape:export-filename="C:\Users\Janek\path4487.png"
+       inkscape:export-xdpi="599"
+       inkscape:export-ydpi="599"><tspan
+         sodipodi:role="line"
+         id="tspan10519"
+         x="110.18903"
+         y="190.63617">Frequency-Magnitude model</tspan><tspan
+         sodipodi:role="line"
+         id="tspan10521"
+         x="110.18903"
+         y="195.44806">: ScyPy.rv_continuous</tspan></text>
+    <path
+       style="fill:none;stroke:#000000;stroke-width:0.26458332px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 110,207 h 60 v -10 h -60 z"
+       id="path6244-4"
+       inkscape:connector-curvature="0"
+       inkscape:export-filename="C:\Users\Janek\path4487.png"
+       inkscape:export-xdpi="599"
+       inkscape:export-ydpi="599" />
+    <text
+       id="text6312-7-3-97"
+       y="203.96709 203.96709"
+       x="136.55254 136.55254"
+       style="font-style:italic;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:5.64444447px;font-family:'Times New Roman';-inkscape-font-specification:'Times New Roman, Italic';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
+       xml:space="preserve"
+       inkscape:export-filename="C:\Users\Janek\path4487.png"
+       inkscape:export-xdpi="599"
+       inkscape:export-ydpi="599"><tspan
+         id="tspan6310-3-7-5"
+         y="203.96709 203.96709"
+         x="136.55254 136.55254"
+         sodipodi:role="line"
+         style="font-style:italic;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:5.64444447px;font-family:'Times New Roman';-inkscape-font-specification:'Times New Roman, Italic';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;writing-mode:lr-tb;text-anchor:start;stroke-width:0.26458332"><tspan
+           id="tspan6306-6-2-4"
+           style="font-style:italic;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:5.64444447px;font-family:'Times New Roman';-inkscape-font-specification:'Times New Roman, Italic';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;writing-mode:lr-tb;text-anchor:start;fill:#000000;stroke-width:0.26458332"
+           dy="0 0"
+           dx="0 0">θ</tspan><tspan
+           id="tspan6308-7-7-6"
+           style="font-style:italic;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:5.64444447px;font-family:'Times New Roman';-inkscape-font-specification:'Times New Roman, Italic';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;writing-mode:lr-tb;text-anchor:start;fill:#000000;stroke-width:0.26458332"
+           dy="0 0"
+           dx="0 173435.7" /></tspan></text>
+    <path
+       style="fill:none;stroke:#000000;stroke-width:0.26458332px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 137.42015,199.88104 1.32291,-0.85045 0.98038,0.8977 v 0"
+       id="path10523"
+       inkscape:connector-curvature="0"
+       inkscape:export-filename="C:\Users\Janek\path4487.png"
+       inkscape:export-xdpi="599"
+       inkscape:export-ydpi="599" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:0.86500001;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;marker-start:url(#EmptyTriangleInL)"
+       d="m 140,186.6 v -9.6 0"
+       id="path10525"
+       inkscape:connector-curvature="0"
+       inkscape:export-filename="C:\Users\Janek\path4487.png"
+       inkscape:export-xdpi="599"
+       inkscape:export-ydpi="599" />
+    <rect
+       style="opacity:1;vector-effect:none;fill:#000000;fill-opacity:0.07843138;fill-rule:evenodd;stroke:#000000;stroke-width:0.49999997;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       id="rect7609-7"
+       width="100"
+       height="20.000004"
+       x="90"
+       y="217"
+       rx="10"
+       ry="10"
+       inkscape:export-filename="C:\Users\Janek\path4487.png"
+       inkscape:export-xdpi="599"
+       inkscape:export-ydpi="599" />
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:5.64444447px;line-height:124.00000095%;font-family:sans-serif;-inkscape-font-specification:'sans-serif, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:justify;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
+       x="100.53454"
+       y="225.19283"
+       id="text7673-7"
+       inkscape:export-filename="C:\Users\Janek\path4487.png"
+       inkscape:export-xdpi="599"
+       inkscape:export-ydpi="599"><tspan
+         sodipodi:role="line"
+         id="tspan14722"
+         x="100.53454"
+         y="225.19283">Maximum magnitude</tspan><tspan
+         sodipodi:role="line"
+         id="tspan14724"
+         x="100.53454"
+         y="232.19194">estimation</tspan></text>
+    <path
+       style="fill:none;stroke:#000000;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:2, 1;stroke-dashoffset:0;stroke-opacity:1"
+       d="M 59.999998,207 H 69.999999 L 70,167 l -10e-7,-50 H 50"
+       id="path11244"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="ccccc"
+       inkscape:export-filename="C:\Users\Janek\path4487.png"
+       inkscape:export-xdpi="599"
+       inkscape:export-ydpi="599" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;stroke-miterlimit:4;stroke-dasharray:2,1;stroke-dashoffset:0"
+       d="M 59.999998,147 H 69.999999"
+       id="path11246"
+       inkscape:connector-curvature="0"
+       inkscape:export-filename="C:\Users\Janek\path4487.png"
+       inkscape:export-xdpi="599"
+       inkscape:export-ydpi="599" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;stroke-miterlimit:4;stroke-dasharray:2,1;stroke-dashoffset:0"
+       d="M 59.999998,177 H 69.999999"
+       id="path11248"
+       inkscape:connector-curvature="0"
+       inkscape:export-filename="C:\Users\Janek\path4487.png"
+       inkscape:export-xdpi="599"
+       inkscape:export-ydpi="599" />
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:4.23333333px;line-height:124.00000095%;font-family:sans-serif;-inkscape-font-specification:'sans-serif, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:justify;letter-spacing:0px;word-spacing:0px;writing-mode:lr;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332;"
+       x="6.2582264"
+       y="146.1982"
+       id="text11726"
+       inkscape:export-filename="C:\Users\Janek\path4487.png"
+       inkscape:export-xdpi="599"
+       inkscape:export-ydpi="599"><tspan
+         sodipodi:role="line"
+         id="tspan11760">Prehistorical catalogue</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:4.23333333px;line-height:124.00000095%;font-family:sans-serif;-inkscape-font-specification:'sans-serif, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:justify;letter-spacing:0px;word-spacing:0px;writing-mode:lr;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332;"
+       x="9.2434053"
+       y="176.1982"
+       id="text11726-1"
+       inkscape:export-filename="C:\Users\Janek\path4487.png"
+       inkscape:export-xdpi="599"
+       inkscape:export-ydpi="599"><tspan
+         sodipodi:role="line"
+         id="tspan11758">Historical catalogue</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:4.23333311px;line-height:124.00000095%;font-family:sans-serif;-inkscape-font-specification:'sans-serif, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:justify;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
+       x="3.0962067"
+       y="205.93092"
+       id="text11726-9"
+       inkscape:export-filename="C:\Users\Janek\path4487.png"
+       inkscape:export-xdpi="599"
+       inkscape:export-ydpi="599"><tspan
+         sodipodi:role="line"
+         id="tspan11762"
+         x="3.0962067"
+         y="205.93092">Instrumental catalogues</tspan></text>
+    <path
+       style="fill:none;stroke:#000000;stroke-width:0.5;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;stroke-miterlimit:4;stroke-dasharray:none"
+       d="m 110,247 h 60 v 10 h -60 z"
+       id="path4487-6-7-1"
+       inkscape:connector-curvature="0"
+       inkscape:export-filename="C:\Users\Janek\path4487.png"
+       inkscape:export-xdpi="599"
+       inkscape:export-ydpi="599" />
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:3.88055563px;line-height:124.00000095%;font-family:sans-serif;-inkscape-font-specification:'sans-serif, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:justify;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
+       x="110.18899"
+       y="250.63617"
+       id="text4519-4-4-5"
+       inkscape:export-filename="C:\Users\Janek\path4487.png"
+       inkscape:export-xdpi="599"
+       inkscape:export-ydpi="599"><tspan
+         style="stroke-width:0.26458332"
+         y="250.63617"
+         x="110.18899"
+         sodipodi:role="line"
+         id="tspan10519-9">Frequency-Magnitude model</tspan><tspan
+         style="stroke-width:0.26458332"
+         y="255.44806"
+         x="110.18899"
+         sodipodi:role="line"
+         id="tspan10521-8">: ScyPy.rv_continuous</tspan></text>
+    <path
+       style="fill:none;stroke:#000000;stroke-width:0.5;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;stroke-miterlimit:4;stroke-dasharray:none"
+       d="m 110,267 h 60 v -10 h -60 z"
+       id="path6244-4-4"
+       inkscape:connector-curvature="0"
+       inkscape:export-filename="C:\Users\Janek\path4487.png"
+       inkscape:export-xdpi="599"
+       inkscape:export-ydpi="599" />
+    <text
+       id="text6312-7-3-97-8"
+       y="263.9671 263.9671"
+       x="118.0317 118.0317"
+       style="font-style:italic;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:5.64444447px;font-family:'Times New Roman';-inkscape-font-specification:'Times New Roman, Italic';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
+       xml:space="preserve"
+       inkscape:export-filename="C:\Users\Janek\path4487.png"
+       inkscape:export-xdpi="599"
+       inkscape:export-ydpi="599"><tspan
+         id="tspan6310-3-7-5-9"
+         y="263.9671 263.9671"
+         x="118.0317 118.0317"
+         sodipodi:role="line"
+         style="font-style:italic;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:5.64444447px;font-family:'Times New Roman';-inkscape-font-specification:'Times New Roman, Italic';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;writing-mode:lr-tb;text-anchor:start;stroke-width:0.26458332"><tspan
+           id="tspan6306-6-2-4-3"
+           style="font-style:italic;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:5.64444447px;font-family:'Times New Roman';-inkscape-font-specification:'Times New Roman, Italic';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;writing-mode:lr-tb;text-anchor:start;fill:#000000;stroke-width:0.26458332"
+           dy="0 0"
+           dx="0 0">θ</tspan><tspan
+           id="tspan6308-7-7-6-4"
+           style="font-style:italic;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:5.64444447px;font-family:'Times New Roman';-inkscape-font-specification:'Times New Roman, Italic';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;writing-mode:lr-tb;text-anchor:start;fill:#000000;stroke-width:0.26458332"
+           dy="0 0"
+           dx="0 173435.7" /></tspan></text>
+    <path
+       style="fill:none;stroke:#000000;stroke-width:0.26458332px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 118.89921,259.88104 1.32291,-0.85045 0.98038,0.8977 v 0"
+       id="path10523-1"
+       inkscape:connector-curvature="0"
+       inkscape:export-filename="C:\Users\Janek\path4487.png"
+       inkscape:export-xdpi="599"
+       inkscape:export-ydpi="599" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:0.86500001;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;marker-start:url(#EmptyTriangleInL-4)"
+       d="m 140,217 v -10 0"
+       id="path10525-8"
+       inkscape:connector-curvature="0"
+       inkscape:export-filename="C:\Users\Janek\path4487.png"
+       inkscape:export-xdpi="599"
+       inkscape:export-ydpi="599" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:2.0000001, 1.00000005;stroke-dashoffset:0;stroke-opacity:1;marker-end:url(#Arrow2Mend-3-4)"
+       d="M 69.999999,167 H 70 90"
+       id="path8138-3-8"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="ccc"
+       inkscape:export-filename="C:\Users\Janek\path4487.png"
+       inkscape:export-xdpi="599"
+       inkscape:export-ydpi="599" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:0.86500001;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;marker-start:url(#EmptyTriangleInL-4-3)"
+       d="m 140,247 v -10 0"
+       id="path10525-8-0"
+       inkscape:connector-curvature="0"
+       inkscape:export-filename="C:\Users\Janek\path4487.png"
+       inkscape:export-xdpi="599"
+       inkscape:export-ydpi="599" />
+    <text
+       xml:space="preserve"
+       style="font-style:italic;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:5.64444447px;line-height:124.00000095%;font-family:'Times New Roman';-inkscape-font-specification:'Times New Roman, Italic';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:justify;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
+       x="129.42834"
+       y="263.46814"
+       id="text6413-5-4"
+       inkscape:export-filename="C:\Users\Janek\path4487.png"
+       inkscape:export-xdpi="599"
+       inkscape:export-ydpi="599"><tspan
+         style="stroke-width:0.26458332"
+         sodipodi:role="line"
+         id="tspan6419-3-2"
+         x="129.42834"
+         y="263.46814">, m</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:italic;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:4.23333311px;line-height:124.00000095%;font-family:'Times New Roman';-inkscape-font-specification:'Times New Roman, Italic';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:justify;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
+       x="136.54442"
+       y="264.52866"
+       id="text6417-8-5"
+       inkscape:export-filename="C:\Users\Janek\path4487.png"
+       inkscape:export-xdpi="599"
+       inkscape:export-ydpi="599"><tspan
+         sodipodi:role="line"
+         id="tspan6415-4-8"
+         x="136.54442"
+         y="264.52866"
+         style="font-style:italic;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:4.23333311px;font-family:'Times New Roman';-inkscape-font-specification:'Times New Roman, Italic';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:justify;writing-mode:lr-tb;text-anchor:start;stroke-width:0.26458332">max</tspan></text>
+    <path
+       style="fill:none;stroke:#000000;stroke-width:0.26458332px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 132.64779,259.92829 2.22324,-0.85045 1.6476,0.8977 v 0"
+       id="path10523-1-1"
+       inkscape:connector-curvature="0"
+       inkscape:export-filename="C:\Users\Janek\path4487.png"
+       inkscape:export-xdpi="599"
+       inkscape:export-ydpi="599" />
+    <text
+       id="text14867"
+       y="203.56502 203.56502"
+       x="140.08984 140.08984"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:5.64444447px;font-family:'Times New Roman';-inkscape-font-specification:'Times New Roman, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
+       xml:space="preserve"
+       inkscape:export-filename="C:\Users\Janek\path4487.png"
+       inkscape:export-xdpi="599"
+       inkscape:export-ydpi="599"><tspan
+         sodipodi:role="line"
+         id="tspan14937"
+         x="140.08984"
+         y="0">, σ</tspan></text>
+    <text
+       id="text6312-7-3-97-4"
+       y="205.10298 205.10298"
+       x="144.92529 144.92529"
+       style="font-style:italic;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:4.23333311px;font-family:'Times New Roman';-inkscape-font-specification:'Times New Roman, Italic';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
+       xml:space="preserve"
+       inkscape:export-filename="C:\Users\Janek\path4487.png"
+       inkscape:export-xdpi="599"
+       inkscape:export-ydpi="599"><tspan
+         id="tspan6310-3-7-5-1"
+         y="205.10298 205.10298"
+         x="144.92529 144.92529"
+         sodipodi:role="line"
+         style="font-style:italic;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:4.23333311px;font-family:'Times New Roman';-inkscape-font-specification:'Times New Roman, Italic';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;writing-mode:lr-tb;text-anchor:start;stroke-width:0.26458332"><tspan
+           id="tspan6306-6-2-4-2"
+           style="font-style:italic;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:4.23333311px;font-family:'Times New Roman';-inkscape-font-specification:'Times New Roman, Italic';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;writing-mode:lr-tb;text-anchor:start;fill:#000000;stroke-width:0.26458332"
+           dy="0 0"
+           dx="0 0">θ</tspan><tspan
+           id="tspan6308-7-7-6-49"
+           style="font-style:italic;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:4.23333311px;font-family:'Times New Roman';-inkscape-font-specification:'Times New Roman, Italic';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;writing-mode:lr-tb;text-anchor:start;fill:#000000;stroke-width:0.26458332"
+           dy="0 0"
+           dx="0 173435.7" /></tspan></text>
+    <text
+       id="text14867-6"
+       y="262.71899 262.71899"
+       x="144.07611 144.07611"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:5.64444447px;font-family:'Times New Roman';-inkscape-font-specification:'Times New Roman, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
+       xml:space="preserve"
+       inkscape:export-filename="C:\Users\Janek\path4487.png"
+       inkscape:export-xdpi="599"
+       inkscape:export-ydpi="599"><tspan
+         sodipodi:role="line"
+         id="tspan15003"
+         x="nan"
+         y="inf">,  σ</tspan></text>
+    <text
+       id="text14867-67"
+       y="263.83228 263.83228"
+       x="121.12096 121.12096"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:5.64444447px;font-family:'Times New Roman';-inkscape-font-specification:'Times New Roman, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
+       xml:space="preserve"
+       inkscape:export-filename="C:\Users\Janek\path4487.png"
+       inkscape:export-xdpi="599"
+       inkscape:export-ydpi="599"><tspan
+         sodipodi:role="line"
+         id="tspan14981"
+         x="nan"
+         y="inf">,  σ</tspan></text>
+    <text
+       id="text6312-7-3-97-4-6"
+       y="265.57068 265.57068"
+       x="126.29051 126.29051"
+       style="font-style:italic;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:4.23333311px;font-family:'Times New Roman';-inkscape-font-specification:'Times New Roman, Italic';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
+       xml:space="preserve"
+       inkscape:export-filename="C:\Users\Janek\path4487.png"
+       inkscape:export-xdpi="599"
+       inkscape:export-ydpi="599"><tspan
+         id="tspan6310-3-7-5-1-2"
+         y="265.57068 265.57068"
+         x="126.29051 126.29051"
+         sodipodi:role="line"
+         style="font-style:italic;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:4.23333311px;font-family:'Times New Roman';-inkscape-font-specification:'Times New Roman, Italic';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;writing-mode:lr-tb;text-anchor:start;stroke-width:0.26458332"><tspan
+           id="tspan6306-6-2-4-2-9"
+           style="font-style:italic;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:4.23333311px;font-family:'Times New Roman';-inkscape-font-specification:'Times New Roman, Italic';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;writing-mode:lr-tb;text-anchor:start;fill:#000000;stroke-width:0.26458332"
+           dy="0 0"
+           dx="0 0">θ</tspan><tspan
+           id="tspan6308-7-7-6-49-3"
+           style="font-style:italic;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:4.23333311px;font-family:'Times New Roman';-inkscape-font-specification:'Times New Roman, Italic';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;writing-mode:lr-tb;text-anchor:start;fill:#000000;stroke-width:0.26458332"
+           dy="0 0"
+           dx="0 173435.7" /></tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:italic;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:4.23333311px;line-height:124.00000095%;font-family:'Times New Roman';-inkscape-font-specification:'Times New Roman, Italic';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:justify;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
+       x="149.18266"
+       y="264.86273"
+       id="text6417-8-5-0"
+       inkscape:export-filename="C:\Users\Janek\path4487.png"
+       inkscape:export-xdpi="599"
+       inkscape:export-ydpi="599"><tspan
+         sodipodi:role="line"
+         id="tspan15001"
+         x="149.18266"
+         y="264.86273">mmax</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:italic;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:4.93888903px;line-height:124.00000095%;font-family:sans-serif;-inkscape-font-specification:'sans-serif, Italic';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:justify;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
+       x="80.386162"
+       y="73.933037"
+       id="text4727"
+       inkscape:export-filename="C:\Users\Janek\path4487.png"
+       inkscape:export-xdpi="599"
+       inkscape:export-ydpi="599"><tspan
+         sodipodi:role="line"
+         id="tspan4725"
+         x="80.386162"
+         y="73.933037"
+         style="font-style:italic;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:4.93888903px;font-family:sans-serif;-inkscape-font-specification:'sans-serif, Italic';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:justify;writing-mode:lr-tb;text-anchor:start;stroke-width:0.26458332">Abstract probability classes</tspan></text>
+  </g>
+</svg>
