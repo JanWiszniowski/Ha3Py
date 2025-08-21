@@ -4,7 +4,7 @@
 Introduction
 ############
 
-HyPy is the Python package for assessing earthquake recurrence parameters.
+Hy3Py is the Python package for assessing earthquake recurrence parameters.
 The typical parameters include the mean activity rate :math:`\lambda`,
 the b-value or :math:`\beta`-value of the Gutenberg-Richter frequency-magnitude distribution,
 and the maximum possible earthquake magnitude, :math:`m_{max}`, for a given area.
