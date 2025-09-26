@@ -14,7 +14,8 @@ Base classes of events occurrence probabilities
 
 """
 
-from scipy.stats import rv_continuous
+from scipy.stats import rv_continuous, uniform
+# from scipy.optimize import fsolve
 import numpy as np
 from abc import ABC, abstractmethod
 from ha3py.get_magnitude_distribution import get_magnitude_distribution
@@ -390,6 +391,19 @@ class OccurrenceBase(rv_continuous, ABC):
     def d_rvs(self, *args):
         t = get_event_occurrence_parameters(*args, default=1.0)
         return self._d_rvs(t)
+
+    # -------------------------------------------------------------
+    # Random number generator of not occurrence of given magnitude
+    # def t_rng(self, m=None):
+    #     if m is None:
+    #         m = self.m_min
+    #     urv = uniform.rvs()
+    #     time_rv = fsolve(lambda t: self._t_cdf(t,m)-urv, np.array(1.0))
+    #     return time_rv[0]
+    #
+    # @abstractmethod
+    # def _t_cdf(self, t, m):
+    #     pass
     # -------------------------------------------------------------
     # coefficient
 

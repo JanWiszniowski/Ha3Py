@@ -210,6 +210,9 @@ class PoissonGammaCompoundOccurrence(LambdaOccurrence, ABC):
         nominator = np.multiply(self.lamb * t * self.q_lambda * self.magnitude_distribution.pdf(m), self._l_cdf(m, t))
         return np.divide(nominator, self.q_lambda + self.lamb * t * self.magnitude_distribution.sf(m))
 
+    # def _t_cdf(self, t, m):
+    #     pass
+
     def _const_coefficients(self):
         return ['q_lambda']
 

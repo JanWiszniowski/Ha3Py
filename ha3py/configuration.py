@@ -286,6 +286,7 @@ def read_hist_cat(filename):
     catalog['name'] = filename
     return catalog
 
+
 def init_lambda_beta(configuration, init_beta=True, init_lambda=True, m_max=None):
     r"""
     Initialize :math:`\beta' and :math:`lambda` based on complete catalogs.
