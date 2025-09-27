@@ -56,6 +56,8 @@ def m_max_estimation(configuration):
         return bayesian_m_max(configuration, get_bayesian_by_shift(configuration, magnitude_distribution=event_occurrence.magnitude_distribution))
     elif bayesian_assessment == 'bayesian_fiducial':
         return bayesian_m_max(configuration, get_bayesian_fiducial(configuration, magnitude_distribution=event_occurrence.magnitude_distribution))
+    elif bayesian_assessment == 'fixed value':
+        return configuration['prior_m_max'], configuration['sd_prior_m_max']
     else:
         raise HaPyException(f'Wrong bayesian m_max assessment procedure name ??{bayesian_assessment}')
 

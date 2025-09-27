@@ -422,6 +422,14 @@ def define_m_max_assessment(configuration):
         configuration['bayesian_m_max_assessment'] = 'bayesian_fiducial'
         configuration['bayesian_m_max_estimator'] = 'expected'
         init_lambda_beta(configuration)
+    elif procedure_id == 10:
+        set_with_warning(configuration, 'magnitude_distribution', 'Compound Gutenberg-Richter')
+        set_with_warning(configuration, 'occurrence_probability', 'Poisson-gamma compound')
+        set_with_warning(configuration, 'delta', 'Kijko-Sellevoll')
+        configuration['m_max_assessment'] = 'solve_delta'
+        configuration['bayesian_m_max_assessment'] = 'fixed value'
+        configuration['bayesian_m_max_estimator'] = 'expected'
+        init_lambda_beta(configuration)
     else:
         raise HaPyException(f'Wrong id={procedure_id}')
     if configuration.get('magnitude_distribution', '') == 'Compound Gutenberg-Richter':

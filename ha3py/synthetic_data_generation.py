@@ -4,48 +4,58 @@ from ha3py.get_events_occurrence import get_events_occurrence
 from ha3py.configuration import load_configuration, save_configuration
 import numpy as np
 import scipy.integrate as integrate
-from scipy.optimize import fsolve
 
 
-def time_cdf(t, m, event_occurrence):
-    if callable(getattr(event_occurrence, 'time_cdf', None)):
-        tcdf = event_occurrence.time_cdf(t, m)
-        return tcdf
-    nominator = integrate.quad(lambda x: event_occurrence.pdf(m, x), 0, t)
-    denominator = integrate.quad(lambda x: event_occurrence.pdf(m, x), 0, np.inf)
+def time_cdf(t, m, occurrence_probability):
+    """
+    The cumulative distribution function of non occurrence event probability given magnitude.
+    If there exists time_cdf method in the event_occurrence object,
+    the result of time_cdf is returned, else
+
+    .. math::
+        \frac{\int_{0}^{t} f_{M}(m,t)dt}{\int_{0}^{\infty } f_{M}(m,t)dt}
+
+    is returned.
+
+    :param t: The time
+    :type t: float
+    :param m: The magnitude
+    :type m: float
+    :param occurrence_probability: The object describing the event occurrence probability.
+    :type occurrence_probability: OccurrenceBase
+    :return:
+    :rtype: float
+    """
+    if callable(getattr(occurrence_probability, 'time_cdf', None)):
+        return occurrence_probability.time_cdf(t, m)
+    nominator = integrate.quad(lambda x: occurrence_probability.pdf(m, x), 0, t)
+    denominator = integrate.quad(lambda x: occurrence_probability.pdf(m, x), 0, np.inf)
     return nominator[0] / denominator[0]
 
-# def _fun(t, event_occurrence, m, urv ):
-#     if t < 0:
-#         f = 1.0e6 * (np.exp(-t))
-#     else:
-#     tcdf = time_cdf(t, m, event_occurrence)
-#     f = tcdf - urv
-#     f += 1.0e6 * t ** 8 if t < 0 else 0
-#     print(f"urv {t}, {tcdf}, {urv}, {f}")
-#     return f
-#
-# def time_rng(event_occurrence, m=None):
-#     if m is None:
-#         m = event_occurrence.m_min
-#     urv = uniform.rvs()
-#     print(f"urv {urv}")
-#     time_rv = fsolve(_fun, np.array(1.0), args=(event_occurrence, m, urv))
-#     return time_rv[0]
 
-def time_rng(event_occurrence, m=None):
+def time_rng(occurrence_probability, m=None):
+    """
+    Next event time random generator.
+    It generates random period of non occurrence of events with magnitude grater than selected.
+    If none magnitude is set, the minimum magnitude of the event occurrence object is taken.
+
+    :param occurrence_probability: The object describing the event occurrence probability.
+    :type occurrence_probability: OccurrenceBase
+    :param m: The magnitude of non occurrence
+    :type m: float
+    :return: The random value of non occurrence period in years
+    :rtype: float
+    """
     if m is None:
-        m = event_occurrence.m_min
+        m = occurrence_probability.m_min
     urv = uniform.rvs()
-    # print(f"urv={urv}")
     lower_limit = 0.0
     upper_limit = 1.0
-    while time_cdf(upper_limit, m, event_occurrence) < urv:
+    while time_cdf(upper_limit, m, occurrence_probability) < urv:
         upper_limit *= 2.0
     while upper_limit-lower_limit > 1e-8:
         new_point = (lower_limit+upper_limit) / 2.0
-        value = time_cdf(new_point, m, event_occurrence)
-        # print(f"==>{lower_limit} {upper_limit} {new_point} {value-urv}")
+        value = time_cdf(new_point, m, occurrence_probability)
         if value > urv:
             upper_limit = new_point
         else:
@@ -54,7 +64,21 @@ def time_rng(event_occurrence, m=None):
 
 
 class MagnitudeRandomise:
+    """
+
+    :param occurrence_probability: The object describing the event occurrence probability.
+    :type occurrence_probability: OccurrenceBase
+    :param magnitude_uncertainty:
+    :type magnitude_uncertainty:
+    """
     def __init__(self, occurrence_probability, magnitude_uncertainty):
+        """
+
+        :param occurrence_probability: The object describing the event occurrence probability.
+        :type occurrence_probability: OccurrenceBase
+        :param magnitude_uncertainty:
+        :type magnitude_uncertainty:
+        """
         self.occurrence_probability = occurrence_probability
         if magnitude_uncertainty is None:
             self.magnitude_uncertainty = None
@@ -78,11 +102,14 @@ class MagnitudeRandomise:
             m += truncnorm.rvs(-self.mu_3, self.m_max - m, scale=self.magnitude_uncertainty)
         return m
 
+
 def get_times(catalog_configuration):
     """
+    The function returns begin, end time of the catalogue and the time span of the catalogue in years.
+    At least two of these values must be defined in the configuration.
 
     :param catalog_configuration: The catalog definition, part of the dictionary of all Ha3Py parameters
-    :type catalog_configuration:
+    :type catalog_configuration: dict
     :return: The beginning, end, and time span of teh catalog definition as float years
     :rtype: tuple
     """
@@ -97,43 +124,71 @@ def get_times(catalog_configuration):
         time_span = end_time - begin_time
     return begin_time, end_time, time_span
 
-def test_lambda_beta(catalog):
-    m_min = catalog['m_min']
-    magnitudes = [earthquake['magnitude'] for earthquake in catalog['earthquakes']]
-    time_span = catalog['time_span']
+
+def test_lambda_beta(catalog_configuration):
+    """
+    The function estimated and prints :math:`\beta` and :math:`\lambda` parameters
+    of the catalogue assessed by the simplest method:
+
+    .. math::
+        \beta =\frac{1}{n}\sum_{i=1}^{n}m_i -m_{min},
+
+        \lambda = \frac{T}{n},
+
+    where :math:`T` id the catalogue time span, :math:`n` is the number of events,
+    and :math:`m_{min}` the minimum magnitude of completeness.
+
+    :param catalog_configuration: The catalog definition, part of the dictionary of all Ha3Py parameters
+    :type catalog_configuration: dict
+    :return: None
+    """
+    m_min = catalog_configuration['m_min']
+    magnitudes = [earthquake['magnitude'] for earthquake in catalog_configuration['earthquakes']]
+    time_span = catalog_configuration['time_span']
     no_earthquakes = len(magnitudes)
     beta_for_catalog = 1.0 / (np.mean(magnitudes) - m_min)
     # magnitude_distribution = GutenbergRichter(configuration, beta=beta_for_catalog)
     lambda_for_catalog = float(no_earthquakes) / time_span
-    print(f"Catalog {catalog['name']}: beta={beta_for_catalog}, lambda={lambda_for_catalog} for m_min={m_min}")
+    print(f"Catalog {catalog_configuration['name']}: beta={beta_for_catalog}, lambda={lambda_for_catalog} for m_min={m_min}")
 
 
 def extreme_simulation(catalog_configuration, occurrence_probability, name):
     r"""
-    Extreme simulation simulate extreme earthquakes
-    :param catalog_configuration: The catalog definition, part of the dictionary of all Ha3Py parameters.
+    The function creates the synthetic extreme earthquakes.
+    It simulates the historical or paleo catalogs, where data are incomplete.
+    The time span of te catalogue is divided into random periods.
+    In each period the random number of event with random magnitudes are generated
+    and the maximum magnitude are added to the catalogue.
+    The randomisation depends on the predefined occurrence probability.
+
+    :param catalog_configuration: The catalogue definition, part of the dictionary of all Ha3Py parameters.
     :type catalog_configuration: dict
-    :param occurrence_probability:
-    :type occurrence_probability:
-    :param name: The name of the catalogue.
-    :type name: (str)
-    :return: The catalogue
+    :param occurrence_probability: The object describing the event occurrence probability.
+    :type occurrence_probability: OccurrenceBase
+    :param name: The name of the created synthetic catalogue.
+    :type name: str
+    :return: The synthetic catalogue
     :rtype: dict
 
-    The catalog configuration dictionary should contain following fields:
-    :time_uncertainty:
-    :time_interval:
-    :magnitude_uncertainty: The uncertainty for magnitude simulation (required)
-    :name: The name of the catalog
-    :m_min: The minimum completeness magnitude of the simulated catalog. Event with lower magnitude are removed
-    :begin, end, time_span: The beginning, end, and time span of the catalog. At least two of them are required.
+    The simulation catalog configuration dictionary should contain following fields:
+    :time_interval: (float) The time interval,
+        from which the maximum magnitude are put to the synthetic catalogue.
+    :time_uncertainty: (float of uniform probability) The uncertainty of periods time
+    :magnitude_uncertainty: (float) The uncertainty for magnitude simulation
+    :sd: (float) The standard deviation of catalog magnitudes.
+        Required for compatibility, when magnitude_uncertainty is not defined.
+        At last magnitude_uncertainty or sd must be defined.
+    :name: (str) The name of the new synthetic catalogue.
+    :m_min: (str) The minimum completeness magnitude of the simulated catalog.
+        Event with lower magnitude are removed
+    :begin, end, time_span: The beginning, end, and time span of the catalog.
+        At least two of them are required.
     """
     time_uncertainty = catalog_configuration.get('time_uncertainty', 10.0) / 2.0
-    time_interval = catalog_configuration.get('time_interval', 10.0)
+    time_interval = catalog_configuration.get('time_interval', 20.0)
     begin_time, end_time, time_span = get_times(catalog_configuration)
-    magnitude_uncertainty = catalog_configuration.get('magnitude_uncertainty', 0.2)
+    magnitude_uncertainty = catalog_configuration.get('magnitude_uncertainty')
     sd = catalog_configuration.get('sd', magnitude_uncertainty)
-    name = catalog_configuration.get('name', name)
     m_min = catalog_configuration['m_min']
     earthquakes = []
     m_max_obs = -100.0
@@ -173,32 +228,37 @@ def extreme_simulation(catalog_configuration, occurrence_probability, name):
 def full_simulation_incremental(catalog_configuration, occurrence_probability, name):
     r"""
     The incremental catalog generation: it starts with the beginning of the interval time,
-    first the non occurrence time  of an event with magnitude greater the :math:`m_{min}` is generated,
+    first the non occurrence time of an event with magnitude greater the :math:`m_{min}` is generated,
     then the event time is set, next the magnitude is random generated for that event,
     and next events times and magnitudes are generated until reaching the end of the interval time.
 
-    :param catalog_configuration: The catalog definition, part of the dictionary of all Ha3Py parameters
+    :param catalog_configuration: The catalogue definition, part of the dictionary of all Ha3Py parameters.
     :type catalog_configuration: dict
-    :param occurrence_probability:
-    :type occurrence_probability:
-    :param name: name of the simulated catalogue
+    :param occurrence_probability: The object describing the event occurrence probability.
+    :type occurrence_probability: OccurrenceBase
+    :param name: The name of the created synthetic catalogue.
     :type name: str
-    :return:
-    :rtype:
+    :return: The synthetic catalogue
+    :rtype: dict
+    
+    The simulation catalog configuration dictionary should contain following fields:
+    :magnitude_uncertainty: (float) The uncertainty for magnitude simulation
+    :sd: (float) The standard deviation of catalog magnitudes.
+        Required for compatibility, when magnitude_uncertainty is not defined.
+        At last magnitude_uncertainty or sd must be defined.
+    :m_min: (str) The minimum completeness magnitude of the simulated catalog.
+        Event with lower magnitude are removed
+    :begin, end, time_span: The beginning, end, and time span of the catalog.
+        At least two of them are required.
     """
-    # time_uncertainty = catalog_configuration.get('time_uncertainty', 0.0)
     begin_time, end_time, time_span = get_times(catalog_configuration)
-    magnitude_uncertainty = catalog_configuration.get('magnitude_uncertainty', 0.2)
+    magnitude_uncertainty = catalog_configuration.get('magnitude_uncertainty')
     sd = catalog_configuration.get('sd', magnitude_uncertainty)
-    # time_step = catalog_configuration.get('time_step', 1.0)
-    name = catalog_configuration.get('name', name)
     m_min = catalog_configuration['m_min']
     occurrence_probability.m_min = m_min
     earthquakes = []
     m_max_obs = -100.0
     dt = time_rng(occurrence_probability) * uniform.rvs()
-    # dt = occurrence_probability.t_rng() * uniform.rvs()
-    # m = occurrence_probability.rvs(dt) * (1.0 + magnitude_uncertainty * (uniform.rvs() -0.5))
     time = begin_time + dt
     magnitude_randomise = MagnitudeRandomise(occurrence_probability, magnitude_uncertainty)
     while time <= end_time:
@@ -221,19 +281,28 @@ def full_simulation_without_date(catalog_configuration, occurrence_probability, 
     in the defined time interval based on the defined n-events occurrence probability
     and next for each event the magnitude is random generated based on the defined magnitude distribution.
 
-    :param catalog_configuration: The catalog definition, part of the dictionary of all Ha3Py parameters
+    :param catalog_configuration: The catalogue definition, part of the dictionary of all Ha3Py parameters.
     :type catalog_configuration: dict
-    :param occurrence_probability:
-    :type occurrence_probability:
-    :param name:
-    :type name:
-    :return:
-    :rtype:
+    :param occurrence_probability: The object describing the event occurrence probability.
+    :type occurrence_probability: OccurrenceBase
+    :param name: The name of the created synthetic catalogue.
+    :type name: str
+    :return: The synthetic catalogue
+    :rtype: dict
+    
+    The simulation catalog configuration dictionary should contain following fields:
+    :magnitude_uncertainty: (float) The uncertainty for magnitude simulation
+    :sd: (float) The standard deviation of catalog magnitudes.
+        Required for compatibility, when magnitude_uncertainty is not defined.
+        At last magnitude_uncertainty or sd must be defined.
+    :m_min: (str) The minimum completeness magnitude of the simulated catalog.
+        Event with lower magnitude are removed
+    :begin, end, time_span: The beginning, end, and time span of the catalog.
+        At least two of them are required.
     """
     begin_time, end_time, time_span = get_times(catalog_configuration)
     magnitude_uncertainty = catalog_configuration.get('magnitude_uncertainty')
     sd = catalog_configuration.get('sd', magnitude_uncertainty)
-    name = catalog_configuration.get('name', name)
     m_min = catalog_configuration['m_min']
     occurrence_probability.m_min = m_min
     n = occurrence_probability.d_rvs(time_span)
@@ -251,7 +320,21 @@ def full_simulation_without_date(catalog_configuration, occurrence_probability, 
     return {'begin': begin_time, 'end': end_time, 'time_span': time_span, 'm_min': m_min,
             'sd': sd, 'name': name, 'earthquakes': earthquakes}, m_max_obs, m_min
 
+
 def remain_unchanged(catalog):
+    """
+    The procedure remains the catalogue almost unchanged,
+    but finds the minimum magnitude, if not defined, and maximum observed in the catalogue magnitude.
+    If m_min is defined, removes event with magnitude smaller than m_min.
+    The procedure doesn't estimate the catalogue completeness magnitude.
+
+    :param catalog: The catalogue with earthquakes - not only definition.
+    :type catalog: dict
+    :return: The copy of the input catalog with event below m_min removed,
+        maximum observed in the catalogue magnitude, and minimum magnitude in the catalogue.
+    :rtype: tuple
+    """
+    catalog = catalog.copy()
     earthquakes = catalog.get('earthquakes')
     if earthquakes is None:
         print(f"Incorrect catalog {catalog.get('name', 'without name')} won't remain")
@@ -273,17 +356,22 @@ def remain_unchanged(catalog):
     return catalog, m_max_obs, m_min
 
 
-def data_generation(configuration):
+def synthetic_catalogs_generation(configuration):
     """
-    The procedure generates the synthetic catalogue based on magnitude occurrence probability definition
-    and catalogs configurations defined in the simulation part of configuration.
-    The older catalogs are replaced by synthetic ones.
+    The procedure generates pseudo paleo, historical, and complete synthetic catalogues
+    based on magnitude occurrence probability definition
+    and catalogs configurations defined in the simulation part of the configuration.
+    *Warning* The older catalogs are replaced by synthetic ones
+    and new minimum and maximum observed magnitudes of all catalogues are set.
 
-    :param configuration: The dictionary of all Ha3Py parameters
+    :param configuration: The dictionary of all Ha3Py parameters.
+        The function doesn't change the input configuration.
     :type configuration: dict
-    :return:
+    :return: The new configuration with synthetic catalogues
     """
+    # ----
     # Init
+    # ----
     output_config = configuration.copy()
     simulation_config = configuration.get('simulation')
     if simulation_config is None:
@@ -292,30 +380,24 @@ def data_generation(configuration):
     prehistoric_conf = simulation_config.get('paleo_catalog')
     historic_conf = simulation_config.get('historic_catalog')
     complete_conf = simulation_config.get('complete_catalogs')
-    event_occurrence = get_events_occurrence(configuration)
-    # m_max_sim = 0
-    # idx = 0
-    # event_occurrence.m_min = event_occurrence.m_min - 1.0
-    # while True:
-    #     m = event_occurrence.magnitude_distribution.rvs()
-    #
-    #     if m_max_sim < m:
-    #         m_max_sim = m
-    #     print(f"{idx}: {m_max_sim} > {m}")
-    #     idx +=1
+    occurrence_probability = get_events_occurrence(configuration)
     general_m_min = 100.0
     general_m_max_obs = -100.0
     general_sd_m_max_obs = 0.0
+    # -------------
     # Paleo catalog
+    # -------------
     if prehistoric_conf is None:
         output_config.pop('paleo_catalog', None)
     else:
         generator = prehistoric_conf.get('generator', 'full_simulation_incremental')
         name = prehistoric_conf.get('name', 'paleo_synthetic')
         if generator == 'full_simulation_incremental':
-            catalog, m_max_obs, m_min = full_simulation_incremental(prehistoric_conf, event_occurrence, name)
+            catalog, m_max_obs, m_min = full_simulation_incremental(prehistoric_conf,
+                                                                    occurrence_probability, name)
         elif generator == 'extreme_simulation':
-            catalog, m_max_obs, m_min = extreme_simulation(prehistoric_conf, event_occurrence, name)
+            catalog, m_max_obs, m_min = extreme_simulation(prehistoric_conf,
+                                                           occurrence_probability, name)
         elif generator == 'remain unchanged':
             catalog, m_max_obs, m_min = remain_unchanged(configuration.get('paleo_catalog'))
         else:
@@ -329,16 +411,20 @@ def data_generation(configuration):
             output_config['paleo_catalog'] = catalog
         else:
             output_config.pop('paleo_catalog', None)
+    # ----------------
     # Historic catalog
+    # ----------------
     if historic_conf is None:
         output_config.pop('historic_catalog', None)
     else:
         generator = historic_conf.get('generator', 'extreme_simulation')
         name = historic_conf.get('name', 'historic_synthetic')
         if generator == 'full_simulation_incremental':
-            catalog, m_max_obs, m_min = full_simulation_incremental(historic_conf, event_occurrence, name)
+            catalog, m_max_obs, m_min = full_simulation_incremental(historic_conf,
+                                                                    occurrence_probability, name)
         elif generator == 'extreme_simulation':
-            catalog, m_max_obs, m_min = extreme_simulation(historic_conf, event_occurrence, name)
+            catalog, m_max_obs, m_min = extreme_simulation(historic_conf,
+                                                           occurrence_probability, name)
         elif generator == 'remain unchanged':
             catalog, m_max_obs, m_min = remain_unchanged(configuration.get('historic_catalog'))
         else:
@@ -352,7 +438,9 @@ def data_generation(configuration):
             output_config['historic_catalog'] = catalog
         else:
             output_config.pop('historic_catalog', None)
+    # -----------------
     # Complete catalogs
+    # -----------------
     if complete_conf is None:
         output_config.pop('complete_catalogs', None)
     else:
@@ -362,9 +450,11 @@ def data_generation(configuration):
             generator = catalog_conf.get('generator', 'no_date_simulation')
             name = catalog_conf.get('name', f'complete#{idx}_synthetic')
             if generator == 'full_simulation_incremental':
-                catalog, m_max_obs, m_min = full_simulation_incremental(catalog_conf, event_occurrence, name)
+                catalog, m_max_obs, m_min = full_simulation_incremental(catalog_conf,
+                                                                        occurrence_probability, name)
             elif generator == 'no_date_simulation':
-                catalog, m_max_obs, m_min = full_simulation_without_date(catalog_conf, event_occurrence, name)
+                catalog, m_max_obs, m_min = full_simulation_without_date(catalog_conf,
+                                                                         occurrence_probability, name)
             elif generator == 'remain unchanged':
                 if old_catalogs is not None and len(old_catalogs) > idx:
                     catalog, m_max_obs, m_min = remain_unchanged(old_catalogs[idx])
@@ -390,7 +480,9 @@ def data_generation(configuration):
             output_config['complete_catalogs'] = catalogs
         else:
             output_config.pop('complete_catalogs', None)
+    # --------------
     # Final settings
+    # --------------
     if general_m_max_obs > -99.0:
         output_config['m_max_obs'] = general_m_max_obs
         output_config['sd_m_max_obs'] = general_sd_m_max_obs
@@ -401,13 +493,15 @@ def data_generation(configuration):
         output_config['m_min'] = general_m_min
     else:
         output_config.pop('m_min', None)
+    # ---
     # End
+    # ---
     return output_config
 
 
 def main():
     configuration = load_configuration()
-    output = data_generation(configuration)
+    output = synthetic_catalogs_generation(configuration)
     save_configuration(output)
 
 

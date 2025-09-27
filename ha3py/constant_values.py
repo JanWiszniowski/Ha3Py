@@ -18,7 +18,8 @@ METHODS = {
      6: 'Tate-Pisarenko-Bayes/compound (Kijko and Singh, 2011)',
      7: 'Non-Parametric-Gaussian/pseudo (Kijko, 2004)',
      8: 'Bayesian MEAN of shifted Likelihood Function & Gaussian Prior (Kijko, 2012)',
-     9: 'Bayesian MEAN of Posterior Fiduicial & Prior Gauss (Kijko, 2004)'
+     9: 'Bayesian MEAN of Posterior Fiduicial & Prior Gauss (Kijko, 2004)',
+     10:'Fixed maximum magnitude'
 }
 
 YMD_365 = [0, 31, 59, 90, 120, 151, 181, 212, 243, 273, 304, 334]
