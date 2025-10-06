@@ -7,13 +7,13 @@ import scipy.integrate as integrate
 
 
 def time_cdf(t, m, occurrence_probability):
-    """
+    r"""
     The cumulative distribution function of non occurrence event probability given magnitude.
     If there exists time_cdf method in the event_occurrence object,
     the result of time_cdf is returned, else
 
     .. math::
-        \frac{\int_{0}^{t} f_{M}(m,t)dt}{\int_{0}^{\infty } f_{M}(m,t)dt}
+        F_T(t|m)=\frac{\int_{0}^{t} f_{M}(m,t)dt}{\int_{0}^{\infty } f_{M}(m,t)dt}
 
     is returned.
 
@@ -23,7 +23,8 @@ def time_cdf(t, m, occurrence_probability):
     :type m: float
     :param occurrence_probability: The object describing the event occurrence probability.
     :type occurrence_probability: OccurrenceBase
-    :return:
+    :return: The CDF of the probability of the non occurrence of the event
+        with the magnitude :math:`m` or greater in the time :math:`t`.
     :rtype: float
     """
     if callable(getattr(occurrence_probability, 'time_cdf', None)):
@@ -33,7 +34,7 @@ def time_cdf(t, m, occurrence_probability):
     return nominator[0] / denominator[0]
 
 
-def time_rng(occurrence_probability, m=None):
+def time_rg(occurrence_probability, m=None):
     """
     Next event time random generator.
     It generates random period of non occurrence of events with magnitude grater than selected.
@@ -65,19 +66,23 @@ def time_rng(occurrence_probability, m=None):
 
 class MagnitudeRandomise:
     """
+    TODO The randomization of magnitudes does not work correctly.
 
-    :param occurrence_probability: The object describing the event occurrence probability.
-    :type occurrence_probability: OccurrenceBase
-    :param magnitude_uncertainty:
-    :type magnitude_uncertainty:
+    Initialisation parameters:
+
+        *occurrence_probability:* (OccurrenceBase) The object describing the event occurrence probability.
+
+        *magnitude_uncertainty:* (float) The standard deviation of simulated magnitude uncertainty
+
     """
     def __init__(self, occurrence_probability, magnitude_uncertainty):
         """
+        Initialisation
 
         :param occurrence_probability: The object describing the event occurrence probability.
         :type occurrence_probability: OccurrenceBase
-        :param magnitude_uncertainty:
-        :type magnitude_uncertainty:
+        :param magnitude_uncertainty: The standard deviation of simulated magnitude uncertainty
+        :type magnitude_uncertainty: (float)
         """
         self.occurrence_probability = occurrence_probability
         if magnitude_uncertainty is None:
@@ -93,6 +98,12 @@ class MagnitudeRandomise:
             self.m_max_bottom = self.m_max - self.mu_3
 
     def __call__(self):
+        """
+        Return random magnitude
+
+        :return: Random magnitude
+        :rtype: float
+        """
         m = self.occurrence_probability.magnitude_distribution.rvs()
         if self.magnitude_uncertainty is None:
             return m
@@ -105,7 +116,8 @@ class MagnitudeRandomise:
 
 def get_times(catalog_configuration):
     """
-    The function returns begin, end time of the catalogue and the time span of the catalogue in years.
+    The support function returns begin, end time of the catalogue,
+    and the time span of the catalogue in years.
     At least two of these values must be defined in the configuration.
 
     :param catalog_configuration: The catalog definition, part of the dictionary of all Ha3Py parameters
@@ -126,14 +138,17 @@ def get_times(catalog_configuration):
 
 
 def test_lambda_beta(catalog_configuration):
-    """
+    r"""
     The function estimated and prints :math:`\beta` and :math:`\lambda` parameters
     of the catalogue assessed by the simplest method:
 
     .. math::
         \beta =\frac{1}{n}\sum_{i=1}^{n}m_i -m_{min},
 
-        \lambda = \frac{T}{n},
+    and
+
+    .. math::
+        \lambda = \frac{n}{T},
 
     where :math:`T` id the catalogue time span, :math:`n` is the number of events,
     and :math:`m_{min}` the minimum magnitude of completeness.
@@ -171,18 +186,24 @@ def extreme_simulation(catalog_configuration, occurrence_probability, name):
     :rtype: dict
 
     The simulation catalog configuration dictionary should contain following fields:
-    :time_interval: (float) The time interval,
-        from which the maximum magnitude are put to the synthetic catalogue.
-    :time_uncertainty: (float of uniform probability) The uncertainty of periods time
-    :magnitude_uncertainty: (float) The uncertainty for magnitude simulation
-    :sd: (float) The standard deviation of catalog magnitudes.
-        Required for compatibility, when magnitude_uncertainty is not defined.
-        At last magnitude_uncertainty or sd must be defined.
-    :name: (str) The name of the new synthetic catalogue.
-    :m_min: (str) The minimum completeness magnitude of the simulated catalog.
-        Event with lower magnitude are removed
-    :begin, end, time_span: The beginning, end, and time span of the catalog.
-        At least two of them are required.
+
+    **time_interval**: (float) The time interval,
+    from which the maximum magnitude are put to the synthetic catalogue.
+
+    **time_uncertainty**: (float of uniform probability) The uncertainty of periods time.
+
+    **magnitude_uncertainty**: (float) The uncertainty for magnitude simulation.
+
+    **sd**: (float) The standard deviation of catalog magnitudes.
+    Required for compatibility, when magnitude_uncertainty is not defined.
+    At last magnitude_uncertainty or sd must be defined.
+
+    **m_min**: (str) The minimum completeness magnitude of the simulated catalog.
+    Event with lower magnitude are removed.
+
+    **begin, end, time_span**: The beginning, end, and time span of the catalog.
+    At least two of them are required.
+
     """
     time_uncertainty = catalog_configuration.get('time_uncertainty', 10.0) / 2.0
     time_interval = catalog_configuration.get('time_interval', 20.0)
@@ -242,14 +263,19 @@ def full_simulation_incremental(catalog_configuration, occurrence_probability, n
     :rtype: dict
     
     The simulation catalog configuration dictionary should contain following fields:
-    :magnitude_uncertainty: (float) The uncertainty for magnitude simulation
-    :sd: (float) The standard deviation of catalog magnitudes.
-        Required for compatibility, when magnitude_uncertainty is not defined.
-        At last magnitude_uncertainty or sd must be defined.
-    :m_min: (str) The minimum completeness magnitude of the simulated catalog.
-        Event with lower magnitude are removed
-    :begin, end, time_span: The beginning, end, and time span of the catalog.
-        At least two of them are required.
+
+    **magnitude_uncertainty**: (float) The uncertainty for magnitude simulation.
+
+    **sd**: (float) The standard deviation of catalog magnitudes.
+    Required for compatibility, when magnitude_uncertainty is not defined.
+    At last magnitude_uncertainty or sd must be defined.
+
+    **m_min**: (str) The minimum completeness magnitude of the simulated catalog.
+    Event with lower magnitude are removed.
+
+    **begin, end, time_span**: The beginning, end, and time span of the catalog.
+    At least two of them are required.
+
     """
     begin_time, end_time, time_span = get_times(catalog_configuration)
     magnitude_uncertainty = catalog_configuration.get('magnitude_uncertainty')
@@ -258,7 +284,7 @@ def full_simulation_incremental(catalog_configuration, occurrence_probability, n
     occurrence_probability.m_min = m_min
     earthquakes = []
     m_max_obs = -100.0
-    dt = time_rng(occurrence_probability) * uniform.rvs()
+    dt = time_rg(occurrence_probability) * uniform.rvs()
     time = begin_time + dt
     magnitude_randomise = MagnitudeRandomise(occurrence_probability, magnitude_uncertainty)
     while time <= end_time:
@@ -269,7 +295,7 @@ def full_simulation_incremental(catalog_configuration, occurrence_probability, n
                 m_max_obs = m
         # dt = occurrence_probability.t_rng()
         # m = occurrence_probability.rvs(dt) * (1.0 + magnitude_uncertainty * (uniform.rvs() - 0.5))
-        dt = time_rng(occurrence_probability)
+        dt = time_rg(occurrence_probability)
         time += dt
     return {'begin': begin_time, 'end': end_time, 'time_span': time_span, 'm_min': m_min,
             'sd': sd, 'name': name, 'earthquakes': earthquakes}, m_max_obs, m_min
@@ -291,14 +317,19 @@ def full_simulation_without_date(catalog_configuration, occurrence_probability, 
     :rtype: dict
     
     The simulation catalog configuration dictionary should contain following fields:
-    :magnitude_uncertainty: (float) The uncertainty for magnitude simulation
-    :sd: (float) The standard deviation of catalog magnitudes.
-        Required for compatibility, when magnitude_uncertainty is not defined.
-        At last magnitude_uncertainty or sd must be defined.
-    :m_min: (str) The minimum completeness magnitude of the simulated catalog.
-        Event with lower magnitude are removed
-    :begin, end, time_span: The beginning, end, and time span of the catalog.
-        At least two of them are required.
+
+    **magnitude_uncertainty**: (float) The uncertainty for magnitude simulation.
+
+    **sd**: (float) The standard deviation of catalog magnitudes.
+    Required for compatibility, when magnitude_uncertainty is not defined.
+    At last magnitude_uncertainty or sd must be defined.
+
+    **m_min**: (str) The minimum completeness magnitude of the simulated catalog.
+    Event with lower magnitude are removed.
+
+    **begin, end, time_span**: The beginning, end, and time span of the catalog.
+    At least two of them are required.
+
     """
     begin_time, end_time, time_span = get_times(catalog_configuration)
     magnitude_uncertainty = catalog_configuration.get('magnitude_uncertainty')
@@ -328,7 +359,7 @@ def remain_unchanged(catalog):
     If m_min is defined, removes event with magnitude smaller than m_min.
     The procedure doesn't estimate the catalogue completeness magnitude.
 
-    :param catalog: The catalogue with earthquakes - not only definition.
+    :param catalog: The full catalogue description with earthquakes - not only simulation definition.
     :type catalog: dict
     :return: The copy of the input catalog with event below m_min removed,
         maximum observed in the catalogue magnitude, and minimum magnitude in the catalogue.

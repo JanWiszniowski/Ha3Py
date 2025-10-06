@@ -30,8 +30,8 @@ Import
 .. automodule:: import_to_hapy
    :members:
 
-Simulation
-==========
+Simulation - synthetic catalogues generation
+============================================
 
-.. automodule:: synthetic_data_generation
+.. automodule:: synthetic_catalogs
    :members:
