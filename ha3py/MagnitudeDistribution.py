@@ -106,19 +106,19 @@ class BaseMagnitudeDistribution(rv_continuous, ABC):
 
     @abstractmethod
     def _prepare(self):
-        raise Exception(f'Undefined _prepare in the {self.name} class')
+        raise Exception(f"Undefined _prepare in the {self.name} class")
 
     @abstractmethod
     def _grad_sf(self, m):
-        raise Exception(f'Undefined _grad_sf in the {self.name} class')
+        raise Exception(f"Undefined _grad_sf in the {self.name} class")
 
     @abstractmethod
     def _coefficient_names(self):
-        raise Exception(f'Undefined _coefficient_names in the {self.name} class')
+        raise Exception(f"Undefined _coefficient_names in the {self.name} class")
 
     @abstractmethod
     def _coefficient_values(self):
-        raise Exception(f'Undefined _coefficient_values in the {self.name} class')
+        raise Exception(f"Undefined _coefficient_values in the {self.name} class")
 
     @property
     def coefficients(self):
@@ -132,7 +132,7 @@ class BaseMagnitudeDistribution(rv_continuous, ABC):
 
     @abstractmethod
     def _const_coefficients(self):
-        raise Exception(f'Undefined _const_coefficients in the {self.name} class')
+        raise Exception(f"Undefined _const_coefficients in the {self.name} class")
 
     @property
     def const_coefficients(self):

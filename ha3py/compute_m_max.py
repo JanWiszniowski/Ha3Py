@@ -59,13 +59,13 @@ def m_max_estimation(configuration):
     elif bayesian_assessment == 'fixed value':
         return configuration['prior_m_max'], configuration['sd_prior_m_max']
     else:
-        raise HaPyException(f'Wrong bayesian m_max assessment procedure name ??{bayesian_assessment}')
+        raise HaPyException(f"Wrong bayesian m_max assessment procedure name ??{bayesian_assessment}")
 
 
 def main():
     params = load_configuration()
     m_max, sd_m_max = m_max_estimation(params)
-    print(f'Result of m_max estimation: m_max = {m_max:4.2f} (+/- {sd_m_max:4.2f})')
+    print(f"Result of m_max estimation: m_max = {m_max:4.2f} (+/- {sd_m_max:4.2f})")
     if input('Save the result? [yes/no] >') == 'yes':
         params['m_max'] = m_max
         params['sd_m_max'] = sd_m_max

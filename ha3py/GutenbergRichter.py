@@ -185,8 +185,8 @@ if __name__ == "__main__":
     magnitude_distribution = GutenbergRichter(gr_parameters)
     magnitudes = np.array([x / 10 for x in range(0, 71)])
     mag = 4
-    print(f'magnitudes = {mag}')
+    print(f"magnitudes = {mag}")
     cdf_vals = magnitude_distribution.cdf(mag)
-    print(f'cdf = {cdf_vals}')
+    print(f"cdf = {cdf_vals}")
     pdf_vals = magnitude_distribution.pdf(mag)
-    print(f'pdf = {pdf_vals}')
+    print(f"pdf = {pdf_vals}")

@@ -234,7 +234,7 @@ class PoissonGammaCompoundOccurrence(LambdaOccurrence, ABC):
         :param t:
         :return:
         """
-        raise Exception(f'Undefined _d_grad_sf_magnitude_distribution in the {self.local_name} class')
+        raise Exception(f"Undefined _d_grad_sf_magnitude_distribution in the {self.local_name} class")
 
     def _d_grad_sf(self, n, t):
         r"""
@@ -244,4 +244,4 @@ class PoissonGammaCompoundOccurrence(LambdaOccurrence, ABC):
         :param t:
         :return:
         """
-        raise Exception(f'Undefined _d_grad_sf in the {self.local_name} class')
+        raise Exception(f"Undefined _d_grad_sf in the {self.local_name} class")

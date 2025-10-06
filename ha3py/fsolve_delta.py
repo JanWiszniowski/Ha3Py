@@ -75,7 +75,7 @@ def m_max_solve_equation(configuration, magnitude_distribution=None, m_max=None,
     sd_m_max_obs = configuration['sd_m_max_obs']
     root = fsolve(_m_max_equation_to_solve, np.array(m_max_obs), args=(delta, configuration))
     if not root:
-        HaPyException(f'Solver can not find the solution for {delta.parameter_name}')
+        HaPyException(f"Solver can not find the solution for {delta.parameter_name}")
     if len(root) > 1:
         m_max = np.max(root)
     else:
@@ -102,4 +102,4 @@ if __name__ == "__main__":
                          'magnitude_distribution': 'Compound Gutenberg-Richter', 'delta': 'Kijko-Sellevoll'}
     # Using compound Gutenberg-Richter magnitude distribution and Kijko-Sellevoll method
     M_max, Sd_mag_max = m_max_solve_equation(Configuration)
-    print(f'm_max = {M_max} (sd = {Sd_mag_max})')
+    print(f"m_max = {M_max} (sd = {Sd_mag_max})")

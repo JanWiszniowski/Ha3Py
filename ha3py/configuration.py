@@ -43,11 +43,11 @@ def load_configuration(required=True):
                 with open(sys.argv[1], "r") as f:
                     return json.load(f)
             except json.decoder.JSONDecodeError as er:
-                print(f'The configuration file error: {er}')
+                print(f"The configuration file error: {er}")
         else:
-            print(f'The configuration file {sys.argv[1]} does not exist')
+            print(f"The configuration file {sys.argv[1]} does not exist")
     if required:
-        print(f'Call: {sys.argv[0]} <params.json>')
+        print(f"Call: {sys.argv[0]} <params.json>")
         exit(-1)
     return dict()
 
@@ -340,7 +340,7 @@ def define_m_max_assessment(configuration):
     print('Assessment of the maximum regional magnitude m_max is based on:')
     print('- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - ')
     for key, method in METHODS.items():
-        print(f' {key}: {method}')
+        print(f" {key}: {method}")
     # configuration_modified |= get_if(configuration, 'procedure_id', 'Enter proper number > ', dtype=int)
     configuration_modified |= set_modify(configuration, 'procedure_id', 'Write proper number{} > ',
                                          ' (or enter to confirm {})', dtype=int)
@@ -431,7 +431,7 @@ def define_m_max_assessment(configuration):
         configuration['bayesian_m_max_estimator'] = 'expected'
         init_lambda_beta(configuration)
     else:
-        raise HaPyException(f'Wrong id={procedure_id}')
+        raise HaPyException(f"Wrong id={procedure_id}")
     if configuration.get('magnitude_distribution', '') == 'Compound Gutenberg-Richter':
         set_uncertainty(configuration, 'q_beta', 'Gutenberg-Richter parameter b', 25)
     if configuration.get('occurrence_probability', '') == 'Poisson-gamma compound':
@@ -521,7 +521,7 @@ def define_catalogs(configuration):
         configuration_modified = True
         no_complete_catalogues = int(input('Number of complete data catalogue files > '))
         for idx in range(no_complete_catalogues):
-            name_comp_file = str(input(f'Name of the #{idx + 1} file with complete data > '))
+            name_comp_file = str(input(f"Name of the #{idx + 1} file with complete data > "))
             comp_cat = read_complete_cat(name_comp_file)
             configuration['complete_catalogs'].append(comp_cat)
             set_global(configuration, comp_cat)
@@ -567,7 +567,7 @@ def define_magnitude_occurrence(configuration):
     occurrence_probability,_ = get_events_occurrence(configuration)
     for parameter in occurrence_probability.const_coefficients:
         configuration_modified |= set_if(configuration, 'parameter',
-                                         f'Value of the {parameter} > ', dtype=float)
+                                         f"Value of the {parameter} > ", dtype=float)
     return configuration_modified
 
 

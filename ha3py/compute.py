@@ -102,15 +102,15 @@ def compute(configuration):
         suggested_m_max, sd_m_max = m_max_estimation(configuration)
         configuration.pop('lambda_ref', None)
         print_separation_double_line()
-        print(f'Run round number #{nr_runs}')
+        print(f"Run round number #{nr_runs}")
         print_separation_single_line()
         for name in names:
             if name == 'beta':
-                print(f'{name:<10s} ={configuration[name]:7.3f} (b = {configuration[name]/LN_10_:3.1f})')
+                print(f"{name:<10s} ={configuration[name]:7.3f} (b = {configuration[name]/LN_10_:3.1f})")
             elif name == 'lambda':
-                print(f'{name:<10s} ={configuration[name]:7.3f} (for m_min = {configuration['m_min']:4.2f})')
+                print(f"{name:<10s} ={configuration[name]:7.3f} (for m_min = {configuration['m_min']:4.2f})")
             else:
-                print(f'{name:<10s} ={configuration[name]:7.3f}')
+                print(f"{name:<10s} ={configuration[name]:7.3f}")
         print(f"m_max (current) = {configuration['m_max_current']}")
         if suggested_m_max > 9.9:
             print(' I am SORRY. I DO NOT HAVE SUGGESTION REGARDING M_MAX')
@@ -179,7 +179,7 @@ def main():
     print_separation_single_line()
     names = get_events_occurrence(configuration).coefficient_names
     for name in names:
-        print(f'{name:<10s} ={configuration[name]:7.3f} (+/- {configuration['sd_' + name]:6.3f} )')
+        print(f"{name:<10s} ={configuration[name]:7.3f} (+/- {configuration['sd_' + name]:6.3f} )")
     print_percentage_share(configuration)
     save_configuration(configuration)
     print_separation_double_line()

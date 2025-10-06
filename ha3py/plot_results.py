@@ -284,7 +284,7 @@ def plot_hazard(pars, what, ax=None):
                 [lambda_mag, rp] = return_period(mag, lamb, event_occurrence.magnitude_distribution)
                 probability = float(event_occurrence.sf(mag, per))
                 probabilities.append(probability)
-            ax.plot(m_v, probabilities, color=m_colors[idx], linewidth=m_width, label=f'T = {per:.0f} [Y]')
+            ax.plot(m_v, probabilities, color=m_colors[idx], linewidth=m_width, label=f"T = {per:.0f} [Y]")
         ax.legend()
         ax.set_ylabel('Probability of not exceedance')
     else:

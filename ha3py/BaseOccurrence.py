@@ -257,7 +257,7 @@ class OccurrenceBase(rv_continuous, ABC):
                                                                 m_max=kwargs.get('m_max'),
                                                                 theta=kwargs.get('theta'))
         self.magnitude_distribution = magnitude_distribution
-        rv_continuous.__init__(self, name=name, longname=f'{name}_md_{self.magnitude_distribution.name}',
+        rv_continuous.__init__(self, name=name, longname=f"{name}_md_{self.magnitude_distribution.name}",
                                a=magnitude_distribution.a, shapes='t')
 
     # -------------------------------------------------------------
@@ -409,11 +409,11 @@ class OccurrenceBase(rv_continuous, ABC):
 
     @abstractmethod
     def _coefficient_names(self):
-        raise Exception(f'Undefined _coefficient_names in the {self.local_name} class')
+        raise Exception(f"Undefined _coefficient_names in the {self.local_name} class")
 
     @abstractmethod
     def _coefficient_values(self):
-        raise Exception(f'Undefined _coefficient_values in the {self.local_name} class')
+        raise Exception(f"Undefined _coefficient_values in the {self.local_name} class")
 
     @property
     def coefficients(self):
@@ -444,7 +444,7 @@ class OccurrenceBase(rv_continuous, ABC):
 
     @abstractmethod
     def _const_coefficients(self):
-        raise Exception(f'Undefined _const_coefficients in the {self.local_name} class')
+        raise Exception(f"Undefined _const_coefficients in the {self.local_name} class")
 
     @property
     def const_coefficients(self):
@@ -462,19 +462,19 @@ class OccurrenceBase(rv_continuous, ABC):
 
     @abstractmethod
     def _grad_sf_magnitude_distribution(self, m, t):
-        raise Exception(f'Undefined _grad_sf_magnitude_distribution in the {self.local_name} class')
+        raise Exception(f"Undefined _grad_sf_magnitude_distribution in the {self.local_name} class")
 
     @abstractmethod
     def _d_grad_sf_magnitude_distribution(self, n, m, t):
-        raise Exception(f'Undefined _d_grad_sf_magnitude_distribution in the {self.local_name} class')
+        raise Exception(f"Undefined _d_grad_sf_magnitude_distribution in the {self.local_name} class")
 
     @abstractmethod
     def _grad_sf(self, m, t):
-        raise Exception(f'Undefined _grad_sf in the {self.local_name} class')
+        raise Exception(f"Undefined _grad_sf in the {self.local_name} class")
 
     @abstractmethod
     def _d_grad_sf(self, n, t):
-        raise Exception(f'Undefined _d_grad_sf in the {self.local_name} class')
+        raise Exception(f"Undefined _d_grad_sf in the {self.local_name} class")
 
     def grad_sf(self, m, t):
         r"""
@@ -541,7 +541,7 @@ class OccurrenceBase(rv_continuous, ABC):
 
     @abstractmethod
     def _set_m_min(self, val):
-        raise Exception(f'Undefined _set_m_min in the {self.local_name} class')
+        raise Exception(f"Undefined _set_m_min in the {self.local_name} class")
 
     @m_min.setter
     def m_min(self, val):
