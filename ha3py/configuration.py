@@ -427,7 +427,7 @@ def define_m_max_assessment(configuration):
         set_with_warning(configuration, 'occurrence_probability', 'Poisson-gamma compound')
         set_with_warning(configuration, 'delta', 'Kijko-Sellevoll')
         configuration['m_max_assessment'] = 'solve_delta'
-        configuration['bayesian_m_max_assessment'] = 'fixed value'
+        configuration['bayesian_m_max_assessment'] = 'fixed_value'
         configuration['bayesian_m_max_estimator'] = 'expected'
         init_lambda_beta(configuration)
     else:

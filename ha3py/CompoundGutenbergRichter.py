@@ -96,7 +96,7 @@ class CompoundGutenbergRichter(BaseMagnitudeDistribution):
         r"""
 
         .. math:
-            \text{cdf}\left( m \right) =
+            \text{pdf}\left( m \right) =
             \beta\left[ \frac{q_\beta}{q_\beta+\beta\left( m-m_{min}\right) } \right]^{q_\beta+1}/D_\beta
 
         where

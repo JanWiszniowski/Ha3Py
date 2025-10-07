@@ -230,7 +230,7 @@ If magnitude distribution is the Compound Gutenberg-Richter the program asks for
     Define the Gutenberg-Richter parameter b uncertainty in percents (or enter for 25.0)  [%] >
 
 If the events occurrence follows the Gamma Compound Poisson distribution,
-the program asks for :the math:`q_{\labda}` value: ::
+the program asks for :the math:`q_{\lambda}` value: ::
 
     Define the mean activity rate 'lambda' uncertainty in percents (or enter for 25.0)  [%] >
 
@@ -638,7 +638,7 @@ If magnitude distribution is the Compound Gutenberg-Richter the program asks for
     Define the Gutenberg-Richter parameter b uncertainty in percents (or enter for 25.0)  [%] >
 
 If the events occurrence follows the Gamma Compound Poisson distribution,
-the program asks for :the math:`q_{\labda}` value: ::
+the program asks for :the math:`q_{\lambda}` value: ::
 
     Define the mean activity rate 'lambda' uncertainty in percents (or enter for 25.0)  [%] >
 

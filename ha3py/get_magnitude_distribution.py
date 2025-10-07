@@ -6,7 +6,7 @@ ver. 2024-01
 
 from ha3py.GutenbergRichter import GutenbergRichter
 from ha3py.CompoundGutenbergRichter import CompoundGutenbergRichter
-from ha3py.NonParametricGaussian import NonparametricGaussianKernel
+from ha3py.NonParametricPseudoGaussian import NonparametricGaussianKernel
 from ha3py.utils import HaPyException
 
 

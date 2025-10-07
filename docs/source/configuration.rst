@@ -229,6 +229,8 @@ Earthquake parameters
 ---------------------
 
 Specific earthquake parameters depends on the catalogue type.
+The all possible field are described bellow,
+though only magnitude can be sufficient for complete catalogs.
 
 :magnitude: (float) The earthquake magnitude. Magnitudes in all catalogs must be unified.
 :date: (float) The date of the earthquake in years AD.
@@ -245,8 +247,36 @@ Earthquake occurrence and magnitude distribution parameters and coefficients
 Earthquake occurrence and magnitude distribution parameters
 -----------------------------------------------------------
 
-:magnitude_distribution: (str) The name of magnitude distribution model e.g 'GCompound Gutenberg-Richter',
+:magnitude_distribution: (str) The name of magnitude distribution model e.g 'Compound Gutenberg-Richter'.
+    Available options:
+
+    `Gutenberg-Richter` - The double truncated Gutenberg-Richter magnitude distribution,
+    where :math:`F_{M}(m)=\frac{1-\exp\left[-\beta\left(m-m_{min}\right)\right]}{1-\exp\left[-\beta\left(m_{max}-m_{min}\right)\right]}`
+    (see the full definition in the GutenbergRichter class description).
+
+    `Compound Gutenberg-Richter` - The compound Gutenberg-Richter magnitude distribution
+    where :math:`F_{M}(m)=C_{\beta} \left [1-\left (1+\overline{\beta}\left(m-m_{min}\right)/q_{\beta} \right )^{-q_{\beta}}  \right ]`
+    (see the full definition in the CompoundGutenbergRichter class description).
+    It requires definition of constant `q_beta` parameter.
+
+    `Nonparametric gaussian kernel` - the nonparametric magnitude distribution based on Gaussian kernel
+    (see the full definition in the NonparametricGaussianKernel class description)
+
 :occurrence_probability: (str) The name of earthquake occurrence model e.g 'Poisson-gamma compound',
+    Available options:
+
+    `Poisson` - Poisson events occurrence probability
+
+    `Poisson-gamma compound` - The combination of Poisson distribution with the gamma distribution.
+    It requires definition of constant `q_lambda` parameter.
+
+:q_lambda: (float) Constant coefficient
+    required for the compound Gutenberg-Richter magnitude distribution
+    :math:`q_\lambda={\lambda}^2/{\sigma_\lambda}^2`
+
+:q_beta: (float) Constant coefficient
+    required for the compound Poisson-gamma earthquake occurrence probability
+    :math:`q_\beta={\beta}^2/{\sigma_\beta}^2`
 
 Earthquake occurrence and magnitude distribution coefficients
 -------------------------------------------------------------
@@ -289,6 +319,25 @@ Maximum magnitude parameters
 :m_max: (float) The final maximum magnitude.
 :sd_m_max: (float) The standard deviation of the final maximum magnitude.
 :m_max_assessment: (str) The non bayesian maximum magnitude assessment method.
+    Available options:
+
+    `solve_delta` - The maximum magnitude assessment by numerical solving the equation
+    :math:`\widehat{m}_{max} = m_{max}^{obs}+\Delta`. The coefficient `delta` must be set.
+
+    `Gibowicz-Kijko` - The procedure relies on the properties
+    of end-point estimators of the uniform distribution.
+
+    `iteration_delta` - Similar to `solve_delta`,
+    but the equation :math:`\widehat{m}_{max} = m_{max}^{obs}+\Delta` is solved by iteration
+
+    `momentum` - Evaluation the maximum magnitude according to moment estimator
+
+    `primitive` - The maximum magnitude is 0.5 greater than the maximum observed magnitude,
+
+    `Robson-Whitlock` - Robson-Whitlock maximum magnitude assessment procedure,
+
+    `Robson-Whitlock-Cooke` - Robson-Whitlock-Cooke maximum magnitude assessment procedure,
+
 :bayesian_m_max_assessment: (str) The bayesian maximum magnitude assessment method.
     When this parameter is not defined,
     the maximum magnitude is estimated by the method defined in the 'm_max_assessment' parameter.
@@ -296,12 +345,33 @@ Maximum magnitude parameters
     the maximum magnitude is estimated by this method
     whereas the 'm_max_assessment' parameter is used in some bayesian methods,
     which requires the pre-estimation of the maximum magnitude from data.
+    When  this parameter is defined, `prior_m_max` `sd_prior_m_max` must be defined
+    Available options:
+
+    `bayesian_normal`- In this method the bayesian likelihood function is normal trunkated
+    to maximum observed magnitude and maximum possible magnitude,
+
+    `bayesian_normal_unlimited` - In this method the bayesian likelihood function is normal,
+
+    `bayesian_by_shift` - In this method the Cornel bayesian likelihood function
+    is shofted by the maximum magnitude estimated by non bayesian method,
+
+    `bayesian_fiducial` - The method assumes that the database information on maximum magnitude
+    (in our case, seismic event catalogue) is expressed in the
+    form of the fiducial distribution,
+
+    `fixed_value` - Primitive method, where the prior maximum magnitude is not modufied.
+
 :bayesian_m_max_estimator: (str) The bayesian maximum magnitude likelihood point estimator.
-    Three estimators are available: 'max' - maximum likelihood, 'expected' - expected likelihood,
-    and 'median' - median likelihood treated as a probability distribution.
+    Three estimators are available: `max` - maximum likelihood, `expected` - expected likelihood,
+    and `median` - median likelihood treated as a probability distribution.
 :m_min_ref: (float) The minimum magnitude definition defined for maximum magnitude estimation.
     It is optional. When is not defined, the minimum magnitude of all catalogs is used ``m_min``.
     However, ``m_min`` can be small, which is numerically not recommended.
+:delta: (str) The method of :math:`\Delta` calculation in the maximum magnitude assessment
+    by solving the formula :math:`\widehat{m}_{max} = m_{max}^{obs}+\Delta`.
+    There two available methods of :math:`\Delta` calculation:
+    `Kijko-Sellevoll` and `Tate-Pisarenko`.
 
 Other parameters
 ================
@@ -315,9 +385,10 @@ Other parameters
 :induced_seismicity: (str) Information if the investigated seismicity
     is the case of induced seismicity ("no" or "yes")
 :induced_seismicity_coefficient: (float),
-:time_intervals: (list)
-:m_min: (float),
-:prior_b: "",
+:time_intervals: (list) The time interval of all catalogues. It is setting during adding catalogues.
+:m_min: (float) The minimum magnitude of all catalogues. It is setting during adding catalogues.
+    Usually the event occurrence is assessed for this magnitude.
+:prior_b: (float) The prior b value for bayesian estimation of magnitude distribution.
 :likelihood_optimization_method: (str) The optimisation method used for maximum likelihood computation.
 :COV: (np.array) The covariance matrix (Inversion of ln ln_likelihood hestian).
 :coefficients: (list(str)) List if earthquake occurrence probability estimated coefficients names,
@@ -334,8 +405,8 @@ Seismic hazard values
 =====================
 
 :mag: (float) The magnitude value, for which the following parameters were calculated.
-:lambda_mag: (float)  ???? 1.2599577011667585e-05,
-:return_period: (float) the return period in years
+:lambda_mag: (float)  Lambda value for relevant magnitude,
+:return_period: (float) The return period in years
 :probabilities: (list(float)) List of non exceeding of above magnitude *mag* probability
     in periods defined in the *time_intervals* list
 
@@ -355,10 +426,10 @@ The dictionary `simulation` consists of:
 Description, how the generate the catalogue consists of:
 
 :generator: (str) The generator name. There are allowed three names:
-    'full_simulation_incremental', 'extreme_simulation', and 'no_date_simulation'.
+    `full_simulation_incremental`, `extreme_simulation`, and `no_date_simulation`.
     For paleo- and historic catalogues 'full_simulation_incremental' and 'extreme_simulation'
-    can be applied, wheras for complete catalogues 'extreme_simulation'
-    and 'no_date_simulation' can be applied.
+    can be applied, whereas for complete catalogues 'extreme_simulation'
+    and 'no_date_simulation' should be applied.
 :begin: (float) The begin of the catalogues in years AD.
 :end: (float) The end of the catalogues in years AD.
 :time_span: (float) The time interval of the catalogue
