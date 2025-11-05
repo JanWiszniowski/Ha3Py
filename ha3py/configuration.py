@@ -80,7 +80,7 @@ def date_years(year, month, day):
     iyear = int(year)
     if iyear >= 1:
         result_date_years = datetime.datetime(int(year), int(month), iday, ihour, imin, isec,
-                                              iusec).toordinal() / 365.25
+                                              iusec).toordinal() / 365.25 + 1
     elif iyear == 0:
         raise HaPyException("Zero year doesn't exist")
     else:
@@ -189,6 +189,11 @@ def read_cat_date(fn):
     return date_years(dt[0], dt[1], dt[2])
 
 
+def line_to_date(line):
+    dt = line.split()
+    return date_years(dt[0], dt[1], dt[2])
+
+
 def read_cat_float(fn):
     while True:
         element = fn.readline()
@@ -233,6 +238,7 @@ def read_paleo_cat(filename):
         catalog['end'] = read_cat_date(fn)
         catalog['time_span'] = catalog['end'] - catalog['begin']
         lines = fn.readlines()
+        lines.sort(key=line_to_date)
         earthquakes = []
         prev_date = catalog['begin']
         for line in lines:
@@ -255,6 +261,7 @@ def read_paleo_cat(filename):
     return catalog
 
 
+
 def read_hist_cat(filename):
     catalog = dict()
     with open(filename, "r") as fn:
@@ -265,6 +272,7 @@ def read_hist_cat(filename):
         catalog['time_span'] = catalog['end'] - catalog['begin']
         magnitude_uncertainty = read_cat_float(fn)
         lines = fn.readlines()
+        lines.sort(key=line_to_date)
         earthquakes = []
         prev_date = catalog['begin']
         for line in lines:
@@ -587,7 +595,7 @@ def define_configuration(configuration):
         print('------------------------------------------------------------------')
         print('Define time intervals, for which seismic hazard will be estimated:')
         print('- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - ')
-        print('Time interval #1 = 1 year by default. You do not need define thr first time interval')
+        print('Time interval #1 = 1 year by default. You do not need define the first time interval')
         configuration['time_intervals'].append(float(input('Time interval #2 > ')))
         configuration['time_intervals'].append(float(input('Time interval #3 > ')))
         configuration['time_intervals'].append(float(input('Time interval #4 > ')))
