@@ -39,12 +39,12 @@ def smooth_parameter_estimation(earthquakes):
     :rtype: (float)
     """
     no_earthquakes = len(earthquakes)
-    mag = [m['magnitude'] for m in earthquakes]
-    mag.sort()
+    magnitudes = [m['magnitude'] for m in earthquakes]
+    magnitudes.sort()
     i1 = round(0.25 * no_earthquakes)
     i2 = round(0.75 * no_earthquakes)
-    quar_range = (mag[i2] - mag[i1]) / 1.34
-    std_mag = ndimage.standard_deviation(np.array(mag))
+    quar_range = (magnitudes[i2] - magnitudes[i1]) / 1.34
+    std_mag = ndimage.standard_deviation(np.array(magnitudes))
     a = min(quar_range, std_mag)
     h = 0.9 * a * no_earthquakes ** (-0.2)
     # h = round(h, 2)

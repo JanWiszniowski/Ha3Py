@@ -189,7 +189,7 @@ def read_cat_date(fn):
     return date_years(dt[0], dt[1], dt[2])
 
 
-def line_to_date(line):
+def line_date(line):
     dt = line.split()
     return date_years(dt[0], dt[1], dt[2])
 
@@ -238,7 +238,7 @@ def read_paleo_cat(filename):
         catalog['end'] = read_cat_date(fn)
         catalog['time_span'] = catalog['end'] - catalog['begin']
         lines = fn.readlines()
-        lines.sort(key=line_to_date)
+        lines.sort(key=line_date)
         earthquakes = []
         prev_date = catalog['begin']
         for line in lines:
@@ -272,7 +272,7 @@ def read_hist_cat(filename):
         catalog['time_span'] = catalog['end'] - catalog['begin']
         magnitude_uncertainty = read_cat_float(fn)
         lines = fn.readlines()
-        lines.sort(key=line_to_date)
+        lines.sort(key=line_date)
         earthquakes = []
         prev_date = catalog['begin']
         for line in lines:
