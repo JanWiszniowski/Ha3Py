@@ -62,11 +62,12 @@ def sd_m_max_by_momentum_compute(mag_v):
 
 
 def get_magnitudes_for_momentum(configuration, magnitude_distribution=None):
-    p_phs = configuration['paleo_catalog']
-    p_his = configuration['historic_catalog']
-    p_comp = configuration['complete_catalogs']
+    p_phs = configuration.get('paleo_catalog')
+    p_his = configuration.get('historic_catalog')
+    p_comp = configuration.get('complete_catalogs')
     if p_phs or p_his or not p_comp:
         HaPyException('Moment estimator can be applied only to complete_catalogs')
+        return None
     mag_mom = []
     if magnitude_distribution is None:
         m_min = configuration['m_min']
@@ -102,6 +103,8 @@ def m_max_by_momentum(configuration, magnitude_distribution=None):  # magnitude_
 
     """
     mag_a = get_magnitudes_for_momentum(configuration, magnitude_distribution=magnitude_distribution)
+    if not mag_a:
+        return None, None
     m_max = m_max_by_momentum_compute(mag_a)
     var_m_max = sd_m_max_by_momentum_compute(mag_a)
     return m_max, var_m_max

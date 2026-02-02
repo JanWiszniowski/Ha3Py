@@ -20,7 +20,18 @@ import scipy.integrate as integrate
 from ha3py.m_max_utils import non_bayesian_m_max_estimation
 from abc import ABC, abstractmethod
 from ha3py.constant_values import EPS2
+from ha3py.utils import HaPyException
 
+
+def init_bayesian_m_max(configuration, magnitude_distribution=None):
+    m_max, sd_m_max = non_bayesian_m_max_estimation(configuration,
+                                                              magnitude_distribution=magnitude_distribution)
+    prior_m_max = configuration['prior_m_max']
+    sd_prior_m_max = configuration['sd_prior_m_max']
+    if m_max > prior_m_max:
+        print(f"Prior m_max ({prior_m_max}) is smaller than m_max estimated from the catalog ({m_max})")
+        raise HaPyException('Prior m_max error')
+    return m_max, sd_m_max, prior_m_max, sd_prior_m_max
 
 class BayesianBase(ABC):
     r"""
@@ -45,9 +56,12 @@ class BayesianBase(ABC):
         :type configuration: dict
 
         """
-        self.m_max, self.sd_m_max = non_bayesian_m_max_estimation(configuration, magnitude_distribution=magnitude_distribution)
-        self.prior_m_max = configuration['prior_m_max']
-        self.sd_prior_m_max = configuration['sd_prior_m_max']
+        self.m_max, self.sd_m_max, self.prior_m_max, self.sd_prior_m_max = init_bayesian_m_max(
+            configuration, magnitude_distribution=magnitude_distribution)
+        # self.m_max, self.sd_m_max = non_bayesian_m_max_estimation(configuration,
+        #                                                           magnitude_distribution=magnitude_distribution)
+        # self.prior_m_max = configuration['prior_m_max']
+        # self.sd_prior_m_max = configuration['sd_prior_m_max']
         self.m_max_u = configuration.get('upper_m_max', 9.5)
         # self.m_max_l = configuration.get('lower_m_max', configuration['m_max_obs'])
         self.m_max_l = configuration.get('lower_m_max', self.m_max)

@@ -36,7 +36,6 @@ def input_configuration_name():
 
 
 def load_configuration(required=True):
-
     if len(sys.argv) >= 2:
         if os.path.isfile(sys.argv[1]):
             try:
@@ -150,7 +149,7 @@ def set_modify_default(pars, key, prompt, default):
         default = pars[key]
         return_value = False
     wyn = input(prompt.format(default))
-    if  wyn:
+    if wyn:
         pars[key] = float(wyn)
         return True
     pars[key] = default
@@ -163,10 +162,10 @@ def set_uncertainty(pars, key, prompt, default):
         default = 100.0 / np.sqrt(pars[key])
         return_value = False
     wyn = input(f"Define the {prompt} uncertainty in percents (or enter for {default})  [%] > ")
-    if  wyn:
-        pars[key] = (100 / float(wyn))**2
+    if wyn:
+        pars[key] = (100 / float(wyn)) ** 2
         return True
-    pars[key] = (100 / default)**2
+    pars[key] = (100 / default) ** 2
     return return_value
 
 
@@ -261,11 +260,10 @@ def read_paleo_cat(filename):
     return catalog
 
 
-
 def read_hist_cat(filename):
     catalog = dict()
     with open(filename, "r") as fn:
-        
+
         catalog['begin'] = read_cat_date(fn)
         catalog['end'] = read_cat_date(fn)
         catalog['m_min'] = read_cat_float(fn)
@@ -277,15 +275,17 @@ def read_hist_cat(filename):
         prev_date = catalog['begin']
         for line in lines:
             dt = line.split()
-            if len(dt)  < 3:
+            if len(dt) < 3:
                 continue
             event_date = date_years(dt[0], dt[1], dt[2])
             magnitude = float(dt[3])
             time_span = event_date - prev_date
             if len(dt) == 5:
-                earthquakes.append({'magnitude': magnitude, 'date': event_date, 'time_span': time_span, 'sd': float(dt[4])})
+                earthquakes.append(
+                    {'magnitude': magnitude, 'date': event_date, 'time_span': time_span, 'sd': float(dt[4])})
             elif len(dt) == 4:
-                earthquakes.append({'magnitude': magnitude, 'date': event_date, 'time_span': time_span, 'sd': magnitude_uncertainty})
+                earthquakes.append(
+                    {'magnitude': magnitude, 'date': event_date, 'time_span': time_span, 'sd': magnitude_uncertainty})
             prev_date = event_date
     catalog['earthquakes'] = [m for m in earthquakes if m['magnitude'] >= catalog['m_min']]
     last_earthquake = catalog['earthquakes'][-1]
@@ -307,7 +307,7 @@ def init_lambda_beta(configuration, init_beta=True, init_lambda=True, m_max=None
     """
     # if 'beta' not configuration:
     #
-    if not configuration.get('complete_catalogs',[]):
+    if not configuration.get('complete_catalogs', []):
         return
     if 'beta' in configuration:
         beta = configuration['beta']
@@ -319,7 +319,7 @@ def init_lambda_beta(configuration, init_beta=True, init_lambda=True, m_max=None
             magnitudes = [earthquake['magnitude'] for earthquake in catalog['earthquakes']]
             no_earthquakes = len(magnitudes)
             beta_for_catalog = 1.0 / (np.mean(magnitudes) - m_min)
-            beta_weight = no_earthquakes / beta_for_catalog**2
+            beta_weight = no_earthquakes / beta_for_catalog ** 2
             sum_val += beta_for_catalog * beta_weight
             sum_weights += beta_weight
         beta = sum_val / sum_weights
@@ -335,7 +335,7 @@ def init_lambda_beta(configuration, init_beta=True, init_lambda=True, m_max=None
         m_min = catalog['m_min']
         no_earthquakes = len(catalog['earthquakes'])
         lambda_for_catalog = float(no_earthquakes) / time_span / magnitude_distribution.sf(m_min)
-        lambda_weight =  1.0 / lambda_for_catalog
+        lambda_weight = 1.0 / lambda_for_catalog
         sum_val += lambda_for_catalog * lambda_weight
         sum_weights += lambda_weight
     if init_lambda:
@@ -441,19 +441,19 @@ def define_m_max_assessment(configuration):
     else:
         raise HaPyException(f"Wrong id={procedure_id}")
     if configuration.get('magnitude_distribution', '') == 'Compound Gutenberg-Richter':
-        set_uncertainty(configuration, 'q_beta', 'Gutenberg-Richter parameter b', 25)
+        set_uncertainty(configuration, 'q_beta', 'Gutenberg-Richter parameter b', 10)
     if configuration.get('occurrence_probability', '') == 'Poisson-gamma compound':
-        set_uncertainty(configuration, 'q_lambda', "mean activity rate 'lambda'", 25)
+        set_uncertainty(configuration, 'q_lambda', "mean activity rate 'lambda'", 10)
 
     if configuration.get('bayesian_m_max_assessment', ''):
-        configuration_modified |= \
-            set_if_default(configuration, 'prior_m_max',
-                           'Prior value of maximum possible earthquake magnitude (not less than {}) > ',
-                           configuration['m_max_obs'])
-        configuration_modified |= set_if(configuration, 'sd_prior_m_max',
-                                         'Standard deviation of prior value of m_max > ', dtype=float)
-        if configuration['sd_prior_m_max'] > 9.5:
-            configuration['sd_prior_m_max'] = 9.5
+        configuration_modified |= set_modify(configuration, 'prior_m_max',
+                                             'Prior value of maximum possible earthquake magnitude{} > ',
+                                             ' (or enter to confirm {})', dtype=float)
+        configuration_modified |= set_modify(configuration, 'sd_prior_m_max',
+                                             'Standard deviation of prior value of m_max{} > ',
+                                             ' (or enter to confirm {})', dtype=float)
+        if configuration['prior_m_max'] > 9.5:
+            configuration['prior_m_max'] = 9.5
         if configuration['sd_prior_m_max'] < 0.1:
             configuration['sd_prior_m_max'] = 0.1
     return configuration_modified
@@ -572,7 +572,7 @@ def define_magnitude_occurrence(configuration):
                                      'Name of the magnitude distribution model > ', dtype=str)
     configuration_modified |= set_if(configuration, 'occurrence_probability',
                                      'Name of the occurrence probability model > ', dtype=str)
-    occurrence_probability,_ = get_events_occurrence(configuration)
+    occurrence_probability, _ = get_events_occurrence(configuration)
     for parameter in occurrence_probability.const_coefficients:
         configuration_modified |= set_if(configuration, 'parameter',
                                          f"Value of the {parameter} > ", dtype=float)
@@ -581,7 +581,8 @@ def define_magnitude_occurrence(configuration):
 
 def define_configuration(configuration):
     configuration_modified = False
-    configuration_modified |= set_if(configuration, 'output_text_file', 'Name of the output text file > ', dtype=str, ext='txt')
+    configuration_modified |= set_if(configuration, 'output_text_file', 'Name of the output text file > ', dtype=str,
+                                     ext='txt')
     configuration_modified |= set_if(configuration, 'output_configuration',
                                      'Name of the output configuration file > ', dtype=str, ext='json')
     configuration_modified |= set_if(configuration, 'area_name', 'Name of the area > ', dtype=str)
@@ -639,6 +640,7 @@ def define_configuration(configuration):
     if configuration_modified:
         configuration['created_on'] = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
     return configuration_modified
+
 
 def main():
     print("==============================================================")

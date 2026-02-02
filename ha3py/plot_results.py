@@ -16,7 +16,6 @@ from estimation of earthquake hazard parameters by Ha3Py.
 Most functions plot diagrams curves with uncertainty margins.
 """
 
-
 import numpy as np
 import matplotlib.pyplot as plt
 from ha3py.return_period import return_period, grad_return_period
@@ -163,7 +162,7 @@ def comp_mean_prob(configuration, tp):
     cpr_v = []
     temp_m_max = round(m_max, 3)
     event_occurrence.m_max = temp_m_max
-    m_v = np.arange(m_min, temp_m_max+d_mag/2, d_mag)
+    m_v = np.arange(m_min, temp_m_max + d_mag / 2, d_mag)
     for mag in np.nditer(m_v):
         cpr = event_occurrence.sf(mag, tp)  # 1 - PROB.
         if cpr >= cpr_min:
@@ -184,7 +183,7 @@ def comp_sd_prob(pars, tp, cpr_sign):
     cpr_v = []
     temp_m_max = round(m_max + cpr_sign * sd_m_max, 3)
     event_occurrence.m_max = temp_m_max
-    m_v = np.arange(m_min, temp_m_max + d_mag/2, d_mag)
+    m_v = np.arange(m_min, temp_m_max + d_mag / 2, d_mag)
     coefficient_names = event_occurrence.coefficient_names[:-1]
     for mag in np.nditer(m_v):
         cpr = event_occurrence.sf(mag, tp)  # 1 - PROB.
@@ -254,7 +253,7 @@ def plot_hazard(pars, what, ax=None):
     cpr_v = []
     temp_m_max = round(m_max, 3)
     event_occurrence.m_max = temp_m_max
-    m_v = np.arange(m_min, temp_m_max+d_mag/2, d_mag)
+    m_v = np.arange(m_min, temp_m_max + d_mag / 2, d_mag)
     if what == 'lambda':
         rp_v = []
         for mag in np.nditer(m_v):
@@ -318,6 +317,7 @@ def plot_results(configuration):
     plot_hazard(configuration, 'probabilities', ax)
     fig5.savefig('probabilities.png')
     fig5.show()
+    print("Close all figures to continue")
     plt.show(block=True)
 
 

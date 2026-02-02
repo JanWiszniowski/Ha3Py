@@ -217,20 +217,24 @@ The selection made is translated to definitions of 'm_max_assessment', 'delta'
 Then the complete analysis will be based on compound distribution principles.
 (If Bayesian maximum magnitude is not chosen the question does not appear) ::
 
-    Prior value of maximum possible earthquake magnitude (not less than *m.m*) >
+    Prior value of maximum possible earthquake magnitude >
 
 The prior maximum regional magnitude :math:`m_{max}` value for Bayesian :math:`m_{max}` assessment methods.
-(If Bayesian maximum magnitude is not chosen the question does not appear)::
+The prior maximum regional magnitude **must** be greated then magnitude estimated from the catalog.
+(If Bayesian maximum magnitude is not chosen the question does not appear) ::
 
     Standard deviation of of prior m_max value >
 
 The prior maximum regional magnitude :math:`\sigma_{m_{max}}` for Bayesian :math:`m_{max}` assessment methods.
-If magnitude distribution is the Compound Gutenberg-Richter the program asks for :the math:`q_{beta}` value: ::
+If magnitude distribution is the Compound Gutenberg-Richter
+(During the selection of assessment of the maximum regional magnitude method 2, 4, 6, 8, or 9 was chosen),
+the program asks for :the math:`q_{beta}` value: ::
 
     Define the Gutenberg-Richter parameter b uncertainty in percents (or enter for 25.0)  [%] >
 
 If the events occurrence follows the Gamma Compound Poisson distribution,
-the program asks for :the math:`q_{\lambda}` value: ::
+(During the selection of assessment of the maximum regional magnitude method 2, 4, 6, 8, or 9 was chosen),
+the program asks for :the math:`q_{\labda}` value: ::
 
     Define the mean activity rate 'lambda' uncertainty in percents (or enter for 25.0)  [%] >
 
@@ -628,6 +632,7 @@ Then the complete analysis will be based on compound distribution principles.
     Prior value of maximum possible earthquake magnitude (not less than *m.m*) >
 
 The prior maximum regional magnitude :math:`m_{max}` value for Bayesian :math:`m_{max}` assessment methods.
+The prior maximum regional magnitude **must** be greated then magnitude estimated from the catalog.
 (If Bayesian maximum magnitude is not chosen the question does not appear)::
 
     Standard deviation of of prior m_max value >
@@ -638,7 +643,7 @@ If magnitude distribution is the Compound Gutenberg-Richter the program asks for
     Define the Gutenberg-Richter parameter b uncertainty in percents (or enter for 25.0)  [%] >
 
 If the events occurrence follows the Gamma Compound Poisson distribution,
-the program asks for :the math:`q_{\lambda}` value: ::
+the program asks for :the math:`q_{\labda}` value: ::
 
     Define the mean activity rate 'lambda' uncertainty in percents (or enter for 25.0)  [%] >
 

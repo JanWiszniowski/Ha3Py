@@ -6,7 +6,7 @@ ver. 2024-01
 
 from ha3py.GutenbergRichter import GutenbergRichter
 from ha3py.CompoundGutenbergRichter import CompoundGutenbergRichter
-from ha3py.NonParametricPseudoGaussian import NonparametricGaussianKernel
+from ha3py.NonParametricGaussian import NonparametricGaussianKernel, NonparametricPseudoGaussianKernel
 from ha3py.utils import HaPyException
 
 
@@ -67,5 +67,7 @@ def get_magnitude_distribution(configuration, m_min=None, m_max=None, theta=None
         return CompoundGutenbergRichter(configuration, beta=beta, m_min=m_min, m_max=m_max)
     elif distribution_name == 'Nonparametric gaussian kernel':
         return NonparametricGaussianKernel(configuration, m_min=m_min, m_max=m_max)
+    elif distribution_name == 'Nonparametric pseudo-gaussian kernel':
+        return NonparametricPseudoGaussianKernel(configuration, m_min=m_min, m_max=m_max)
     else:
         HaPyException('Unknown magnitude distribution')

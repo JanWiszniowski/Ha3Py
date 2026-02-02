@@ -52,9 +52,9 @@ def print_results(configuration):
     print('Created on {}'.format(configuration['created_on']))
     print('Computed on {}'.format(configuration['computation_time']))
     print_separation_single_line()
-    print('Occurrence probability: '.format(configuration['occurrence_probability']))
-    print('Magnitude distribution: '.format(configuration['magnitude_distribution']))
-    print('M_max assessment method: '.format(configuration['m_max_method']))
+    print('Occurrence probability: {}'.format(configuration['occurrence_probability']))
+    print('Magnitude distribution: {}'.format(configuration['magnitude_distribution']))
+    print('M_max assessment method: {}'.format(configuration['m_max_method']))
     print_separation_single_line()
     cov = configuration['cov_beta_lambda']
     events_distribution_names = configuration['coefficient_names']

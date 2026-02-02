@@ -22,6 +22,7 @@ and normal distribution of a maximum magnitude estimated based on catalogues
 import numpy as np
 from scipy.stats import truncnorm
 from ha3py.m_max_utils import non_bayesian_m_max_estimation
+from ha3py.BayesianMmax import init_bayesian_m_max
 
 
 def m_max_bayesian_norm(configuration, magnitude_distribution=None):
@@ -52,10 +53,12 @@ def m_max_bayesian_norm(configuration, magnitude_distribution=None):
     :return: The posterior maximum magnitude and its standard deviation.
     :rtype: tuple(float, float)
     """
-    m_max, sd_m_max = non_bayesian_m_max_estimation(configuration, magnitude_distribution=magnitude_distribution)
-    # m_max, sd_m_max = 1, 2
-    prior_m_max = configuration['prior_m_max']
-    sd_prior_m_max = configuration['sd_prior_m_max']
+    # m_max, sd_m_max = non_bayesian_m_max_estimation(configuration, magnitude_distribution=magnitude_distribution)
+    # # m_max, sd_m_max = 1, 2
+    # prior_m_max = configuration['prior_m_max']
+    # sd_prior_m_max = configuration['sd_prior_m_max']
+    m_max, sd_m_max, prior_m_max, sd_prior_m_max = init_bayesian_m_max(
+        configuration, magnitude_distribution=magnitude_distribution)
     d = sd_m_max ** 2 + sd_prior_m_max ** 2
     return ((sd_m_max ** 2 * prior_m_max + sd_prior_m_max ** 2 * m_max) / d,
             sd_m_max * sd_prior_m_max / np.sqrt(d))
@@ -82,10 +85,8 @@ def get_bayesian_truncnorm(configuration, magnitude_distribution=None):
     :return: The
     :rtype: tuple(float, float)
     """
-    m_max, sd_m_max = non_bayesian_m_max_estimation(configuration, magnitude_distribution=magnitude_distribution)
-    # m_max, sd_m_max = 1, 2
-    prior_m_max = configuration['prior_m_max']
-    sd_prior_m_max = configuration['sd_prior_m_max']
+    m_max, sd_m_max, prior_m_max, sd_prior_m_max = init_bayesian_m_max(
+        configuration, magnitude_distribution=magnitude_distribution)
     m_max_u = configuration.get('upper_m_max', 9.5)
     m_max_obs = configuration['m_max_obs']
     m_max_l = configuration.get('lower_m_max', m_max_obs)
@@ -94,7 +95,12 @@ def get_bayesian_truncnorm(configuration, magnitude_distribution=None):
     scale = sd_m_max * sd_prior_m_max / np.sqrt(d)
     a = (m_max_l - loc) / scale
     b = (m_max_u - loc) / scale
-    return truncnorm(a, b, loc=loc, scale=scale)
+    distribution = truncnorm(a, b, loc=loc, scale=scale)
+    distribution.m_max_l = m_max_l
+    distribution.m_max_u = m_max_u
+    distribution.sd_m_max = sd_m_max
+    distribution.sd_prior_m_max = sd_prior_m_max
+    return distribution
     # m, v, _, _ = truncnorm.stats(m_max_l, m_max_u,
     #                              loc=(sd_m_max ** 2 * prior_m_max + sd_prior_m_max ** 2 * m_max) / d,
     #                              scale=sd_m_max * sd_prior_m_max / np.sqrt(d))

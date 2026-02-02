@@ -22,9 +22,9 @@ from math import sqrt
 def get_magnitudes(configuration):
     m_n = -100.0
     m_n_1 = None
-    p_phs = configuration['paleo_catalog']
-    p_his = configuration['historic_catalog']
-    p_comp = configuration['complete_catalogs']
+    p_phs = configuration.get('paleo_catalog')
+    p_his = configuration.get('historic_catalog')
+    p_comp = configuration.get('complete_catalogs')
     if p_phs:
         for eq in p_phs['earthquakes']:
             if eq['magnitude'] > m_n:
@@ -37,7 +37,7 @@ def get_magnitudes(configuration):
                 m_n = eq['magnitude']
     if p_comp:
             for complete_catalog in p_comp:
-                for eq in complete_catalog:
+                for eq in complete_catalog['earthquakes']:
                     if eq['magnitude'] > m_n:
                         m_n_1 = m_n
                         m_n = eq['magnitude']

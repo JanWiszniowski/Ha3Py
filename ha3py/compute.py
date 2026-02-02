@@ -112,7 +112,7 @@ def compute(configuration):
             else:
                 print(f"{name:<10s} ={configuration[name]:7.3f}")
         print(f"m_max (current) = {configuration['m_max_current']}")
-        if suggested_m_max > 9.9:
+        if suggested_m_max is None or suggested_m_max > 9.9:
             print(' I am SORRY. I DO NOT HAVE SUGGESTION REGARDING M_MAX')
         else:
             configuration['m_max_suggested'] = suggested_m_max
@@ -120,33 +120,38 @@ def compute(configuration):
         print(f"                           for m_max_obs = {configuration['m_max_obs']:4.2f}")
         if configuration.get('bayesian_m_max_assessment'):
             print(f"                           for prior_m_max = {configuration['prior_m_max']:4.2f}")
-        print_separation_double_line()
-        if abs(suggested_m_max - configuration['m_max_current']) >= 0.01:
-            print('To obtain the optimal solution for m_max, please re-run the process')
-            print('according to the suggested value until the SUGGESTED and SOLUTION')
-            print('values are the same.')
-        else:
-            print('')
-            print('You have reach an optimal solution !!!')
-        enter_correct = False
-        print('')
-        while not enter_correct:
-            new_m_max_str = input('NEW value of m_max (NOT LESS than {:4.2f}) (or enter to accept current {:4.2f} and finish) >'.
-                                  format(configuration['m_max_obs'], configuration['m_max_current']))
-            if new_m_max_str:
-                try:
-                    new_m_max = float(new_m_max_str)
-                except ValueError:
-                    new_m_max = -1.0
-                if configuration['m_max_obs'] < new_m_max < 10.0:
-                    configuration['m_max_current'] = new_m_max
-                    enter_correct = True
-                else:
-                    print('WRONG INPUT! "{}" is not a correct mag_max'.format(new_m_max_str))
+        if configuration.get('enter_m_max', True):
+            print_separation_double_line()
+            if abs(suggested_m_max - configuration['m_max_current']) >= 0.01:
+                print('To obtain the optimal solution for m_max, please re-run the process')
+                print('according to the suggested value until the SUGGESTED and SOLUTION')
+                print('values are the same.')
             else:
-                id_do_again = False
-                enter_correct = True
-    if suggested_m_max >= 9.9:
+                print('')
+                print('You have reach an optimal solution !!!')
+            enter_correct = False
+            print('')
+            while not enter_correct:
+                new_m_max_str = input('NEW value of m_max (NOT LESS than {:4.2f}) (or enter to accept current {:4.2f} and finish) >'.
+                                      format(configuration['m_max_obs'], configuration['m_max_current']))
+                if new_m_max_str:
+                    try:
+                        new_m_max = float(new_m_max_str)
+                    except ValueError:
+                        new_m_max = -1.0
+                    if configuration['m_max_obs'] < new_m_max < 10.0:
+                        configuration['m_max_current'] = new_m_max
+                        enter_correct = True
+                    else:
+                        print('WRONG INPUT! "{}" is not a correct mag_max'.format(new_m_max_str))
+                else:
+                    id_do_again = False
+                    enter_correct = True
+        else:
+            if suggested_m_max is not None and suggested_m_max <= 9.9:
+                configuration['m_max_current'] = suggested_m_max
+            id_do_again = False
+    if suggested_m_max is None or suggested_m_max >= 9.9:
         print(f"!!!!! Procedure {METHODS[configuration['procedure_id']]} ({configuration['m_max_assessment']})")
         print(f"!!!!! could not asses correct m_max")
         print(f"!!!!! Final m_max is not set")
