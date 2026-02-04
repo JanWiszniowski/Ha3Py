@@ -23,14 +23,18 @@ from ha3py.constant_values import EPS2
 from ha3py.utils import HaPyException
 
 
-def init_bayesian_m_max(configuration, magnitude_distribution=None):
-    m_max, sd_m_max = non_bayesian_m_max_estimation(configuration,
-                                                              magnitude_distribution=magnitude_distribution)
+def init_bayesian_m_max(configuration, magnitude_distribution=None, m_max_pair=None):
+    if m_max_pair is None:
+        m_max, sd_m_max = non_bayesian_m_max_estimation(configuration,
+                                                        magnitude_distribution=magnitude_distribution)
+    else:
+        m_max, sd_m_max = m_max_pair
     prior_m_max = configuration['prior_m_max']
     sd_prior_m_max = configuration['sd_prior_m_max']
     if m_max > prior_m_max:
         print(f"Prior m_max ({prior_m_max}) is smaller than m_max estimated from the catalog ({m_max})")
-        raise HaPyException('Prior m_max error')
+        # raise HaPyException('Prior m_max error')
+        exit(-1)
     return m_max, sd_m_max, prior_m_max, sd_prior_m_max
 
 class BayesianBase(ABC):
@@ -46,7 +50,7 @@ class BayesianBase(ABC):
     :type configuration: dict
 
     """
-    def __init__(self, configuration, magnitude_distribution=None):
+    def __init__(self, configuration, magnitude_distribution=None, m_max_pair=None):
         """
         Initialisation
 
@@ -57,7 +61,7 @@ class BayesianBase(ABC):
 
         """
         self.m_max, self.sd_m_max, self.prior_m_max, self.sd_prior_m_max = init_bayesian_m_max(
-            configuration, magnitude_distribution=magnitude_distribution)
+            configuration, magnitude_distribution=magnitude_distribution, m_max_pair=m_max_pair)
         # self.m_max, self.sd_m_max = non_bayesian_m_max_estimation(configuration,
         #                                                           magnitude_distribution=magnitude_distribution)
         # self.prior_m_max = configuration['prior_m_max']

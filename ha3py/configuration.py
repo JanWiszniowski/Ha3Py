@@ -108,39 +108,62 @@ def set_if(pars, key, prompt, dtype, ext=''):
 
 def set_modify(pars, key, prompt, extra, dtype):
     if key in pars:
-        wyn = input(prompt.format(extra.format(pars[key])))
-        if not wyn:
-            return False
-        pars[key] = dtype(wyn)
+        while True:
+            wyn = input(prompt.format(extra.format(pars[key])))
+            if not wyn:
+                return False
+            try:
+                pars[key] = dtype(wyn)
+                return True
+            except ValueError:
+                print(f"! Invalid {dtype.__name__} value")
     else:
-        pars[key] = dtype(input(prompt.format('')))
-    return True
+        while True:
+            try:
+                pars[key] = dtype(input(prompt.format('')))
+                return True
+            except ValueError:
+                print(f"! Invalid {dtype.__name__} value")
 
 
 def set_with_warning(pars, key, value):
     if key in pars:
         if pars[key] != value:
-            answer = input(f"Parameter '{key}' should be {value} and is {pars[key]} [replace/ignore/cancel] > ")
-            if answer[0] == 'i':
-                return
-            if answer[0] == 'c':
-                quit()
-    pars[key] = value
+            answer = ''
+            while not answer:
+                answer = input(f"Parameter '{key}' should be {value} and is {pars[key]} [replace/ignore/cancel] > ")
+                if not answer:
+                    print("! Not answer")
+                    continue
+                if answer[0] == 'i':
+                    return
+                elif answer[0] == 'c':
+                    quit()
+                elif answer[0] == 'r':
+                    pars[key] = value
+                    return
+                else:
+                    print("! Wrong answer")
+                    answer = ''
 
 
 def set_if_default(pars, key, prompt, default):
     if key in pars:
         return True
-    wyn = input(prompt.format(default))
-    if not wyn:
-        pars[key] = default
-        return True
-    wyn = float(wyn)
-    if wyn < default:
-        pars[key] = default
-    else:
-        pars[key] = float(wyn)
-    return True
+    while True:
+        wyn = input(prompt.format(default))
+        if not wyn:
+            pars[key] = default
+            return True
+        try:
+            wyn = float(wyn)
+            if wyn < default:
+                pars[key] = default
+            else:
+                pars[key] = float(wyn)
+            return True
+        except ValueError:
+            print("! Invalid float value")
 
 
 def set_modify_default(pars, key, prompt, default):

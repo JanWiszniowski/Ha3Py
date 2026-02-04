@@ -169,7 +169,9 @@ class NonparametricGaussianKernel(BaseMagnitudeDistribution):
         self.den = p_max - p_min
 
     def _cdf(self, x, *args):
-        p = np.zeros(len(x), dtype=float)
+        dtyp = np.promote_types(x.dtype, np.float64)
+        x = np.asarray(x, dtype=dtyp)
+        p = np.zeros(x.shape, dtype=dtyp)
         sig = self.h
         # sig5 = sig * 5.0
         for x_i in self.mag:
@@ -182,7 +184,9 @@ class NonparametricGaussianKernel(BaseMagnitudeDistribution):
         return (p-self.p_min) / self.den
 
     def _pdf(self, x, *args):
-        p = np.zeros(len(x), dtype=float)
+        dtyp = np.promote_types(x.dtype, np.float64)
+        x = np.asarray(x, dtype=dtyp)
+        p = np.zeros(x.shape, dtype=dtyp)
         sig = self.h
         # sig5 = sig * 5.0
         for x_i in self.mag:
@@ -332,8 +336,9 @@ class NonparametricPseudoGaussianKernel(BaseMagnitudeDistribution):
         a2 = .115194
         a3 = .000344
         a4 = .019527
-
-        p = np.zeros(len(x), dtype=float)
+        dtyp = np.promote_types(x.dtype, np.float64)
+        x = np.asarray(x, dtype=dtyp)
+        p = np.zeros(x.shape, dtype=dtyp)
         sig = self.h
         for x_i in self.mag:
             xn = (x - x_i[0]) / sig
@@ -352,8 +357,9 @@ class NonparametricPseudoGaussianKernel(BaseMagnitudeDistribution):
         a2 = .115194
         a3 = .000344
         a4 = .019527
-
-        p = np.zeros(len(x), dtype=float)
+        dtyp = np.promote_types(x.dtype, np.float64)
+        x = np.asarray(x, dtype=dtyp)
+        p = np.zeros(x.shape, dtype=dtyp)
         sig = self.h
         for x_i in self.mag:
             xn = (x - x_i[0]) / sig

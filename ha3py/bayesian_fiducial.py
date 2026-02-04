@@ -85,16 +85,17 @@ class BayesianFiducial(BayesianBase):
         :param configuration:
         :type configuration:
         """
-        # m_max, sd_m_max = non_bayesian_m_max_estimation(configuration)
+        m_max, sd_m_max = non_bayesian_m_max_estimation(configuration)
         fiducial_m_min = configuration.get('fiducial_m_min')
         if fiducial_m_min is None:
-            event_occurrence = get_events_occurrence(configuration, m_max=self.m_max)
+            event_occurrence = get_events_occurrence(configuration, m_max=m_max)
         else:
-            event_occurrence = get_events_occurrence(configuration, m_max=self.m_max, m_min=fiducial_m_min)
+            event_occurrence = get_events_occurrence(configuration, m_max=m_max, m_min=fiducial_m_min)
         self.n = event_occurrence.d_expected(t=configuration['time_span'])
         self.magnitude_distribution = event_occurrence.magnitude_distribution
         self.m_max_obs = configuration['m_max_obs']
-        super().__init__(configuration, magnitude_distribution=magnitude_distribution)
+        super().__init__(configuration, magnitude_distribution=magnitude_distribution,
+                         m_max_pair=(m_max, sd_m_max))
 
     def _likelihood(self, m_max):
         """
