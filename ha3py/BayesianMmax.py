@@ -1,5 +1,5 @@
 """
-Module base classes of bayesian maximum magnitude likelihood
+Module-based classes of Bayesian maximum magnitude likelihood
 ------------------------------------------------------------
 
 ..

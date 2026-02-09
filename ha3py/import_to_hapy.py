@@ -13,7 +13,6 @@ Import catalogues to the Ha3Py configuration
         2025-01-01
 """
 
-
 import sys
 import numpy as np
 import scipy as sp
@@ -27,6 +26,13 @@ from ha3py.configuration import date_years, load_configuration, save_configurati
 
 
 class EPISODESCatalog:
+    """
+    The class EPISODESCatalog allows read the EPISODES catalogue.
+    It keeps the catalogue events in the ObsPy format.
+    Therefore, it is possible to operate on the EPISODESCatalog events similar to the ObsPy catalogue.
+
+    """
+
     def __init__(self):
         self.events = []
 
@@ -42,6 +48,14 @@ def _get_vals(cat, field):
 
 
 def read_episodes(file_name):
+    """
+    It reads the catalogue Matlab file and create the EPISODES catalog.
+
+    :param file_name:
+    :type file_name: str
+    :return: The catalog
+    :rtype: EPISODESCatalog
+    """
     catalog = EPISODESCatalog()
     contents = sp.io.loadmat(file_name)
     for key in contents:
@@ -60,7 +74,7 @@ def read_episodes(file_name):
     energy = _get_vals(cat, 'E')
     events_size = indexes.size
     for idx in range(events_size):
-        utc_time = UTCDateTime((times[idx][0] - 719529.0)*86400.0)
+        utc_time = UTCDateTime((times[idx][0] - 719529.0) * 86400.0)
         origin = Origin(time=utc_time, longitude=longitudes[idx][0], latitude=latitudes[idx][0], depth=depths[idx][0])
         magnitudes = []
         if np.any(mls) and np.size(mls[idx]) and not np.isnan(mls[idx]):
@@ -77,9 +91,9 @@ def read_episodes(file_name):
 def get_magnitude(event, magnitude_type=None):
     """
     Function get_magnitude extracts the magnitude of the event.
-    If you want to extract a specific magnitude you can define it as magnitude_type,
-    e.g. ``get_magnitude(event, magnitude_type='Mw')``, otherwise, any magnitude will be extracted.
-    If the preferred_magnitude_id of the event is set it returns the preferred origin.
+    If you want to extract a specific magnitude, you can define it as magnitude_type,
+    e.g. *get_magnitude(event, magnitude_type='Mw')*, otherwise, any magnitude will be extracted.
+    If the preferred_magnitude_id of the event is set, it returns the preferred origin.
     Otherwise, it returns the first magnitude from the list.
     The function is intended to extract the magnitude unconditionally and non-interactively.
     Therefore, if preferred_magnitude_id is not set and there are multiple magnitudes,
@@ -88,18 +102,21 @@ def get_magnitude(event, magnitude_type=None):
     If event magnitude does not exist, but station_name magnitudes exist, the new magnitude is computed
     as the mean value of station_name magnitudes.
 
-    :param event: ObsPy Event object
+    :param event: The event object
+    :type event: ObsPy Event
     :param magnitude_type:  (optional)
-        Describes the type of magnitude. This is a free-text. Proposed values are:
-        * unspecified magnitude (``'M'``) - function search for exactly unspecified magnitude,
-        * local magnitude (``'ML'``),
-        * moment magnitude (``'Mw'``),
-        * energy (``'Energy'``),
-        * etc.
+        Describes the type of magnitude. This is a free text. Proposed values are:
+            * unspecified magnitude ('M') - function search for exactly unspecified magnitude,
+            * local magnitude ('ML'),
+            * moment magnitude ('Mw'),
+            * energy ('Energy'),
+            * etc.
+    :type magnitude_type: str
 
     :return: The magnitude object or None if the function cannot find or create the magnitude.
         If only station_name magnitudes exist, the new ObsPy Magnitude object is created,
         but it is not appended to the event
+    :rtype: ObsPy Magnitude
 
     """
     if event.preferred_magnitude_id is not None:
@@ -135,9 +152,9 @@ def get_magnitude(event, magnitude_type=None):
 
 def remove_catalogs(configuration):
     """
-    The procedure lists complete catalogues and allows an operator to select a directory to delete.
+    The procedure lists complete catalogues, and allows an operator to select, which one to delete.
 
-    :param configuration: The dictionary of all Ha3Py parameters
+    :param configuration: The configuration of Ha3Py including catalogues.
     :type configuration: dict
     """
     catalogs = configuration.get('complete_catalogs')
@@ -163,14 +180,16 @@ def remove_catalogs(configuration):
 def get_origin(event):
     """
     Function get_origin extracts the origin from the event.
-    If preferred_origin_id of the event is set it return the preferred origin.
+    If the preferred_origin_id of the event is set, it returns the preferred origin.
     Otherwise, it returns the first origin from the list.
     The function is intended to extract the event origin unconditionally and non-interactively.
     Therefore, if preferred_origin_id is not set and there are multiple origins, the returned origin may be random
 
-    :param event: ObsPy Event object
+    :param event: The event object
+    :type event: ObsPy Event
 
-    :return: The ObsPy Origin object or None if none origin is defined for the event.
+    :return: The origin object or None if no origin is defined for the event.
+    :rtype: ObsPy Origin
 
     """
     if not event.origins:
@@ -180,7 +199,18 @@ def get_origin(event):
     return event.origins[0]
 
 
-def obspy_to_hapy(obspy_catalog, magnitude_type='Mw'):
+def obspy_to_ha3py(obspy_catalog, magnitude_type='Mw'):
+    """
+    It converts the ObsPy or EPISODESCatalog to the dictionary object accepted by the Ha3Py configuration.
+
+    :param obspy_catalog: The input catalog
+    :type obspy_catalog: ObsPy Catalog or EPISODESCatalog
+    :param magnitude_type: The name of magnitude (The default is recommended magnitude Mw)
+    :type magnitude_type: str
+
+    :return: The complete catalogue
+    :rtype: dict
+    """
     default_sd = float(input('Default standard deviation of magnitude > '))
     proposed_m_min = float(input('Minimum magnitude > '))
     catalog_m_min = 100.0
@@ -214,7 +244,7 @@ def obspy_to_hapy(obspy_catalog, magnitude_type='Mw'):
         earthquake['date'] = date_years(time.year, time.month, time.day)
         earthquakes.append(earthquake)
     catalog['begin'] = date_years(begin_time.year, begin_time.month, begin_time.day)
-    catalog['end'] = date_years(end_time.year, end_time.month, end_time.day+1)
+    catalog['end'] = date_years(end_time.year, end_time.month, end_time.day + 1)
     catalog['time_span'] = catalog['end'] - catalog['begin']
     catalog['m_min'] = proposed_m_min
     catalog['sd'] = sum_sd / len(earthquakes)
@@ -229,7 +259,7 @@ def read_file(file_name, catalog_format, configuration):
 
     :param file_name: The path to the reading catalogue file
     :type file_name: str
-    :param catalog_format: The catalogue format name. Allowing names are: EPISODES
+    :param catalog_format: The catalogue format name. Allowed name is: EPISODES
     :type catalog_format: str
     :param configuration: The dictionary of all Ha3Py parameters
     :type configuration: dict
@@ -240,7 +270,7 @@ def read_file(file_name, catalog_format, configuration):
     else:
         catalog = read_events(file_name, format=catalog_format)
     remove_catalogs(configuration)
-    obspy_to_hapy(catalog, configuration.get('Import magnitude type'))
+    obspy_to_ha3py(catalog, configuration.get('Import magnitude type'))
 
 
 def main():

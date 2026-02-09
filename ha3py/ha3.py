@@ -20,6 +20,13 @@ from ha3py.plot_results import plot_results
 
 
 def main():
+    """
+    The main function performs all the operations necessary to calculate the seismic hazard.
+    It reads the configuration from a file or creates a configuration by asking the operator,
+    calculates all earthquake recurrent parameters,
+    and calculates, prints, and displays the seismic hazard for the studied region.
+    Results are written to configuration like file.
+    """
     print("==============================================================")
     configuration = load_configuration(required=False)
     if configuration:

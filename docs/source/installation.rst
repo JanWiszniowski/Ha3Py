@@ -28,9 +28,7 @@ To upgrade from a previously installed version:
 Installing a developer package
 ##############################
 
-If you want to possibly modify the source code 😉,
-you should clone the project using ``git``:
-
+If you want to modify the source code, you should clone the project using ``git``:
 ::
 
     git clone https://github.com/JanWiszniowski/ha3py.git
@@ -42,5 +40,5 @@ Next, go into the ``ha3py`` main directory and install the code in
 
     pip install -e .
 
-You can keep your local Ha3Py repository updated by running times to times ``git pull`` commands.
+You can keep your local Ha3Py repository updated by running ``git pull`` commands at regular intervals.
 Thanks to ``pip`` editable mode, you don't need to reinstall Ha3Py after each update.

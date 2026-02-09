@@ -4,39 +4,38 @@
 Command line tools
 ##################
 
-There are some Python programs that you can call from the console to compute seismic hazard parameters,
+There are some Python programs, which you can run from the console, to compute seismic hazard parameters,
 get and visualize the results, or simulate catalogs.
-WARNING. It is important to have defined the Pythin scripts catalog in the system paths environment.
+WARNING. It is important to have defined the Python scripts catalog in the system paths environment.
 
-Main program for assessment of seismic hazard parameters
-========================================================
+Main program for the assessment of seismic hazard parameters
+============================================================
 
-Main program for assessment of seismic hazard parameters is `ha3`.
-It works similar to the program `HA3` written HA3 by A. Kijko in Matlab,
-which means that it asks the user similar questions and generates the same results.
+The main program for assessment of seismic hazard parameters is `ha3`.
+It works similarly to the program `HA3`, written by A. Kijko in Matlab,
+which means it asks the user similar questions and generates the same results.
 
-The `ha3` programs uses the following modules,
-which can be also used as standalone programs:
+The `ha3` program uses the following modules, which can also be used as standalone programs:
 
 1. From the `configuration` module, the ha3 calls the procedure `questions`
-    that sent question to the user and generate the parameter structure
+    that sent the question to the user, and generates the parameter structure
     required to seismic hazard estimation.
     In order to operate, see the :ref:`Configuration of the Ha3Py` section.
 2. From the `compute` module, the ha3 calls the procedure `compute`
-    that estimate the SH based on parameters earlier defined.
+    that estimates the SH based on parameters previously defined.
     The results are added to the parameter structure.
-    In order to operate, see the :ref:`Compute the earthquake hazard parameters` section.
-3. Results are printed on console or to file by procedures in the `print_info`
+    To operate, see the :ref:`Compute the earthquake hazard parameters` section.
+3. Results are printed on the console or to a file by procedures in the `print_info`
     and `print_results` module (see :ref:`Printing the estimation results`).
-4. Figures of results are plotted by the `plot_results` module,
-    which consist of procedure tah allows plot diagrams of SH properties
+4. Figures of results are plotted by the `plot_results` modules,
+    which consist of procedures that allows plot diagrams of SH properties
     (see :ref:`Plotting the estimation results`).
 
-All presented modules can be call independently.
-We want to point out that the similarity of `ha3` to Matlab `HA3` results in
-the impossibility of all new Ha3Py options definitions.
-If we want to use them, we should not call `ha3` but:
-define the configuration file differently, e.g. by calling `ha_config`
+All presented modules can be called independently.
+We want to point out that the similarity between `ha3` and Matlab `HA3`
+makes it impossible to define all new Ha3Py options.
+If we were going to use them, we should not call `ha3` but:
+define the configuration file differently, e.g., by calling `ha_config`
 (see the :ref:`Configuration of the Ha3Py` section),
 modifying the configuration file
 (see the :ref:`Configuration description <configuration>` section),
@@ -46,27 +45,27 @@ and finally calling `ha_compute`.
 
     ha3 [ <configuration_file.json> ]
 
-where <configuration_file.json> is the optional input configuration file name.
-If configuration_file.json exists the program fills only missing
-entries in the configuration dictionary, there will then appear the message ::
+where **<configuration_file.json>** is the optional input configuration file name.
+If *configuration_file.json* exists, the program fills only missing
+entries in the configuration dictionary, and then displays the message: ::
 
     ==============================================================
     Loading configuration file for '<area_name>'
     ==============================================================
 
-when <area_name> is defined in the configuration file or ::
+when **<area_name>** is defined in the configuration file or ::
 
     ==============================================================
     Loading configuration file for undefined area
     ==============================================================
 
-If configuration_file.json does not exist, there will then appear the message ::
+If configuration_file.json does not exist, the message will appear: ::
 
     ==============================================================
     The configuration will be created from the beginning
     ==============================================================
 
-If configuration_file.json is wrong or empty, there will then appear the message ::
+If configuration_file.json is incorrect or empty, the message will appear: ::
 
     ==============================================================
     The configuration file error: *reason for file not being read if exist*
@@ -76,24 +75,25 @@ If configuration_file.json is wrong or empty, there will then appear the message
 and configuration starts from the beginning.
 
 Next, the list of questions appears for the user to answer.
-The  full series of queries appears
+The whole series of queries appears
 when the input file name is not defined in the configuration.
-If configuration_file.json exists,
-the program does not ask for most positions defined in the configuration.
+If *configuration_file.json* exists,
+the program does not prompt for most positions defined in the configuration file.
+**The *configuration_file.json* changes. The modified configuration is saved to thad file.**
 The first question is ::
 
     Name of your output file >
 
-The output file is the text file file name
-that the seismic hazard values and estimation info are saved.
-The extension 'txt' is added to the file name as default. ::
+The output file is the text file name,
+where the seismic hazard values and estimation info are saved.
+The extension 'txt' is added to the file name by default. ::
 
     Name of the output configuration file >
 
-This file contains the configuration with all the choices made in the program.
+This file contains the program's configuration, including all the choices made in the program.
 The output configuration file can be used as input configuration file in other Ha3Py programs.
-The output configuration file will be in the `JSON`_ format.
-Therefore, It is recommended that the file name have extension `json`.
+The output configuration file will be in `JSON`_ format.
+Therefore, it is recommended that the file name have theextension `json`.
 If extension is missing, the default 'json' is added to the file name. ::
 
     Name of the area >
@@ -106,32 +106,32 @@ The query appears when the area name is not defined in the configuration. ::
 The name of a prehistoric (paleo-) catalogue file if it is available.
 The query appears when the paleo-catalogue is not defined in the configuration.
 Putting ENTER indicates not processing a paleo-catalogue.
-The format of paleo-catalogue file is similar to the Matlab HA3 formats.
-It described in :ref:`Input/Output data section <io_data>`.
-Events with magnitude below the completeness leve must be removed. ::
+The format of the paleo-catalogue file is similar to the Matlab HA3 formats.
+It is described in the :ref:`Input/Output data section <io_data>`.
+Events with magnitude below the completeness level must be removed. ::
 
     Historic data file name or enter if none >
 
 The name of a historical catalogue file if it is available.
-The query appears when the historical catalogue was not earlier defined in the configuration.
+The query appears when the historical catalogue was not previously configured.
 Putting ENTER indicates not processing a historical catalogue.
-The format of historical catalogue file is similar to the Matlab HA3 formats.
-It described in :ref:`Input/Output data section <io_data>`.
-Events with magnitude below the completeness leve must be removed. ::
+The format of the historical catalogue file is similar to the Matlab HA3 formats.
+It described in the :ref:`Input/Output data section <io_data>`.
+Events with magnitude below the completeness level must be removed. ::
 
     Number of complete data catalogue files >
 
 Indicate the number of complete catalogues.
 The query appears when complete catalogues were not earlier defined in the configuration.
-When the number greater than zero was put,
+When a number greater than zero was entered,
 the following equation appears the number of catalogues times. ::
 
     Name of the #<i> file with complete data >
 
 The name of the <i>-th complete catalogue file.
 Putting ENTER is not allowed in this case.
-The format of complete catalogue file is described in :ref:`Input/Output data section <io_data>`.
-The catalogue must be declustered end events with magnitude below the completeness leve must be removed. ::
+The format of the complete catalogue file is described in the :ref:`Input/Output data section <io_data>`.
+The catalogue should be declustered and events with magnitudes below the completeness level must be removed. ::
 
     Maximum (EVER!) observed magnitude determination less or equal to *m.m* (or enter to confirm *m.m*) >
 
@@ -140,8 +140,8 @@ The catalogue must be declustered end events with magnitude below the completene
 This value refers to the maximum observed magnitude.
 It is preset over all the provided catalogues and the maximum magnitude *m.m* is found.
 However, the higher value can be set based on other information.
-If not set (second quarry), it must be defined.
-The program always asks for the maximum observed magnitude.::
+If not set (as in the second query), it must be defined.
+The program always asks for the maximum observed magnitude. ::
 
     Standard deviation of the maximum observed magnitude (or enter to confirm *e*) >
 
@@ -150,14 +150,14 @@ The program always asks for the maximum observed magnitude.::
 The standard deviation value refers to the maximum observed magnitude.
 If it is preset from catalogues, it is proposed as *e*.
 However, the other value can be set based on other information.
-If not set (second quarry), it must be defined. The program always asks for the standard deviation value. ::
+If not set (as in the second query), it must be defined. The program always asks for the standard deviation value. ::
 
     Minimum value of magnitude  less or equal to *m.m* (or enter to confirm *m.m*)
 
-The minimum value of magnitude refers to the minimum (completness) magnitude
-of catalogues. It is proposed es the smallest completeness magnitude *m.m* of all catalogues.
-However, the other higher than *m.m* value can be set.
-The program always asks for minimum completeness magnitude::
+The minimum value of magnitude refers to the minimum (completeness) magnitude
+of catalogues. It is proposed to be the smallest completeness magnitude *m.m* of all catalogues.
+However, the other value, higher than *m.m*, can be set.
+The program always asks for the minimum completeness magnitude::
 
     Year when time span starts less or equal to *yyyy* (or enter to confirm it) >
 
@@ -171,8 +171,8 @@ if it is to be earlier than the first earthquake time (*yyyy*). ::
 
 Time intervals for which seismic hazard will be estimated.
 Actually, four time intervals are used.
-The time interval of 1 year is given automatically. Others are here defined here
-in units of years. Suggested times** 50, 100 and 1000. ::
+The first 1 year time interval automatically provided. Others are defined here
+in units of years. E.g., times 50, 100 and 1000. ::
 
     Assessment of the maximum regional magnitude m_max is based on:
      1: 'Gibowicz-Kijko (1994)',
@@ -200,22 +200,21 @@ or ::
      9: 'Bayesian MEAN of Posterior Fiduicial & Prior Gauss (Kijko, 2004)'
     Write proper number (or enter to confirm *n*) >
 
-when the the the maximum regional magnitude assessment is already defined.
-Any one of these 9 procedures can be defined to calculate :math:`m_{max}`.
-Based on the selected number the maximum magnitude procedure is defined.
-Additionally, occurrence provability, magnitude distribution, delta computation method
-are also defined.
+Any one of these 9 procedures can be specified to calculate :math:`m_{max}`.
+Based on the selected number, the maximum magnitude procedure is defined.
+Additionally, occurrence provability, magnitude distribution, and delta computation method
+are also chosen.
 The Kijko-Sellevoll-Bayes (4) procedure is recommended.
-The selected method to not agree with the described predefined
+The selected method does not agree with the described predefined
 :ref:`maximum magnitude assessment methods <description_m_max>` described in
 :ref:`the theoretical background <description>`, because it is a copy
-of the list of choices from the **HA3** program in Matlab.
+of the list of choices from the *HA3* program in Matlab.
 The selection made is translated to definitions of 'm_max_assessment', 'delta'
 'occurrence_probability', and 'magnitude_distribution'
 (see :ref:`configuration`)
 
 Then the complete analysis will be based on compound distribution principles.
-(If Bayesian maximum magnitude is not chosen the question does not appear) ::
+(If Bayesian maximum magnitude is not chosen the question does not appear). ::
 
     Prior value of maximum possible earthquake magnitude >
 
@@ -226,37 +225,39 @@ The prior maximum regional magnitude **must** be greated then magnitude estimate
     Standard deviation of of prior m_max value >
 
 The prior maximum regional magnitude :math:`\sigma_{m_{max}}` for Bayesian :math:`m_{max}` assessment methods.
-If magnitude distribution is the Compound Gutenberg-Richter
+If the magnitude distribution is the Compound Gutenberg-Richter distribution
 (During the selection of assessment of the maximum regional magnitude method 2, 4, 6, 8, or 9 was chosen),
 the program asks for :the math:`q_{beta}` value: ::
 
     Define the Gutenberg-Richter parameter b uncertainty in percents (or enter for 25.0)  [%] >
 
-If the events occurrence follows the Gamma Compound Poisson distribution,
+If the event's occurrence follows the Gamma Compound Poisson distribution,
 (During the selection of assessment of the maximum regional magnitude method 2, 4, 6, 8, or 9 was chosen),
 the program asks for :the math:`q_{\labda}` value: ::
 
     Define the mean activity rate 'lambda' uncertainty in percents (or enter for 25.0)  [%] >
 
-In the case if Non-Parametric-Gaussian the program asks for number of largest magnitudes limit  ::
+In the case of the Non-Parametric-Gaussian distribution,
+calculation the seismic hazard from all magnitudes can be significantly time consuming.
+To minimize te calculation time, the assessment can be processed based on fewer number of magnitudes.
+For this purpose, the program asks for number of the largest magnitudes. ::
 
     Number of largest magnitudes (or enter for all) >
 
-Calculation the seismic hazard from all magnitudes can be significantly time consuming.
 
-Next remaining parameters are defined. ::
+The remaining parameters are defined. ::
 
     Is provision for induced seismicity required (yes/no)? >
 
-Induced seismicity here refers to water or dam induced seismicity.
+Induced seismicity here refers e.g., to reservoir triggered seismicity.
 If a provision is not required, enter *no*.
-If a provision is required and must be included in the hazard assessment enter *yes*.
+If a provision is required and must be included in the hazard assessment, enter *yes*.
 Then the user will be asked to provide the multiplicative factor for :math:`\lambda`. ::
 
     Multiplicative factor of activity rate (lambda) >
 
-The answer is the value of multiplicative factor for :math:`\lambda`
-Induced seismicity usually don’t exceed the tectonic origin seismicity.
+The answer is the multiplicative factor value for :math:`\lambda`
+Induced seismicity usually does not exceed the tectonic origin seismicity.
 Therefore the multiplicative factor for the :math:`\lambda` is usually not more than 2. ::
 
     Prior value of the Gutenberg-Richter parameter b (enter if not defined) >
@@ -288,16 +289,16 @@ The following method names can be used (see `scipy.optimize`_)
 * dogleg
 * trust-ncg
 
-At the end, the configuration program ha3 asks, whether to save the configuration to other JSON file
+At the end, the configuration program *ha3* asks, whether to save the configuration to another `JSON`_ file
 before starting seismic hazard estimation. ::
 
     File to save the only configuration [enter if not save] >
 
-It is useful, if you plan do estimation many times. Next the the program starts computations.
-The :math:`m_{max}` is assessed with the cooperation with the user.
+It is helpful if you plan to do estimation many times. Next, the program starts computations.
+The :math:`m_{max}` is assessed with the cooperation of the user.
 Other seismic hazard parameters are estimated by the maximum likelihood method.
-There can be many iteration of :math:`m_{max}` assessment,
-which are notified by the message e.g. ::
+There can be many iterations of :math:`m_{max}` assessment,
+which are notified by the message, e.g. ::
 
     Likelihood estimation result: Optimization terminated successfully.
     ==================================================================
@@ -312,30 +313,30 @@ which are notified by the message e.g. ::
 
 The estimated coefficients list depends on the magnitude occurrence model.
 Here are beta and lambda.
-The the the information of result is shown. Message::
+The the the information about the result is shown. Message::
 
     You have reach an optimal solution !!!
 
-means that there an optimal solution was reached and repeating calculation is not recommended.
+means that  an optimal solution was reached, and repeating calculation is not recommended.
 Otherwise a message::
 
     To obtain the optimal solution for m_max, please re-run the process
     according to the suggested value until the SUGGESTED and SOLUTION
     values are the same.
 
-will be displayed. Then the program asks en operator to set
-the current maximum magnitude based on showed information's::
+will be displayed. Then the program asks an operator to set
+the current maximum magnitude based on the shown information: ::
 
     NEW value of m_max (NOT LESS than 5.80) (or enter to accept current 6.30 and finish) >
 
-Pressing ENTER accepts the maximum magnitude and finishes assessment.
-Putting a new current magnitude value starts next estimation round.
-Next the program asses the estimation uncertainty, and calculates the hazard values.
-Results are saved to the output file as a text, saved with the configuration to the JSON file,
+Pressing ENTER accepts the **current** maximum magnitude and finishes the assessment.
+Putting a new current magnitude value, fixes its as the current, and starts the next estimation round.
+Next, the program assesses the estimation uncertainty, and calculates the hazard values.
+Results are saved to the output file as text, saved with the configuration to the `JSON`_ file,
 and printed on screen, e.g. ::
 
     ==================================================================
-    Information provided by each part of catalogue (in per-cent)
+    Information provided by each part of catalogue (in percent)
     ------------------------------------------------------------------
     Historic catalogue:     lambda = 51.7%
                             beta   = 22.2%
@@ -392,7 +393,7 @@ and printed on screen, e.g. ::
     | 5.80 | 1.96e-03 |   510.2 |  0.001958  |  0.093087  |  0.591688  |  0.999997  |
     =================================================================================
 
-Finally program plots the seismic hazard figures:
+Finally, the program plots the seismic hazard figures:
 
     * Annual probability of exceedance versus magnitude
     * Return period versus magnitude
@@ -408,12 +409,12 @@ Maximum possible earthquake magnitude computation
 
 The maximum magnitude is estimated independently of other magnitude recurrence parameters.
 Users can use one from the list of predefined magnitude estimation algorithms.
-The presented software evaluates the probability of exceedance of a specified magnitude
-based on all presented catalogues if we have them.
+The presented software evaluates the probability of exceeding a specified magnitude
+based on all the presented catalogues, if we have them.
 We can also apply it only to the historical or instrumental catalogue itself.
 
 Of course, one must be reasonable, especially during the maximum magnitude estimation.
-(**The used must remember the principle, “*no mathematical tricks can replace the data*”.**)
+(**The user must remember the principle, “*no mathematical tricks can replace the data*”.**)
 
 The software's adaptability is a key feature,
 as it can estimate any probability distribution of exceedance of a magnitude.
@@ -422,24 +423,21 @@ the occurrence of an earthquake in time distribution and magnitude distribution.
 Importantly, there are no other prior assumptions about the probability function,
 showcasing the software's adaptability.
 
-**Calling** ::
+**To run the maximum possible earthquake magnitude computation write:** ::
 
     ha_m_max <configuration_file.json>
 
 Unlike the 'ha3' program,
-the maximum possible earthquake magnitude estimation requires full configuration
-in the <configuration_file.json> JSON file.
-You can use for that the configuration program (see bellow),
-although not all available magnitude estimation methods can be there define.
-The magnitude estimation requires requires in the configuration
-the method definition maximum observed magnitude,
-and their uncertainty.
-Depending on the method, it requires additionally the description of
-event occurrence and magnitude distribution,
-delta calculation method, time span, catalogues, etc.
+the maximum possible earthquake magnitude estimation requires complete configuration
+in the <configuration_file.json> `JSON`_ file.
+You can use the configuration program for that (see below),
+although not all available magnitude estimation methods can be defined there.
+The magnitude estimation configuration requires the method definition maximum observed magnitude,
+and its uncertainty. Depending on the method, it involves the description of
+event occurrence and magnitude distribution, the delta calculation method, time span, catalogues, etc.
 It must be checked in the earthquake magnitude estimation description.
 
-In contrast to the `ha3` and `compute` programs the `compute_m_max` processes
+In contrast to the `ha3` and `compute` programs, the `compute_m_max` processes
 only one round of :math:`m_{max}` estimation, prints the result, e.g. ::
 
     Result of m_max estimation: m_max = 7.32 (+/- 0.65)
@@ -449,7 +447,7 @@ and asks ::
     Save the result? [yes/no] >
 
 User has to put *yes* to save the results of :math:`m_{max}` estimation.
-The results are saved to the output configuration JSON file.
+The results are saved to the output configuration `JSON`_ file.
 If the output name is not defined in the configuration, the output file name is 'Ha3Py.json'.
 
 Configuration of the Ha3Py
@@ -461,7 +459,7 @@ Configuration of the Ha3Py
 
 where <configuration_file.json> is the optional input configuration file name.
 If configuration_file.json exists the configuration program fills only missing
-entries in the configuration dictionary, there will then appear the message::
+entries in the configuration dictionary. The message will then appear::
 
 
     ==============================================================
@@ -474,38 +472,35 @@ when <area_name> is defined in the configuration file or ::
     Loading configuration file for undefined area
     ==============================================================
 
-If configuration_file.json does not exist, there will then appear the message ::
+If configuration_file.json does not exist, an error will appear: ::
 
     ==============================================================
     The configuration will be created from the beginning
     ==============================================================
 
-If configuration_file.json is wrong or empty, there will then appear the message ::
+If configuration_file.json is incorrect or empty, there will then appear the message ::
 
     ==============================================================
     The configuration file error: *reason for file not being read if exist*
     The configuration will be created from the beginning
     ==============================================================
 
-Then the list of questions appears for the user to answer.
-The  full series of queries appears
+Then the list of questions appears for the user to answer. The  whole series of queries appears
 when the input file name is not defined in the configuration.
-If configuration_file.json exists,
-the program does not ask for most positions defined in the configuration.
+If *configuration_file.json* exists, the program does not ask for most positions defined in the configuration.
 The first question is ::
 
     Name of your output file >
 
-The output file is the text file file name
-that the seismic hazard values and estimation info are saved.
-The extension 'txt' is added to the file name as default. ::
+The output file is the text file name, where the seismic hazard values and estimation info are saved.
+The extension 'txt' is added to the file name by default. ::
 
     Name of the output configuration file >
 
 This file contains the configuration with all the choices made in the program.
 The output configuration file can be used as input configuration file in other Ha3Py programs.
-The output configuration file will be in the `JSON`_ format.
-Therefore, It is recommended that the file name have extension `json`.
+The output configuration file will be in `JSON`_ format.
+Therefore, it is recommended that the file name have the extension 'json'.
 If extension is missing, the default 'json' is added to the file name. ::
 
     Name of the area >
@@ -520,30 +515,30 @@ The query appears when the paleo-catalogue is not defined in the configuration.
 Putting ENTER indicates not processing a paleo-catalogue.
 The format of paleo-catalogue file is similar to the Matlab HA3 formats.
 It described in :ref:`Input/Output data section <io_data>`.
-Events with magnitude below the completeness leve must be removed. ::
+Events with magnitude below the completeness level must be removed. ::
 
     Historic data file name or enter if none >
 
 The name of a historical catalogue file if it is available.
-The query appears when the historical catalogue was not earlier defined in the configuration.
+The query appears when the historical catalogue was not previously defined in the configuration.
 Putting ENTER indicates not processing a historical catalogue.
-The format of historical catalogue file is similar to the Matlab HA3 formats.
-It described in :ref:`Input/Output data section <io_data>`.
-Events with magnitude below the completeness leve must be removed. ::
+The format of historical catalogue file is similar to the Matlab HA3 format.
+It is described in the :ref:`Input/Output data section <io_data>`.
+Events with magnitude below the completeness level must be removed. ::
 
     Number of complete data catalogue files >
 
 Indicate the number of complete catalogues.
 The query appears when complete catalogues were not earlier defined in the configuration.
-When the number greater than zero was put,
-the following equation appears the number of catalogues times. ::
+When a number greater than zero was put,
+the following equation appears the enetered number times. ::
 
     Name of the #<i> file with complete data >
 
 The name of the <i>-th complete catalogue file.
 Putting ENTER is not allowed in this case.
-The format of complete catalogue file is described in :ref:`Input/Output data section <io_data>`.
-The catalogue must be declustered end events with magnitude below the completeness leve must be removed. ::
+The format of complete catalogue file is described in the :ref:`Input/Output data section <io_data>`.
+The catalogue should be declustered, and events with magnitude below the completeness level must be removed. ::
 
     Maximum (EVER!) observed magnitude determination less or equal to *m.m* (or enter to confirm *m.m*) >
 
@@ -552,7 +547,7 @@ The catalogue must be declustered end events with magnitude below the completene
 This value refers to the maximum observed magnitude.
 It is preset over all the provided catalogues and the maximum magnitude *m.m* is found.
 However, the higher value can be set based on other information.
-If not set (second quarry), it must be defined.
+If not set (second query), it must be defined.
 The program always asks for the maximum observed magnitude.::
 
     Standard deviation of the maximum observed magnitude (or enter to confirm *e*) >
@@ -562,14 +557,14 @@ The program always asks for the maximum observed magnitude.::
 The standard deviation value refers to the maximum observed magnitude.
 If it is preset from catalogues, it is proposed as *e*.
 However, the other value can be set based on other information.
-If not set (second quarry), it must be defined. The program always asks for the standard deviation value. ::
+If not set (second query), it must be defined. The program always asks for the standard deviation value. ::
 
     Minimum value of magnitude  less or equal to *m.m* (or enter to confirm *m.m*)
 
-The minimum value of magnitude refers to the minimum (completness) magnitude
+The minimum value of magnitude refers to the minimum (completeness) magnitude
 of catalogues. It is proposed es the smallest completeness magnitude *m.m* of all catalogues.
 However, the other higher than *m.m* value can be set.
-The program always asks for minimum completeness magnitude::
+The program always asks for minimum completeness magnitude. ::
 
     Year when time span starts less or equal to *yyyy* (or enter to confirm it) >
 
@@ -581,9 +576,8 @@ if it is to be earlier than the first earthquake time (*yyyy*). ::
     Time interval #2 >
     Time interval #3 >
 
-Time intervals for which seismic hazard will be estimated.
-Actually, four time intervals are used.
-The time interval of 1 year is given automatically. Others are here defined here
+Time intervals for which seismic hazard will be estimated. Actually, four time intervals are used.
+The 1 year time interval is given by default. Others are defined here
 in units of years. Suggested times** 50, 100 and 1000. ::
 
     Assessment of the maximum regional magnitude m_max is based on:
@@ -598,7 +592,7 @@ in units of years. Suggested times** 50, 100 and 1000. ::
      9: 'Bayesian MEAN of Posterior Fiduicial & Prior Gauss (Kijko, 2004)'
     Write proper number >
 
-or ::
+or, when the maximum regional magnitude assessment is already defined, ::
 
     Assessment of the maximum regional magnitude m_max is based on:
      1: 'Gibowicz-Kijko (1994)',
@@ -612,13 +606,12 @@ or ::
      9: 'Bayesian MEAN of Posterior Fiduicial & Prior Gauss (Kijko, 2004)'
     Write proper number (or enter to confirm *n*) >
 
-when the the the maximum regional magnitude assessment is already defined.
+
 Any one of these 9 procedures can be defined to calculate :math:`m_{max}`.
 Based on the selected number the maximum magnitude procedure is defined.
-Additionally, occurrence provability, magnitude distribution, delta computation method
-are also defined.
+Additionally, occurrence provability, magnitude distribution, and the delta computation method are also defined.
 The Kijko-Sellevoll-Bayes (4) procedure is recommended.
-The selected method to not agree with the described predefined
+The selected method does not agree with the described predefined
 :ref:`maximum magnitude assessment methods <description_m_max>` described in
 :ref:`the theoretical background <description>`, because it is a copy
 of the list of choices from the **HA3** program in Matlab.
@@ -638,20 +631,22 @@ The prior maximum regional magnitude **must** be greated then magnitude estimate
     Standard deviation of of prior m_max value >
 
 The prior maximum regional magnitude :math:`\sigma_{m_{max}}` for Bayesian :math:`m_{max}` assessment methods.
-If magnitude distribution is the Compound Gutenberg-Richter the program asks for :the math:`q_{beta}` value: ::
+
+If the magnitude distribution is the Compound Gutenberg-Richter distribution,
+program asks for :the math:`q_{beta}` value: ::
 
     Define the Gutenberg-Richter parameter b uncertainty in percents (or enter for 25.0)  [%] >
 
-If the events occurrence follows the Gamma Compound Poisson distribution,
+If the event's occurrence follows the Gamma Compound Poisson distribution,
 the program asks for :the math:`q_{\labda}` value: ::
 
     Define the mean activity rate 'lambda' uncertainty in percents (or enter for 25.0)  [%] >
 
-In the case if Non-Parametric-Gaussian the program asks for number of largest magnitudes limit  ::
+Calculation the seismic hazard from all Non-Parametric-Gaussian distribution magnitudes
+can be significantly time consuming.
+In the case of Non-Parametric-Gaussian the program asks for number of largest magnitudes limit used in calculations ::
 
     Number of largest magnitudes (or enter for all) >
-
-Calculation the seismic hazard from all magnitudes can be significantly time consuming.
 
 Next remaining parameters are defined. ::
 
@@ -664,8 +659,8 @@ Then the user will be asked to provide the multiplicative factor for :math:`\lam
 
     Multiplicative factor of activity rate (lambda) >
 
-The answer is the value of multiplicative factor for :math:`\lambda`
-Induced seismicity usually don’t exceed the tectonic origin seismicity.
+The answer is the value of the multiplicative factor for :math:`\lambda`
+Induced seismicity usually does not exceed the tectonic origin seismicity.
 Therefore the multiplicative factor for the :math:`\lambda` is usually not more than 2. ::
 
     Prior value of the Gutenberg-Richter parameter b (enter if not defined) >
@@ -697,23 +692,23 @@ The following method names can be used (see `scipy.optimize`_)
 * dogleg
 * trust-ncg
 
-At the end the configuration is saved to the output JSON file.
-It is done only when something was changed in the configuration.
+At the end the configuration is saved to the output `JSON`_ file. Usually, it is the input configuration file.
+It is done only when something has changed in the configuration.
 
 Import catalogue to Ha3Py
 =========================
 
-The program imports catalogues in other formats do the configuration file
+The program imports catalogues in other formats into the configuration file
 
-**Calling** ::
+**To import catalogue enter** ::
 
     ha_import <configuration_file.json> <imported_catalogue> <format_name>
 
 The program imports catalogues <imported_catalogue.extension> in all `ObsPy formats`_ and
-in MATLAB file from `EPISODES Platform`_ (<format_name> is 'EPISODES').
+in MATLAB files from `EPISODES Platform`_ (<format_name> is 'EPISODES').
 The <configuration_file.json> must exist created manually or by the *configuration* program.
 Already defined in the <configuration_file.json> prehistorical and historical catalogs remain unchanged.
-Complete catalog can be remove or remain depends of the operator decision.
+Complete catalog can be removed or stay depending ob the operato'r decision.
 Program list existing complete catalogs, e.g, ::
 
     There exists 2 complete catalogs:
@@ -721,44 +716,44 @@ Program list existing complete catalogs, e.g, ::
      2. c2.txt
     Write number of name of the catalog to remove it or ENTER to skip >
 
-and the user can remove the catalogue by writing its number (e.g. 1 or 2) or its name (e.g. c1.txt or c2.txt)
-ENTER ends catalogues removing and the new catalogue will be added to remaining catalogues.
+and the user can remove the catalogue by writing its number (e.g. 1 or 2) or its name (e.g. c1.txt or c2.txt).
+ENTER ends catalogues removing old catalogs, and the new catalogue will be added to the remaining catalogues.
 Catalogues need not contain magnitude uncertainties.
-Therefore user must define the default value ::
+Therefore, the user must define the default value ::
 
     Default standard deviation of magnitude >
 
 which be added to the event in the case of missing magnitude uncertainty. The catalogue must be declustered end events with magnitude below the completeness magnitude
-must be estimated using other tool. Because catalog do not contain the completeness magnitude
-after the quation ::
+must be estimated using another tool. Because catalog do not contain the completeness magnitude
+after the question ::
 
     Minimum magnitude >
 
-user must write the completeness magnitude value. All events in the catalogue having smaller magnitude
+the user must write the completeness magnitude value. All events in the catalogue having smaller magnitude
 wil be ignored.
 
-**WARNING** Program loads only earthquakes having magnitude Mw.
+**WARNING Program loads only earthquakes having magnitude Mw.**
 
 The modified configuration is saved to the output configuration file.
 If the output name is not defined in the configuration, the output file name is 'Ha3Py.json'.
 
-Compute the earthquake hazard parameters
-========================================
+The earthquake hazard parameters assessment
+===========================================
 
-**Calling** ::
+**To run the earthquake hazard parameters assessment, enter** ::
 
     ha_compute <configuration_file.json>
 
 The procedure estimates the magnitude occurrence probability,
 including magnitude distribution, coefficients
-(e.g. estimates :math:`\lambda` and :math:`\beta`)
-and asses maximum possible event magnitude :math:`m_{max}` in the investigated area.
+(e.g., estimates :math:`\lambda` and :math:`\beta`)
+and assesses the maximum possible event magnitude :math:`m_{max}` in the investigated area.
 The assessment method depends on the configuration.
 Results are saved to the output configuration file.
 The existing in the configuration coefficients are replaced.
 
-The :math:`m_{max}` is assessed with the cooperation with the user.
-There can be many iteration of :math:`m_{max}` assessment,
+The :math:`m_{max}` is assessed with the cooperation of the user.
+There can be many iterations of :math:`m_{max}` assessment,
 which are notified by the message e.g. ::
 
     Likelihood estimation result: Optimization terminated successfully.
@@ -774,11 +769,11 @@ which are notified by the message e.g. ::
 
 The estimated coefficients list depends on the magnitude occurrence model.
 Here are beta and lambda.
-The the the information of result is shown. Message::
+The information about the result is shown. Message::
 
     You have reach an optimal solution !!!
 
-means that there an optimal solution was reached and repeating calculation is not recommended.
+means that the optimal solution equals the current magnitude and repeating calculation is not recommended.
 Otherwise a message::
 
     To obtain the optimal solution for m_max, please re-run the process
@@ -786,29 +781,29 @@ Otherwise a message::
     values are the same.
 
 will be displayed. Then the program asks en operator to set
-the current maximum magnitude based on showed information's::
+the current maximum magnitude based on the shown information ::
 
     NEW value of m_max (NOT LESS than 5.80) (or enter to accept current 6.30 and finish) >
 
-Pressing ENTER finishes assessment. Putting a magnitude value starts next estimation round.
-The results are saved to the output configuration JSON file.
+Pressing ENTER finishes the assessment. Putting a magnitude value starts the next estimation round.
+The results are saved to the output configuration `JSON`_ file.
 If the output name is not defined in the configuration, the output file name is 'Ha3Py.json'.
 
 Printing the estimation results
 ===============================
 
-The magnitude occurrence model estimation results can be printer to screen or to file.
+The magnitude occurrence model estimation results can be printed to screen or to file.
 
-**Calling** ::
+**For printing results enter** ::
 
     ha_print <configuration_file.json>
 
-Program calculates and print the hazard values.
-Results are saved to the output file as a text, saved with the configuration to the JSON file,
+The program calculates and prints the hazard values.
+Results are saved to the output file as text, saved with the configuration to the `JSON`_ file,
 and printed on screen, e.g. ::
 
     ==================================================================
-    Information provided by each part of catalogue (in per-cent)
+    Information provided by each part of catalogues (in percent)
     ------------------------------------------------------------------
     Historic catalogue:     lambda = 51.7%
                             beta   = 22.2%
@@ -868,7 +863,7 @@ and printed on screen, e.g. ::
 Plotting the estimation results
 ===============================
 
-**Calling** ::
+**For plotting enter** ::
 
     ha_plot <configuration_file.json>
 
@@ -896,14 +891,14 @@ and `probabilities.png`.
 Creating synthetic catalogues
 =============================
 
-The program creates synthetic catalogues base on the existing catalogue description in the configuration file
+The program creates synthetic catalogues based on the existing catalogue description in the configuration file
 and defined seismic hazard parameters.
 The program does the opposite of calculating the parameters of exceeding the magnitude.
-Based on these parameters it simulates catalogs.
-Program requires for simulation catalogue periods (begin time and end time),
-completeness magnitude, and magnitude uncertainty.
+Based on these parameters, it simulates catalogs.
+The program requires catalogue's periods (begin time and end time),
+completeness magnitude, and magnitude uncertainty for simulation.
 
-**Calling** ::
+**For creating synthetic catalogues enter** ::
 
     ha_simulate <configuration_file.json>
 
