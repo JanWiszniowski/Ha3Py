@@ -4,13 +4,13 @@
 Theoretical Background
 ######################
 
-The seismic hazard assessment conducted by the `Ha3Py` algorithm employs a hybrid approach.
-The maximum magnitude :math:`m_{max}` is estimated separately using various methods,
-while other parameters of the magnitude exceed probability,
-such as :math:`\beta` (the equivalent of the b-value in Gutenberg-Richter (G-R) magnitude distribution)
+The seismic hazard assessment conducted by the Ha3Py algorithm employs a hybrid approach.
+The maximum magnitude :math:`m_{max}` is estimated separately using various methods.
+In contrast other parameters of the magnitude exceed probability,
+such as :math:`\beta` (the equivalent of the b-value in the Gutenberg-Richter (G-R) magnitude distribution)
 and the :math:`\lambda` coefficient of the Poisson events occurrence probability,
-are estimated independently through maximum likelihood methods.
-Nevertheless, the estimation error for all parameters is ascertained using the maximum likelihood method.
+are estimated independently using maximum-likelihood methods.
+Nevertheless, the estimation errors for all parameters are assessed using the maximum likelihood method.
 
 The earthquake recurrence parameters and their estimation
 #########################################################
@@ -21,7 +21,7 @@ The chosen assessment procedure requires knowledge of the likelihood function of
 :math:`\mathbf{\theta}=\left( \lambda, \beta, m_{max} \right)`.
 Following the multiplicative property of the likelihood function (:cite:t:`Rao1973`),
 the joint likelihood :math:`\mathcal{L}\left(\mathbf{\theta}\right)` based on prehistoric,
-historic and complete parts of the catalogue, it of the form:
+historic, and complete parts of the catalogue, is of the form:
 
 .. math::
     :label: eq_a1
@@ -158,7 +158,7 @@ Kijko-Sellevoll procedure
 =========================
 
 Similar to the previous Tate-Pisarenko procedure :eq:`eq_b4`,
-the Kijko-Sellevoll procedure assess :math:`m_{max}` by solving the equation
+the Kijko-Sellevoll procedure assesses :math:`m_{max}` by solving the equation
 
 .. math::
     \widehat{m}_{max} = m_{max}^{obs}+\Delta,
@@ -187,8 +187,7 @@ Bayesian maximum magnitude assessment methods
 #############################################
 
 The Bayesian :math:`m_{max}` assessment methods incorporate any relevant information about :math:`m_{max}`.
-This information is external and can come from geology,
-tectonics, or the seismicity of similar regions.
+This information is external and can come from geology, tectonics, or the seismicity of similar regions.
 The idea of :math:`m_{max}` Bayesian estimation was first described by :cite:`Cornell1994`.
 It combines two sources of information:
 
@@ -199,7 +198,7 @@ It combines two sources of information:
     :math:`\pi\left(m_{max}\right)=\mathcal{N}\left(m_{max}^{prior},\sigma_{m_{max}^{prior}}, m_{max}^L, m_{max}^U \right)`,
     where :math:`m_{\max}^U` is the largest magnitude that might ever happen,
     and :math:`m_{max}^L` is the magnitude that we are confident has occurred.
-    Usually it is the maximum observed magnitude.
+    Usually, it is the maximum observed magnitude.
 *   The likelihood function :math:`\mathcal{L}\left(\mathbf{m}|m_{max}\right)` of observed earthquake magnitudes.
 
 Both the prior knowledge about :math:`m_{max}` and the knowledge derived from the observed magnitudes :math:`\mathbf{m}`,
@@ -251,8 +250,8 @@ Based on :eq:`eq_b7`, three Bayesian analogues of the maximum likelihood (ML) po
     \prod_{i=1}^{n}{f_M\left(m_i|m_{max}\right)}.
 
 However, if :math:`f_M\left(m|m_{max}\right)` is the G-R distribution,
-MAP that fulfil :eq:`eq_b8` gives the maximum observed magnitude :math:`m_{\max}^{obs}` as the solution of :eq:`eq_b7`,
-which is not expected as the maximum possible magnitude :math:`m_{max}`.
+the MAP that fulfills :eq:`eq_b8` gives the maximum observed magnitude :math:`m_{\max}^{obs}` as
+the solution of :eq:`eq_b7`, which is not expected as the maximum possible magnitude :math:`m_{max}`.
 Therefore, several techniques were applied to correct the :cite:`Cornell1994` procedure.
 
 Bayesian :math:`m_{max}` assessment based on the shift of the likelihood function
@@ -282,8 +281,7 @@ and the likelihood function is
     \mathcal{N}\left({\widehat{m}}_{max},\sqrt{\text{VAR}\left( \widehat{m}_{max} \right)} \right)
 
 where :math:`{\widehat{m}}_{max}` and :math:`\text{VAR}\left( \widehat{m}_{max} \right)`
-can be assessed by any of described in the
-:ref:`Maximum magnitude assessment methods` section.
+can be assessed by any of methods described in the :ref:`Maximum magnitude assessment methods` section.
 
 Bayesian :math:`m_{max}` assessment based on the Fiducial :math:`m_{max}` distribution
 ======================================================================================
@@ -316,8 +314,8 @@ Estimation uncertainty assessment
 .. math::
     \mathbf{COV_\Theta} = \mathbf{H_\mathcal{L}}^{-1},
 
-where :math:`\mathbf{\Theta}` is the vector of estimated by the maximum likelihood coefficients
-and :math:`\mathbf{H_\mathcal{L}}` is an Hesian of the likelihood logarithm
+where :math:`\mathbf{\Theta}` is the vector estimated by the maximum likelihood coefficients,
+and :math:`\mathbf{H_\mathcal{L}}` is the Hessian of the likelihood logarithm
 
 .. math::
     \mathbf{H_\mathcal{L}}=
@@ -330,7 +328,7 @@ and :math:`\mathbf{H_\mathcal{L}}` is an Hesian of the likelihood logarithm
     \cdots &
     \frac{\partial^2 \ln\left(\mathcal{L}\right)}{\partial \Theta_K \partial \Theta_K} \end{bmatrix}
 
-Standard deviation earthquake occurrence probability coefficients is
+The standard deviation of the earthquake occurrence probability coefficients is
 
 .. math::
     \sigma_\mathbf{\Theta} = \sqrt{\text tr\left( \mathbf{COV_\Theta} \right)}
@@ -358,16 +356,16 @@ Return period computing methods
 
 The return period (:math:`T_R \left( m \right)`) is a function of magnitude.
 It is defined as the inverse of the annual probability of not occurrence,
-which is the survive function of magnitude not occurrence distribution.
+which is the survival function of the magnitude distribution.
 
 .. math::
     :label: eq_c1
 
     T_{R}\left(m,\lambda_{0},F_{M}\right)=\frac{1}{S_M^{max}\left(m\right)}
 
-Sometimes, the annual probability of not occurrence is described as :math:`\lambda`
+Sometimes, the annual probability of not-occurrence is described as :math:`\lambda`
 (Not to confuse with the lambda notation as the occurrence probability coefficient).
-Then, e.g. the return period (:math:`T_R \left( m \right)`) is
+Then, e.g., the return period (:math:`T_R \left( m \right)`) is
 
 .. math::
 
@@ -375,10 +373,10 @@ Then, e.g. the return period (:math:`T_R \left( m \right)`) is
 
 where :math:`\lambda\left( m \right)=\lambda_0S_M\left( m|m_0 \right)`,
 :math:`m_0` is the assumed minimum magnitude,
-:math:`\lambda_0` is the annual probability of not occurrence corresponding
+:math:`\lambda_0` is the annual probability of not-occurrence corresponding
 to the minimum magnitude,
-and :math:`S_{M}\left(m|m_{0}\right)=1-F_{M}\left(m|m_{0}\right)` is the survive function
-of :ref:`Magnitude distribution <api_md>`.
+and :math:`S_{M}\left(m|m_{0}\right)=1-F_{M}\left(m|m_{0}\right)` is the survival function
+of the :ref:`Magnitude distribution <api_md>`.
 
 The return period uncertainty is
 
@@ -394,10 +392,10 @@ where
     \frac{-1}{\left( S_M^{max}\left(m\right) \right)^2}
     \frac{\partial S_M^{max}\left(m\right)}{\partial\Theta_i}
 
-The gradient of the survive function of magnitude not occurrence distribution
+The gradient of the survival function of magnitude distribution
 depends on not occurrence distribution models
 (see specific applications in :ref:`Seismic event occurrence probability <api_ed>` section).
-In the typical simplified case, when magnitude  not occurrence distribution coefficients are
+In the typical simplified case, when the magnitude and not-occurrence distribution coefficients are
 :math:`\lambda_0`, :math:`\beta` and :math:`m_{max}`, gradient of the return period is
 
 .. math::
@@ -417,7 +415,7 @@ In the typical simplified case, when magnitude  not occurrence distribution coef
     {\partial m_{max}}=\frac{-1}{\lambda\cdot S_{M}^{2}\left(m|m_{0}\right)}
     \frac{\partial S_{M}\left(m|m_{0}\right)}{\partial m_{max}},
 
-where gradients of survive function :math:`\partial S_{M}\left(m|m_{0}\right) / \partial m_{max}`
+where gradients of survival function :math:`\partial S_{M}\left(m|m_{0}\right) / \partial m_{max}`
 are defined with magnitude distribution classes.
 
 Synthetic catalogues
@@ -435,7 +433,7 @@ The catalogue, which contains both the origin times and magnitudes created by th
 with event times, can be used for all likelihood functions.
 The catalogue only includes seismic event magnitudes can be used by the likelihood function.
 
-The catalog of earthquakes containing origin times and magnitudes can be calculates by two methods:
+Two methods can calculate the catalog of earthquakes containing origin times and magnitudes:
 
 :Extreme events simulation: This method divides the catalog period
     into roughly equal time intervals with random margins,
@@ -444,15 +442,15 @@ The catalog of earthquakes containing origin times and magnitudes can be calcula
     From these events, only one earthquake with extreme magnitude is selected and recorded in the catalog.
 :Full simulation incremental: This method is iterative with incremental event time.
     First, the time is set to the catalog's starting time.
-    In each iteration, the algorithm generates random periods of seismic event non-occurrence
-    based on a defined probability of occurrence.
+    In each iteration, the algorithm generates random periods of non-occurrence of the seismic event
+    drawn from a defined probability of occurrence.
     The time is incremented by the period and set as the event time.
-    The earthquake  with a random magnitude based on the defined magnitude distribution is recorded in the catalog
+    The earthquake with a random magnitude based on the defined magnitude distribution is recorded in the catalog
     and the time for the next iteration is set to the event time.
-    This process repeats until reaching the end of the catalog.
+    This process repeats until the end of the catalog is reached.
 
-The catalog of earthquakes containing only origin magnitudes without origin time can be calculates by one methods:
+The catalog of earthquakes containing only origin magnitudes without origin time can be calculated by one method:
 
 :Full simulation without date: The method generates a random number of earthquakes for the catalog period,
-    assigning random magnitudes based on the specified occurrence probabilities,
+    assigns random magnitudes based on the specified occurrence probabilities,
     and then records all events with their magnitudes into the catalog.

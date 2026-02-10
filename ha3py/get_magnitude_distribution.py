@@ -31,7 +31,7 @@ def get_magnitude_distribution(configuration, m_min=None, m_max=None, theta=None
     .. math::
         F_M(m)=C_{\beta} \left [1-\left ( \frac{p}{p+m-m_{min}} \right )^q  \right ]
 
-    'Nonparametric gaussian kernel'
+    'Nonparametric Gaussian kernel'
 
     .. math::
         f_M\left( m \right)=
@@ -60,12 +60,12 @@ def get_magnitude_distribution(configuration, m_min=None, m_max=None, theta=None
     beta = None
     if theta is not None and len(theta) >= 1:
         beta = theta[-1]
-    distribution_name = configuration.get('magnitude_distribution', 'Nonparametric gaussian kernel')
+    distribution_name = configuration.get('magnitude_distribution', 'Nonparametric Gaussian kernel')
     if distribution_name == 'Gutenberg-Richter':
         return GutenbergRichter(configuration, beta=beta, m_min=m_min, m_max=m_max)
     elif distribution_name == 'Compound Gutenberg-Richter':
         return CompoundGutenbergRichter(configuration, beta=beta, m_min=m_min, m_max=m_max)
-    elif distribution_name == 'Nonparametric gaussian kernel':
+    elif distribution_name == 'Nonparametric Gaussian kernel':
         return NonparametricGaussianKernel(configuration, m_min=m_min, m_max=m_max)
     elif distribution_name == 'Nonparametric pseudo-gaussian kernel':
         return NonparametricPseudoGaussianKernel(configuration, m_min=m_min, m_max=m_max)

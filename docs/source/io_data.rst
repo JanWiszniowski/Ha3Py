@@ -4,7 +4,7 @@
 Input/Output data
 #################
 
-The principal are JSON files containing all the necessary data.
+The principal input data is the JSON file containing all the necessary data.
 Input and output files have the same structure,
 both for seismic hazard calculation and catalogue simulation.
 Different parameters are required and set then.
@@ -16,13 +16,13 @@ Catalogue formats converted to input data
 HA3 catalogues
 ==============
 
-They are text files FREE Format.
+They are text files in free Format.
 
 Pre-historic catalogue
 ----------------------
 
-:Line 1: y1, m1, d1 = year, month, day of the BEGINNING of PRE-HISTORIC part of the catalogue (e.g. -10000, 1, 1).
-:Line 2: y2, m2, d2 = year, month, day of the END of PREHISTORIC part of the catalogue (e.g. 800, 12, 31).
+:Line 1: y1, m1, d1 = year, month, day of the beginning of the pre-historic part of the catalogue (e.g., -10000, 1, 1).
+:Line 2: y2, m2, d2 = year, month, day of the end of the pre-historic part of the catalogue (e.g., 800, 12, 31).
 :Lines 3 - n: For each earthquake year1, year2, magnitude, magnitude uncertainty,
     where year1 and year2 are lower and upper bounds of estimated occurrence time,
     the magnitude of the event and its uncertainty.
@@ -44,17 +44,16 @@ Example::
       756  1156   6.08   0.25
      1003  1403   6.08   0.25
 
-
 Historic catalogue
 ------------------
 
-:Line 1: y1, m1, d1 = year, month, day of the BEGINNING of the
-    HISTORIC part of the catalogue (e.g. 1550, 1, 1).
-:Line 2: y2, m2, d2 = year, month, day of the END of the HISTORIC
-    part of the catalogue (e.g. 1550, 1, 1).
-:Line 3: Level of completeness for a magnitude (e.g. 5.0)
-:Line 4: SE = STANDARD ERROR of magnitude determination (magnitude uncertainty).
-    It is assumed that STANDARD ERRORS for each earthquake are the same (e.g. 0.25)
+:Line 1: y1, m1, d1 = year, month, day of the beginning of the
+    historic part of the catalogue (e.g., 1550, 1, 1).
+:Line 2: y2, m2, d2 = year, month, day of the end of the historic
+    part of the catalogue (e.g., 1550, 1, 1).
+:Line 3: Level of completeness for a magnitude (e.g., 5.0)
+:Line 4: se = standard error of magnitude determination (magnitude uncertainty).
+    It is assumed that standard errors for each earthquake are the same (e.g., 0.25)
 :Lines 5 - n: For each earthquake: year, month, day, magnitude.
 
 Example::
@@ -85,14 +84,14 @@ Example::
 Complete catalogue
 ------------------
 
-:Line 1: y1, m1, d1 = year, month, day of the BEGINNING of the
-    COMPLETE part of the catalogue (e.g. 1800, 1, 1).
-:Line 2: y2, m2, d2 = year, month, day of the END of the COMPLETE
+:Line 1: y1, m1, d1 = year, month, day of the beginning of the
+    complete part of the catalogue (e.g., 1800, 1, 1).
+:Line 2: y2, m2, d2 = year, month, day of the END of the complete
     part of the catalogue (e.g. 1899 12 31).
-:Line 3: Level of completeness for a magnitude (e.g. 3.5)
-:Line 4: SE = STANDARD ERROR of magnitude determination (magnitude uncertainty).
-    It is assumed that for each earthquake in the file, SE-s are the same. (e.g. 0.2)
-:Lines 5 - n: For each earthquake magnitude.
+:Line 3: Level of completeness for a magnitude (e.g., 3.5)
+:Line 4: se = standard error of magnitude determination (magnitude uncertainty).
+    It is assumed that for each earthquake in the file, se-s are the same. (e.g., 0.2)
+:Lines 5 - n: Magnitudes of all earthquakes.
 
 Example::
 
@@ -112,15 +111,14 @@ Example::
 
 ObsPy formats of catalogues
 ===========================
-The program imports catalogues <imported_catalogue.extension> in all `ObsPy catalogues formats`_.
-They are formats:
+The program imports catalogues in all `ObsPy catalogues formats`_. They are formats:
 
 :CMTSOLUTION: Format of the `Global Centroid-Moment-Tensor (CMT) Project`
 :EVT: `SeismicHandler`_ EVT file format
 :FNETMT: Format of moment tensor files (TEXT format) provided for the F-net broadband seismograph network
     operated by the National Research Institute for Earth Science and Disaster Prevention in Japan (`NIED`_)
 :FOCMEC: Format used to store data for focal mechanism determinations
-:GSE2: GSE2.1 Format first developed for use in the GSE's Technical Test 3 (GSETT-3),
+:GSE2: GSE2.1 Format developed for use in the GSE's Technical Test 3 (GSETT-3),
     which was a trial starting on 1st January 1995
     for a system of global monitoring of nuclear explosions.
     Based on experience during GSETT-3,
@@ -128,13 +126,13 @@ They are formats:
     of the Comprehensive Nuclear Test Ban Treaty.
     Here is documentation of `GSE2.1`_.
 :HYPODDPHA: HypoDD format.
-:IMS10BULLETIN: (IASPEI Seismic bulletin Format)
+:IMS10BULLETIN: (IASPEI Seismic Bulletin Format)
     ISF is the IASPEI approved standard format for the exchange of parametric seismological data
     (hypocentres, magnitudes, phase arrivals, moment tensors, etc.).
     It was adopted as standard in August 2001 by IASPEI's Commission on Seismic Observation
     and Interpretation at the Scientific Assembly in Hanoi, Vietnam.
     The format is an extension of IMS1.0.
-    here is available the brief online description of `IASPEI Seismic Format (ISF)`_.
+    Here is the brief online description of `IASPEI Seismic Format (ISF)`_.
 :MCHEDR: Machine-readable Earthquake Data Report format used to transmit data to the ISC
     by only the U.S. National Earthquake Information Service and is thus an agency-specific format.
 :NDK: File format used to store
@@ -147,15 +145,14 @@ They are formats:
     and the so called Nordic format was agreed upon among the 5 Nordic countries.
     The format later became the standard format used in the SEISAN database
     and processing system and is now widely used.
-    The format tried to address some of the shortcomings in HYPO71 format by being able
-    to store nearly all parameters used,
-    having space for extensions and useful for both input and output.
+    The format tried to address some of the shortcomings in the HYPO71 format by being able
+    to store nearly all parameters used.
 :QUAKEML: QuakeML is a flexible,
     extensible and modular XML representation of seismological data.
-    The full documentation may be found at `QuakeML page`_.
-:SC3ML: The `SeisComp`_ catalog
-:SCARDEC: The `SCARDEC`_ Source Time Functions Database
-:ZMAP: The format of the written the MATLAB set of tools for the analysis of earthquake catalogues.
+    The documentation may be found at `QuakeML page`_.
+:SC3ML: The `SeisComp`_ catalog format.
+:SCARDEC: The `SCARDEC`_ Source Time Functions Database format.
+:ZMAP: The format of the written for the MATLAB set of tools in order to the analysis of earthquake catalogues.
 
 EPISODES Platform format
 ========================
@@ -166,8 +163,8 @@ in MATLAB file described at `Anthropogenic hazard EPISODES Platform`_.
 Output text format
 ##################
 
-The output is a text file containing the based information estimated seismic hazard parameters,
-e.g. lambda, beta, m_max, and table with magnitude exceedance : lambda, return period (RP),
+The output is a text file containing the base information, estimated seismic hazard parameters,
+e.g., lambda, beta, m_max, and a table with magnitude exceedance : lambda, return period (RP),
 and probability in chosen period years.
 
 Example::

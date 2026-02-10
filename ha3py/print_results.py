@@ -171,7 +171,7 @@ def print_percentage_share(configuration):
     # =========================================================================
     # DISPLAY INFO PROVIDED BY EACH PART OF CATALOGUE =========================
     print_separation_double_line()
-    print('Information provided by each part of catalogue (in per-cent)')
+    print('Information provided by each part of catalogues (in percent)')
     print_separation_single_line()
     if p_phs:
         print_share('Prehistoric catalogue', info_phs_v, names)

@@ -430,7 +430,7 @@ def define_m_max_assessment(configuration):
         configuration.pop('bayesian_m_max_assessment', None)
         init_lambda_beta(configuration)
     elif procedure_id == 7:
-        set_with_warning(configuration, 'magnitude_distribution', 'Nonparametric gaussian kernel')
+        set_with_warning(configuration, 'magnitude_distribution', 'Nonparametric Gaussian kernel')
         set_with_warning(configuration, 'occurrence_probability', 'Poisson-gamma compound')
         set_with_warning(configuration, 'delta', 'Kijko-Sellevoll')
         configuration['m_max_assessment'] = 'solve_delta'
