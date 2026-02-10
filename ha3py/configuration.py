@@ -145,6 +145,8 @@ def set_with_warning(pars, key, value):
                 else:
                     print("! Wrong answer")
                     answer = ''
+    else:
+        pars[key] = value
 
 
 def set_if_default(pars, key, prompt, default):
@@ -252,6 +254,10 @@ def read_complete_cat(filename):
     return catalog
 
 
+def sort_paleo(line):
+    dt = line.split()
+    return (float(dt[0]) + float(dt[1])) / 2.0
+
 def read_paleo_cat(filename):
     catalog = dict()
     m_min = 100.0
@@ -260,7 +266,7 @@ def read_paleo_cat(filename):
         catalog['end'] = read_cat_date(fn)
         catalog['time_span'] = catalog['end'] - catalog['begin']
         lines = fn.readlines()
-        lines.sort(key=line_date)
+        lines.sort(key=sort_paleo)
         earthquakes = []
         prev_date = catalog['begin']
         for line in lines:
