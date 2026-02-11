@@ -93,17 +93,34 @@ def date_years(year, month, day):
     # return float(year) + (YMD_365[int(month) - 1] + float(day) - 1) / 365
 
 
+def get_value(prompt, dtype):
+    while True:
+        text = input(prompt)
+        if dtype == str:
+            return text
+        else:
+            try:
+                return dtype(text)
+            except ValueError:
+                print(f"! Invalid {dtype.__name__} value")
+
+
 def set_if(pars, key, prompt, dtype, ext=''):
     if key in pars:
         return False
-    text = input(prompt)
-    if dtype == str:
-        if ext and text.find(".") == -1:
-            text += '.' + ext
-        pars[key] = text
-    else:
-        pars[key] = dtype(text)
-    return True
+    while True:
+        text = input(prompt)
+        if dtype == str:
+            if ext and text.find(".") == -1:
+                text += '.' + ext
+            pars[key] = text
+            return True
+        else:
+            try:
+                pars[key] = dtype(text)
+                return True
+            except ValueError:
+                print(f"! Invalid {dtype.__name__} value")
 
 
 def set_modify(pars, key, prompt, extra, dtype):
@@ -173,12 +190,16 @@ def set_modify_default(pars, key, prompt, default):
     if key in pars:
         default = pars[key]
         return_value = False
-    wyn = input(prompt.format(default))
-    if wyn:
-        pars[key] = float(wyn)
-        return True
-    pars[key] = default
-    return return_value
+    while True:
+        try:
+            wyn = input(prompt.format(default))
+            if wyn:
+                pars[key] = float(wyn)
+                return True
+            pars[key] = default
+            return return_value
+        except ValueError:
+            print(f"! Must be float value or just ENTER")
 
 
 def set_uncertainty(pars, key, prompt, default):
@@ -186,12 +207,16 @@ def set_uncertainty(pars, key, prompt, default):
     if key in pars:
         default = 100.0 / np.sqrt(pars[key])
         return_value = False
-    wyn = input(f"Define the {prompt} uncertainty in percents (or enter for {default})  [%] > ")
-    if wyn:
-        pars[key] = (100 / float(wyn)) ** 2
-        return True
-    pars[key] = (100 / default) ** 2
-    return return_value
+    while True:
+        try:
+            wyn = input(f"Define the {prompt} uncertainty in percents (or enter for {default})  [%] > ")
+            if wyn:
+                pars[key] = (100 / float(wyn)) ** 2
+                return True
+            pars[key] = (100 / default) ** 2
+            return return_value
+        except ValueError:
+            print(f"! Must be float value or just ENTER")
 
 
 # def set_(pars, key, prompt, default):
@@ -224,7 +249,7 @@ def read_cat_float(fn):
         try:
             return float(element)
         except ValueError:
-            pass
+            print('Data error in the file. Wrong float value')
 
 
 def read_complete_cat(filename):
@@ -257,6 +282,7 @@ def read_complete_cat(filename):
 def sort_paleo(line):
     dt = line.split()
     return (float(dt[0]) + float(dt[1])) / 2.0
+
 
 def read_paleo_cat(filename):
     catalog = dict()
@@ -584,14 +610,19 @@ def define_catalogs(configuration):
     configuration_modified |= set_modify(configuration, 'm_min', 'Minimum value of magnitude{} > ',
                                          ' less or equal to {0} (or enter to confirm {0})', dtype=float)
     if 'time_span' not in configuration:
-        time_begin = input(f"Year when time span starts less or equal to {floor(configuration['begin'])}"
-                           f" (or enter to confirm it) >")
-        if time_begin:
-            time_begin = float(time_begin)
-            if time_begin < configuration['begin']:
-                configuration['begin'] = time_begin
-        configuration['time_span'] = configuration['end'] - configuration['begin']
-        configuration_modified = True
+        while True:
+            try:
+                time_begin = input(f"Year when time span starts less or equal to {floor(configuration['begin'])}"
+                                   f" (or enter to confirm it) >")
+                if time_begin:
+                    time_begin = float(time_begin)
+                    if time_begin < configuration['begin']:
+                        configuration['begin'] = time_begin
+                configuration['time_span'] = configuration['end'] - configuration['begin']
+                configuration_modified = True
+                break
+            except ValueError:
+                print(f"! Must be float value of the year or just ENTER")
     return configuration_modified
 
 
@@ -626,9 +657,9 @@ def define_configuration(configuration):
         print('Define time intervals, for which seismic hazard will be estimated:')
         print('- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - ')
         print('Time interval #1 = 1 year by default. You do not need define the first time interval')
-        configuration['time_intervals'].append(float(input('Time interval #2 > ')))
-        configuration['time_intervals'].append(float(input('Time interval #3 > ')))
-        configuration['time_intervals'].append(float(input('Time interval #4 > ')))
+        configuration['time_intervals'].append(get_value('Time interval #2 > ', float))
+        configuration['time_intervals'].append(get_value('Time interval #3 > ', float))
+        configuration['time_intervals'].append(get_value('Time interval #4 > ', float))
     # configuration_modified |= get_if_default(params, 'uncertainty_beta',
     #                                          'Uncertainty of Gutenberg-Richter parameter b [%] > ', 1.0)
     # configuration_modified |= get_if_default(params, 'uncertainty_lambda',
@@ -650,7 +681,8 @@ def define_configuration(configuration):
         configuration['induced_seismicity_coefficient'] = 1.0
     if 'prior_beta' not in configuration:
         configuration_modified |= set_if(configuration, 'prior_b',
-                                         'Prior value of the Gutenberg-Richter parameter b (or enter if not defined) > ',
+                                         'Prior value of the Gutenberg-Richter parameter b'
+                                         ' (or enter if not defined) > ',
                                          dtype=str)
         if not configuration.get('prior_b', ''):
             configuration.pop('prior_beta', None)
