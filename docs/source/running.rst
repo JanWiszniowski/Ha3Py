@@ -184,6 +184,7 @@ in units of years. E.g., times 50, 100 and 1000. ::
      7: 'Non-Parametric-Gaussian/pseudo (Kijko, 2004)',
      8: 'Bayesian MEAN of shifted Likelihood Function & Gaussian Prior (Kijko, 2012)',
      9: 'Bayesian MEAN of Posterior Fiduicial & Prior Gauss (Kijko, 2004)'
+     10:'Fixed maximum magnitude'
     Write proper number >
 
 or ::
@@ -198,6 +199,7 @@ or ::
      7: 'Non-Parametric-Gaussian/pseudo (Kijko, 2004)',
      8: 'Bayesian MEAN of shifted Likelihood Function & Gaussian Prior (Kijko, 2012)',
      9: 'Bayesian MEAN of Posterior Fiduicial & Prior Gauss (Kijko, 2004)'
+     10:'Fixed maximum magnitude'
     Write proper number (or enter to confirm *n*) >
 
 Any one of these 9 procedures can be specified to calculate :math:`m_{max}`.
@@ -590,6 +592,7 @@ in units of years. Suggested times** 50, 100 and 1000. ::
      7: 'Non-Parametric-Gaussian/pseudo (Kijko, 2004)',
      8: 'Bayesian MEAN of shifted Likelihood Function & Gaussian Prior (Kijko, 2012)',
      9: 'Bayesian MEAN of Posterior Fiduicial & Prior Gauss (Kijko, 2004)'
+     10:'Fixed maximum magnitude'
     Write proper number >
 
 or, when the maximum regional magnitude assessment is already defined, ::
@@ -604,10 +607,11 @@ or, when the maximum regional magnitude assessment is already defined, ::
      7: 'Non-Parametric-Gaussian/pseudo (Kijko, 2004)',
      8: 'Bayesian MEAN of shifted Likelihood Function & Gaussian Prior (Kijko, 2012)',
      9: 'Bayesian MEAN of Posterior Fiduicial & Prior Gauss (Kijko, 2004)'
+     10:'Fixed maximum magnitude'
     Write proper number (or enter to confirm *n*) >
 
 
-Any one of these 9 procedures can be defined to calculate :math:`m_{max}`.
+Any one of these 10 procedures can be defined to calculate :math:`m_{max}`.
 Based on the selected number the maximum magnitude procedure is defined.
 Additionally, occurrence provability, magnitude distribution, and the delta computation method are also defined.
 The Kijko-Sellevoll-Bayes (4) procedure is recommended.
@@ -622,7 +626,7 @@ The selection made is translated to definitions of 'm_max_assessment', 'delta'
 Then the complete analysis will be based on compound distribution principles.
 (If Bayesian maximum magnitude is not chosen the question does not appear) ::
 
-    Prior value of maximum possible earthquake magnitude (not less than *m.m*) >
+    Prior value of maximum possible earthquake magnitude >
 
 The prior maximum regional magnitude :math:`m_{max}` value for Bayesian :math:`m_{max}` assessment methods.
 The prior maximum regional magnitude **must** be greated then magnitude estimated from the catalog.

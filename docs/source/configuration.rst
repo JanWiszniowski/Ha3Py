@@ -378,7 +378,8 @@ Maximum magnitude parameters
         (in our case, seismic event catalogue) is expressed in the
         form of the fiducial distribution,
 
-    `fixed_value` - Primitive method, where the prior maximum magnitude is not modufied.
+    - `fixed_value`
+        Primitive method, where the entered prior maximum magnitude is not modified.
 
 :bayesian_m_max_estimator: (str) The Bayesian maximum magnitude likelihood point estimator.
     Three estimators are available: `max` - maximum likelihood, `expected` - expected likelihood,
