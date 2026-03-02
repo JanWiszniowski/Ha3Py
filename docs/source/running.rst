@@ -24,7 +24,7 @@ The `ha3` program uses the following modules, which can also be used as standalo
 2. From the `compute` module, the ha3 calls the procedure `compute`
     that estimates the SH based on parameters previously defined.
     The results are added to the parameter structure.
-    To operate, see the :ref:`Compute the earthquake hazard parameters` section.
+    To operate, see the :ref:`The earthquake hazard parameters assessment` section.
 3. Results are printed on the console or to a file by procedures in the `print_info`
     and `print_results` module (see :ref:`Printing the estimation results`).
 4. Figures of results are plotted by the `plot_results` modules,

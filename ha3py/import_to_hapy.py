@@ -11,6 +11,7 @@ Import catalogues to the Ha3Py configuration
         (https://www.gnu.org/copyleft/lesser.html)
     :version 0.0.1:
         2025-01-01
+
 """
 
 import sys
@@ -104,14 +105,15 @@ def get_magnitude(event, magnitude_type=None):
 
     :param event: The event object
     :type event: ObsPy Event
-    :param magnitude_type:  (optional)
-        Describes the type of magnitude. This is a free text. Proposed values are:
-            * unspecified magnitude ('M') - function search for exactly unspecified magnitude,
-            * local magnitude ('ML'),
-            * moment magnitude ('Mw'),
-            * energy ('Energy'),
-            * etc.
+    :param magnitude_type: Describes the type of magnitude. This is a free text.
     :type magnitude_type: str
+
+    Proposed magnitudes are:
+        * unspecified magnitude ('M') - function search for exactly unspecified magnitude,
+        * local magnitude ('ML'),
+        * moment magnitude ('Mw'),
+        * energy ('Energy'),
+        * etc.
 
     :return: The magnitude object or None if the function cannot find or create the magnitude.
         If only station_name magnitudes exist, the new ObsPy Magnitude object is created,

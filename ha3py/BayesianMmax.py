@@ -1,6 +1,6 @@
 """
 Module-based classes of Bayesian maximum magnitude likelihood
-------------------------------------------------------------
+-------------------------------------------------------------
 
 ..
     :copyright:

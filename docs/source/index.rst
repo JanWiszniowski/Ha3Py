@@ -21,3 +21,4 @@ Ha3Py
     citing
     changelog
     contributing
+    indices

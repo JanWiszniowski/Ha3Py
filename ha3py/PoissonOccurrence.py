@@ -83,6 +83,8 @@ class PoissonOccurrence(LambdaOccurrence, ABC):
         :rtype:
         """
         lambda_t = self.lamb * t
+        if lambda_t < 0.0:
+            return 0.0
         return np.exp(-lambda_t * self.magnitude_distribution.sf(m))
 
     def _l_pdf(self, m, t):
@@ -103,14 +105,14 @@ class PoissonOccurrence(LambdaOccurrence, ABC):
         return np.multiply(lambda_t * self.magnitude_distribution.pdf(m),
                            np.exp(-lambda_t * self.magnitude_distribution.sf(m)))
 
-    def time_cdf(self, t, m):
-        if t < 0:
-            return 0.0
-        l = self.lamb
-        sf = self.magnitude_distribution.sf(m)
-        fm = self.magnitude_distribution.pdf(m)
-        ex = np.exp(-sf * t * l)
-        return -(-fm + fm*ex + sf*t*fm*l*ex) / fm
+    # def time_cdf(self, t, m):
+    #     if t < 0:
+    #         return 0.0
+    #     l = self.lamb
+    #     sf = self.magnitude_distribution.sf(m)
+    #     fm = self.magnitude_distribution.pdf(m)
+    #     ex = np.exp(-sf * t * l)
+    #     return -(-fm + fm * ex + sf * t * fm * l * ex) / fm
 
     def _const_coefficients(self):
         return []

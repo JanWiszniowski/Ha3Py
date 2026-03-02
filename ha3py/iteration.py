@@ -83,7 +83,8 @@ def m_max_solve_by_iteration(configuration, magnitude_distribution=None, m_max=N
         m_max_est_old = m_max_est_new
         delta.m_max = m_max_est_new
         m_max_est_new = m_max_obs + delta(time=time, annual_lambda=annual_lambda)
-        print('Itr:{:d},M_max={}, delta={}'.format(nr_iter, m_max_est_new, type( delta).__name__))
+        print(f"Itr:{nr_iter:2d},M_max={m_max_est_new}, delta={fabs(m_max_est_new - m_max_est_old)}"
+              f", ({type(delta).__name__})")
     m_max = round(m_max_est_new, 2)
     if m_max <= m_max_obs:
         m_max = m_max_obs + .01
