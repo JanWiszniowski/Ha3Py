@@ -1,7 +1,15 @@
 """
-Ha3Py
-(c) Andrzej Kijko, Jan Wiszniowski
-ver. 2024-01
+..
+
+    :copyright:
+        Jan Wiszniowski <jwisz@igf.edu.pl>,
+        Andrzej Kijko <andrzej.kijko@up.ac.za>
+    :license:
+        GNU Lesser General Public License, Version 3
+        (https://www.gnu.org/copyleft/lesser.html)
+    :version 0.0.1:
+        2025-01-01
+
 """
 
 import numpy as np
@@ -22,6 +30,15 @@ def print_share(prompt, share, parameter_names):
 
 
 def compute_hazard(configuration):
+    """
+    The function computes seismic hazard as functions of magnitude including:
+    lambda(survive function) for the magnitude,
+    return period of the magnitude in years, and exceedance probabilities for defined time periods.
+    The results are stored in configuration and can be used for hazard printing (see function print_hazard)
+
+    :param configuration:
+
+    """
     event_occurrence = get_events_occurrence(configuration)
     lamb = configuration['lambda']
     m_min = configuration['m_min']
@@ -37,7 +54,8 @@ def compute_hazard(configuration):
         for mag in np.nditer(np.arange(mag_start, mag_end, d_mag)):  # MAGNITUDE LOOP STARTS HERE >>>>>>>>
             [lambda_mag, rp] = return_period(mag, lamb, event_occurrence.magnitude_distribution)
             probabilities = [float(event_occurrence.sf(mag, tp)) for tp in time_periods]
-            haz_a.append({'mag': float(mag), 'lambda_mag': float(lambda_mag), 'return_period': float(rp), 'probabilities': probabilities})
+            haz_a.append({'mag': float(mag), 'lambda_mag': float(lambda_mag), 'return_period': float(rp),
+                          'probabilities': probabilities})
         # END OF MAGNITUDE LOOP <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
     return haz_a
     # END OF FUNCTION compute_hazard ==========================================
@@ -62,8 +80,8 @@ def print_results(configuration):
     for name in events_distribution_names:
         if name == 'beta':
             print(f"{name:<10s} = {configuration.get(name, -999):7.3f} +/- {configuration.get('sd_' + name):.3f},"
-                  f" (b = {configuration.get(name, -999)/LN_10_:.2f} "
-                  f"+/- {configuration.get('sd_' + name)/LN_10_:.2f})")
+                  f" (b = {configuration.get(name, -999) / LN_10_:.2f} "
+                  f"+/- {configuration.get('sd_' + name) / LN_10_:.2f})")
         elif name == 'lambda':
             print(f"{name:<10s} = {configuration.get(name, -999):7.3f} +/- {configuration.get('sd_' + name):.3f},"
                   f" (for m_min = {configuration['m_min']:.2f})")
@@ -81,7 +99,7 @@ def print_results(configuration):
     first_line = True
     for cov_row in cov:
         if first_line:
-            cov_str ='COV = [ '
+            cov_str = 'COV = [ '
             first_line = False
         else:
             cov_str = '      [ '
@@ -90,20 +108,29 @@ def print_results(configuration):
         cov_str += ']'
         print(cov_str)
     print('')
-    for idx1 in range(len(events_distribution_names)-1):
-        for idx2 in range(idx1+1, len(events_distribution_names)-1):
+    for idx1 in range(len(events_distribution_names) - 1):
+        for idx2 in range(idx1 + 1, len(events_distribution_names) - 1):
             print("Corr({},{}) = {:.3f}".format(events_distribution_names[idx1], events_distribution_names[idx2],
                                                 cov[idx1][idx2] / np.sqrt(cov[idx1][idx1] * cov[idx2][idx2])))
     print('')
 
 
 def print_hazard(configuration):
+    """
+    The function prints the table of seismic hazards.
+    The table columns are: magnitude, lambda(survive function) for the magnitude,
+    return period of the magnitude in years, and exceedance probabilities for four time periods.
+    The printing requires the hazard to be earlier computed (see function compute_hazard).
+
+    :param configuration:
+
+    """
     s = '| Mag  |Lambda(sf)|   RP    |'
     for rp in configuration['time_intervals']:
         s += ' pr. T={:5.0f}|'.format(rp)
     line_eq = '=' * len(s)
     print(line_eq)
-    spaces_before = (len(s)-len('SEISMIC HAZARD')-2)//2
+    spaces_before = (len(s) - len('SEISMIC HAZARD') - 2) // 2
     title = '|' + ' ' * spaces_before + 'SEISMIC HAZARD'
     title = title + ' ' * (len(s) - len(title) - 1) + '|'
     print(title)
@@ -122,6 +149,12 @@ def print_hazard(configuration):
 
 
 def print_percentage_share(configuration):
+    """
+    The function prints the percentage share of used catalogues in seismic hazards estimation.
+
+    :param configuration:
+
+    """
     p_phs = configuration.get('paleo_catalog')
     p_his = configuration.get('historic_catalog')
     p_comp = configuration.get('complete_catalogs')
@@ -194,4 +227,3 @@ def main():
 
 if __name__ == "__main__":
     main()
-

@@ -1,9 +1,23 @@
+"""
+..
+
+    :copyright:
+        Jan Wiszniowski <jwisz@igf.edu.pl>,
+        Andrzej Kijko <andrzej.kijko@up.ac.za>
+    :license:
+        GNU Lesser General Public License, Version 3
+        (https://www.gnu.org/copyleft/lesser.html)
+    :version 0.0.1:
+        2025-01-01
+
+"""
 import numpy as np
 from numpy.linalg import inv
 from math import sqrt
 from ha3py.ln_likelihood import ln_likelihood
 from ha3py.get_events_occurrence import get_events_occurrence
 from ha3py.constant_values import LN_10_
+
 # from scipy.differentiate import hessian
 
 

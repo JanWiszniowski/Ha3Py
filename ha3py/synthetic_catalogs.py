@@ -2,15 +2,29 @@
 The synthetic catalogs simulates the paleo-, historical, and complete catalogues.
 The package is the Python conversion
 of the MATLAB MC_data_generation package by Andrzej Kijko.
+
+..
+
+    :copyright:
+        Jan Wiszniowski <jwisz@igf.edu.pl>,
+        Andrzej Kijko <andrzej.kijko@up.ac.za>
+    :license:
+        GNU Lesser General Public License, Version 3
+        (https://www.gnu.org/copyleft/lesser.html)
+    :version 0.0.3:
+        2026-03-03
+
+
 """
 
 from ha3py.utils import HaPyException
 from ha3py.configuration import load_configuration, save_configuration
 from ha3py.constant_values import EPS
+from ha3py.get_magnitude_distribution import get_magnitude_distribution
 import numpy as np
 
 
-def test_lambda_beta(catalog_configuration):
+def test_lambda_beta(catalog_configuration, printing=True):
     r"""
     The function estimated and prints :math:`\beta` and :math:`\lambda` parameters
     of the catalogue assessed by the simplest method:
@@ -37,7 +51,9 @@ def test_lambda_beta(catalog_configuration):
     beta_catalog = 1.0 / (np.mean(magnitudes) - m_min)
     # magnitude_distribution = GutenbergRichter(configuration, beta=beta_for_catalog)
     lambda_catalog = float(no_earthquakes) / time_span
-    print(f"Catalog {catalog_configuration['name']}: beta={beta_catalog}, lambda={lambda_catalog} for m_min={m_min}")
+    if printing:
+        print(f"Catalog {catalog_configuration['name']}: beta={beta_catalog}, lambda={lambda_catalog} for m_min={m_min}")
+    return beta_catalog, lambda_catalog
 
 
 def f_rnd_app_mag(mag, sd_mag):
@@ -109,7 +125,8 @@ def f_rnd_mag_grb(configuration):
         mag = m_min + EPS
     if mag > m_max:
         mag = m_max - EPS
-    return 0.01 * np.random.rand(100 * mag)
+    # return mag
+    return 0.01 * round(100 * mag)
     # END OF rd_mag_grb_f =================================================
 
 
@@ -277,11 +294,22 @@ def complete_simulation(catalog_configuration, configuration, idx):
     nr_eq_total = 0
     nr_eq_current = 0
     m_max_obs = 0.0
+    mean_mag = 0.0
     m_min_current = catalog_configuration['m_min']
+    m_min = catalog_configuration['m_min']
     lamb = configuration['lambda']
+    # config_m_min = configuration['m_min']
     sd_mag = catalog_configuration.get('sd', 0.5)
     begin_time, end_time, time_span = get_times(catalog_configuration)
     earthquakes = []
+    if sd_mag > (m_min_current - m_min) / 3.0:
+        sd_mag = (m_min_current - m_min) / 3.0
+    # if m_min_current < config_m_min + sd_mag:
+    #     configuration['m_min'] = m_min_current - sd_mag
+    #     magnitude_distribution = get_magnitude_distribution(configuration)
+    #     catalog_lambda = configuration['lambda'] / magnitude_distribution.sf(config_m_min)
+    # else:
+    #     catalog_lambda = configuration['lambda']
     while time < time_span:
         dt = f_rnd_time_int(lamb)  # RANDOM TIME INTERVAL [Y] CORRESPONDING TO LAMBDA_TOTAL
         time = time + dt  # CURRENT TIME
@@ -292,9 +320,15 @@ def complete_simulation(catalog_configuration, configuration, idx):
         if mag < m_min_current:
             continue
         nr_eq_current = nr_eq_current + 1  # NR OF EQ - s FROM m_min_current
+        mean_mag += mag
         earthquakes.append({"magnitude": mag})
         if mag > m_max_obs:
             m_max_obs = mag
+    # configuration['m_min'] = config_m_min
+    if nr_eq_current > 0:
+        mean_mag = mean_mag / nr_eq_current;
+        b_aki_utsu = 1.0 / (np.log(10) * (mean_mag - m_min_current))
+        print(f"ESTIMATED b-value (AKI-UTSU) = {b_aki_utsu}, beta = {b_aki_utsu * np.log(10)}")
     print(f"NUMBER of EQ-s (from M_min_total) = {nr_eq_total}")
     print(f"NUMBER of EQ-s (from M_min_current) = {nr_eq_current}")
     print(f"Maximum OBSERVED magnitude (APPARENT)  = {m_max_obs}")
@@ -378,7 +412,7 @@ def synthetic_catalogs_generation(configuration):
             if general_m_min > m_min:
                 general_m_min = m_min
             if catalog['earthquakes']:
-                test_lambda_beta(catalog)
+                # test_lambda_beta(catalog)
                 catalogs.append(catalog)
             if m_max_obs > general_m_max_obs:
                 general_m_max_obs = m_max_obs

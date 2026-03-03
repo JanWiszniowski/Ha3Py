@@ -5,15 +5,17 @@ Trivial :math:`m_{max}` assessment
 The algorithm name in the configuration is 'primitive'.
 
 The primitive :math:`m_{max}` is assessed by adding the value 0.5 to :math:`m_{max}^{obs}`.
+..
 
-:copyright:
-    Jan Wiszniowski <jwisz@igf.edu.pl>,
-    Andrzej Kijko <andrzej.kijko@up.ac.za>
-:license:
-    GNU Lesser General Public License, Version 3
-    (https://www.gnu.org/copyleft/lesser.html)
-:version 0.0.1:
-    2025-01-01
+    :copyright:
+        Jan Wiszniowski <jwisz@igf.edu.pl>,
+        Andrzej Kijko <andrzej.kijko@up.ac.za>
+    :license:
+        GNU Lesser General Public License, Version 3
+        (https://www.gnu.org/copyleft/lesser.html)
+    :version 0.0.1:
+        2025-01-01
+
 """
 
 

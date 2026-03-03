@@ -2,17 +2,17 @@ r"""
 Library for creating the configuration file
 -------------------------------------------
 
-The procedure realises Bayesian MAP, Max of Posterior Fiduicial & Gauss (Kijko, 2004)
-The algorithm name in the configuration is 'bayesian_fiducial'.
+..
 
-:copyright:
-    Jan Wiszniowski <jwisz@igf.edu.pl>,
-    Andrzej Kijko <andrzej.kijko@up.ac.za>
-:license:
-    GNU Lesser General Public License, Version 3
-    (https://www.gnu.org/copyleft/lesser.html)
-:version 0.0.1:
-    2025-01-01
+    :copyright:
+        Jan Wiszniowski <jwisz@igf.edu.pl>,
+        Andrzej Kijko <andrzej.kijko@up.ac.za>
+    :license:
+        GNU Lesser General Public License, Version 3
+        (https://www.gnu.org/copyleft/lesser.html)
+    :version 0.0.1:
+        2025-01-01
+
 """
 
 import sys
@@ -60,11 +60,15 @@ def save_configuration(configuration, file_name=None):
 
 def date_years(year, month, day):
     r"""
-    Coverts date (year, month, day) into years as float value
+    Coverts date (year, month, day) into years as float value.
+    Negative years are modified to obtain continuity of years,
+    because year zero doesn't exist.
+
     :param year:
     :param month:
     :param day:
-    :return: years
+    :return: years as float value, where months and days are a decimal part of the year
+    :rtype: float
     """
     fday = float(day)
     iday = floor(fday)

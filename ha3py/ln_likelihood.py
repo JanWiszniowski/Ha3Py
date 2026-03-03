@@ -1,15 +1,16 @@
 """
 Likelihood coefficients estimation
 ----------------------------------
+..
+    :copyright:
+        Jan Wiszniowski <jwisz@igf.edu.pl>,
+        Andrzej Kijko <andrzej.kijko@up.ac.za>
+    :license:
+        GNU Lesser General Public License, Version 3
+        (https://www.gnu.org/copyleft/lesser.html)
+    :version 0.0.1:
+        2025-01-01
 
-:copyright:
-    Jan Wiszniowski <jwisz@igf.edu.pl>,
-    Andrzej Kijko <andrzej.kijko@up.ac.za>
-:license:
-    GNU Lesser General Public License, Version 3
-    (https://www.gnu.org/copyleft/lesser.html)
-:version 0.0.1:
-    2025-01-01
 """
 
 import numpy as np
@@ -19,21 +20,21 @@ from ha3py.get_events_occurrence import get_events_occurrence
 
 def likelihood0(event_occurrence, catalogue):
     r"""
-    Compute natural logarithm of likelihood for a catalogue with constant completeness level
+    Function computes natural logarithm of likelihood for a catalogue with constant completeness level
     based on the non occurrence event of magnitude :math:`m` time distribution :math:`f_M^{max}`
-    with the catalogue completeness magnitude
+    with the catalogue completeness magnitude. This function is applied to paleo and historical catalogues
 
     .. math::
         ln\left( \mathcal{L}_\mathbf{\Theta} \right)=
         w_c\sum_{i=1}^{N}w_i\ln\left[f_M^{max} \left( m_i\middle|\mathbf{\Theta},t_i \right) \right],
 
     where :math:`N` is number of events in the catalogue, :math:`m_i` is the :math:`i`-th event magnitude,
-    :param event_occurrence:
-    :type event_occurrence:
     :math:`t_i` is the between event time, :math:`\mathbf{\Theta}` are the probability coefficients,
     :math:`w_c` is the weight of the current catalogue likelihood,
     and :math:`w_i` is the weight of the :math:`i`-th event
 
+    :param event_occurrence: The events occurrence object
+    :type event_occurrence: OccurrenceBase or LambdaOccurrence
     :param catalogue: The catalogue must contain items:
 
         * 'm_min' (float) the completeness magnitude,
@@ -46,8 +47,8 @@ def likelihood0(event_occurrence, catalogue):
                 (:math:`w_i`).
 
     :type catalogue: dict
-    :return: The likelihood of the catalogue
-    :rtype: (float)
+    :return: The ln likelihood of the catalogue
+    :rtype: float
 
     Example, the gamma compound Poisson distribution case
 
@@ -72,19 +73,73 @@ def likelihood0(event_occurrence, catalogue):
     return sum_ln_likelihood
 
 
-def complete_catalogue_likelihood(event_occurrence, cat):
-    if cat is None:
+def complete_catalogue_likelihood(event_occurrence, catalogue):
+    """
+    Function computes natural logarithm of likelihood for an instrumental catalogue with optional
+    constant completeness level or time-varying completeness level.
+
+    :param event_occurrence: The events occurrence object
+    :type event_occurrence: OccurrenceBase or LambdaOccurrence
+    :param catalogue: The catalogue must contain items:
+
+        * 'm_min' (float) the completeness magnitude,
+        * 'weight' (float, optional, default=1.0) the weight of the catalogue in the total ln likelihood,
+            (:math:`w_c`)
+        * 'events' (list) list of events. Each event is a dictionary containing:
+            * 'magnitude' the event magnitude (:math:`m_i`),
+            * 'time_span' time span the events (:math:`t_i`) (required only for time-varying completeness),
+            * 'weight' (float, optional, default=1.0) the weight of the event in the catalogue ln likelihood,
+                (:math:`w_i`).
+
+    :type catalogue: dict
+    :return: The ln likelihood of the catalogue
+    :rtype: float
+
+    """
+    if catalogue is None:
         return 0.0
-    min_type = type(cat['m_min'])
+    min_type = type(catalogue['m_min'])
     if min_type == float:
-        return const_completeness_likelihood(event_occurrence, cat)
+        return const_completeness_likelihood(event_occurrence, catalogue)
     elif min_type == str and type == 'time-varying':
-        return time_varying_completeness_likelihood(event_occurrence, cat)
+        return time_varying_completeness_likelihood(event_occurrence, catalogue)
     else:
         raise HaPyException('Wrong m_min definition')
 
 
 def const_completeness_likelihood(event_occurrence, catalogue):
+    r"""
+    Function computes natural logarithm of likelihood for a complete catalogue with constant completeness level
+    based on the occurrence of n event with magnitude :math:`m>m_{min}`.
+
+    .. math::
+
+        \ln\mathcal{L}_n \left( \mathbf{\theta}| \mathbf{m},T,n \right)=w_c \left[
+        \ln\mathcal{L}_\lambda \left( \mathbf{\theta}_\lambda| \mathbf{m},T,n \right)+
+        \ln\mathcal{L}_\beta\left( \mathbf{\theta}_\beta| \mathbf{m} \right) \right]
+
+        \ln\mathcal{L}_\lambda \left( \mathbf{\theta}_\lambda| \mathbf{m},T,n \right)=
+        \ln p_n\left( n|T \right)
+
+        \ln\mathcal{L}_\beta\left( \mathbf{\theta}_\beta| \mathbf{m} \right)=
+        \sum_{j=1}^{n}w_j \ln f_M\left( m_j \right)
+
+    :param event_occurrence: The events occurrence object
+    :type event_occurrence: OccurrenceBase or LambdaOccurrence
+    :param catalogue: The catalogue must contain items:
+
+        * 'm_min' (float) the completeness magnitude,
+        * 'weight' (float, optional, default=1.0) the weight of the catalogue in the total ln likelihood,
+            (:math:`w_c`)
+        * 'events' (list) list of events. Each event is a dictionary containing:
+            * 'magnitude' the event magnitude (:math:`m_j`),
+            * 'weight' (float, optional, default=1.0) the weight of the event (:math:`w_j`)
+
+    :type catalogue: dict
+    :return: The ln likelihood of the catalogue
+    :rtype: float
+
+    """
     if not catalogue:
         return 0.0
     event_occurrence.m_min = catalogue['m_min']
@@ -103,6 +158,27 @@ def const_completeness_likelihood(event_occurrence, catalogue):
 
 
 def time_varying_completeness_likelihood(event_occurrence, catalogue):
+    r"""
+    Function computes natural logarithm of likelihood for an instrumental catalogue with
+    time-varying completeness level
+
+    :param event_occurrence: The events occurrence object
+    :type event_occurrence: OccurrenceBase or LambdaOccurrence
+    :param catalogue: The catalogue must contain items:
+
+        * 'm_min' (float) the completeness magnitude,
+        * 'weight' (float, optional, default=1.0) the weight of the catalogue in the total ln likelihood,
+            (:math:`w_c`)
+        * 'events' (list) list of events. Each event is a dictionary containing:
+            * 'magnitude' the event magnitude (:math:`m_i`),
+            * 'time_span' time span the events (:math:`t_i`),
+            * 'weight' (float, optional, default=1.0) the weight of the event in the catalogue ln likelihood,
+                (:math:`w_i`).
+
+    :type catalogue: dict
+    :return: The ln likelihood of the catalogue
+    :rtype: float
+    """
     if not catalogue:
         return 0.0
     sum_ln_likelihood = 0.0
@@ -122,6 +198,7 @@ def time_varying_completeness_likelihood(event_occurrence, catalogue):
 
 def ln_likelihood(x_v, configuration, m_max=None):
     """
+    Function computes natural logarithm of likelihood of all paleo-, historical, and complete catalogues
 
     :param x_v:
         Array of event distribution and occurrence coefficients.

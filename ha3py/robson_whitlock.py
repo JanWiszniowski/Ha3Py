@@ -5,14 +5,17 @@ r"""
 :math:`m_{max}` is assessed by adding to :math:`m_{max}^{obs}` the difference
 between :math:`m_{max}^{obs}` and the second maximum magnitude.
 
-:copyright:
-    Jan Wiszniowski <jwisz@igf.edu.pl>,
-    Andrzej Kijko <andrzej.kijko@up.ac.za>
-:license:
-    GNU Lesser General Public License, Version 3
-    (https://www.gnu.org/copyleft/lesser.html)
-:version 0.0.1:
-    2025-01-01
+..
+
+    :copyright:
+        Jan Wiszniowski <jwisz@igf.edu.pl>,
+        Andrzej Kijko <andrzej.kijko@up.ac.za>
+    :license:
+        GNU Lesser General Public License, Version 3
+        (https://www.gnu.org/copyleft/lesser.html)
+    :version 0.0.1:
+        2025-01-01
+
 """
 
 
@@ -20,6 +23,12 @@ from math import sqrt
 
 
 def get_magnitudes(configuration):
+    """
+    Extract the value of first magnitude lower than the max observed magnitude
+
+    :param configuration:
+    :return:
+    """
     m_n = -100.0
     m_n_1 = None
     p_phs = configuration.get('paleo_catalog')
@@ -36,11 +45,11 @@ def get_magnitudes(configuration):
                 m_n_1 = m_n
                 m_n = eq['magnitude']
     if p_comp:
-            for complete_catalog in p_comp:
-                for eq in complete_catalog['earthquakes']:
-                    if eq['magnitude'] > m_n:
-                        m_n_1 = m_n
-                        m_n = eq['magnitude']
+        for complete_catalog in p_comp:
+            for eq in complete_catalog['earthquakes']:
+                if eq['magnitude'] > m_n:
+                    m_n_1 = m_n
+                    m_n = eq['magnitude']
     return m_n_1
 
 
