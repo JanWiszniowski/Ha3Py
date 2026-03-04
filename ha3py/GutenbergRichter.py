@@ -2,14 +2,16 @@
 Gutenberg-Richter magnitude distribution
 ----------------------------------------
 
-:copyright:
-    Jan Wiszniowski <jwisz@igf.edu.pl>,
-    Andrzej Kijko <andrzej.kijko@up.ac.za>
-:license:
-    GNU Lesser General Public License, Version 3
-    (https://www.gnu.org/copyleft/lesser.html)
-:version 0.0.1:
-    2025-01-01
+..
+    :copyright:
+        Jan Wiszniowski <jwisz@igf.edu.pl>,
+        Andrzej Kijko <andrzej.kijko@up.ac.za>
+    :license:
+        GNU Lesser General Public License, Version 3
+        (https://www.gnu.org/copyleft/lesser.html)
+    :version 0.0.1:
+        2025-01-01
+
 """
 
 import numpy as np
@@ -65,15 +67,33 @@ class GutenbergRichter(BaseMagnitudeDistribution):
     .. math::
         N=1-\exp\left[-\beta\left(m-m_{min}\right)\right]
 
+
+    :param beta: The :math:`\beta` value.
+        If missing, the value is taken from configuration
+    :type beta: float
+    :param m_min: Minimum value of the magnitude distribution.
+        If missing, the maximum magnitude is taken from configuration
+    :type m_min: float
+    :param m_max: Maximum value of the magnitude distribution.
+        If missing, the maximum magnitude is taken from configuration
+    :type m_max: float
+
     """
 
-    def __init__(self, parameters, beta=None, m_min=None, m_max=None):
+    def __init__(self, configuration, beta=None, m_min=None, m_max=None):
+        """
+
+        :param configuration:
+        :param beta:
+        :param m_min:
+        :param m_max:
+        """
         self.den = 1.0
         if beta:
             self._beta = beta
         else:
-            self._beta = parameters.get('beta', 2.3)
-        super().__init__(parameters, 'G-R', long_name='Gutenberg-Richter magnitude distribution',
+            self._beta = configuration.get('beta', 2.3)
+        super().__init__(configuration, 'G-R', long_name='Gutenberg-Richter magnitude distribution',
                          m_min=m_min, m_max=m_max)
 
     def _prepare(self):

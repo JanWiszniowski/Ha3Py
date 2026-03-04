@@ -1,6 +1,7 @@
 """
 Likelihood coefficients estimation
 ----------------------------------
+
 ..
     :copyright:
         Jan Wiszniowski <jwisz@igf.edu.pl>,
@@ -208,7 +209,7 @@ def ln_likelihood(x_v, configuration, m_max=None):
         which is the dictionary of all parameters required for Ha3Py modules
         and results of all computations.
     :type configuration: dict
-    :param m_max: Maximum magnitude. If missing the maximum magnitude is taken from configuration
+    :param m_max: Maximum magnitude. If missing, the maximum magnitude is taken from configuration
     :type m_max: float
     :return: The natural logarithm of likelihood computed ever all catalogues.
     :rtype: (float)

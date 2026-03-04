@@ -64,6 +64,7 @@ def bayesian_m_max(configuration, likelihood):
     :return: Estimated by bayesian method maximum magnitude
         and standard deviation of the maximum magnitude.
     :rtype: (float, float)
+
     """
     bayesian_m_max_estimator = configuration.get('bayesian_m_max_estimator', 'expected')
     if bayesian_m_max_estimator == 'expected':

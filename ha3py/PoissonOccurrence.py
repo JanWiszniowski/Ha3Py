@@ -36,7 +36,7 @@ class PoissonOccurrence(LambdaOccurrence, ABC):
 
     .. math::
         F_M^{max}\left( m|\lambda,\mathbf{\Theta_\beta},t \right)=
-        1 - e^{-\lambda t S_M\left( m|\mathbf{\Theta_\beta} \right)}.
+        e^{-\lambda t S_M\left( m|\mathbf{\Theta_\beta} \right)}.
 
     Gradients of the of non occurrence of event in the time probability survive function are:
 
@@ -73,7 +73,7 @@ class PoissonOccurrence(LambdaOccurrence, ABC):
 
         .. math::
             F_M^{max}\left( m|\lambda,t \right)=
-            1-\exp\left(-\lambda t S_M\left( m \right)\right)
+            \exp\left(-\lambda t S_M\left( m \right)\right)
 
         :param m:
         :type m:

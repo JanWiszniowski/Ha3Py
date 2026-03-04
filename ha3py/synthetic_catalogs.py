@@ -4,7 +4,6 @@ The package is the Python conversion
 of the MATLAB MC_data_generation package by Andrzej Kijko.
 
 ..
-
     :copyright:
         Jan Wiszniowski <jwisz@igf.edu.pl>,
         Andrzej Kijko <andrzej.kijko@up.ac.za>

@@ -77,13 +77,16 @@ class BayesianFiducial(BayesianBase):
         and results of all computations.
     :type configuration: dict
 
-
     """
+
     def __init__(self, configuration, magnitude_distribution=None):
         """
 
-        :param configuration:
-        :type configuration:
+        :param configuration: General configuration container,
+            which is the dictionary of all parameters required for Ha3Py modules
+            including all catalogues
+            and results of all computations.
+        :type configuration: dict
         """
         m_max, sd_m_max = non_bayesian_m_max_estimation(configuration)
         fiducial_m_min = configuration.get('fiducial_m_min')
@@ -100,8 +103,8 @@ class BayesianFiducial(BayesianBase):
     def _likelihood(self, m_max):
         """
 
-        :param m_max:
-        :type m_max:
+        :param m_max: Maximum value of the magnitude distribution (required)
+        :type m_max: float
         :return:
         :rtype:
         """
@@ -126,10 +129,14 @@ class BayesianFiducial(BayesianBase):
 def get_bayesian_fiducial(configuration, magnitude_distribution=None):
     """
 
-    :param configuration:
-    :type configuration:
-    :param magnitude_distribution:
-    :type magnitude_distribution: object
+    :param configuration: General configuration container,
+        which is the dictionary of all parameters required for Ha3Py modules
+        including all catalogues
+        and results of all computations.
+    :type configuration: dict
+    :param magnitude_distribution:  Optional magnitude distribution object.
+        If missing, the magnitude distribution object is created based on the configuration
+    :type magnitude_distribution: MagnitudeDistribution
     :return:
     :rtype:
     """

@@ -1,7 +1,5 @@
 """
-Ha3Py
-(c) Jan Wiszniowski, Andrzej Kijko
-ver. 2024-01
+
 """
 
 import numpy as np

@@ -2,14 +2,16 @@
 BaseDelta class of magnitude distributions
 ------------------------------------------
 
-:copyright:
-    Jan Wiszniowski <jwisz@igf.edu.pl>,
-    Andrzej Kijko <andrzej.kijko@up.ac.za>
-:license:
-    GNU Lesser General Public License, Version 3
-    (https://www.gnu.org/copyleft/lesser.html)
-:version 0.0.1:
-    2025-01-01
+..
+    :copyright:
+        Jan Wiszniowski <jwisz@igf.edu.pl>,
+        Andrzej Kijko <andrzej.kijko@up.ac.za>
+    :license:
+        GNU Lesser General Public License, Version 3
+        (https://www.gnu.org/copyleft/lesser.html)
+    :version 0.0.1:
+        2025-01-01
+
 """
 
 from scipy.stats import rv_continuous
@@ -24,17 +26,23 @@ class BaseMagnitudeDistribution(rv_continuous, ABC):
     `SciPy generic continuous random variable class.
     <https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.rv_continuous.html>`_
 
-    :param parameters: dictionary of Ha3Py params params
+    :param configuration: dictionary of Ha3Py params params
         Required items in the params dictionary are unless they are define in the constructor:
 
         * m_min
         * m_max_current
         * m_max (required if m_max_current is missing in the params dictionary)
 
-    :param name: magnitude distribution prompt
-    :param long_name:  magnitude distribution long prompt
-    :param m_min: minimum value of the magnitude distribution
-    :param m_max: maximum value of the magnitude distribution
+    :param name: Magnitude distribution prompt
+    :type name: str
+    :param long_name: Magnitude distribution long prompt
+    :type long_name: str
+    :param m_min: Minimum value of the magnitude distribution
+        If missing, the maximum magnitude is taken from configuration
+    :type m_min: float
+    :param m_max: Maximum value of the magnitude distribution.
+        If missing, the maximum magnitude is taken from configuration
+    :type m_max: float
 
     Classes derived from the MagnitudeDistribution classes define exact magnitude distribution,
     e.g. Gutenberg-Richter magnitude distribution. They must define methods:
@@ -51,7 +59,15 @@ class BaseMagnitudeDistribution(rv_continuous, ABC):
         (see grad_sf)
 
    """
-    def __init__(self, parameters, name, long_name=None, m_min=None, m_max=None):
+    def __init__(self, configuration, name, long_name=None, m_min=None, m_max=None):
+        """
+
+        :param configuration:
+        :param name:
+        :param long_name:
+        :param m_min:
+        :param m_max:
+        """
         r"""
         Required params:
             m_min
@@ -62,13 +78,13 @@ class BaseMagnitudeDistribution(rv_continuous, ABC):
         if m_min is not None:
             self._m_min = m_min
         else:
-            self._m_min = parameters.get('m_min', 0.0)
+            self._m_min = configuration.get('m_min', 0.0)
         if m_max is not None:
             self._m_max = m_max
-        elif 'm_max_current' in parameters:
-            self._m_max = parameters['m_max_current']
+        elif 'm_max_current' in configuration:
+            self._m_max = configuration['m_max_current']
         else:
-            self._m_max = parameters.get('m_max', 10.0)
+            self._m_max = configuration.get('m_max', 10.0)
         if long_name is None:
             long_name = name
         rv_continuous.__init__(self, a=self._m_min-EPS2, b=self._m_max+EPS2, name=name, longname=long_name)
@@ -149,9 +165,10 @@ class BaseMagnitudeDistribution(rv_continuous, ABC):
         where a survive function :math:`S_M \left( m \right) = 1 - F_M \left( m \right)`
         and :math:`x_i, i = 1,...` are the magnitude distribution Parameters .
 
-        :param coefficient_name:
-        :type coefficient_name:
+        :param coefficient_name: The coefficient name for which gradient is calculated
+        :type coefficient_name: str
         :param m: magnitude distribution of the survive function
+        :type m: float
         :return: dictionary of magnitude distribution Parameters names and their gradients.
                  The magnitude distribution Parameters depend on the magnitude distribution
         """

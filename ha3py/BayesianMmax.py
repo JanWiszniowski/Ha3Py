@@ -58,7 +58,9 @@ class BayesianBase(ABC):
             which is the dictionary of all parameters required for Ha3Py modules
             and results of all computations.
         :type configuration: dict
-
+        :param magnitude_distribution: Optional magnitude distribution object.
+            If missing, the magnitude distribution object is created based on the configuration
+        :type magnitude_distribution: MagnitudeDistribution
         """
         self.m_max, self.sd_m_max, self.prior_m_max, self.sd_prior_m_max = init_bayesian_m_max(
             configuration, magnitude_distribution=magnitude_distribution, m_max_pair=m_max_pair)

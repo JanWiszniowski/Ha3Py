@@ -1,6 +1,8 @@
 """
-..
+Printing estimation recurrence parameter results
+------------------------------------------------
 
+..
     :copyright:
         Jan Wiszniowski <jwisz@igf.edu.pl>,
         Andrzej Kijko <andrzej.kijko@up.ac.za>
@@ -36,7 +38,10 @@ def compute_hazard(configuration):
     return period of the magnitude in years, and exceedance probabilities for defined time periods.
     The results are stored in configuration and can be used for hazard printing (see function print_hazard)
 
-    :param configuration:
+    :param configuration: General configuration container,
+        which is the dictionary of all parameters required for Ha3Py modules
+        and results of all computations.
+    :type configuration: dict
 
     """
     event_occurrence = get_events_occurrence(configuration)
@@ -122,7 +127,10 @@ def print_hazard(configuration):
     return period of the magnitude in years, and exceedance probabilities for four time periods.
     The printing requires the hazard to be earlier computed (see function compute_hazard).
 
-    :param configuration:
+    :param configuration: General configuration container,
+        which is the dictionary of all parameters required for Ha3Py modules
+        and results of all computations.
+    :type configuration: dict
 
     """
     s = '| Mag  |Lambda(sf)|   RP    |'
@@ -152,7 +160,10 @@ def print_percentage_share(configuration):
     """
     The function prints the percentage share of used catalogues in seismic hazards estimation.
 
-    :param configuration:
+    :param configuration: General configuration container,
+        which is the dictionary of all parameters required for Ha3Py modules
+        and results of all computations.
+    :type configuration: dict
 
     """
     p_phs = configuration.get('paleo_catalog')

@@ -1,4 +1,5 @@
 r"""
+
 ..
     Main program for assessment of seismic hazard parameters
     :copyright:
@@ -9,6 +10,7 @@ r"""
         (https://www.gnu.org/copyleft/lesser.html)
     :version 0.0.1:
         2025-01-01
+
 """
 
 import sys

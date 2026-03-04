@@ -168,7 +168,7 @@ where
 .. math::
     :label: eq_b6
 
-    \Delta=\int_{m_{min}}^{m_{max}}F_{M}\left(m\right)^{n}dm,
+    \Delta=\int_{m_{min}}^{m_{max}}F_{M}\left(m\right|m_{max})^{n}dm,
 
 The approximate variance of the Kijko-Sellevoll estimator of :math:`m_{max}`
 for the frequency-magnitude G-R distribution is of the form
@@ -418,39 +418,40 @@ In the typical simplified case, when the magnitude and not-occurrence distributi
 where gradients of survival function :math:`\partial S_{M}\left(m|m_{0}\right) / \partial m_{max}`
 are defined with magnitude distribution classes.
 
-Synthetic catalogues
-####################
+..
+    Synthetic catalogues
+    ####################
 
-Simulation of two types of synthetic catalogues is possible:
+    Simulation of two types of synthetic catalogues is possible:
 
-* Each seismic event is specified by its origin time and magnitude
-* Each seismic event is specified by its magnitude
+    * Each seismic event is specified by its origin time and magnitude
+    * Each seismic event is specified by its magnitude
 
-The first method should be applied for simulating paleo and historical catalogues.
-In contrast, the second method creates complete catalogues.
+    The first method should be applied for simulating paleo and historical catalogues.
+    In contrast, the second method creates complete catalogues.
 
-The catalogue, which contains both the origin times and magnitudes created by the simulation,
-with event times, can be used for all likelihood functions.
-The catalogue only includes seismic event magnitudes can be used by the likelihood function.
+    The catalogue, which contains both the origin times and magnitudes created by the simulation,
+    with event times, can be used for all likelihood functions.
+    The catalogue only includes seismic event magnitudes can be used by the likelihood function.
 
-Two methods can calculate the catalog of earthquakes containing origin times and magnitudes:
+    Two methods can calculate the catalog of earthquakes containing origin times and magnitudes:
 
-:Extreme events simulation: This method divides the catalog period
-    into roughly equal time intervals with random margins,
-    during which it counts a random number of earthquakes
-    with random magnitudes following the specified occurrence probability.
-    From these events, only one earthquake with extreme magnitude is selected and recorded in the catalog.
-:Full simulation incremental: This method is iterative with incremental event time.
-    First, the time is set to the catalog's starting time.
-    In each iteration, the algorithm generates random periods of non-occurrence of the seismic event
-    drawn from a defined probability of occurrence.
-    The time is incremented by the period and set as the event time.
-    The earthquake with a random magnitude based on the defined magnitude distribution is recorded in the catalog
-    and the time for the next iteration is set to the event time.
-    This process repeats until the end of the catalog is reached.
+    :Extreme events simulation: This method divides the catalog period
+        into roughly equal time intervals with random margins,
+        during which it counts a random number of earthquakes
+        with random magnitudes following the specified occurrence probability.
+        From these events, only one earthquake with extreme magnitude is selected and recorded in the catalog.
+    :Full simulation incremental: This method is iterative with incremental event time.
+        First, the time is set to the catalog's starting time.
+        In each iteration, the algorithm generates random periods of non-occurrence of the seismic event
+        drawn from a defined probability of occurrence.
+        The time is incremented by the period and set as the event time.
+        The earthquake with a random magnitude based on the defined magnitude distribution is recorded in the catalog
+        and the time for the next iteration is set to the event time.
+        This process repeats until the end of the catalog is reached.
 
-The catalog of earthquakes containing only origin magnitudes without origin time can be calculated by one method:
+    The catalog of earthquakes containing only origin magnitudes without origin time can be calculated by one method:
 
-:Full simulation without date: The method generates a random number of earthquakes for the catalog period,
-    assigns random magnitudes based on the specified occurrence probabilities,
-    and then records all events with their magnitudes into the catalog.
+    :Full simulation without date: The method generates a random number of earthquakes for the catalog period,
+        assigns random magnitudes based on the specified occurrence probabilities,
+        and then records all events with their magnitudes into the catalog.

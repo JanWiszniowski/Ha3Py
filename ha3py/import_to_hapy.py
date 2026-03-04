@@ -203,10 +203,10 @@ def get_origin(event):
 
 def obspy_to_ha3py(obspy_catalog, magnitude_type='Mw'):
     """
-    It converts the ObsPy or EPISODESCatalog to the dictionary object accepted by the Ha3Py configuration.
+    It converts the ObsPy or EPISODES catalogue to the dictionary object accepted by the Ha3Py configuration.
 
-    :param obspy_catalog: The input catalog
-    :type obspy_catalog: ObsPy Catalog or EPISODESCatalog
+    :param obspy_catalog: The input catalogue
+    :type obspy_catalog: ObsPy catalogue or EPISODES catalogue
     :param magnitude_type: The name of magnitude (The default is recommended magnitude Mw)
     :type magnitude_type: str
 
@@ -265,7 +265,9 @@ def read_file(file_name, catalog_format, configuration):
     :type catalog_format: str
     :param configuration: The dictionary of all Ha3Py parameters
     :type configuration: dict
-    :return:
+
+    :return: Complete catalog structure used in the configuration
+    :rtype: dict
     """
     if catalog_format == 'EPISODES':
         catalog = read_episodes(file_name)

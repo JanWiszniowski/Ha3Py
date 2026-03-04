@@ -2,14 +2,15 @@ r"""
 Plotting results procedures
 ---------------------------
 
-:copyright:
-    Jan Wiszniowski <jwisz@igf.edu.pl>,
-    Andrzej Kijko <andrzej.kijko@up.ac.za>
-:license:
-    GNU Lesser General Public License, Version 3
-    (https://www.gnu.org/copyleft/lesser.html)
-:version 0.0.1:
-    2025-01-01
+..
+    :copyright:
+        Jan Wiszniowski <jwisz@igf.edu.pl>,
+        Andrzej Kijko <andrzej.kijko@up.ac.za>
+    :license:
+        GNU Lesser General Public License, Version 3
+        (https://www.gnu.org/copyleft/lesser.html)
+    :version 0.0.1:
+        2025-01-01
 
 The module contain procedure for plotting seismic hazard diagrams resulted
 from estimation of earthquake hazard parameters by Ha3Py.
@@ -25,35 +26,31 @@ from ha3py.get_events_occurrence import get_events_occurrence
 
 
 def fill_sd(x, y, ax):
-    # """
-    # Procedure fills the area of uncertainty
-    # :param x:
-    # :type x:
-    # :param y:
-    # :type y:
-    # :param ax:
-    # :type ax:
-    # :return:
-    # :rtype:
-    # """
+    """
+    Procedure fills the uncertainty area in the diagram
+    :param x: x coordinates of the filled polygon
+    :type x: iterable float
+    :param y: x coordinates of the filled polygon
+    :type y: iterable float
+    :param ax: plotting axis
+    :type ax: Axes
+    """
     sd_color = (0.4, 0.3, 0.5)
-    sd_facecolor = sd_color
+    sd_face_color = sd_color
     sd_alpha = 0.5
-    ax.fill(x, y, color=sd_color, facecolor=sd_facecolor, alpha=sd_alpha)
+    ax.fill(x, y, color=sd_color, facecolor=sd_face_color, alpha=sd_alpha)
 
 
 def plot_mean(x, y, ax):
-    # """
-    # Procedure plit the mean value curve
-    # :param x:
-    # :type x:
-    # :param y:
-    # :type y:
-    # :param ax:
-    # :type ax:
-    # :return:
-    # :rtype:
-    # """
+    """
+    Procedure plit the mean value curve
+    :param x: x coordinates of the filled polygon
+    :type x: iterable float
+    :param y: x coordinates of the filled polygon
+    :type y: iterable float
+    :param ax: plotting axis
+    :type ax: Axes
+    """
     m_color = 'r'
     m_width = 2
     ax.plot(x, y, color=m_color, linewidth=m_width)
@@ -67,8 +64,8 @@ def comp_mean_return_period(configuration):
         which is the dictionary of all parameters required for Ha3Py modules
         and results of all computations.
     :type configuration: dict
-    :return:
-    :rtype:
+    :return: mean return period for magnitudes
+    :rtype: list
     """
     event_occurrence = get_events_occurrence(configuration)
     lamb = configuration['lambda']
@@ -88,6 +85,18 @@ def comp_mean_return_period(configuration):
 
 
 def comp_sd_return_period(configuration, rp_sign):
+    """
+    Procedure compute the return period uncertainty
+
+    :param configuration: General configuration container,
+        which is the dictionary of all parameters required for Ha3Py modules
+        and results of all computations.
+    :type configuration: dict
+    :param rp_sign: The sign of the uncertainty (+1 or -1)
+    :type rp_sign: int
+    :return: mean return left or right return period uncertainty for magnitudes
+    :rtype: list
+    """
     event_occurrence = get_events_occurrence(configuration)
     lamb = configuration['lambda']
     m_min = configuration['m_min']
@@ -122,6 +131,17 @@ def comp_sd_return_period(configuration, rp_sign):
 
 
 def plot_return_period(configuration, ax=None):
+    """
+    Function plots the return period diagram
+
+    :param configuration: General configuration container,
+        which is the dictionary of all parameters required for Ha3Py modules
+        and results of all computations.
+    :type configuration: dict
+    :param ax: plotting axis
+    :type ax: Axes
+
+    """
     rp_v = comp_mean_return_period(configuration)
     rp_psd_v = comp_sd_return_period(configuration, +1)
     rp_msd_v = comp_sd_return_period(configuration, -1)
@@ -154,6 +174,17 @@ def plot_return_period(configuration, ax=None):
 
 
 def comp_mean_prob(configuration, tp):
+    """
+    Procedure compute the mean exceedance of magnitudes in given time period
+
+    :param configuration: General configuration container,
+        which is the dictionary of all parameters required for Ha3Py modules
+        and results of all computations.
+    :type configuration: dict
+    :param tp: Time period in years
+    :type tp: float
+
+    """
     event_occurrence = get_events_occurrence(configuration)
     m_min = configuration['m_min']
     m_max = configuration['m_max']
@@ -172,12 +203,25 @@ def comp_mean_prob(configuration, tp):
     return cpr_v
 
 
-def comp_sd_prob(pars, tp, cpr_sign):
-    event_occurrence = get_events_occurrence(pars)
-    m_min = pars['m_min']
-    m_max = pars['m_max']
-    sd_m_max = pars['sd_m_max']
-    cov_mc = np.array(pars['cov_beta_lambda'])
+def comp_sd_prob(configuration, tp, cpr_sign):
+    """
+    Procedure compute the uncertainty of exceedance of magnitudes in given time period
+
+    :param configuration: General configuration container,
+        which is the dictionary of all parameters required for Ha3Py modules
+        and results of all computations.
+    :type configuration: dict
+    :param tp: Time period in years
+    :type tp: float
+    :param cpr_sign: The sign of the uncertainty (+1 or -1)
+    :type cpr_sign: int
+
+    """
+    event_occurrence = get_events_occurrence(configuration)
+    m_min = configuration['m_min']
+    m_max = configuration['m_max']
+    sd_m_max = configuration['sd_m_max']
+    cov_mc = np.array(configuration['cov_beta_lambda'])
     cpr_min = 1e-6
     d_mag = 0.005
     cpr_v = []
@@ -202,10 +246,23 @@ def comp_sd_prob(pars, tp, cpr_sign):
     return cpr_v
 
 
-def plot_prob(pars, tp, ax=None):
-    cpr_v = comp_mean_prob(pars, tp)
-    cpr_psd_v = comp_sd_prob(pars, tp, +1)
-    cpr_msd_v = comp_sd_prob(pars, tp, -1)
+def plot_prob(configuration, tp, ax=None):
+    """
+    Function plots the probability of magnitude exceedances in given time period
+
+    :param configuration: General configuration container,
+        which is the dictionary of all parameters required for Ha3Py modules
+        and results of all computations.
+    :type configuration: dict
+    :param tp: Time period in years
+    :type tp: float
+    :param ax: plotting axis
+    :type ax: Axes
+
+    """
+    cpr_v = comp_mean_prob(configuration, tp)
+    cpr_psd_v = comp_sd_prob(configuration, tp, +1)
+    cpr_msd_v = comp_sd_prob(configuration, tp, -1)
     # m1 = min(cpr_v, key=lambda tup: tup[1])
     # m2 = min(cpr_msd_v, key=lambda tup: tup[1])
     # m3 = min(cpr_psd_v, key=lambda tup: tup[1])
@@ -232,32 +289,47 @@ def plot_prob(pars, tp, ax=None):
     plot_mean(m_x, m_y, ax)
     ax.set_xlabel('Magnitude')
     ax.set_ylabel('Annual probability of exceedance')
-    ax.set_title('Area: {}'.format(pars['area_name']))
+    ax.set_title('Area: {}'.format(configuration['area_name']))
     ax.grid(which='both', linestyle=':')
     return ax
 
 
-def plot_hazard(pars, what, ax=None):
+def plot_hazard(configuration, what, ax=None):
+    """
+    Function plots various seismic hazard diagrams. Diagrams are simple - without plotting standard deviation
+
+    :param configuration: General configuration container,
+        which is the dictionary of all parameters required for Ha3Py modules
+        and results of all computations.
+    :type configuration: dict
+    :param what: Information what to plot: 'lambda', 'return_period' or 'probabilities'
+    :param what: str
+    :param ax: plotting axis
+    :type ax: Axes
+
+    :param ax:
+    :return:
+    """
     # if 'hazard' not in pars:
     #     return
     if not ax:
         fig, ax = plt.subplots()
     # mags = [item['mag'] for item in pars['hazard']]
-    event_occurrence = get_events_occurrence(pars)
-    m_min = pars['m_min']
-    m_max = pars['m_max']
-    lamb = pars['lambda']
-    time_periods = pars['time_intervals']
-    cpr_min = 1e-6
+    event_occurrence = get_events_occurrence(configuration)
+    m_min = configuration['m_min']
+    m_max = configuration['m_max']
+    lamb = configuration['lambda']
+    # time_periods = configuration['time_intervals']
+    # cpr_min = 1e-6
     d_mag = 0.005
-    cpr_v = []
+    # cpr_v = []
     temp_m_max = round(m_max, 3)
     event_occurrence.m_max = temp_m_max
     m_v = np.arange(m_min, temp_m_max + d_mag / 2, d_mag)
     if what == 'lambda':
         rp_v = []
         for mag in np.nditer(m_v):
-            [lambda_mag, rp] = return_period(mag, lamb, event_occurrence.magnitude_distribution)
+            [lambda_mag, _] = return_period(mag, lamb, event_occurrence.magnitude_distribution)
             rp_v.append(lambda_mag)
         m_color = 'b'
         m_width = 2
@@ -266,21 +338,21 @@ def plot_hazard(pars, what, ax=None):
     elif what == 'return_period':
         rp_v = []
         for mag in np.nditer(m_v):
-            [lambda_mag, rp] = return_period(mag, lamb, event_occurrence.magnitude_distribution)
+            [_, rp] = return_period(mag, lamb, event_occurrence.magnitude_distribution)
             rp_v.append(rp)
         m_color = 'b'
         m_width = 2
         ax.plot(m_v, rp_v, color=m_color, linewidth=m_width)
         ax.set_ylabel('Lambda for magnitude')
     elif what == 'probabilities':
-        if 'time_intervals' not in pars:
+        if 'time_intervals' not in configuration:
             return
         m_colors = ['k', 'r', 'g', 'b', 'm', 'c', 'y']
         m_width = 2
-        for idx, per in enumerate(pars['time_intervals']):
+        for idx, per in enumerate(configuration['time_intervals']):
             probabilities = []
             for mag in np.nditer(m_v):
-                [lambda_mag, rp] = return_period(mag, lamb, event_occurrence.magnitude_distribution)
+                # [lambda_mag, rp] = return_period(mag, lamb, event_occurrence.magnitude_distribution)
                 probability = float(event_occurrence.sf(mag, per))
                 probabilities.append(probability)
             ax.plot(m_v, probabilities, color=m_colors[idx], linewidth=m_width, label=f"T = {per:.0f} [Y]")
@@ -289,7 +361,7 @@ def plot_hazard(pars, what, ax=None):
     else:
         raise 'Can not plot {}'.format(what)
     ax.set_xlabel('Magnitude')
-    ax.set_title('Area: {}'.format(pars['area_name']))
+    ax.set_title('Area: {}'.format(configuration['area_name']))
     ax.grid(which='both', linestyle=':')
 
 

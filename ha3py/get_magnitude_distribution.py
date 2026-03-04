@@ -49,10 +49,15 @@ def get_magnitude_distribution(configuration, m_min=None, m_max=None, theta=None
 
     A more detailed description of the magnitude distribution is included in the definition of a specific class
 
-    :param theta:
-    :type theta:
-    :param m_max:
-    :param m_min:
+    :param theta: Earthquake recurrent coefficients
+        If missing, the appropriate coefficients are taken from configuration
+    :type theta: list
+    :param m_max: Maximum value of the magnitude distribution.
+        If missing, the maximum magnitude is taken from configuration
+    :type m_max: float
+    :param m_min: Minimum value of the magnitude distribution.
+        If missing, the maximum magnitude is taken from configuration
+    :type m_min: float
     :param configuration: The dictionary of all Ha3Py parameters
     :type configuration: dict
     :return: the magnitude distribution object

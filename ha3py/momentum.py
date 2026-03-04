@@ -4,14 +4,16 @@ The :math:`m_{max}` estimation by momentum
 
 The algorithm name in the configuration is 'momentum'.
 
-:copyright:
-    Jan Wiszniowski <jwisz@igf.edu.pl>,
-    Andrzej Kijko <andrzej.kijko@up.ac.za>
-:license:
-    GNU Lesser General Public License, Version 3
-    (https://www.gnu.org/copyleft/lesser.html)
-:version 0.0.1:
-    2025-01-01
+..
+    :copyright:
+        Jan Wiszniowski <jwisz@igf.edu.pl>,
+        Andrzej Kijko <andrzej.kijko@up.ac.za>
+    :license:
+        GNU Lesser General Public License, Version 3
+        (https://www.gnu.org/copyleft/lesser.html)
+    :version 0.0.1:
+        2025-01-01
+
 """
 
 
@@ -88,7 +90,8 @@ def m_max_by_momentum(configuration, magnitude_distribution=None):  # magnitude_
         which is the dictionary of all parameters required for Ha3Py modules
         and results of all computations.
     :type configuration: dict
-    :param magnitude_distribution: object
+    :param magnitude_distribution:  Optional magnitude distribution object.
+        If missing, the magnitude distribution object is created based on the configuration
     :type magnitude_distribution: MagnitudeDistribution
     :return:
     :rtype:

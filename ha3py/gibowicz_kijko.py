@@ -4,14 +4,15 @@ The :math:`m_{max}` assessment by Gibowicz-Kijko procedure
 
 The algorithm name in the configuration is 'Gibowicz-Kijko'.
 
-:copyright:
-    Jan Wiszniowski <jwisz@igf.edu.pl>,
-    Andrzej Kijko <andrzej.kijko@up.ac.za>
-:license:
-    GNU Lesser General Public License, Version 3
-    (https://www.gnu.org/copyleft/lesser.html)
-:version 0.0.1:
-    2025-01-01
+..
+    :copyright:
+        Jan Wiszniowski <jwisz@igf.edu.pl>,
+        Andrzej Kijko <andrzej.kijko@up.ac.za>
+    :license:
+        GNU Lesser General Public License, Version 3
+        (https://www.gnu.org/copyleft/lesser.html)
+    :version 0.0.1:
+        2025-01-01
 
 """
 
@@ -44,15 +45,19 @@ def m_max_by_gibowicz_kijko(configuration, magnitude_distribution=None, m_max=No
     .. math::
         \sigma_{m_{max}} = \sqrt{\sigma_{m_{max}^{obs}}^2+(m_{max}-m_{max}^{obs})^2}
 
-    :param m_min:
     :param configuration: General configuration container,
         which is the dictionary of all parameters required for Ha3Py modules
         and results of all computations.
     :type configuration: dict
-    :param m_max:
-    :type m_max:
-    :param magnitude_distribution:
-    :type magnitude_distribution:
+    :param m_max: Maximum value of the magnitude distribution.
+        If missing, the maximum magnitude is taken from configuration
+    :type m_max: float
+    :param m_min: Minimum value of the magnitude distribution.
+        If missing, the maximum magnitude is taken from configuration
+    :type m_min: float
+    :param magnitude_distribution:  Optional magnitude distribution object.
+        If missing, the magnitude distribution object is created based on the configuration
+    :type magnitude_distribution: MagnitudeDistribution
     :return: estimated maximum magnitude, standard deviation of maximum magnitude.
     :rtype: (float, float)
 

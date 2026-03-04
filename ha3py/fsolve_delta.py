@@ -6,14 +6,16 @@ The :math:`m_{max}` estimation by solving :math:`m_{max} = m_{max}^{obs} + \Delt
 by the *SciPy.fsolve* function.
 The algorithm name in the configuration is 'solve_delta'
 
-:copyright:
-    Jan Wiszniowski <jwisz@igf.edu.pl>,
-    Andrzej Kijko <andrzej.kijko@up.ac.za>
-:license:
-    GNU Lesser General Public License, Version 3
-    (https://www.gnu.org/copyleft/lesser.html)
-:version 0.0.1:
-    2025-01-01
+..
+    :copyright:
+        Jan Wiszniowski <jwisz@igf.edu.pl>,
+        Andrzej Kijko <andrzej.kijko@up.ac.za>
+    :license:
+        GNU Lesser General Public License, Version 3
+        (https://www.gnu.org/copyleft/lesser.html)
+    :version 0.0.1:
+        2025-01-01
+
 """
 
 from math import sqrt
@@ -57,10 +59,12 @@ def m_max_solve_equation(configuration, magnitude_distribution=None, m_max=None,
         * m_max_current: starting m_max for solving the formula
 
     :type configuration: dict
-    :param magnitude_distribution:
-    :type magnitude_distribution:
-    :param m_max:
-    :type m_max:
+    :param magnitude_distribution:  Optional magnitude distribution object.
+        If missing, the magnitude distribution object is created based on the configuration
+    :type magnitude_distribution: MagnitudeDistribution
+    :param m_max: Maximum value of the magnitude distribution.
+        If missing, the maximum magnitude is taken from configuration
+    :type m_max: float
     :param delta:
     :type delta:
     :return:

@@ -1,3 +1,16 @@
+"""
+..
+    :copyright:
+        Jan Wiszniowski <jwisz@igf.edu.pl>,
+        Andrzej Kijko <andrzej.kijko@up.ac.za>
+    :license:
+        GNU Lesser General Public License, Version 3
+        (https://www.gnu.org/copyleft/lesser.html)
+    :version 0.0.1:
+        2025-01-01
+
+"""
+
 from math import sqrt, exp
 
 
@@ -11,10 +24,27 @@ def add_catalog_var(catalogue, sum_var, nr_eq):
 
 def lambda_correction(configuration):
     r"""
-    Required parameters:
+    Correction factor calculation, A.Kijko & M.A. Sellevoll, 1992,
+    "Estimation of earthquake hazard parameters from incomplete data files,
+    Part II. Incorporation of magnitude heterogeneity", Bull. Seism. Soc.
+    Am., Vol.82, pp 120-134.
+
+    :param configuration: General configuration container,
+        which is the dictionary of all parameters required for Ha3Py modules
+        and results of all computations.
+    :type configuration: dict
+
+    Required configuration parameters:
+        lambda
+        beta
         paleo_catalog
         historic_catalog
         complete_catalogs
+        m_min
+        m_max_current
+
+    The configuration parameter lambda is modified.
+
     """
     lamb = configuration.get('lambda')
     if lamb is None:
@@ -39,10 +69,6 @@ def lambda_correction(configuration):
         for complete_catalog in p_comp:
             sum_var, nr_eq = add_catalog_var(complete_catalog, sum_var, nr_eq)
     # ======================================================================
-    # CORRECTION FACTOR CALCULATION (eq. 21), A.Kijko & M.A. Sellevoll, 1992,
-    # "Estimation of earthquake hazard parameters from incomplete data files,
-    # Part II. Incorporation of magnitude heterogeneity", Bull. Seism. Soc.
-    # Am., Vol.82, pp 120-134.
     var_mag = sum_var / nr_eq  # THE MEAN VARIANCE OF EARTHQUKE
     # MAGNITUDE DETERMINATION
     sd_mag = sqrt(var_mag)  # THE MEAN SD OF EARTHQUKE

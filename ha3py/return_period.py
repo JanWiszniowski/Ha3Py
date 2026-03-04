@@ -1,6 +1,7 @@
 r"""
 Return period calculation
 -------------------------
+
 ..
     :copyright:
         Jan Wiszniowski <jwisz@igf.edu.pl>,

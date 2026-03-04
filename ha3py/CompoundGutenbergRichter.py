@@ -66,11 +66,30 @@ class CompoundGutenbergRichter(BaseMagnitudeDistribution):
         -m_{min}\right)}\right)^{q_{\beta}+1}-D\left(m-m_{min}\right)\left(\frac{q_{\beta}}
         {q_{\beta}+\overline{\beta}\left(m-m_{min}\right)}\right)^{q_{\beta}+1}}{D^{2}}
 
+    :param beta: The :math:`\beta` value.
+        If missing, the value is taken from configuration
+    :type beta: float
+    :param q_beta: The :math:`g_\beta` value.
+        If missing, the  value is taken from configuration
+    :type q_beta: float
+    :param m_min: Minimum value of the magnitude distribution.
+        If missing, the maximum magnitude is taken from configuration
+    :type m_min: float
+    :param m_max: Maximum value of the magnitude distribution.
+        If missing, the maximum magnitude is taken from configuration
+    :type m_max: float
+
     """
-    # def __init__(self, _beta=np.NaN, b_std=np.NaN, p=np.NaN, q=np.NaN, m_min=0, M_max=10):
-    def __init__(self, parameters, beta=None, q_beta=None, m_min=None, m_max=None):
-        r"""
-        Required params:
+
+    def __init__(self, configuration, beta=None, q_beta=None, m_min=None, m_max=None):
+        """
+
+        :param configuration:
+        :param beta:
+        :param q_beta:
+        :param m_min:
+        :param m_max:
+        Required params in the configuration:
             m_min
             m_max_current
             _beta
@@ -81,12 +100,12 @@ class CompoundGutenbergRichter(BaseMagnitudeDistribution):
         if beta is not None:
             self.beta = beta
         else:
-            self.beta = parameters.get('beta', 2.3)
+            self.beta = configuration.get('beta', 2.3)
         if q_beta is not None:
             self.q = q_beta
         else:
-            self.q = parameters.get('q_beta', 100.0)
-        super().__init__(parameters, 'C-G-R', 'Compound Gutenberg-Richter magnitude distribution',
+            self.q = configuration.get('q_beta', 100.0)
+        super().__init__(configuration, 'C-G-R', 'Compound Gutenberg-Richter magnitude distribution',
                          m_min=m_min, m_max=m_max)
 
     def _prepare(self):

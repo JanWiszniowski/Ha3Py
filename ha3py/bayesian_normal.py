@@ -7,15 +7,15 @@ In this method we assume the normal distribution of a prior maximum magnitude
 and normal distribution of a maximum magnitude estimated based on catalogues
 :math:`\mathcal{N}\left( m_{max}, \sigma_{m_{max}} \right)`.
 
-
-:copyright:
-    Jan Wiszniowski <jwisz@igf.edu.pl>,
-    Andrzej Kijko <andrzej.kijko@up.ac.za>
-:license:
-    GNU Lesser General Public License, Version 3
-    (https://www.gnu.org/copyleft/lesser.html)
-:version 0.0.1:
-    2025-01-01
+..
+    :copyright:
+        Jan Wiszniowski <jwisz@igf.edu.pl>,
+        Andrzej Kijko <andrzej.kijko@up.ac.za>
+    :license:
+        GNU Lesser General Public License, Version 3
+        (https://www.gnu.org/copyleft/lesser.html)
+    :version 0.0.1:
+        2025-01-01
 
 """
 
@@ -48,8 +48,9 @@ def m_max_bayesian_norm(configuration, magnitude_distribution=None):
         which is the dictionary of all parameters required for Ha3Py modules
         and results of all computations.
     :type configuration: dict
-    :param magnitude_distribution:
-    :type magnitude_distribution: object
+    :param magnitude_distribution:  Optional magnitude distribution object.
+        If missing, the magnitude distribution object is created based on the configuration
+    :type magnitude_distribution: MagnitudeDistribution
     :return: The posterior maximum magnitude and its standard deviation.
     :rtype: tuple(float, float)
     """
@@ -80,8 +81,9 @@ def get_bayesian_truncnorm(configuration, magnitude_distribution=None):
         which is the dictionary of all parameters required for Ha3Py modules
         and results of all computations.
     :type configuration: dict
-    :param magnitude_distribution:
-    :type magnitude_distribution:
+    :param magnitude_distribution:  Optional magnitude distribution object.
+        If missing, the magnitude distribution object is created based on the configuration
+    :type magnitude_distribution: MagnitudeDistribution
     :return: The
     :rtype: tuple(float, float)
     """

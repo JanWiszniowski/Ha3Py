@@ -52,22 +52,30 @@ class BayesianByShift(BayesianBase):
         which is the dictionary of all parameters required for Ha3Py modules
         and results of all computations.
     :type configuration: dict
+    :param magnitude_distribution:  Optional magnitude distribution object.
+        If missing, the magnitude distribution object is created based on the configuration
+    :type magnitude_distribution: MagnitudeDistribution
 
     """
     def __init__(self, configuration, magnitude_distribution=None):
         """
 
-        :param configuration:
-        :type configuration:
+        :param configuration: General configuration container,
+            which is the dictionary of all parameters required for Ha3Py modules
+            and results of all computations.
+        :type configuration: dict
+        :param magnitude_distribution:  Optional magnitude distribution object.
+            If missing, the magnitude distribution object is created based on the configuration
+        :type magnitude_distribution: MagnitudeDistribution
+
         """
         self.configuration = configuration
         super().__init__(configuration, magnitude_distribution=magnitude_distribution)
 
     def _likelihood(self, m_max):
         """
-        ln_likelihood(None, configuration, m_max=None)
-        :param m_max:
-        :type m_max:
+        :param m_max: Maximum value of the magnitude distribution
+        :type m_max: float
         :return:
         :rtype:
         """
@@ -88,8 +96,9 @@ def get_bayesian_by_shift(configuration, magnitude_distribution=None):
         which is the dictionary of all parameters required for Ha3Py modules
         and results of all computations.
     :type configuration: dict
-    :param magnitude_distribution:
-    :type magnitude_distribution:
+    :param magnitude_distribution:  Optional magnitude distribution object.
+        If missing, the magnitude distribution object is created based on the configuration
+    :type magnitude_distribution: MagnitudeDistribution
     :return: The BayesianByShift object
     :rtype: BayesianBase derived object
     """

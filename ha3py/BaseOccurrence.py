@@ -237,15 +237,23 @@ class OccurrenceBase(rv_continuous, ABC):
 
     `d_mean`:
 
+    :param configuration: General configuration container,
+        which is the dictionary of all parameters required for Ha3Py modules
+        and results of all computations.
+    :type configuration: dict
+    :param name: Name od the object.
+    :type name: str
     """
 
     def __init__(self, configuration, name, **kwargs):
         """
 
-        :param configuration:
-        :type configuration:
+        :param configuration: General configuration container,
+            which is the dictionary of all parameters required for Ha3Py modules
+            and results of all computations.
+        :type configuration: dict
         :param name:
-        :type name:
+        :type name: str
         :param kwargs:
         :type kwargs:
         """
@@ -343,9 +351,10 @@ class OccurrenceBase(rv_continuous, ABC):
         pass
 
     def d_mean(self, *args):
-        """
+        r"""
+        The function compute the mean value of non-occurrence time (:math:`\lambda`)
 
-        :return: The
+        :return: The mean value
         :rtype: float
         """
         t = get_event_occurrence_parameters(*args, default=1.0)
@@ -353,9 +362,9 @@ class OccurrenceBase(rv_continuous, ABC):
 
     def d_expected(self, t):
         """
-        The function compute the expected value
-        of occurrence of :math:`n` events in the period :math:`time` having magnitudes :math:`m` or greater.
-        It is realised by :math:``
+        The function compute the expected value of occurrence of :math:`n` events
+        in the period :math:`time` having magnitudes :math:`m` or greater.
+
         :param t:
         :return:
         """
@@ -378,9 +387,10 @@ class OccurrenceBase(rv_continuous, ABC):
         If you wanted to compute occurrence for magnitudes :math:`m` or greater,
         you must set :math:`m_{min}=m` earlier.
 
-        :param n:
-        :param args:
-        :return:
+        :param n: Number of events
+        :type n: int
+        :return: The probability of n event occurrence
+        :rtype: float
         """
         return np.log(self.d_pmf(n,*args))
 

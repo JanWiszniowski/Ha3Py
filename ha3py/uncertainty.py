@@ -1,6 +1,6 @@
 """
-..
 
+..
     :copyright:
         Jan Wiszniowski <jwisz@igf.edu.pl>,
         Andrzej Kijko <andrzej.kijko@up.ac.za>

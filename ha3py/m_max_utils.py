@@ -2,14 +2,16 @@ r"""
 Non-bayesian Maximum possible earthquake magnitude estimation
 -------------------------------------------------------------
 
-:copyright:
-    Jan Wiszniowski <jwisz@igf.edu.pl>,
-    Andrzej Kijko <andrzej.kijko@up.ac.za>
-:license:
-    GNU Lesser General Public License, Version 3
-    (https://www.gnu.org/copyleft/lesser.html)
-:version 0.0.1:
-    2025-01-01
+..
+    :copyright:
+        Jan Wiszniowski <jwisz@igf.edu.pl>,
+        Andrzej Kijko <andrzej.kijko@up.ac.za>
+    :license:
+        GNU Lesser General Public License, Version 3
+        (https://www.gnu.org/copyleft/lesser.html)
+    :version 0.0.1:
+        2025-01-01
+
 """
 
 from ha3py.fsolve_delta import m_max_solve_equation
@@ -27,11 +29,13 @@ def non_bayesian_m_max_estimation(configuration, magnitude_distribution=None):
     by the non-bayesian method defined in the configuration `m_max_assessment` parameter.
     The function chooses the method.
 
-    :param magnitude_distribution:
     :param configuration: General configuration container,
         which is the dictionary of all parameters required for Ha3Py modules
         and results of all computations.
     :type configuration: dict
+    :param magnitude_distribution:  Optional magnitude distribution object.
+        If missing, the magnitude distribution object is created based on the configuration
+    :type magnitude_distribution: MagnitudeDistribution
     :return: Estimated by non bayesian method maximum magnitude
         and standard deviation of the maximum magnitude.
     :rtype: (float, float)

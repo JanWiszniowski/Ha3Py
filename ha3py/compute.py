@@ -43,16 +43,15 @@ def compute_occurrence(configuration):
         which is the dictionary of all parameters required for Ha3Py modules
         and results of all computations.
     :type configuration: dict
-    :return:
-        names of estimated coefficients,
-
-        values of estimated coefficients
+    :return: Names of estimated coefficients, and values of estimated coefficients
     :rtype: (tuple)
 
+    The configuration is modified.
     """
     event_occurrence = get_events_occurrence(configuration)
     # x0_v = np.array(event_occurrence.coefficients[:-1])  # Array of beta and lambda for likelihood optimization
-    log_x0_v = np.log(np.array(event_occurrence.coefficients[:-1]))  # Array of beta and lambda for likelihood optimization
+    log_x0_v = np.log(
+        np.array(event_occurrence.coefficients[:-1]))  # Array of beta and lambda for likelihood optimization
     # results = optimize.minimize(ln_likelihood, x0_v, args=configuration,
     #                             method=configuration.get('likelihood_optimization_method'),
     #                             tol=configuration.get('likelihood_tolerance', 0.001))
@@ -87,6 +86,7 @@ def compute(configuration):
     :type configuration: dict
     :return: None
 
+    The configuration is modified.
     """
     configuration.pop('mag_max', None)
     if 'm_max_current' not in configuration:
@@ -106,7 +106,7 @@ def compute(configuration):
         print_separation_single_line()
         for name in names:
             if name == 'beta':
-                print(f"{name:<10s} ={configuration[name]:7.3f} (b = {configuration[name]/LN_10_:3.1f})")
+                print(f"{name:<10s} ={configuration[name]:7.3f} (b = {configuration[name] / LN_10_:3.1f})")
             elif name == 'lambda':
                 print(f"{name:<10s} ={configuration[name]:7.3f} (for m_min = {configuration['m_min']:4.2f})")
             else:
@@ -132,7 +132,8 @@ def compute(configuration):
             enter_correct = False
             print('')
             while not enter_correct:
-                new_m_max_str = input('NEW value of m_max (NOT LESS than {:4.2f}) (or enter to accept current {:4.2f} and finish) >'.
+                new_m_max_str = input('NEW value of m_max (NOT LESS than {:4.2f})'
+                                      '(or enter to accept current {:4.2f} and finish) >'.
                                       format(configuration['m_max_obs'], configuration['m_max_current']))
                 if new_m_max_str:
                     try:
@@ -157,7 +158,6 @@ def compute(configuration):
         print(f"!!!!! Final m_max is not set")
         print(f"!!!!! The current m_max value ({configuration['m_max_current']:4.2f}) remains")
         return
-    # configuration['m_max'] = round(suggested_m_max, 2)
     configuration['m_max'] = round(configuration['m_max_current'], 2)
     configuration['sd_m_max'] = round(sd_m_max, 2)
     if 'lambda' in configuration and configuration.get('induced_seismicity', 'no') == 'yes':
@@ -177,7 +177,7 @@ def main():
         if output_name is not None:
             print(f"Input and output configuration names '{output_name}' are the same")
         set_modify(configuration, 'output_configuration', 'Name of the output configuration file{} > ',
-                                         " (other than '{0}' or enter to accept '{0}')", dtype=str)
+                   " (other than '{0}' or enter to accept '{0}')", dtype=str)
     compute(configuration)
     print_separation_double_line()
     print('Final results')

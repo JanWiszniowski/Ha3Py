@@ -1,7 +1,16 @@
 """
-Ha3Py
-(c) Jan Wiszniowski, Andrzej Kijko
-ver. 2024-01
+
+..
+    :copyright:
+        Jan Wiszniowski <jwisz@igf.edu.pl>,
+        Andrzej Kijko <andrzej.kijko@up.ac.za>
+    :license:
+        GNU Lesser General Public License, Version 3
+        (https://www.gnu.org/copyleft/lesser.html)
+    :version 0.0.1:
+        2025-01-01
+
+
 """
 
 from abc import ABC
@@ -9,6 +18,10 @@ from ha3py.BaseOccurrence import OccurrenceBase
 
 
 class LambdaOccurrence(OccurrenceBase, ABC):
+    """
+    Base class of event occurrence classes, which are described by lambda coefficient.
+
+    """
     def __init__(self, configuration, name, **kwargs):
         theta = kwargs.get('theta')
         if theta is None:

@@ -3,7 +3,6 @@ Library for creating the configuration file
 -------------------------------------------
 
 ..
-
     :copyright:
         Jan Wiszniowski <jwisz@igf.edu.pl>,
         Andrzej Kijko <andrzej.kijko@up.ac.za>
@@ -359,10 +358,16 @@ def init_lambda_beta(configuration, init_beta=True, init_lambda=True, m_max=None
     Initialize :math:`\beta' and :math:`lambda` based on complete catalogs.
     If coefficient 'beta' exists, do not change it
 
-    :param configuration:
+    :param configuration: General configuration container,
+        which is the dictionary of all parameters required for Ha3Py modules
+        and results of all computations.
+    :type configuration: dict
     :param init_beta:
     :param init_lambda:
-    :param m_max:
+    :param m_max: Maximum value of the magnitude distribution.
+        If missing, the maximum magnitude is taken from configuration
+    :type m_max: float
+
     """
     # if 'beta' not configuration:
     #

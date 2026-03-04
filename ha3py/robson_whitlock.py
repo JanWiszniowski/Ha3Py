@@ -6,7 +6,6 @@ r"""
 between :math:`m_{max}^{obs}` and the second maximum magnitude.
 
 ..
-
     :copyright:
         Jan Wiszniowski <jwisz@igf.edu.pl>,
         Andrzej Kijko <andrzej.kijko@up.ac.za>
@@ -26,8 +25,11 @@ def get_magnitudes(configuration):
     """
     Extract the value of first magnitude lower than the max observed magnitude
 
-    :param configuration:
-    :return:
+    :param configuration: General configuration container,
+        which is the dictionary of all parameters required for Ha3Py modules
+        and results of all computations.
+    :type configuration: dict
+    :return: The second magnitude in all catalogues
     """
     m_n = -100.0
     m_n_1 = None

@@ -2,14 +2,15 @@ r"""
 Delta (:math:`\Delta`) calculation classes
 ------------------------------------------
 
-:copyright:
-    Jan Wiszniowski <jwisz@igf.edu.pl>,
-    Andrzej Kijko <andrzej.kijko@up.ac.za>
-:license:
-    GNU Lesser General Public License, Version 3
-    (https://www.gnu.org/copyleft/lesser.html)
-:version 0.0.1:
-    2025-01-01
+..
+    :copyright:
+        Jan Wiszniowski <jwisz@igf.edu.pl>,
+        Andrzej Kijko <andrzej.kijko@up.ac.za>
+    :license:
+        GNU Lesser General Public License, Version 3
+        (https://www.gnu.org/copyleft/lesser.html)
+    :version 0.0.1:
+        2025-01-01
 
 The delta classes define the :math:`\Delta` calculation methods,
 They are applied in a few :math:`m_{max}` estimation algorithms,
@@ -139,6 +140,7 @@ class TatePisarenko(BaseDelta):
 
         """
         # Modification of pdf_m for stability ???
+        # pdf_m = self.magnitude_distribution.pdf(self.m_max - 0.025)
         if self.m_max_obs < self.magnitude_distribution.m_max - 0.025:
             pdf_m = self.magnitude_distribution.pdf(self.m_max_obs)
         else:

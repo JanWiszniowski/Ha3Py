@@ -15,19 +15,18 @@ def current_version():
     version_date = "2025-01-01"
     for item in changelog_items:
         if item.startswith("##"):
-            pos = item.split();
+            pos = item.split()
             version = pos[1][1:]
             version_date = pos[3]
     return version, version_date
 
 
 Version, VersionDate = current_version()
-
+print(f"Version {Version}, {VersionDate}")
 
 setup(
     name='ha3py',
     version=Version,
-    date=VersionDate,
     description='Hy3Py - Python package for assessing earthquake recurrence parameters from Incomplete Data Files.',
     long_description=open('README.md').read(),
     long_description_content_type='text/markdown',
@@ -39,7 +38,7 @@ setup(
         'matplotlib>=3.9.2',
         'numpy>=1.2.0',
         'scipy>=1.0.0',
-        # 'obspy>=1.2.0',
+        'obspy>=1.2.0'
     ],
     license='GNU Lesser General Public License v3 (LGPLv3)',
     classifiers=[
