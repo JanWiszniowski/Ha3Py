@@ -9,8 +9,8 @@ Plotting results procedures
     :license:
         GNU Lesser General Public License, Version 3
         (https://www.gnu.org/copyleft/lesser.html)
-    :version 0.0.1:
-        2025-01-01
+    :version 0.0.4:
+        2026-03-12
 
 The module contain procedure for plotting seismic hazard diagrams resulted
 from estimation of earthquake hazard parameters by Ha3Py.
@@ -107,7 +107,10 @@ def comp_sd_return_period(configuration, rp_sign):
     d_mag = 0.005
     rp_v = []
     last_rp_sd = 0.0
-    temp_m_max = round(m_max - rp_sign * sd_m_max, 3)
+    if rp_sign > 0:
+        temp_m_max = round(m_max - rp_sign * sd_m_max, 3)
+    else:
+        temp_m_max = round(m_max,3)
     event_occurrence.m_max = temp_m_max
     m_v = np.arange(m_min, temp_m_max, d_mag)
     # m_v = np.arange(m_min, temp_m_max+d_mag/2, d_mag)
@@ -123,10 +126,14 @@ def comp_sd_return_period(configuration, rp_sign):
         sd_rp = np.sqrt(abs(np.matmul(grad_vec, np.matmul(cov_mc, grad_vec.T))))
         # -------------- END: Calculation of SD of Return period ------------------
         rp_sd = rp + sd_rp * rp_sign
-        if rp_max >= rp_sd >= 0 and rp_sd >= last_rp_sd:
-            last_rp_sd = rp_sd
+        if last_rp_sd == 0.0:
+            last_rp_sd = rp_sd[0][0]
+        if rp_max < float(rp_sd):
+            rp_v.append((mag, rp_max))
+        elif rp_sd >= last_rp_sd:
             rp_v.append((mag, rp_sd[0][0]))
-            # print(f"{mag}, {rp_sd[0][0]}")
+        else:
+            rp_v.append((mag, last_rp_sd))
     return rp_v
 
 
@@ -146,9 +153,12 @@ def plot_return_period(configuration, ax=None):
     rp_psd_v = comp_sd_return_period(configuration, +1)
     rp_msd_v = comp_sd_return_period(configuration, -1)
     rp_max_max = max(rp_v[-1][1], rp_msd_v[-1][1], rp_psd_v[-1][1])
+    rp_max_m = rp_msd_v[-1][0]
     rp_v.append((rp_v[-1][0], rp_max_max))
-    rp_msd_v.append((rp_psd_v[-1][0], rp_max_max))
-    rp_psd_v.append((rp_msd_v[-1][0], rp_max_max))
+    rp_psd_v.append((rp_psd_v[-1][0], rp_max_max))
+    rp_psd_v.append((rp_max_m, rp_max_max))
+    # rp_msd_v.append((rp_psd_v[-1][0], rp_max_max))
+    # rp_psd_v.append((rp_msd_v[-1][0], rp_max_max))
     sd_x, sd_y = [], []
     for x, y in rp_msd_v:
         sd_x.append(x)
@@ -229,7 +239,7 @@ def comp_sd_prob(configuration, tp, cpr_sign):
     event_occurrence.m_max = temp_m_max
     m_v = np.arange(m_min, temp_m_max + d_mag / 2, d_mag)
     coefficient_names = event_occurrence.coefficient_names[:-1]
-    for mag in np.nditer(m_v):
+    for mag in m_v:
         cpr = event_occurrence.sf(mag, tp)  # 1 - PROB.
         grad_dict = event_occurrence.grad_sf(mag, 1.0)
         # grad_vec = np.array([grad_dict['beta'], grad_dict['lambda']])[np.newaxis]

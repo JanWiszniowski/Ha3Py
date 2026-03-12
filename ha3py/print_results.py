@@ -9,8 +9,8 @@ Printing estimation recurrence parameter results
     :license:
         GNU Lesser General Public License, Version 3
         (https://www.gnu.org/copyleft/lesser.html)
-    :version 0.0.1:
-        2025-01-01
+    :version 0.0.3:
+        2026-03-12
 
 """
 
@@ -27,7 +27,7 @@ from ha3py.constant_values import LN_10_
 def print_share(prompt, share, parameter_names):
     prompt += ':'
     for idx, name in enumerate(parameter_names):
-        print(f'{prompt:<23} {name:<7}= {share[idx][idx]:4.1f}%')
+        print(f'{prompt:<23} {name:<7}= {share[idx]:4.1f}%')
         prompt = ' '
 
 
@@ -182,9 +182,9 @@ def print_percentage_share(configuration):
         temp_pars['paleo_catalog'] = p_phs
         var_cov_a = get_covariance(temp_pars)
         temp_pars.pop('paleo_catalog', None)
-        info_phs_a = abs(inv(var_cov_a))
+        info_phs_a = np.diagonal(abs(inv(var_cov_a)))
     else:
-        info_phs_a = np.zeros((2, 2))
+        info_phs_a = np.zeros((2,))
     # End of info assessment provided by PALEO part of catalogue ==============
     # =========================================================================
     # Calculations of info provided by HISTORIC part of catalogue =============
@@ -192,9 +192,9 @@ def print_percentage_share(configuration):
         temp_pars['historic_catalog'] = p_his
         var_cov_a = get_covariance(temp_pars)
         temp_pars.pop('historic_catalog', None)
-        info_his_a = abs(inv(var_cov_a))
+        info_his_a = np.diagonal(abs(inv(var_cov_a)))
     else:
-        info_his_a = np.zeros((2, 2))
+        info_his_a = np.zeros((2,))
     # End of info assessment provided by HISTORIC catalogue ===================
     # =========================================================================
     # Calculations of info provided by COMPLETE part of catalogue =============
@@ -202,9 +202,9 @@ def print_percentage_share(configuration):
         temp_pars['complete_catalogs'] = p_comp
         var_cov_a = get_covariance(temp_pars)
         temp_pars.pop('complete_catalogs', None)
-        info_comp_a = abs(inv(var_cov_a))
+        info_comp_a = np.diagonal(abs(inv(var_cov_a)))
     else:
-        info_comp_a = np.zeros((2, 2))
+        info_comp_a = np.zeros((2,))
     # End of info assessment provided by COMPLETE catalogue ===================
     # =========================================================================
     # Info by WHOLE & percent of info provided by EACH catalogue ==============

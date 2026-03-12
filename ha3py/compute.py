@@ -9,8 +9,8 @@ Main module for probability of exceeding the magnitude estimation
     :license:
         GNU Lesser General Public License, Version 3
         (https://www.gnu.org/copyleft/lesser.html)
-    :version 0.0.1:
-        2025-02-01
+    :version 0.0.3:
+        2026-03-12
 
 """
 
@@ -153,17 +153,21 @@ def compute(configuration):
                 configuration['m_max_current'] = suggested_m_max
             id_do_again = False
     if suggested_m_max is None or suggested_m_max >= 9.9:
+        sd_m_max = configuration['sd_m_max_obs']
         print(f"!!!!! Procedure {METHODS[configuration['procedure_id']]} ({configuration['m_max_assessment']})")
         print(f"!!!!! could not asses correct m_max")
         print(f"!!!!! Final m_max is not set")
-        print(f"!!!!! The current m_max value ({configuration['m_max_current']:4.2f}) remains")
-        return
+        print(f"!!!!! The current m_max value {configuration['m_max_current']:4.2f} +/- {sd_m_max:1.2f},")
+        print(f"!!!!! which is primitive assessment, remains")
+        if input("Break computations yes/no [yes] >") != 'no':
+            exit(0)
     configuration['m_max'] = round(configuration['m_max_current'], 2)
     configuration['sd_m_max'] = round(sd_m_max, 2)
     if 'lambda' in configuration and configuration.get('induced_seismicity', 'no') == 'yes':
         configuration['lambda_is'] = configuration['lambda'] * configuration['induced_seismicity_coefficient']
     compute_uncertainty(configuration)
     configuration['computation_time'] = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+    print(f"Computation time {configuration['computation_time']}")
 
 
 def main():
