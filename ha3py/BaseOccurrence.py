@@ -14,8 +14,7 @@ Base classes of events occurrence probabilities
 
 """
 
-from scipy.stats import rv_continuous, uniform
-# from scipy.optimize import fsolve
+from scipy.stats import rv_continuous
 import numpy as np
 from abc import ABC, abstractmethod
 from ha3py.get_magnitude_distribution import get_magnitude_distribution
@@ -392,7 +391,7 @@ class OccurrenceBase(rv_continuous, ABC):
         :return: The probability of n event occurrence
         :rtype: float
         """
-        return np.log(self.d_pmf(n,*args))
+        return np.log(self.d_pmf(n, *args))
 
     @abstractmethod
     def _d_rvs(self, *args):

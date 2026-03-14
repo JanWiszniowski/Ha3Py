@@ -16,7 +16,6 @@ The algorithm name in the configuration is 'momentum'.
 
 """
 
-
 import numpy as np
 from math import sqrt
 from ha3py.utils import HaPyException
@@ -80,7 +79,7 @@ def get_magnitudes_for_momentum(configuration, magnitude_distribution=None):
     return np.ndarray(mag_mom)
 
 
-def m_max_by_momentum(configuration, magnitude_distribution=None):  # magnitude_distribution=None, m_max=None, delta=None
+def m_max_by_momentum(configuration, magnitude_distribution=None):  # magnitude_distribution=None,m_max=None,delta=None
     r"""
      :math:`m_{max}` evaluation according to moment estimator (SEE "Estimation of
      Paramers of a Right Truncated Exponential Distribution" by U.J. Dixit and P.N. Nasiri

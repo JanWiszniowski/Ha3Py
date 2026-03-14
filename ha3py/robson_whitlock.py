@@ -17,7 +17,6 @@ between :math:`m_{max}^{obs}` and the second maximum magnitude.
 
 """
 
-
 from math import sqrt
 
 

@@ -18,6 +18,7 @@ from ha3py.ln_likelihood import ln_likelihood
 from ha3py.get_events_occurrence import get_events_occurrence
 from ha3py.constant_values import LN_10_
 
+
 # from scipy.differentiate import hessian
 
 
@@ -72,7 +73,6 @@ def get_covariance(configuration, events_distribution=None, delta=0.01):
     for idx in range(var_cov_size):
         var_cov_a[idx][idx] = abs(var_cov_a[idx][idx])
     return var_cov_a
-
 
 
 # def get_covariance(configuration, events_distribution=None, delta=0.01):
@@ -138,8 +138,8 @@ def compute_uncertainty(configuration, events_distribution=None):
         configuration[f'sd_{name}'] = sqrt(cov[idx][idx])
     if 'sd_beta' in configuration:
         configuration['sd_b'] = configuration['sd_beta'] / LN_10_
-    if 'sd_lambda' in configuration\
-            and configuration.get('induced_seismicity', 'no') == 'yes'\
+    if 'sd_lambda' in configuration \
+            and configuration.get('induced_seismicity', 'no') == 'yes' \
             and 'induced_seismicity_coefficient' in configuration:
         configuration['sd_lambda_is'] = configuration['sd_lambda'] * configuration['induced_seismicity_coefficient']
 
@@ -147,6 +147,7 @@ def compute_uncertainty(configuration, events_distribution=None):
 if __name__ == "__main__":
     import sys
     from configuration import load_configuration, save_configuration
+
     params = load_configuration()
     ED = get_events_occurrence(params)
     compute_uncertainty(params, events_distribution=ED)

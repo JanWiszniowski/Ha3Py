@@ -55,9 +55,9 @@ def lambda_correction(configuration):
     p_phs = configuration.get('paleo_catalog')
     p_his = configuration.get('historic_catalog')
     p_comp = configuration.get('complete_catalogs')
-    m_min = configuration['m_min']
-    m_max = configuration['m_max_current']
-    x = m_min
+    # m_min = configuration['m_min']
+    # m_max = configuration['m_max_current']
+    # x = m_min
     nr_eq = 0
     sum_var = 0.0
     # ======================================================================
@@ -73,11 +73,11 @@ def lambda_correction(configuration):
     # MAGNITUDE DETERMINATION
     sd_mag = sqrt(var_mag)  # THE MEAN SD OF EARTHQUKE
     # MAGNITUDE DETERMINATION
-    xx = x
-    if xx < m_min:
-        xx = m_min
-    if xx > m_max:
-        xx = m_max
+    # xx = x
+    # if xx < m_min:
+    #     xx = m_min
+    # if xx > m_max:
+    #     xx = m_max
     sqrt_2_ = sqrt(2)
     gamma = beta * sd_mag / sqrt_2_
     gamma2 = gamma ** 2

@@ -14,13 +14,10 @@ Module-based classes of Bayesian maximum magnitude likelihood
 
 """
 import numpy as np
-from scipy.stats import rv_continuous
 from scipy.stats import truncnorm
 import scipy.integrate as integrate
 from ha3py.m_max_utils import non_bayesian_m_max_estimation
 from abc import ABC, abstractmethod
-from ha3py.constant_values import EPS2
-from ha3py.utils import HaPyException
 
 
 def init_bayesian_m_max(configuration, magnitude_distribution=None, m_max_pair=None):
@@ -29,6 +26,24 @@ def init_bayesian_m_max(configuration, magnitude_distribution=None, m_max_pair=N
                                                         magnitude_distribution=magnitude_distribution)
     else:
         m_max, sd_m_max = m_max_pair
+    if m_max is None or m_max > 9.9:
+        print("!!!!The catalogue dependent m_max can not be assessed")
+        print(f"Chose the solution:")
+        print(f"Observed m_max ({configuration['m_max_obs']}) - press o")
+        print(f"Primitive m_max ({configuration['m_max_obs'] + 0.5}) - press p")
+        print(f"Exit program - press x")
+        answer = input("Enter [o/p/x] > ")
+        if not answer:
+            exit(0)
+        if answer[0] == 'o':
+            m_max = configuration['m_max_obs']
+            sd_m_max = configuration['sd_m_max_obs']
+        elif answer[0] == 'p':
+            m_max = configuration['m_max_obs'] + 0.5
+            sd_m_max = configuration['sd_m_max_obs']
+        else:
+            exit(0)
+
     prior_m_max = configuration['prior_m_max']
     sd_prior_m_max = configuration['sd_prior_m_max']
     if m_max > prior_m_max:
@@ -36,6 +51,7 @@ def init_bayesian_m_max(configuration, magnitude_distribution=None, m_max_pair=N
         # raise HaPyException('Prior m_max error')
         exit(-1)
     return m_max, sd_m_max, prior_m_max, sd_prior_m_max
+
 
 class BayesianBase(ABC):
     r"""
@@ -50,6 +66,7 @@ class BayesianBase(ABC):
     :type configuration: dict
 
     """
+
     def __init__(self, configuration, magnitude_distribution=None, m_max_pair=None):
         """
         Initialisation
@@ -64,10 +81,6 @@ class BayesianBase(ABC):
         """
         self.m_max, self.sd_m_max, self.prior_m_max, self.sd_prior_m_max = init_bayesian_m_max(
             configuration, magnitude_distribution=magnitude_distribution, m_max_pair=m_max_pair)
-        # self.m_max, self.sd_m_max = non_bayesian_m_max_estimation(configuration,
-        #                                                           magnitude_distribution=magnitude_distribution)
-        # self.prior_m_max = configuration['prior_m_max']
-        # self.sd_prior_m_max = configuration['sd_prior_m_max']
         self.m_max_u = configuration.get('upper_m_max', 9.5)
         # self.m_max_l = configuration.get('lower_m_max', configuration['m_max_obs'])
         self.m_max_l = configuration.get('lower_m_max', self.m_max)
@@ -79,7 +92,7 @@ class BayesianBase(ABC):
         #                        longname='Bayesian_by_shift')
         self.den = 1
         # self.den = self.cdf(self.m_max_u) - self.cdf(self.m_max_l)
-        den =  integrate.quad(lambda x: self.pdf(x), self.m_max_l, self.m_max_u)
+        den = integrate.quad(lambda x: self.pdf(x), self.m_max_l, self.m_max_u)
         self.den = den[0]
 
     def pdf(self, m, *args):

@@ -1,4 +1,3 @@
-
 class HaPyException(Exception):
     """
     The spectral magnitude estimation exception class

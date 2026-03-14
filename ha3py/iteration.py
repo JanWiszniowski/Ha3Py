@@ -94,7 +94,7 @@ def m_max_solve_by_iteration(configuration, magnitude_distribution=None, m_max=N
         m_max = m_max_obs + .01
     if m_max > 9.99:
         m_max = 9.99
-    sd_m_max = sqrt(sd_m_max_obs**2 + (m_max - m_max_obs)**2)
+    sd_m_max = sqrt(sd_m_max_obs ** 2 + (m_max - m_max_obs) ** 2)
     sd_m_max = round(sd_m_max, 2)
     return m_max, sd_m_max
 
@@ -102,6 +102,7 @@ def m_max_solve_by_iteration(configuration, magnitude_distribution=None, m_max=N
 if __name__ == "__main__":
     import sys
     import json
+
     if len(sys.argv) >= 2:
         with open(sys.argv[1], "r") as f:
             parameters = json.load(f)

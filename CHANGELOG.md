@@ -19,5 +19,13 @@ Query i printing modification
 Improved user communication, new simulation package,
 and modified manual.
 
+## v0.0.4 - 2026-03-14
+
+Improved drawing of the return period uncertainty.
+
+Modified handling of the m_max determination impossibility.
+
+New figures
+
 
 [Discussions]: https://github.com/JanWiszniowski/hapy/discussions

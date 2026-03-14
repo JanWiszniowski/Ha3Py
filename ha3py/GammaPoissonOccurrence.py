@@ -16,7 +16,7 @@ Gamma compound Poisson events occurrence probability
 
 from abc import ABC
 import numpy as np
-from scipy.special import factorial, gamma, loggamma
+from scipy.special import loggamma
 from ha3py.LambdaOccurrence import LambdaOccurrence
 from ha3py.BaseOccurrence import get_event_occurrence_parameters
 
@@ -102,7 +102,7 @@ class PoissonGammaCompoundOccurrence(LambdaOccurrence, ABC):
     def factor(self, n):
         result = 1.0
         for idx in range(n):
-            result *= (self.q_lambda+n-1) / n
+            result *= (self.q_lambda + n - 1) / n
         return result
 
     # def _d_pmf1(self, k, t):
@@ -224,7 +224,7 @@ class PoissonGammaCompoundOccurrence(LambdaOccurrence, ABC):
 
     def _grad_sf(self, m, t):
         d_lambda = t * (1.0 + t * self.lamb * self.magnitude_distribution.sf(m) / self.q_lambda) ** (
-                    -1.0 - self.q_lambda)
+                -1.0 - self.q_lambda)
         d_lambda = np.multiply(self.magnitude_distribution.sf(m), d_lambda)
         return {'lambda': d_lambda}
 
@@ -241,7 +241,6 @@ class PoissonGammaCompoundOccurrence(LambdaOccurrence, ABC):
     def _d_grad_sf(self, n, t):
         r"""
 
-        :param m:
         :param n:
         :param t:
         :return:

@@ -22,6 +22,7 @@ class LambdaOccurrence(OccurrenceBase, ABC):
     Base class of event occurrence classes, which are described by lambda coefficient.
 
     """
+
     def __init__(self, configuration, name, **kwargs):
         theta = kwargs.get('theta')
         if theta is None:

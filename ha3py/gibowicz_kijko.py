@@ -25,7 +25,7 @@ from ha3py.get_magnitude_distribution import get_magnitude_distribution
 
 def _m_max_equation_to_solve(x, magnitude_distribution, n, m_max_obs):
     magnitude_distribution.m_max = x
-    return magnitude_distribution.cdf(m_max_obs) - n / (n+1)
+    return magnitude_distribution.cdf(m_max_obs) - n / (n + 1)
 
 
 def m_max_by_gibowicz_kijko(configuration, magnitude_distribution=None, m_max=None, m_min=None):

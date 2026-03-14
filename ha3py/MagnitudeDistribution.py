@@ -59,6 +59,7 @@ class BaseMagnitudeDistribution(rv_continuous, ABC):
         (see grad_sf)
 
    """
+
     def __init__(self, configuration, name, long_name=None, m_min=None, m_max=None):
         """
 
@@ -87,7 +88,7 @@ class BaseMagnitudeDistribution(rv_continuous, ABC):
             self._m_max = configuration.get('m_max', 10.0)
         if long_name is None:
             long_name = name
-        rv_continuous.__init__(self, a=self._m_min-EPS2, b=self._m_max+EPS2, name=name, longname=long_name)
+        rv_continuous.__init__(self, a=self._m_min - EPS2, b=self._m_max + EPS2, name=name, longname=long_name)
         self._prepare()
 
     @property
@@ -174,7 +175,7 @@ class BaseMagnitudeDistribution(rv_continuous, ABC):
         """
         if coefficient_name is None:
             return self._grad_sf(m)
-        coefficient_names = self.coefficient_names
+        # coefficient_names = self.coefficient_names
         grad = self._grad_sf(m)
         return grad[coefficient_name]
         # for idx, name in enumerate(coefficient_names):

@@ -15,8 +15,8 @@ Module bayesian fiducial maximum magnitude computation
 """
 
 import numpy as np
-from ha3py.m_max_utils import non_bayesian_m_max_estimation
-from ha3py.BayesianMmax import BayesianBase
+# from ha3py.m_max_utils import non_bayesian_m_max_estimation
+from ha3py.BayesianMmax import BayesianBase, init_bayesian_m_max
 from ha3py.get_events_occurrence import get_events_occurrence
 
 
@@ -88,7 +88,7 @@ class BayesianFiducial(BayesianBase):
             and results of all computations.
         :type configuration: dict
         """
-        m_max, sd_m_max = non_bayesian_m_max_estimation(configuration)
+        m_max, sd_m_max, _, _ = init_bayesian_m_max(configuration)
         fiducial_m_min = configuration.get('fiducial_m_min')
         if fiducial_m_min is None:
             event_occurrence = get_events_occurrence(configuration, m_max=m_max)

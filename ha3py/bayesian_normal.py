@@ -21,7 +21,6 @@ and normal distribution of a maximum magnitude estimated based on catalogues
 
 import numpy as np
 from scipy.stats import truncnorm
-from ha3py.m_max_utils import non_bayesian_m_max_estimation
 from ha3py.BayesianMmax import init_bayesian_m_max
 
 
@@ -54,10 +53,6 @@ def m_max_bayesian_norm(configuration, magnitude_distribution=None):
     :return: The posterior maximum magnitude and its standard deviation.
     :rtype: tuple(float, float)
     """
-    # m_max, sd_m_max = non_bayesian_m_max_estimation(configuration, magnitude_distribution=magnitude_distribution)
-    # # m_max, sd_m_max = 1, 2
-    # prior_m_max = configuration['prior_m_max']
-    # sd_prior_m_max = configuration['sd_prior_m_max']
     m_max, sd_m_max, prior_m_max, sd_prior_m_max = init_bayesian_m_max(
         configuration, magnitude_distribution=magnitude_distribution)
     d = sd_m_max ** 2 + sd_prior_m_max ** 2

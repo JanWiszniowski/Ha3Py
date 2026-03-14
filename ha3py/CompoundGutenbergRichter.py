@@ -109,7 +109,7 @@ class CompoundGutenbergRichter(BaseMagnitudeDistribution):
                          m_min=m_min, m_max=m_max)
 
     def _prepare(self):
-        self.den = (1 - (self.q/(self.q + self.beta * (self.m_max - self.m_min)))**self.q)
+        self.den = (1 - (self.q / (self.q + self.beta * (self.m_max - self.m_min))) ** self.q)
 
     def _pdf(self, m, *args):
         r"""
@@ -128,7 +128,7 @@ class CompoundGutenbergRichter(BaseMagnitudeDistribution):
         :param args:
         :return:
         """
-        return self.beta * (self.q / (self.q + self.beta * (m - self.m_min)))**(self.q + 1)/self.den
+        return self.beta * (self.q / (self.q + self.beta * (m - self.m_min))) ** (self.q + 1) / self.den
 
     def _cdf(self, m, *args):
         r"""
@@ -169,12 +169,12 @@ class CompoundGutenbergRichter(BaseMagnitudeDistribution):
         if self.m_max >= m >= self.m_min:
             # nominator
             diff_m = m - self.m_min
-            nom_pow1 = (self.q/(self.q + self.beta*diff_m))**(self.q+1)
-            nom = 1 - (self.q/(self.q + self.beta*diff_m))**self.q
+            nom_pow1 = (self.q / (self.q + self.beta * diff_m)) ** (self.q + 1)
+            nom = 1 - (self.q / (self.q + self.beta * diff_m)) ** self.q
             # denominatar
             diff_m_max = self.m_max - self.m_min
             den = self.den
-            den_pow1 = (self.q/(self.q + self.beta*diff_m_max))**(self.q+1)
+            den_pow1 = (self.q / (self.q + self.beta * diff_m_max)) ** (self.q + 1)
             # _beta
             d_beta = (nom * diff_m_max * den_pow1 - den * diff_m * nom_pow1) / den / den
             # M_max

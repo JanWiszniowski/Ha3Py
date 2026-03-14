@@ -49,15 +49,22 @@ def m_max_estimation(configuration):
 
     bayesian_assessment = configuration.get('bayesian_m_max_assessment')
     if not bayesian_assessment:
-        return non_bayesian_m_max_estimation(configuration, magnitude_distribution=event_occurrence.magnitude_distribution)
+        return non_bayesian_m_max_estimation(configuration,
+                                             magnitude_distribution=event_occurrence.magnitude_distribution)
     elif bayesian_assessment == 'bayesian_normal':
-        return bayesian_m_max(configuration, get_bayesian_truncnorm(configuration, magnitude_distribution=event_occurrence.magnitude_distribution))
+        return bayesian_m_max(configuration,
+                              get_bayesian_truncnorm(configuration,
+                                                     magnitude_distribution=event_occurrence.magnitude_distribution))
     elif bayesian_assessment == 'bayesian_normal_unlimited':
         return m_max_bayesian_norm(configuration, magnitude_distribution=event_occurrence.magnitude_distribution)
     elif bayesian_assessment == 'bayesian_by_shift':
-        return bayesian_m_max(configuration, get_bayesian_by_shift(configuration, magnitude_distribution=event_occurrence.magnitude_distribution))
+        return bayesian_m_max(configuration,
+                              get_bayesian_by_shift(configuration,
+                                                    magnitude_distribution=event_occurrence.magnitude_distribution))
     elif bayesian_assessment == 'bayesian_fiducial':
-        return bayesian_m_max(configuration, get_bayesian_fiducial(configuration, magnitude_distribution=event_occurrence.magnitude_distribution))
+        return bayesian_m_max(configuration,
+                              get_bayesian_fiducial(configuration,
+                                                    magnitude_distribution=event_occurrence.magnitude_distribution))
     elif bayesian_assessment == 'fixed_value':
         return configuration['prior_m_max'], configuration['sd_prior_m_max']
     else:

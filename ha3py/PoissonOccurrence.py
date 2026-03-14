@@ -50,6 +50,7 @@ class PoissonOccurrence(LambdaOccurrence, ABC):
         \left\{\frac{\partial S_M\left(m \right)}{\partial\theta_i}\right\}.
 
     """
+
     def __init__(self, configuration, **kwargs):
         super().__init__(configuration, 'Poisson', **kwargs)
 
@@ -134,7 +135,7 @@ class PoissonOccurrence(LambdaOccurrence, ABC):
 
     def _grad_sf(self, m, t):
         d_lambda = t * np.multiply(np.exp(-t * self.lamb * self.magnitude_distribution.sf(m)),
-                               self.magnitude_distribution.sf(m))
+                                   self.magnitude_distribution.sf(m))
         return {'lambda': d_lambda}
 
     def _d_grad_sf_magnitude_distribution(self, n, m, t):

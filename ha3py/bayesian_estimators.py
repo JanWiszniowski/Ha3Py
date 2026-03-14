@@ -18,6 +18,7 @@ import numpy as np
 from ha3py.utils import HaPyException
 import scipy.integrate as integrate
 
+
 def bayesian_m_max(configuration, likelihood):
     r"""
     The bayesian_m_max function estimates the :math:`m_{max}` bze the Bayesian methods.
@@ -69,12 +70,12 @@ def bayesian_m_max(configuration, likelihood):
     bayesian_m_max_estimator = configuration.get('bayesian_m_max_estimator', 'expected')
     if bayesian_m_max_estimator == 'expected':
         # return likelihood.expect()
-        result = integrate.quad(lambda x: likelihood.pdf(x)*x, likelihood.m_max_l, likelihood.m_max_u)
+        result = integrate.quad(lambda x: likelihood.pdf(x) * x, likelihood.m_max_l, likelihood.m_max_u)
         return result[0], likelihood.sd_m_max + likelihood.sd_prior_m_max
     elif bayesian_m_max_estimator == 'median':
         # return likelihood.median()
         space = np.linspace(likelihood.m_max_l, likelihood.m_max_u, 500)
-        delta = (space[1]-space[0]) / 2.0
+        delta = (space[1] - space[0]) / 2.0
         aggregator = 0.0
         old_pdf = 0
         for idx, m in enumerate(space):

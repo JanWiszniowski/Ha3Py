@@ -14,7 +14,7 @@ Likelihood coefficients estimation
 
 """
 
-import numpy as np
+# import numpy as np
 from ha3py.utils import HaPyException
 from ha3py.get_events_occurrence import get_events_occurrence
 
@@ -149,7 +149,8 @@ def const_completeness_likelihood(event_occurrence, catalogue):
     if dtime <= 0.0:
         dtime = 1.0
     sum_ln_likelihood = event_occurrence.ln_d_pmf(n, dtime)
-    # sum_ln_likelihood = np.log(event_occurrence.lamb) * n - np.log(dtime * event_occurrence.lamb + event_occurrence.q_lambda) * (event_occurrence.q_lambda + n)
+    # sum_ln_likelihood = np.log(event_occurrence.lamb) * n - np.log(dtime * event_occurrence.lamb
+    # + event_occurrence.q_lambda) * (event_occurrence.q_lambda + n)
     for evt_phs in catalogue['earthquakes']:
         evt_weight = evt_phs.get('weight', 1.0)
         magnitude = evt_phs['magnitude']

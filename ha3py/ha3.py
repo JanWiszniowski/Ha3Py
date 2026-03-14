@@ -17,7 +17,7 @@ import sys
 from ha3py.compute import compute
 from ha3py.print_results import print_results, print_hazard, print_percentage_share, compute_hazard
 from ha3py.configuration import load_configuration, save_configuration, define_configuration
-from ha3py.utils import HaPyException
+# from ha3py.utils import HaPyException
 from ha3py.plot_results import plot_results
 
 

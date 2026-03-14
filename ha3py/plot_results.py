@@ -110,7 +110,7 @@ def comp_sd_return_period(configuration, rp_sign):
     if rp_sign > 0:
         temp_m_max = round(m_max - rp_sign * sd_m_max, 3)
     else:
-        temp_m_max = round(m_max,3)
+        temp_m_max = round(m_max, 3)
     event_occurrence.m_max = temp_m_max
     m_v = np.arange(m_min, temp_m_max, d_mag)
     # m_v = np.arange(m_min, temp_m_max+d_mag/2, d_mag)

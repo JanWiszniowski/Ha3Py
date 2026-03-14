@@ -57,6 +57,7 @@ class BayesianByShift(BayesianBase):
     :type magnitude_distribution: MagnitudeDistribution
 
     """
+
     def __init__(self, configuration, magnitude_distribution=None):
         """
 

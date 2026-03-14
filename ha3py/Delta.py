@@ -36,6 +36,7 @@ class BaseDelta(ABC):
     r"""
     BaseDelta :math:`\Delta` calculation class.
     """
+
     def __init__(self, parameters, magnitude_distribution=None, m_max=None, m_max_obs=None):
         if magnitude_distribution:
             self.magnitude_distribution = magnitude_distribution
