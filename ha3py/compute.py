@@ -158,8 +158,7 @@ def compute(configuration):
         print(f"!!!!! could not asses correct m_max")
         print(f"!!!!! Final m_max is not set")
         print(f"!!!!! The current m_max value {configuration['m_max_current']:4.2f} +/- {sd_m_max:1.2f},")
-        print(f"!!!!! which is primitive assessment, remains")
-        if input("Break computations yes/no [yes] >") != 'no':
+        if input("Accept the current m_max (yes) or break computations (no) [no] >") != 'yes':
             exit(0)
     configuration['m_max'] = round(configuration['m_max_current'], 2)
     configuration['sd_m_max'] = round(sd_m_max, 2)
