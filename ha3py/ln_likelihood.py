@@ -164,6 +164,7 @@ def time_varying_completeness_likelihood(event_occurrence, catalogue):
     Function computes natural logarithm of likelihood for an instrumental catalogue with
     time-varying completeness level
 
+
     :param event_occurrence: The events occurrence object
     :type event_occurrence: OccurrenceBase or LambdaOccurrence
     :param catalogue: The catalogue must contain items:

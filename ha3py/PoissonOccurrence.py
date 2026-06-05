@@ -23,6 +23,12 @@ from ha3py.BaseOccurrence import get_event_occurrence_parameters
 
 class PoissonOccurrence(LambdaOccurrence, ABC):
     r"""
+    The probability to observe :math:`n` seismic events, within a time interval :math:`t`,
+    for temporal varying seismic activity :math:`\lambda` (Benjamin, 1968), as follows
+
+    .. math::
+        p_n(n|\lambda,t)=\left( \lambda t  \right)^k \frac{\exp(-\lambda t )}{k!}
+
     The PDF of Poisson distribution of not exceeding magnitude :math:`m`
     in time :math:`t` is
 
