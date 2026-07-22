@@ -27,5 +27,8 @@ Modified handling of the m_max determination impossibility.
 
 New figures
 
+## v0.0.5 - 2026-07-26
+
+Verification of delta m_max solution
 
 [Discussions]: https://github.com/JanWiszniowski/hapy/discussions

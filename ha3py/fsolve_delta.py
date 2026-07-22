@@ -25,9 +25,9 @@ from ha3py.Delta import get_delta
 from ha3py.utils import HaPyException
 
 
-def _m_max_equation_to_solve(x, delta, pars):
+def _m_max_equation_to_solve(x, delta, m_max_obs, time, annual_lambda):
     delta.m_max = x
-    fun = x - pars['m_max_obs'] - delta(time=pars['time_span'], annual_lambda=pars['lambda_ref'])
+    fun = x - m_max_obs - delta(time=time, annual_lambda=annual_lambda)
     return fun
 
 
@@ -75,9 +75,15 @@ def m_max_solve_equation(configuration, magnitude_distribution=None, m_max=None,
     """
     if delta is None:
         delta = get_delta(configuration, magnitude_distribution=magnitude_distribution, m_max=m_max)
+
     m_max_obs = configuration['m_max_obs']
     sd_m_max_obs = configuration['sd_m_max_obs']
-    root = fsolve(_m_max_equation_to_solve, np.array(m_max_obs), args=(delta, configuration))
+    time = configuration['time_span']
+    annual_lambda = configuration['lambda_ref']
+    if not delta.exist_solution(time=time, annual_lambda=annual_lambda):
+        print(f"The {delta.name} delta solution does not exist for time={time}, lambda={annual_lambda}")
+        return None, None
+    root = fsolve(_m_max_equation_to_solve, np.array(m_max_obs), args=(delta, m_max_obs, time, annual_lambda))
     if not root:
         HaPyException(f"Solver can not find the solution for {delta.parameter_name}")
     if len(root) > 1:

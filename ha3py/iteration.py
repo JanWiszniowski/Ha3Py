@@ -82,6 +82,9 @@ def m_max_solve_by_iteration(configuration, magnitude_distribution=None, m_max=N
     m_max_est_new = m_max_obs  # MAX OBS MAGNITUDE
     time = configuration['time_span']
     annual_lambda = configuration['lambda_ref']
+    if not delta.exist_solution(time=time, annual_lambda=annual_lambda):
+        print(f"The {delta.name} delta solution does not exist for time={time}, lambda={annual_lambda}")
+        return None, None
     while (fabs(m_max_est_new - m_max_est_old) > accuracy) and (nr_iter_max > nr_iter):
         nr_iter += 1
         m_max_est_old = m_max_est_new

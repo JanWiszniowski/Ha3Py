@@ -30,6 +30,8 @@ import scipy.integrate as integrate
 from abc import ABC, abstractmethod
 from ha3py.get_magnitude_distribution import get_magnitude_distribution
 from ha3py.utils import HaPyException
+from ha3py.constant_values import EPS
+from math import log
 
 
 class BaseDelta(ABC):
@@ -37,7 +39,8 @@ class BaseDelta(ABC):
     BaseDelta :math:`\Delta` calculation class.
     """
 
-    def __init__(self, parameters, magnitude_distribution=None, m_max=None, m_max_obs=None):
+    def __init__(self, name, parameters, magnitude_distribution=None, m_max=None, m_max_obs=None):
+        self.name = name
         if magnitude_distribution:
             self.magnitude_distribution = magnitude_distribution
         else:
@@ -85,6 +88,18 @@ class BaseDelta(ABC):
         """
         raise Exception('Undefined')
 
+    def exist_solution(self, n=None, time=1.0, annual_lambda=1.0):
+        if n is None:
+            n = time * annual_lambda
+        return self._exist_solution(n)
+
+    def _exist_solution(self, n):
+        r"""
+        The abstract :math:`\Delta` calculation method.
+        :param n: number of events
+        """
+        return n > 0.0
+
 
 class KijkoSellevoll(BaseDelta):
     r"""
@@ -97,7 +112,7 @@ class KijkoSellevoll(BaseDelta):
     """
 
     def __init__(self, configuration, magnitude_distribution=None, m_max=None, m_max_obs=None):
-        super().__init__(configuration, magnitude_distribution=magnitude_distribution, m_max=m_max, m_max_obs=m_max_obs)
+        super().__init__('Kijko-Sellevoll', configuration, magnitude_distribution=magnitude_distribution, m_max=m_max, m_max_obs=m_max_obs)
 
     def _delta(self, n):
         r"""
@@ -116,6 +131,50 @@ class KijkoSellevoll(BaseDelta):
                                self.magnitude_distribution.m_min, self.magnitude_distribution.m_max)
         return delta[0]
 
+    def _exist_solution(self, n):
+        r""""
+        Test whether exist Tate-Pisarenko solution condition:
+
+        .. math::
+            ln\left(n\right)\geq\beta\left(m_{max}^{obs}{-m}_{min}\right)-0.58.
+
+        """
+        left = log(n)
+        right = self.magnitude_distribution.beta * (self.m_max_obs - self.magnitude_distribution.m_min) - 0.57
+        return left >= right
+
+
+class KijkoSellevoll_m_max_obs(BaseDelta):
+    r"""
+    Kijko-Sellevoll :math:`\Delta` calculation class
+
+    .. math::
+        \Delta =\int_{m_{min}}^{m_{max}^{obs}}F_M\left( m \right)^ndm
+
+    The integration is performed numerically.
+    """
+
+    def __init__(self, configuration, magnitude_distribution=None, m_max=None, m_max_obs=None):
+        super().__init__('Kijko-Sellevoll for m_max_obs', configuration, magnitude_distribution=magnitude_distribution, m_max=m_max, m_max_obs=m_max_obs)
+
+    def _delta(self, n):
+        r"""
+        The Kijko-Sellevoll simplified :math:`\Delta` calculation method.
+
+        :param n: Number of events, It can be float value
+        :return: the :math:`\Delta` value
+
+        .. math::
+            \Delta =\int_{m_{min}}^{m_{max}^{obs}}F_M\left( m \right)^ndm
+
+        The integration is performed numerically.
+        """
+        # return integrate.quad(lambda x: exp(log(self.cdf(x))*n), self.m_min, m)
+        delta = integrate.quad(lambda x: self.magnitude_distribution.cdf(x) ** n,
+                               self.magnitude_distribution.m_min, self.magnitude_distribution.m_max_obs)
+        return delta[0]
+
+
 
 class TatePisarenko(BaseDelta):
     r"""
@@ -127,7 +186,46 @@ class TatePisarenko(BaseDelta):
     """
 
     def __init__(self, configuration, magnitude_distribution=None, m_max=None, m_max_obs=None):
-        super().__init__(configuration, magnitude_distribution=magnitude_distribution, m_max=m_max, m_max_obs=m_max_obs)
+        super().__init__('Tate-Pisarenko', configuration, magnitude_distribution=magnitude_distribution, m_max=m_max, m_max_obs=m_max_obs)
+
+    def _delta(self, n):
+        r"""
+        The Tate-Pisarenko :math:`\Delta` calculation method.
+
+        :param n: Number of events, It can be float value
+        :return: the :math:`\Delta` value
+
+        .. math::
+        \Delta =\frac{1}{nf_M\left( m_{max} \right)}
+
+        """
+        pdf_m = self.magnitude_distribution.pdf(self.magnitude_distribution.m_max - EPS)
+        return 1.0 / n / pdf_m
+
+    def _exist_solution(self, n):
+        r""""
+        Test whether exist Tate-Pisarenko solution condition:
+
+        .. math::
+            m_{max}^{obs}{-m}_{min}\le\frac{\ln{\left(n\right)}}{\beta}-\frac{n-1}{n\beta}
+
+        """
+        left = self.m_max_obs - self.magnitude_distribution.m_min
+        right = log(n) / self.magnitude_distribution.beta - (n - 1) / n / self.magnitude_distribution.beta
+        return left <= right
+
+
+class TatePisarenko_m_max_obs(BaseDelta):
+    r"""
+    Tate-Pisarenko simplified :math:`\Delta` calculation class
+
+    .. math::
+        \Delta =\frac{1}{nf_M\left( m_{max}^{obs} \right)}
+
+    """
+
+    def __init__(self, configuration, magnitude_distribution=None, m_max=None, m_max_obs=None):
+        super().__init__('Tate-Pisarenko m_max_obs', configuration, magnitude_distribution=magnitude_distribution, m_max=m_max, m_max_obs=m_max_obs)
 
     def _delta(self, n):
         r"""
@@ -155,5 +253,9 @@ def get_delta(configuration, magnitude_distribution=None, m_max=None):
         return KijkoSellevoll(configuration, magnitude_distribution=magnitude_distribution, m_max=m_max)
     elif delta == 'Tate-Pisarenko':
         return TatePisarenko(configuration, magnitude_distribution=magnitude_distribution, m_max=m_max)
+    if delta == 'Kijko-Sellevoll m_max_obs':
+        return KijkoSellevoll_m_max_obs(configuration, magnitude_distribution=magnitude_distribution, m_max=m_max)
+    elif delta == 'Tate-Pisarenko m_max_obs':
+        return TatePisarenko_m_max_obs(configuration, magnitude_distribution=magnitude_distribution, m_max=m_max)
     else:
         raise HaPyException('Unknown delta computation')

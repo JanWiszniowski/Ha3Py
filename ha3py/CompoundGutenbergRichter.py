@@ -25,11 +25,11 @@ class CompoundGutenbergRichter(BaseMagnitudeDistribution):
 
     .. math::
         f_{M}(m)=\left\{ \begin{alignat*}{2}
-        & 0 && : \text{for } m<m_{min} \\
+        & 0 && : \text{for } m < m_{min} \\
         & \overline{\beta} C_{\beta}\left[ \frac{q_{\beta}}{q_{\beta}+
         \overline{\beta}\left(m-m_{min} \right)}\right ]^{q_{\beta}+1} &&
         : \text{for } m_{min} \leqslant m \leqslant m_{max}\\
-        & 0 && : \text{for } m>m_{max}
+        & 0 && : \text{for } m > m_{max}
         \end{alignat*} \right.
 
     where:
