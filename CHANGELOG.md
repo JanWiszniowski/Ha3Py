@@ -29,6 +29,6 @@ New figures
 
 ## v0.0.5 - 2026-07-26
 
-Verification of delta m_max solution
+Verification and new delta m_max solutions
 
 [Discussions]: https://github.com/JanWiszniowski/hapy/discussions

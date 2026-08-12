@@ -14,7 +14,7 @@ Likelihood coefficients estimation
 
 """
 
-# import numpy as np
+import numpy as np
 from ha3py.utils import HaPyException
 from ha3py.get_events_occurrence import get_events_occurrence
 
@@ -68,6 +68,75 @@ def likelihood0(event_occurrence, catalogue):
         if dtime <= 0.0:
             dtime = 1.0
         magnitude = evt_phs['magnitude']  # MAGNITUDE OF PRE/HISTORIC EQ-s
+        evt_weight = evt_phs.get('weight', 1.0)
+        sum_ln_likelihood += event_occurrence.logpdf(magnitude, dtime) * evt_weight
+    sum_ln_likelihood *= catalogue.get('weight', 1.0)
+    return sum_ln_likelihood
+
+
+def extreme_catalogue_likelihood(event_occurrence, catalogue):
+    r"""
+    Function computes natural logarithm of likelihood for a catalogue with extreme event,
+    where constant completeness level does not exist,
+    based on the non occurrence event of magnitude :math:`m` time distribution :math:`f_M^{max}`
+    with the catalogue completeness magnitude. This function is applied to paleo and historical catalogues
+
+    .. math::
+        ln\left( \mathcal{L}_\mathbf{\Theta} \right)=
+        w_c\sum_{i=1}^{N}w_i\ln\left[f_M^{max} \left( m_i\middle|\mathbf{\Theta},T_i-T_k \right) \right],
+
+    where :math:`N` is number of events in the catalogue, :math:`m_i` is the :math:`i`-th event magnitude,
+    :math:`T_i` is the event time, :math:`T_k` is the time of the previous event having greater or equal magnitude,
+    :math:`\mathbf{\Theta}` are the probability coefficients,
+    :math:`w_c` is the weight of the current catalogue likelihood,
+    and :math:`w_i` is the weight of the :math:`i`-th event
+
+    :param event_occurrence: The events occurrence object
+    :type event_occurrence: OccurrenceBase or LambdaOccurrence
+    :param catalogue: The catalogue must contain items:
+
+        * 'm_min' (float) the completeness magnitude,
+        * 'weight' (float, optional, default=1.0) the weight of the catalogue in the total ln likelihood,
+            (:math:`w_c`)
+        * 'events' (list) list of events. Each event is a dictionary containing:
+            * 'magnitude' the event magnitude (:math:`m_i`),
+            * 'time_span' time span the events (:math:`t_i`),
+            * 'weight' (float, optional, default=1.0) the weight of the event in the catalogue ln likelihood,
+                (:math:`w_i`).
+
+    :type catalogue: dict
+    :return: The ln likelihood of the catalogue
+    :rtype: float
+
+    Example, the gamma compound Poisson distribution case
+
+    .. math::
+        ln\left( \mathcal{L}_\lambda \mathcal{L}_\beta \right)=
+        ln\left[ \lambda time\left( 1+\frac{\lambda time\left( 1-F_M\left( m \right) \right)}{q_\lambda} \right)
+        ^{-\left( q_\lambda+1 \right)} \right]+ln\left( f_M\left( m \right) \right)
+
+    """
+    if not catalogue:
+        return 0.0
+    event_occurrence.m_min = catalogue['m_min']
+    sum_ln_likelihood = 0.0
+    events = catalogue['earthquakes']
+    catalog_sd = catalogue.get('sd', 0.25)
+    n = len(events)
+    for evt_idx in range(n - 1, -1, -1):
+        evt_phs = events[evt_idx]
+        magnitude = evt_phs['magnitude']
+        date = evt_phs['date']
+        evt_sd_2 = evt_phs.get('sd', catalog_sd) ^ 2
+        for pre_evt_idx in range(evt_idx - 1, -1, -1):
+            pre_evt_phs = events[pre_evt_idx]
+            if pre_evt_phs['magnitude'] + 0.68 * np.sqrt(pre_evt_phs.get('sd', catalog_sd) ^ 2 + evt_sd_2) >= magnitude:
+                dtime = date - pre_evt_phs['date']
+                break
+        else:
+            continue
+        if dtime <= 0.0:
+            dtime = 1.0
         evt_weight = evt_phs.get('weight', 1.0)
         sum_ln_likelihood += event_occurrence.logpdf(magnitude, dtime) * evt_weight
     sum_ln_likelihood *= catalogue.get('weight', 1.0)

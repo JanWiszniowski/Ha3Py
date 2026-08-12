@@ -75,7 +75,7 @@ class NonparametricGaussianKernel(BaseMagnitudeDistribution):
         \end{alignat*} \right.
 
     where :math:`h` is the smoothing parameter and :math:`T_i` is the sum of time periods
-    of catalogues, where :math:`m_i \ge m_x`. Values :math:`1/T_i` can be replaced by predefined weights
+    of catalogues, where :math:`m_i \ge m_{min}`. Values :math:`1/T_i` can be replaced by predefined weights
     if they are defined in catalogs. The smoothing parameter :math:`h` is estimated by
     the smooth_parameter_estimation function unless it is predefined.
 

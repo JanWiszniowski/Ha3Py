@@ -87,16 +87,16 @@ def m_max_solve_equation(configuration, magnitude_distribution=None, m_max=None,
     if not root:
         HaPyException(f"Solver can not find the solution for {delta.parameter_name}")
     if len(root) > 1:
-        m_max = np.max(root)
+        return_m_max = np.min(root)
     else:
-        m_max = root[0]
-    if m_max <= m_max_obs:
-        m_max = m_max_obs + 0.01
-    if m_max > 9.99:
-        m_max = 9.99
-    sd_m_max = sqrt(sd_m_max_obs ** 2 + (m_max - m_max_obs) ** 2)
-    sd_m_max = round(sd_m_max, 2)
-    return m_max, sd_m_max
+        return_m_max = root[0]
+    if return_m_max <= m_max_obs:
+        return_m_max = m_max_obs + 0.01
+    if return_m_max > 9.99:
+        return_m_max = 9.99
+    return_sd_m_max = sqrt(sd_m_max_obs ** 2 + (return_m_max - m_max_obs) ** 2)
+    return_sd_m_max = round(return_sd_m_max, 2)
+    return return_m_max, return_sd_m_max
 
 
 if __name__ == "__main__":

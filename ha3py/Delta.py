@@ -112,7 +112,8 @@ class KijkoSellevoll(BaseDelta):
     """
 
     def __init__(self, configuration, magnitude_distribution=None, m_max=None, m_max_obs=None):
-        super().__init__('Kijko-Sellevoll', configuration, magnitude_distribution=magnitude_distribution, m_max=m_max, m_max_obs=m_max_obs)
+        super().__init__('Kijko-Sellevoll', configuration, magnitude_distribution=magnitude_distribution,
+                         m_max=m_max, m_max_obs=m_max_obs)
 
     def _delta(self, n):
         r"""
@@ -171,7 +172,7 @@ class KijkoSellevoll_m_max_obs(BaseDelta):
         """
         # return integrate.quad(lambda x: exp(log(self.cdf(x))*n), self.m_min, m)
         delta = integrate.quad(lambda x: self.magnitude_distribution.cdf(x) ** n,
-                               self.magnitude_distribution.m_min, self.magnitude_distribution.m_max_obs)
+                               self.magnitude_distribution.m_min, self.m_max_obs)
         return delta[0]
 
 
@@ -186,7 +187,8 @@ class TatePisarenko(BaseDelta):
     """
 
     def __init__(self, configuration, magnitude_distribution=None, m_max=None, m_max_obs=None):
-        super().__init__('Tate-Pisarenko', configuration, magnitude_distribution=magnitude_distribution, m_max=m_max, m_max_obs=m_max_obs)
+        super().__init__('Tate-Pisarenko', configuration, magnitude_distribution=magnitude_distribution,
+                         m_max=m_max, m_max_obs=m_max_obs)
 
     def _delta(self, n):
         r"""
