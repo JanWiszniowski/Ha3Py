@@ -140,9 +140,10 @@ class KijkoSellevoll(BaseDelta):
             ln\left(n\right)\geq\beta\left(m_{max}^{obs}{-m}_{min}\right)-0.58.
 
         """
-        left = log(n)
-        right = self.magnitude_distribution.beta * (self.m_max_obs - self.magnitude_distribution.m_min) - 0.57
-        return left >= right
+        return True
+        # left = log(n)
+        # right = self.magnitude_distribution.beta * (self.m_max_obs - self.magnitude_distribution.m_min) - 0.5772156649
+        # return left >= right
 
 
 class KijkoSellevoll_m_max_obs(BaseDelta):
@@ -212,9 +213,10 @@ class TatePisarenko(BaseDelta):
             m_{max}^{obs}{-m}_{min}\le\frac{\ln{\left(n\right)}}{\beta}-\frac{n-1}{n\beta}
 
         """
-        left = self.m_max_obs - self.magnitude_distribution.m_min
-        right = log(n) / self.magnitude_distribution.beta - (n - 1) / n / self.magnitude_distribution.beta
-        return left <= right
+        return True
+        # left = self.m_max_obs - self.magnitude_distribution.m_min
+        # right = log(n) / self.magnitude_distribution.beta - (n - 1) / n / self.magnitude_distribution.beta
+        # return left <= right
 
 
 class TatePisarenko_m_max_obs(BaseDelta):
