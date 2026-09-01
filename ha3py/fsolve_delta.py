@@ -68,9 +68,7 @@ def m_max_solve_equation(configuration, magnitude_distribution=None, m_max=None,
     :param delta:
     :type delta:
     :return:
-    :return:
-        m_max       - estimated maximum magnitude
-        sd_m_max    - standard deviation of maximum magnitude
+    :return: Estimated maximum magnitude, standard deviation of maximum magnitude
     :rtype: (float, float)
     """
     if delta is None:

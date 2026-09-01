@@ -79,8 +79,9 @@ def get_bayesian_truncnorm(configuration, magnitude_distribution=None):
     :param magnitude_distribution:  Optional magnitude distribution object.
         If missing, the magnitude distribution object is created based on the configuration
     :type magnitude_distribution: MagnitudeDistribution
-    :return: The
-    :rtype: tuple(float, float)
+    :return: The posterior maximum magnitude and its standard deviation.
+    :rtype: (float, float)
+
     """
     m_max, sd_m_max, prior_m_max, sd_prior_m_max = init_bayesian_m_max(
         configuration, magnitude_distribution=magnitude_distribution)

@@ -1,7 +1,9 @@
 """
-Ha3Py
-(c) Jan Wiszniowski, Andrzej Kijko
-ver. 2024-01
+..
+    Ha3Py
+    (c) Jan Wiszniowski, Andrzej Kijko
+    ver. 2024-01
+
 """
 
 from ha3py.GutenbergRichter import GutenbergRichter

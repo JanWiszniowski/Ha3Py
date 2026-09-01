@@ -35,13 +35,14 @@ def lambda_correction(configuration):
     :type configuration: dict
 
     Required configuration parameters:
-        lambda
-        beta
-        paleo_catalog
-        historic_catalog
-        complete_catalogs
-        m_min
-        m_max_current
+
+        lambda,
+        beta,
+        paleo_catalog,
+        historic_catalog,
+        complete_catalogs,
+        m_min,
+        m_max_current,
 
     The configuration parameter lambda is modified.
 

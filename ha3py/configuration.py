@@ -21,7 +21,6 @@ import datetime
 import numpy as np
 from math import floor
 from ha3py.GutenbergRichter import GutenbergRichter
-# from ha3py.CompoundGutenbergRichter import CompoundGutenbergRichter
 from ha3py.utils import HaPyException
 from ha3py.constant_values import LN_10_, METHODS
 from ha3py.get_events_occurrence import get_events_occurrence
@@ -551,8 +550,8 @@ def define_catalogs(configuration):
         which is the dictionary of all parameters required for Ha3Py modules
         and results of all computations.
     :type configuration: dict
-    :return:
-    :rtype:
+    :return: Information whether configuration was modified
+    :rtype: bool
     """
     configuration_modified = False
     if 'begin' not in configuration:

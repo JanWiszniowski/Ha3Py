@@ -39,8 +39,9 @@ def m_max_solve_by_iteration(configuration, magnitude_distribution=None, m_max=N
     where the delta is a class defined outside the function and the object ot the class is one
     of the Parameters of the call.
 
-    :param delta:
-    :type delta:
+    :param delta: Magnitude correction :math:``\Delta object.
+        If missing, the object is created based on the configuration
+    :type delta: BaseDelta
     :param m_max: Maximum value of the magnitude distribution.
         If missing, the maximum magnitude is taken from configuration
     :type m_max: float
@@ -66,9 +67,8 @@ def m_max_solve_by_iteration(configuration, magnitude_distribution=None, m_max=N
             * m_max_current: starting M_max in the iteration
 
     :type configuration: dict
-    :return:
-        M_max       - estimated maximum magnitude
-        Sd_mag_max    - standard deviation of maximum magnitude
+    :return: Estimated maximum magnitude, standard deviation of maximum magnitude
+    "rtype" (float, float)
 
     """
     if delta is None:

@@ -46,13 +46,13 @@ for more information on how the code works.
 The Ha3Py requires a working Python environment and the same Python packages to run
 (see :ref:`Installation <installation>`).
 
-The key programme of the package is called `ha3`.
+The main programme of the package is called `ha3`.
 This programme manages everything necessary for seismic hazard estimation.
 It defines computation coefficients, assesses earthquake recurrence parameters,
 and visualises the results.
 Its queries and outcomes are analogous to those of the HA3 programme written in MATLAB.
 Additionally, `ha3` generates the :ref:`configuration file <configuration>` for other programmes.
-However, both `ha3` and the `configuration` programme do not provide all configuration options
+However, both `ha3` and the `configuration` programmes do not provide all configuration options
 and cannot define external classes.
 Utilising all the features of the package requires the manual definition of the configuration file.
 All programmes, as command line tools, are detailed in the :ref:`Command line tools <running>` section.
@@ -60,18 +60,6 @@ In addition to executing the command line tool, it is also possible to build you
 using predefined classes and methods.
 All Ha3Py methods and classes are outlined in the :ref:`Methods and Classes <api_methods>` sections.
 
-The main programme in the package is called `ha3`.
-This programme handles all aspects necessary for seismic hazard estimation.
-It defines computation coefficients, evaluates earthquake recurrence parameters, and visualises the results.
-Its queries and outputs are similar to those of the `HA3` programme written in MATLAB.
-Additionally, `ha3` generates the :ref:`configuration file <configuration>` for other programmes.
-However, both `ha3` and the `configuration` programmes do not offer all configuration options
-and cannot define external classes.
-To utilise all the package's features, the configuration file must be defined manually.
-All programmes, as command-line tools, are described in the :ref:`Command line tools <running>` section.
-Besides running the command line tool, it is also possible to build your hazard evaluation programme
-using predefined classes and methods.
-All Ha3Py methods and classes are detailed in the :ref:`Methods and Classes <api_methods>` section.
 
 .. File format links:
 .. _OOD: https://www.geeksforgeeks.org/oops-object-oriented-design/

@@ -259,7 +259,7 @@ Earthquake occurrence and magnitude distribution parameters
         The compound Gutenberg-Richter magnitude distribution
         where :math:`F_{M}(m)=C_{\beta} \left [1-\left (1+\overline{\beta}\left(m-m_{min}\right)/q_{\beta} \right )^{-q_{\beta}}  \right ]`
         (see the full definition in the CompoundGutenbergRichter class description).
-        It requires definition of constant :math:`q_beta` parameter.
+        It requires definition of constant `q_beta` parameter.
 
     - `Nonparametric Gaussian kernel`
         The nonparametric magnitude distribution based on a Gaussian kernel
@@ -430,32 +430,34 @@ Seismic hazard values
 :probabilities: (list(float)) List of non-exceeding the above magnitude `mag` probability
     in periods defined in the `time_intervals` list
 
-Simulation configuration
-========================
+..
 
-:simulation: (dict) It is the definition of parameter required for creating artificial catalogues.
+    Simulation configuration
+    ========================
 
-Simulation parameters are analogues to catalogs parameters. The dictionary `simulation` consists of:
+    :simulation: (dict) It is the definition of parameter required for creating artificial catalogues.
 
-:pre-historic data: (dict) which has a description how to generate the pre-historic catalogue,
-:historic data: (dict) which has a description how to generate the historic catalogue,
-:complete data: (list) which is the list of a few complete catalogues,
-    each has the description how to generate the complete catalogue.
+    Simulation parameters are analogues to catalogs parameters. The dictionary `simulation` consists of:
 
-Description how to generate the catalogue, consists of:
+    :pre-historic data: (dict) which has a description how to generate the pre-historic catalogue,
+    :historic data: (dict) which has a description how to generate the historic catalogue,
+    :complete data: (list) which is the list of a few complete catalogues,
+        each has the description how to generate the complete catalogue.
 
-:generator: (str) The generator name. There are allowed three names:
-    `full_simulation_incremental`, `extreme_simulation`, and `no_date_simulation`.
-    For paleo- and historic catalogues 'full_simulation_incremental' and 'extreme_simulation'
-    can be applied, whereas for complete catalogues 'extreme_simulation'
-    and 'no_date_simulation' should be applied.
-:begin: (float) The beginning of the catalogues in floating point years AD.
-:end: (float) The end of the catalogues in years AD.
-:time_span: (float) The time interval of the catalogue in years
-:time_uncertainty: The event time uncertainty in the catalogue
-:magnitude_uncertainty: (float) The magnitude uncertainty in the catalogue
-:name: (str) The name of the catalogue
-:m_min: (float) The minimum magnitude in the catalogue (required)
+    Description how to generate the catalogue, consists of:
+
+    :generator: (str) The generator name. There are allowed three names:
+        `full_simulation_incremental`, `extreme_simulation`, and `no_date_simulation`.
+        For paleo- and historic catalogues 'full_simulation_incremental' and 'extreme_simulation'
+        can be applied, whereas for complete catalogues 'extreme_simulation'
+        and 'no_date_simulation' should be applied.
+    :begin: (float) The beginning of the catalogues in floating point years AD.
+    :end: (float) The end of the catalogues in years AD.
+    :time_span: (float) The time interval of the catalogue in years
+    :time_uncertainty: The event time uncertainty in the catalogue
+    :magnitude_uncertainty: (float) The magnitude uncertainty in the catalogue
+    :name: (str) The name of the catalogue
+    :m_min: (float) The minimum magnitude in the catalogue (required)
 
 .. Configuration links:
 .. _JSON: https://www.json.org

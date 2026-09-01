@@ -96,8 +96,7 @@ def extreme_catalogue_likelihood(event_occurrence, catalogue):
     :param catalogue: The catalogue must contain items:
 
         * 'm_min' (float) the completeness magnitude,
-        * 'weight' (float, optional, default=1.0) the weight of the catalogue in the total ln likelihood,
-            (:math:`w_c`)
+        * 'weight' (float, optional, default=1.0) the weight (:math:`w_c`) of the catalogue in the total ln likelihood,
         * 'events' (list) list of events. Each event is a dictionary containing:
             * 'magnitude' the event magnitude (:math:`m_i`),
             * 'time_span' time span the events (:math:`t_i`),
@@ -153,13 +152,11 @@ def complete_catalogue_likelihood(event_occurrence, catalogue):
     :param catalogue: The catalogue must contain items:
 
         * 'm_min' (float) the completeness magnitude,
-        * 'weight' (float, optional, default=1.0) the weight of the catalogue in the total ln likelihood,
-            (:math:`w_c`)
+        * 'weight' (float, optional, default=1.0) the weight (:math:`w_c`) of the catalogue in the total ln likelihood,
         * 'events' (list) list of events. Each event is a dictionary containing:
-            * 'magnitude' the event magnitude (:math:`m_i`),
-            * 'time_span' time span the events (:math:`t_i`) (required only for time-varying completeness),
-            * 'weight' (float, optional, default=1.0) the weight of the event in the catalogue ln likelihood,
-                (:math:`w_i`).
+            - 'magnitude' the event magnitude (:math:`m_i`),
+            - 'time_span' time span the events (:math:`t_i`) (required only for time-varying completeness),
+            - 'weight' (float, optional, default=1.0) the weight (:math:`w_i`) of the event in the catalogue ln likelihood.
 
     :type catalogue: dict
     :return: The ln likelihood of the catalogue
@@ -199,11 +196,10 @@ def const_completeness_likelihood(event_occurrence, catalogue):
     :param catalogue: The catalogue must contain items:
 
         * 'm_min' (float) the completeness magnitude,
-        * 'weight' (float, optional, default=1.0) the weight of the catalogue in the total ln likelihood,
-            (:math:`w_c`)
+        * 'weight' (float, optional, default=1.0) the weight (:math:`w_c`) of the catalogue in the total ln likelihood,
         * 'events' (list) list of events. Each event is a dictionary containing:
-            * 'magnitude' the event magnitude (:math:`m_j`),
-            * 'weight' (float, optional, default=1.0) the weight of the event (:math:`w_j`)
+            - 'magnitude' the event magnitude (:math:`m_j`),
+            - 'weight' (float, optional, default=1.0) the weight of the event (:math:`w_j`)
 
     :type catalogue: dict
     :return: The ln likelihood of the catalogue
@@ -239,8 +235,7 @@ def time_varying_completeness_likelihood(event_occurrence, catalogue):
     :param catalogue: The catalogue must contain items:
 
         * 'm_min' (float) the completeness magnitude,
-        * 'weight' (float, optional, default=1.0) the weight of the catalogue in the total ln likelihood,
-            (:math:`w_c`)
+        * 'weight' (float, optional, default=1.0) the weight (:math:`w_c`) of the catalogue in the total ln likelihood,
         * 'events' (list) list of events. Each event is a dictionary containing:
             * 'magnitude' the event magnitude (:math:`m_i`),
             * 'time_span' time span the events (:math:`t_i`),
