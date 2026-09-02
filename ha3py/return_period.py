@@ -36,10 +36,10 @@ def return_period(m, lamb, mag_dist):
     .. math::
         \color{gray}T_{R}\left(m,\lambda_{0},F_{M}\right)=\frac{1}{\lambda\left(m\right)}
 
-    :param m: magnitude for the return period
-    :param lamb: lambda for the minimum magnitude
-    :param mag_dist: the magnitude distribution
-    :return: the return period
+    :param m: Magnitude for the return period
+    :param lamb: Lambda for the minimum magnitude
+    :param mag_dist: The magnitude distribution
+    :return: The return period
     """
     lambda_x = lamb * mag_dist.sf(m)
     if lambda_x <= 1e-6:
@@ -85,7 +85,8 @@ def grad_return_period(m, lamb, mag_distr):
     :param m: magnitude for the return period
     :param lamb: lambda for the minimum magnitude
     :param mag_distr: the magnitude distribution
-    :return: gradient of the return priod versus lambad and magnitude distribution paramters
+    :return: Gradient of the return period versus lambda and magnitude distribution parameters
+    :rtype: dict
     """
     sf = mag_distr.sf(m)  # sf(m) = [1-cdf(m)]
     if sf == 0.0:

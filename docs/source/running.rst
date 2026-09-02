@@ -17,19 +17,19 @@ which means it asks the user similar questions and generates the same results.
 
 The `ha3` program uses the following modules, which can also be used as standalone programs:
 
-1. From the `configuration` module, the ha3 calls the procedure `questions`
-    that sent the question to the user, and generates the parameter structure
-    required to seismic hazard estimation.
-    In order to operate, see the :ref:`Configuration of the Ha3Py` section.
-2. From the `compute` module, the ha3 calls the procedure `compute`
-    that estimates the SH based on parameters previously defined.
-    The results are added to the parameter structure.
-    To operate, see the :ref:`The earthquake hazard parameters assessment` section.
-3. Results are printed on the console or to a file by procedures in the `print_info`
-    and `print_results` module (see :ref:`Printing the estimation results`).
-4. Figures of results are plotted by the `plot_results` modules,
-    which consist of procedures that allows plot diagrams of SH properties
-    (see :ref:`Plotting the estimation results`).
+    1. From the `configuration` module, the ha3 calls the procedure `questions`
+        that sent the question to the user, and generates the parameter structure
+        required to seismic hazard estimation.
+        In order to operate, see the :ref:`Configuration of the Ha3Py` section.
+    2. From the `compute` module, the ha3 calls the procedure `compute`
+        that estimates the SH based on parameters previously defined.
+        The results are added to the parameter structure.
+        To operate, see the :ref:`The earthquake hazard parameters assessment` section.
+    3. Results are printed on the console or to a file by procedures in the `print_info`
+        and `print_results` module (see :ref:`Printing the estimation results`).
+    4. Figures of results are plotted by the `plot_results` modules,
+        which consist of procedures that allows plot diagrams of SH properties
+        (see :ref:`Plotting the estimation results`).
 
 All presented modules can be called independently.
 We want to point out that the similarity between `ha3` and Matlab `HA3`
@@ -892,21 +892,23 @@ Closing the drawings ends the program.
 The figures are also written to png files: `annual_probability.png`, `return_period.png`,
 and `probabilities.png`.
 
-Creating synthetic catalogues
-=============================
+..
 
-The program creates synthetic catalogues based on the existing catalogue description in the configuration file
-and defined seismic hazard parameters.
-The program does the opposite of calculating the parameters of exceeding the magnitude.
-Based on these parameters, it simulates catalogs.
-The program requires catalogue's periods (begin time and end time),
-completeness magnitude, and magnitude uncertainty for simulation.
+    Creating synthetic catalogues
+    =============================
 
-**For creating synthetic catalogues enter** ::
+    The program creates synthetic catalogues based on the existing catalogue description in the configuration file
+    and defined seismic hazard parameters.
+    The program does the opposite of calculating the parameters of exceeding the magnitude.
+    Based on these parameters, it simulates catalogs.
+    The program requires catalogue's periods (begin time and end time),
+    completeness magnitude, and magnitude uncertainty for simulation.
 
-    ha_simulate <configuration_file.json>
+    **For creating synthetic catalogues enter** ::
 
-**WARNING! Existing earthquake lists in catalogs are overwritten.**
+        ha_simulate <configuration_file.json>
+
+    **WARNING! Existing earthquake lists in catalogs are overwritten.**
 
 .. File format links:
 .. _JSON: https://www.json.org

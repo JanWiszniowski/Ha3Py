@@ -32,9 +32,7 @@ def m_max_primitive(configuration):
         which is the dictionary of all parameters required for Ha3Py modules
         and results of all computations.
     :type configuration: dict
-    :return:
-        m_max       - estimated maximum magnitude
-        sd_m_max    - standard deviation of maximum magnitude
+    :return: Estimated maximum magnitude, standard deviation of maximum magnitude
     :rtype: (float, float)
 
     """

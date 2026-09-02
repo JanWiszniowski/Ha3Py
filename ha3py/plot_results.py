@@ -266,7 +266,7 @@ def plot_prob(configuration, tp, ax=None):
     :type configuration: dict
     :param tp: Time period in years
     :type tp: float
-    :param ax: plotting axis
+    :param ax: Plotting axis
     :type ax: Axes
 
     """
@@ -313,8 +313,8 @@ def plot_hazard(configuration, what, ax=None):
         and results of all computations.
     :type configuration: dict
     :param what: Information what to plot: 'lambda', 'return_period' or 'probabilities'
-    :param what: str
-    :param ax: plotting axis
+    :type what: str
+    :param ax: Plotting axis
     :type ax: Axes
 
     :param ax:

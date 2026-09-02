@@ -47,16 +47,20 @@ class BaseMagnitudeDistribution(rv_continuous, ABC):
     Classes derived from the MagnitudeDistribution classes define exact magnitude distribution,
     e.g. Gutenberg-Richter magnitude distribution. They must define methods:
 
+        * _prepare - preparation of probability distribution computation,
+        * _parameters - return the list of all probability distribution parameters,
+        * _grad_sf - return the survive function gradients of all probability distribution parameters (see grad_sf),
+        * _const_coefficients - return list of names of defined unestimated coefficients,
+        * _coefficient_names - return list of names of coefficients including m_max as a last coefficient,
+        * _coefficient_values -  return list of values of coefficients including m_max,
+        * _pdf - return probability density function of magnitude(s),
+        * _cdf - return cumulative distribution function of magnitude(s),
+
     Required params if they are not define in the contractor:
 
-    * m_min
-    * m_max_current
-    * m_max (required if 'm_max_current' is missing in the params dictionary)
-
-    * _prepare - preparation of probability distribution computation
-    * _parameters - return the list of all probability distribution Parameters
-    * _grad_sf - return the survive function gradients of all probability distribution Parameters
-        (see grad_sf)
+        * m_min,
+        * m_max_current,
+        * m_max (required if 'm_max_current' is missing in the params dictionary)
 
    """
 
@@ -99,7 +103,7 @@ class BaseMagnitudeDistribution(rv_continuous, ABC):
     @m_min.setter
     def m_min(self, val):
         self._m_min = val
-        self.a = val - EPS2
+        self.rv_continuous.a = val - EPS2
         self._prepare()
 
     @m_min.getter
@@ -114,7 +118,7 @@ class BaseMagnitudeDistribution(rv_continuous, ABC):
     @m_max.setter
     def m_max(self, val):
         self._m_max = val
-        self.b = val + EPS2
+        self.rv_continuous.b = val + EPS2
         self._prepare()
 
     @m_max.getter
@@ -139,12 +143,12 @@ class BaseMagnitudeDistribution(rv_continuous, ABC):
 
     @property
     def coefficients(self):
-        """They are magnitude distribution Parameters"""
+        """They are magnitude distribution parameters"""
         return self._coefficient_values()
 
     @property
     def coefficient_names(self):
-        """They are magnitude distribution Parameters"""
+        """They are magnitude distribution parameters"""
         return self._coefficient_names()
 
     @abstractmethod
@@ -153,25 +157,28 @@ class BaseMagnitudeDistribution(rv_continuous, ABC):
 
     @property
     def const_coefficients(self):
-        """They are magnitude distribution Parameters"""
+        """They are magnitude distribution parameters"""
         return self._const_coefficients()
 
     def grad_sf(self, m, coefficient_name=None):
         r"""
-        Compute gradients of magnitude distribution survive function Parameters
+        Compute gradients of magnitude distribution survive function parameters
 
         .. math::
             \frac{\partial S_M\left( m \right)}{\partial x_i}, i=1,...
 
         where a survive function :math:`S_M \left( m \right) = 1 - F_M \left( m \right)`
-        and :math:`x_i, i = 1,...` are the magnitude distribution Parameters .
+        and :math:`x_i, i = 1,...` are the magnitude distribution parameters .
 
-        :param coefficient_name: The coefficient name for which gradient is calculated
+        :param coefficient_name: The coefficient name for which gradient is calculated.
+            If coefficient_name is empty method return dictionary of gradients of all coefficients.
         :type coefficient_name: str
         :param m: magnitude distribution of the survive function
         :type m: float
-        :return: dictionary of magnitude distribution Parameters names and their gradients.
-                 The magnitude distribution Parameters depend on the magnitude distribution
+        :return: Dictionary of magnitude distribution parameters names and their gradients
+            or value of gradient of the coefficient.
+
+        The magnitude distribution coefficients depend on the magnitude distribution
         """
         if coefficient_name is None:
             return self._grad_sf(m)

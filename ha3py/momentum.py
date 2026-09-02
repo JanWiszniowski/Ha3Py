@@ -24,8 +24,10 @@ from ha3py.utils import HaPyException
 def m_max_by_momentum_compute(mag_a):
     """
 
-    :param mag_a:
-    :return:
+    :param mag_a: Vector of seismic magnitudes
+    :type mag_a: numpy.ndarray
+    :return: Maximum value of the magnitude distribution.
+    :rtype: float
     """
     m_shift = mag_a - min(mag_a)  # work with distribution shifted to start support at zero
     n_mag = mag_a.size
@@ -92,16 +94,14 @@ def m_max_by_momentum(configuration, magnitude_distribution=None):  # magnitude_
     :param magnitude_distribution:  Optional magnitude distribution object.
         If missing, the magnitude distribution object is created based on the configuration
     :type magnitude_distribution: MagnitudeDistribution
-    :return:
-    :rtype:
+    :return: Estimated maximum magnitude, standard deviation of maximum magnitude.
+    :rtype: (float, float)
 
     Function history:
 
-        * Created by P.J. Vermeulen on FEB 2014
-            (Created as additional procedure for the program mmax.m)
-        * MAR 2014: Calculation of standard deviation by bootstrap method
-            included. Done by means of subfunction f_boot_var.
-        * 2025.01.01 code in Python
+        - Created by P.J. Vermeulen on FEB 2014 (Created as additional procedure for the program mmax.m)
+        - MAR 2014: Calculation of standard deviation by bootstrap method included. Done by means of subfunction f_boot_var.
+        - 2025.01.01 code in Python
 
     """
     mag_a = get_magnitudes_for_momentum(configuration, magnitude_distribution=magnitude_distribution)

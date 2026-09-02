@@ -66,7 +66,7 @@ Primitive Procedure
 Robson-Whitlock Procedure
 =========================
 
-:cite:t:`Robson_and_Whitlock_1964` showed that, under very general conditions,
+:cite:t:`RobsonWhitlock1964` showed that, under very general conditions,
 when magnitudes of :math:`n` events are arranged in ascending order
 :math:`m_1 \le m_2 \le .... \le m_{n-1} \le m_{max}^{obs}`,
 the estimation of :math:`m_{max}` takes the form:
@@ -120,9 +120,9 @@ the following relation can be anticipated
 .. math::
     :label: eq_b3a
 
-    F_M \left( m_{max}^{obs} \right)= \frac{n}{n+1} .
+    F_M \left( m_{max}^{obs} | m_{max} \right)= \frac{n}{n+1} .
 
-Since :math:`F_M \left( m \right)` depends on :math:`m_{max}`,
+Since :math:`F_M \left( m | m_{max} \right)` depends on :math:`m_{max}`,
 we can derive the estimator of the :math:`\widehat{m}_{max}` by solving equation :eq:`eq_b3a`.
 
 Tate-Pisarenko Procedure
@@ -136,21 +136,63 @@ The Tate-Pisarenko (and following Kijko-Sellevoll) assess :math:`m_{max}` by sol
     \widehat{m}_{max} = m_{max}^{obs}+\Delta,
 
 where :math:`\Delta` depends on :math:`m_{max}`.
-In the case of applying the Tate-Pisarenko procedure,
+In the case of applying the Tate-Pisarenko procedure (:cite:t:`KijkoGraham_1998`),
 the correction factor :math:`\Delta` takes the form
 
 .. math::
     :label: eq_b5
 
-    \Delta=\frac{1}{nf_M\left( m_{max}^{obs} \right)},
+    \Delta=\frac{1}{nf_M\left( m_{max} | m_{max} \right)},
 
 where the probability density function of the magnitude distribution :math:`f_M\left( m \right)`
 depends on :math:`m_{max}`. The approximate variance of the Tate-Pisarenko estimator is of the form
-(:cite:t:`Kijko_and_Graham_1998`; :cite:t:`Kijko_2004`)
+(:cite:t:`KijkoGraham_1998`; :cite:t:`Kijko_2004`)
 
 .. math::
     \text{VAR}\left( \widehat{m}_{max} \right)=
-    \sigma_M^2+\frac{n+1}{n^3f_M^2\left( m_{max}^{obs} \right)}
+    \sigma_M^2+\frac{n+1}{n^3f_M^2\left( m_{max} | m_{max} \right)}
+
+where :math:`\sigma_M^2` denotes the standard error of the largest observed magnitude determination.
+
+Original Tate-Pisarenko Procedure
+---------------------------------
+
+In the original Tate-Pisarenko procedure (:cite:t:`Pisarenko1991`; :cite:t:`Pisarenko1996`),
+the correction factor :math:`\Delta` takes the form
+
+.. math::
+    :label: eq_b5a
+
+    \Delta=\frac{1}{nf_M\left( m_{max}^{obs} | m_{max}^{obs} \right)},
+
+where the probability density function of the magnitude distribution :math:`f_M\left( m \right)`
+depends on :math:`m_{max}`. The approximate variance of the Tate-Pisarenko estimator is of the form
+(:cite:t:`KijkoGraham_1998`; :cite:t:`Kijko_2004`)
+
+.. math::
+    \text{VAR}\left( \widehat{m}_{max} \right)=
+    \sigma_M^2+\frac{n+1}{n^3f_M^2\left( m_{max}^{obs}  | m_{max}^{obs} \right)}
+
+where :math:`\sigma_M^2` denotes the standard error of the largest observed magnitude determination.
+
+Auxiliary Tate-Pisarenko Procedure
+---------------------------------
+
+In the auxiliary Tate-Pisarenko procedure (:cite:t:`Pisarenko1991`; :cite:t:`Pisarenko1996`),
+the correction factor :math:`\Delta` takes the form
+
+.. math::
+    :label: eq_b5b
+
+    \Delta=\frac{1}{nf_M\left( m_{max}^{obs} | m_{max} \right)},
+
+where the probability density function of the magnitude distribution :math:`f_M\left( m \right)`
+depends on :math:`m_{max}`. The approximate variance of the Tate-Pisarenko estimator is of the form
+(:cite:t:`KijkoGraham_1998`; :cite:t:`Kijko_2004`)
+
+.. math::
+    \text{VAR}\left( \widehat{m}_{max} \right)=
+    \sigma_M^2+\frac{n+1}{n^3f_M^2\left( m_{max}^{obs}  | m_{max} \right)}
 
 where :math:`\sigma_M^2` denotes the standard error of the largest observed magnitude determination.
 
@@ -168,13 +210,24 @@ where
 .. math::
     :label: eq_b6
 
-    \Delta=\int_{m_{min}}^{m_{max}}F_{M}\left(m\right|m_{max})^{n}dm,
+    \Delta=\int_{m_{min}}^{m_{max}}F_{M}\left(m\right | m_{max})^{n}dm,
 
 The approximate variance of the Kijko-Sellevoll estimator of :math:`m_{max}`
 for the frequency-magnitude G-R distribution is of the form
 
 .. math::
     \text{VAR}\left( \widehat{m}_{max} \right) = \sigma_M^2+\Delta^2
+
+Auxiliary Kijko-Sellevoll Procedure
+---------------------------------
+
+In the auxiliary Kijko-Sellevoll procedure (:cite:t:`KijkoSellevoll1989`; :cite:t:`KijkoSellevoll1992`),
+the correction factor :math:`\Delta` takes the form
+
+.. math::
+    :label: eq_b6a
+
+    \Delta=\int_{m_{min}}^{m_{max}^{obs}}F_{M}\left(m\right | m_{max})^{n}dm,
 
 Procedure based on the largest few earthquakes
 ==============================================
@@ -210,7 +263,7 @@ which is known as the posterior distribution of :math:`m_{max}`, are summarised 
     p_{m_{max}}\left(m_{max}|\mathbf{m}\right)=
     \begin{cases}
     0 & : m_{max} < m_{\max}^L \\
-    C\cdot \pi\left(m_{max}\right)\mathcal{L}\left(\mathbf{m}|m_{max}\right)
+    C\cdot \pi\left(m_{max}\right)\left(\mathbf{m}|m_{max}\right)
     & : m_{\max}^L \leqslant m_{max} \leqslant m_{\max}^U \\
     0 & : m_{max} > m_{\max}^U
     \end{cases},
@@ -219,7 +272,7 @@ where :math:`C` is a normalising constant
 
 .. math::
     C=1/\int_{m_{max}^L}^{m_{max}^U}
-    \pi\left(m_{max}\right)L\left(\mathbf{m}|m_{max}\right)dm_{max}.
+    \pi\left(m_{max}\right)\mathcal{L}\left(\mathbf{m}|m_{max}\right)dm_{max}.
 
 Based on :eq:`eq_b7`, three Bayesian analogues of the maximum likelihood (ML) point estimators are used:
 

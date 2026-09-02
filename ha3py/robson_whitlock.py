@@ -1,5 +1,5 @@
 r"""
-:math:`m_{max}` assessment by Robson-Whitlock and Robson-Whitlock-Cooke procedure
+The :math:`m_{max}` assessment by Robson-Whitlock and Robson-Whitlock-Cooke procedure
 ---------------------------------------------------------------------------------
 
 :math:`m_{max}` is assessed by adding to :math:`m_{max}^{obs}` the difference
@@ -69,9 +69,7 @@ def m_max_by_robson_whitlock(configuration):
         which is the dictionary of all parameters required for Ha3Py modules
         and results of all computations.
     :type configuration: dict
-    :return:
-        m_max       - estimated maximum magnitude
-        sd_m_max    - standard deviation of maximum magnitude
+    :return: Estimated maximum magnitude, standard deviation of maximum magnitude
     :rtype: (float, float)
 
     """
@@ -99,9 +97,7 @@ def m_max_by_robson_whitlock_cooke(configuration):
         which is the dictionary of all parameters required for Ha3Py modules
         and results of all computations.
     :type configuration: dict
-    :return:
-        m_max       - estimated maximum magnitude
-        sd_m_max    - standard deviation of maximum magnitude
+    :return: Estimated maximum magnitude, standard deviation of maximum magnitude
     :rtype: (float, float)
 
     """

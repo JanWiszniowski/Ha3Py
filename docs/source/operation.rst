@@ -12,7 +12,7 @@ which realises a generic methodology that is capable of utilizing different sour
 and uncertainty in the natural hazard based on the theory described
 among others in a series of works entitled
 "Estimation of Earthquake Hazard Parameters from Incomplete Data Files"
-(cite:t:`Kijko_atal_2016`).
+(cite:t:`KijkoSellevol1989`; cite:t:`KijkoSellevol1992`; cite:t:`Kijko_atal_2016`).
 It applies to various types of natural hazards - prehistoric, historical, and instrumental
 data can be incorporated, and the programme can account for incomplete data,
 uncertainty in event sizes, and applied occurrence distributions.

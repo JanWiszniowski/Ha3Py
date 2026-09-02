@@ -54,7 +54,7 @@ def m_max_by_direct_tate_pisarenko(configuration, magnitude_distribution=None, m
     :param magnitude_distribution:  Optional magnitude distribution object.
         If missing, the magnitude distribution object is created based on the configuration
     :type magnitude_distribution: MagnitudeDistribution
-    :return: estimated maximum magnitude, standard deviation of maximum magnitude.
+    :return: Estimated maximum magnitude, standard deviation of maximum magnitude.
     :rtype: (float, float)
 
     """
