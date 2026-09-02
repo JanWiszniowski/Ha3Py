@@ -25,24 +25,26 @@ class GutenbergRichter(BaseMagnitudeDistribution):
     The Gutenberg-Richter probability density function is:
 
     .. math::
-        f_{M}(m)=\begin{cases}
-        & 0 && : \text{for } m<m_{min} \\
-        & \frac {\beta\exp\left[-\beta\left(m-m_{min}\right)\right]}
-        {1-\exp\left[-\beta\left(m_{max}-m_{min}\right)\right]} &&
-        : \text{for } m_{min} \leqslant m \leqslant m_{max}\\
-        & 0 && : \text{for } m>m_{max}
-        \end{cases}
+
+        f_{M}\left( m \right)=\left\{ \begin{matrix}
+        0 & \text{: for } m < m_{min} \\
+        \frac {\beta\exp\left[-\beta\left(m-m_{min}\right)\right]}
+        {1-\exp\left[-\beta\left(m_{max}-m_{min}\right)\right]}
+        & \text{: for } m_{min} \leqslant m \leqslant m_{max} \\
+        0 & \text{: for } m>m_{max}
+        \end{matrix} \right.
 
     The Gutenberg-Richter cumulate density function is
 
     .. math::
-        F_{M}(m)=\left\{ \begin{alignat*}{2}
-        & 0 && : \text{for } m<m_{min} \\
-        & \frac{1-\exp\left[-\beta\left(m-m_{min}\right)\right]}
-        {1-\exp\left[-\beta\left(m_{max}-m_{min}\right)\right]} &&
-        : \text{for } m_{min} \leqslant m \leqslant m_{max}\\
-        & 1 && : \text{for } m>m_{max}
-        \end{alignat*} \right.
+
+        F_{M}\left( m \right)=\left\{ \begin{matrix}
+        0 & \text{: for } m < m_{min} \\
+        \frac{1-\exp\left[-\beta\left(m-m_{min}\right)\right]}
+        {1-\exp\left[-\beta\left(m_{max}-m_{min}\right)\right]}
+        & \text{: for } m_{min} \leqslant m \leqslant m_{max} \\
+        1 & \text{: for } m>m_{max}
+        \end{matrix} \right.
 
     The Gutenberg-Richter gradients for :math:`m_{max}` and :math:`\beta` are:
 

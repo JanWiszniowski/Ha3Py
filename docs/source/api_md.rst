@@ -15,6 +15,9 @@ Base magnitude distribution class
 .. automodule:: MagnitudeDistribution
    :members:
 
+Predefined magnitude distribution classes
+-----------------------------------------
+
 Users can use one from three predefined magnitude distribution classes:
 
 * classic Gutenberg-Richter magnitude distribution,
@@ -24,9 +27,6 @@ Users can use one from three predefined magnitude distribution classes:
 The non-parametric magnitude distribution is sensitive to the completeness of the magnitudes.
 Therefore, applying this to complete and extreme catalogues should be done with caution,
 as additional conditions must be fulfill, e.g., there must be no gaps in the magnitude ranges.
-
-Predefined magnitude distribution classes
------------------------------------------
 
 .. automodule:: GutenbergRichter
    :members:

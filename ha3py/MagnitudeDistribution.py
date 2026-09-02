@@ -56,7 +56,7 @@ class BaseMagnitudeDistribution(rv_continuous, ABC):
         * _pdf - return probability density function of magnitude(s),
         * _cdf - return cumulative distribution function of magnitude(s),
 
-    Required params if they are not define in the contractor:
+    Required params if they are not define in the constructor:
 
         * m_min,
         * m_max_current,
@@ -177,6 +177,7 @@ class BaseMagnitudeDistribution(rv_continuous, ABC):
         :type m: float
         :return: Dictionary of magnitude distribution parameters names and their gradients
             or value of gradient of the coefficient.
+        :rtype: dict
 
         The magnitude distribution coefficients depend on the magnitude distribution
         """

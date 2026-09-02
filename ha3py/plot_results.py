@@ -27,13 +27,15 @@ from ha3py.get_events_occurrence import get_events_occurrence
 
 def fill_sd(x, y, ax):
     """
-    Procedure fills the uncertainty area in the diagram
+    Procedure fills the uncertainty area in the diagram.
+
     :param x: x coordinates of the filled polygon
     :type x: iterable float
     :param y: x coordinates of the filled polygon
     :type y: iterable float
     :param ax: plotting axis
     :type ax: Axes
+
     """
     sd_color = (0.4, 0.3, 0.5)
     sd_face_color = sd_color
@@ -43,13 +45,15 @@ def fill_sd(x, y, ax):
 
 def plot_mean(x, y, ax):
     """
-    Procedure plit the mean value curve
+    Procedure plot the mean value curve.
+
     :param x: x coordinates of the filled polygon
     :type x: iterable float
     :param y: x coordinates of the filled polygon
     :type y: iterable float
     :param ax: plotting axis
     :type ax: Axes
+
     """
     m_color = 'r'
     m_width = 2
@@ -317,8 +321,6 @@ def plot_hazard(configuration, what, ax=None):
     :param ax: Plotting axis
     :type ax: Axes
 
-    :param ax:
-    :return:
     """
     # if 'hazard' not in pars:
     #     return

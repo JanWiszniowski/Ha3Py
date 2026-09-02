@@ -32,6 +32,17 @@ from ha3py.constant_values import LN_10_
 
 
 def get_covariance(configuration, events_distribution=None, delta=0.01):
+    """
+
+    :param configuration:
+    :param configuration:
+    :param events_distribution:
+    :param events_distribution:
+    :param delta:
+    :param delta:
+    :return:
+    :rtype:
+    """
     if events_distribution is None:
         events_distribution = get_events_occurrence(configuration)
     x_v = events_distribution.coefficients[:-1]
@@ -75,52 +86,17 @@ def get_covariance(configuration, events_distribution=None, delta=0.01):
     return var_cov_a
 
 
-# def get_covariance(configuration, events_distribution=None, delta=0.01):
-#     if events_distribution is None:
-#         events_distribution = get_events_occurrence(configuration)
-#     x_v = events_distribution.coefficients
-#     if len(x_v) > 3:
-#         return None
-#     lamb = x_v[0]
-#     beta = x_v[1]
-#     d_beta = abs(beta) * delta  # d_beta   = 1% OF BETA   VALUE
-#     d_lambda = abs(lamb) * delta  # d_lambda = 1% OF LAMBDA VALUE
-#     f_00 = ln_likelihood(array([lamb, beta]), configuration)
-#
-#     # d2_Ln(LIKELIHOOD FUNCTION)/d2_BETA >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-#     f_bm2 = ln_likelihood(array([lamb, beta - 2 * d_beta]), configuration)
-#     f_bm1 = ln_likelihood(array([lamb, beta - d_beta]), configuration)
-#     f_bp1 = ln_likelihood(array([lamb, beta + d_beta]), configuration)
-#     f_bp2 = ln_likelihood(array([lamb, beta + 2 * d_beta]), configuration)
-#     d2d2_beta = (-f_bp2 + 16 * f_bp1 - 30 * f_00 + 16 * f_bm1 - f_bm2) / (12 * d_beta * d_beta)
-#     # END OF d2_Ln(LIKELIHOOD FUNCTION)/d2_BETA DETERMINATION <<<<<<<<<<<<<<<<<
-#
-#     # d2_Ln(LIKELIHOOD FUNCTION)/d2_LAMBDA >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-#     f_lm2 = ln_likelihood(array([lamb - 2 * d_lambda, beta]), configuration)
-#     f_lm1 = ln_likelihood(array([lamb - d_lambda, beta]), configuration)
-#     f_lp1 = ln_likelihood(array([lamb + d_lambda, beta]), configuration)
-#     f_lp2 = ln_likelihood(array([lamb + 2 * d_lambda, beta]), configuration)
-#     d2d2_lambda = (-f_lp2 + 16 * f_lp1 - 30 * f_00 + 16 * f_lm1 - f_lm2) / (12 * d_lambda * d_lambda)
-#     # END OF d2_Ln(LIKELIHOOD FUNCTION)/d2_LAMBDA DETERMINATION <<<<<<<<<<<<<<<
-#
-#     # d2_Ln(LIKELIHOOD FUNCTION)/d_BETA_LAMBDA >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-#     f_bmlm = ln_likelihood(array([lamb - d_lambda, beta - d_beta]), configuration)
-#     f_bmlp = ln_likelihood(array([lamb + d_lambda, beta - d_beta]), configuration)
-#     f_bplm = ln_likelihood(array([lamb - d_lambda, beta + d_beta]), configuration)
-#     f_bplp = ln_likelihood(array([lamb + d_lambda, beta + d_beta]), configuration)
-#     d2d_beta_lambda = (f_bplp - f_bplm - f_bmlp + f_bmlm) / (4 * d_beta * d_lambda)
-#     # END OF d2_Ln(LIKELIHOOD FUNCTION)/d_BETA_LAMBDA DETERMINATION <<<<<<<<<<<
-#
-#     # VAR-COV MATRIX CALCULATION >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-#     var_cov_inv_a = array([[-d2d2_lambda, -d2d_beta_lambda],
-#                            [-d2d_beta_lambda, -d2d2_beta]])
-#     var_cov_a = inv(var_cov_inv_a)
-#     var_cov_a[0][0] = abs(var_cov_a[0][0])
-#     var_cov_a[1][1] = abs(var_cov_a[1][1])
-#     return var_cov_a
-
-
 def compute_uncertainty(configuration, events_distribution=None):
+    """
+
+    :param configuration:
+    :param configuration:
+    :param events_distribution:
+    :param events_distribution:
+    :return:
+    :rtype:
+
+    """
     if events_distribution is None:
         events_distribution = get_events_occurrence(configuration)
     cov = get_covariance(configuration, events_distribution=events_distribution)

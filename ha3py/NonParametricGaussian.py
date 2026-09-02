@@ -35,9 +35,9 @@ def smooth_parameter_estimation(earthquakes):
 
     For more details, see Silverman (1986), pp. 48.
 
-    :param earthquakes: column vector of earthquakes dictionaries
+    :param earthquakes: Column vector of earthquakes dictionaries
     :type earthquakes: list(dict)
-    :return: optimal value of smoothing parameter in the non-parametric (Gaussian kernel) function
+    :return: Optimal value of smoothing parameter in the non-parametric (Gaussian kernel) function
     :rtype: (float)
     """
     no_earthquakes = len(earthquakes)
