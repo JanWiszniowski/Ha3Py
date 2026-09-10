@@ -39,7 +39,7 @@ def m_max_solve_by_iteration(configuration, magnitude_distribution=None, m_max=N
     where the delta is a class defined outside the function and the object ot the class is one
     of the Parameters of the call.
 
-    :param delta: Magnitude correction :math:``\Delta object.
+    :param delta: Magnitude correction :math:`\Delta` object.
         If missing, the object is created based on the configuration
     :type delta: BaseDelta
     :param m_max: Maximum value of the magnitude distribution.
@@ -49,26 +49,26 @@ def m_max_solve_by_iteration(configuration, magnitude_distribution=None, m_max=N
         If missing, the magnitude distribution object is created based on the configuration
     :type magnitude_distribution: MagnitudeDistribution
     :param delta: Delta object (e.g. GuRiBaKiSe), which combines the magnitude distribution
-        (e.g. Gutenberg-Richter-Bayes) and delta calculation method (e.g. Kijko-Sellovoll).
+        (e.g. Gutenberg-Richter-Bayes) and delta calculation method (e.g. Kijko-Sellevoll).
     :param configuration: General configuration container,
         which is the dictionary of all parameters required for Ha3Py modules
         and results of all computations.
         Required Parameters in the dictionary are (keys are strings):
 
-            * m_max_obs
-            * sd_m_max_obs
-            * m_min
-            * m_max_current
-            * beta
-            * lambda
-            * time_span
-            * q_beta
-            * q_lamb
-            * m_max_current: starting M_max in the iteration
+            * m_max_obs,
+            * sd_m_max_obs,
+            * m_min,
+            * m_max_current,
+            * beta,
+            * lambda,
+            * time_span,
+            * q_beta,
+            * q_lamb,
+            * m_max_current: starting M_max in the iteration.
 
     :type configuration: dict
     :return: Estimated maximum magnitude, standard deviation of maximum magnitude
-    "rtype" (float, float)
+    :rtype: (float, float)
 
     """
     if delta is None:

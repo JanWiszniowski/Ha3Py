@@ -64,15 +64,16 @@ class NonparametricGaussianKernel(BaseMagnitudeDistribution):
     The non-parametric magnitude distribution with Gaussian kernel probability density function is:
 
     .. math::
-        f_{M}(m)=\left\{ \begin{alignat*}{2}
-        & 0 && : \text{for } m<m_{min} \\
-        & \frac{\left( h\sqrt{2\pi}\right)^{-1}\sum_{i=1}^{M}\frac{1}{T_i}\exp
+
+        f_{M}\left( m \right)=\begin{cases}
+        0 & \text{: for } m < m_{min} \\
+        \frac{\left( h\sqrt{2\pi}\right)^{-1}\sum_{i=1}^{M}\frac{1}{T_i}\exp
         \left[ -0.5\left( \frac{m-m_i}{h} \right)^2 \right]}
         {\sum_{i=1}^{M}\frac{1}{T_i}\left[  \Phi\left( \frac{m_{max}-m_i}{h} \right)-
-        \Phi\left( \frac{m_{min}-m_i}{h} \right) \right]} &&
-        : \text{for } m_{min} \leqslant m \leqslant m_{max}\\
-        & 0 && : \text{for } m>m_{max}
-        \end{alignat*} \right.
+        \Phi\left( \frac{m_{min}-m_i}{h} \right) \right]}
+        & \text{: for } m_{min} \leqslant m \leqslant m_{max} \\
+        0 & \text{: for } m>m_{max}
+        \end{cases}
 
     where :math:`h` is the smoothing parameter and :math:`T_i` is the sum of time periods
     of catalogues, where :math:`m_i \ge m_{min}`. Values :math:`1/T_i` can be replaced by predefined weights
@@ -83,15 +84,16 @@ class NonparametricGaussianKernel(BaseMagnitudeDistribution):
     The non-parametric magnitude distribution with Gaussian kernel cumulate density functions:
 
     .. math::
-        F_{M}(m)=\left\{ \begin{alignat*}{2}
-        & 0 && : \text{for } m<m_{min} \\
-        & \frac{\sum_{i=1}^{M}\frac{1}{T_i}\left[  \Phi\left( \frac{m-m_i}{h} \right)-
+
+        F_{M}\left( m \right)=\begin{cases}
+        0 & \text{: for } m < m_{min} \\
+        \frac{\sum_{i=1}^{M}\frac{1}{T_i}\left[  \Phi\left( \frac{m-m_i}{h} \right)-
         \Phi\left( \frac{m_{min}-m_i}{h} \right) \right]}
         {\sum_{i=1}^{M}\frac{1}{T_i}\left[  \Phi\left( \frac{m_{max}-m_i}{h} \right)-
-        \Phi\left( \frac{m_{min}-m_i}{h} \right) \right]} &&
-        : \text{for } m_{min} \leqslant m \leqslant m_{max}\\
-        & 1 && : \text{for } m>m_{max}
-        \end{alignat*} \right.
+        \Phi\left( \frac{m_{min}-m_i}{h} \right) \right]}
+        & \text{: for } m_{min} \leqslant m \leqslant m_{max} \\
+        1 & \text{: for } m>m_{max}
+        \end{cases}
 
     where :math:`\Phi(m)` is the normal cdf.
 
@@ -218,14 +220,16 @@ class NonparametricPseudoGaussianKernel(BaseMagnitudeDistribution):
     The non-parametric magnitude distribution with pseudo Gaussian kernel probability density function is:
 
     .. math::
-        f_{M}(m)=\left\{ \begin{alignat*}{2}
-        & 0 && : \text{for } m<m_{min} \\
-        & \frac{\sum_{i=1}^{M}\frac{1}{T_i} \psi\left(\frac{m-m_i}{h}\right)}
+
+        f_{M}\left( m \right)=\begin{cases}
+        0 & \text{: for } m < m_{min} \\
+        \frac{\sum_{i=1}^{M}\frac{1}{T_i} \psi\left(\frac{m-m_i}{h}\right)}
         {\sum_{i=1}^{M}\frac{1}{T_i}\left[  \Psi\left( \frac{m_{max}-m_i}{h} \right)-
-        \Psi\left( \frac{m_{min}-m_i}{h} \right) \right]} &&
-        : \text{for } m_{min} \leqslant m \leqslant m_{max}\\
-        & 0 && : \text{for } m>m_{max}
-        \end{alignat*} \right.
+        \Psi\left( \frac{m_{min}-m_i}{h} \right) \right]}
+        & \text{: for } m_{min} \leqslant m \leqslant m_{max} \\
+        0 & \text{: for } m>m_{max}
+        \end{cases}
+
 
     where
 
@@ -248,15 +252,16 @@ class NonparametricPseudoGaussianKernel(BaseMagnitudeDistribution):
     The non-parametric magnitude distribution with Gaussian kernel cumulate density functions:
 
     .. math::
-        F_{M}(m)=\left\{ \begin{alignat*}{2}
-        & 0 && : \text{for } m<m_{min} \\
-        & \frac{\sum_{i=1}^{M}\frac{1}{T_i}\left[  \Psi\left( \frac{m-m_i}{h} \right)-
+
+        F_{M}\left( m \right)=\begin{cases}
+        0 & \text{: for } m < m_{min} \\
+        \frac{\sum_{i=1}^{M}\frac{1}{T_i}\left[  \Psi\left( \frac{m-m_i}{h} \right)-
         \Psi\left( \frac{m_{min}-m_i}{h} \right) \right]}
         {\sum_{i=1}^{M}\frac{1}{T_i}\left[  \Psi\left( \frac{m_{max}-m_i}{h} \right)-
-        \Psi\left( \frac{m_{min}-m_i}{h} \right) \right]} &&
-        : \text{for } m_{min} \leqslant m \leqslant m_{max}\\
-        & 1 && : \text{for } m>m_{max}
-        \end{alignat*} \right.
+        \Psi\left( \frac{m_{min}-m_i}{h} \right) \right]}
+        & \text{: for } m_{min} \leqslant m \leqslant m_{max} \\
+        1 & \text{: for } m>m_{max}
+        \end{cases}
 
     The only variable parameter is :math:`m_{max}`. The survive function gradient for :math:`m_{max}` is
 

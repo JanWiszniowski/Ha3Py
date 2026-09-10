@@ -17,11 +17,12 @@ Module bayesian maximum magnitude computation
 import numpy as np
 from ha3py.utils import HaPyException
 import scipy.integrate as integrate
+from ha3py.m_max_utils import non_bayesian_m_max_estimation
 
 
 def bayesian_m_max(configuration, likelihood):
     r"""
-    The bayesian_m_max function estimates the :math:`m_{max}` bze the Bayesian methods.
+    The bayesian_m_max function estimates the :math:`m_{max}` by the Bayesian methods.
     The bayesian :math:`m_{max}` assessment methods incorporate any relevant information about :math:`m_{max}`
     which is defined as the apriori probability with the double-truncated Gaussian
     distribution :math:`\pi\left(m_{max}\right)=
@@ -96,3 +97,36 @@ def bayesian_m_max(configuration, likelihood):
         return m_max, likelihood.sd_m_max + likelihood.sd_prior_m_max
     else:
         raise HaPyException(f"Wrong bayesian m_max estimator ?'{bayesian_m_max_estimator}'")
+
+
+def init_bayesian_m_max(configuration, magnitude_distribution=None, m_max_pair=None):
+    if m_max_pair is None:
+        m_max, sd_m_max = non_bayesian_m_max_estimation(configuration,
+                                                        magnitude_distribution=magnitude_distribution)
+    else:
+        m_max, sd_m_max = m_max_pair
+    if m_max is None or m_max > 9.9:
+        print("!!!!The catalogue dependent m_max can not be assessed")
+        print(f"Chose the solution:")
+        print(f"Observed m_max ({configuration['m_max_obs']}) - press o")
+        print(f"Primitive m_max ({configuration['m_max_obs'] + 0.5}) - press p")
+        print(f"Exit program - press x")
+        answer = input("Enter [o/p/x] > ")
+        if not answer:
+            exit(0)
+        if answer[0] == 'o':
+            m_max = configuration['m_max_obs']
+            sd_m_max = configuration['sd_m_max_obs']
+        elif answer[0] == 'p':
+            m_max = configuration['m_max_obs'] + 0.5
+            sd_m_max = configuration['sd_m_max_obs']
+        else:
+            exit(0)
+
+    prior_m_max = configuration['prior_m_max']
+    sd_prior_m_max = configuration['sd_prior_m_max']
+    if m_max > prior_m_max:
+        print(f"Prior m_max ({prior_m_max}) is smaller than m_max estimated from the catalog ({m_max})")
+        # raise HaPyException('Prior m_max error')
+        exit(-1)
+    return m_max, sd_m_max, prior_m_max, sd_prior_m_max

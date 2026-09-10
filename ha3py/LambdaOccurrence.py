@@ -18,8 +18,12 @@ from ha3py.BaseOccurrence import OccurrenceBase
 
 
 class LambdaOccurrence(OccurrenceBase, ABC):
-    """
-    Base class of event occurrence classes, which are described by lambda coefficient.
+    r"""
+    Base class of event occurrence classes,
+    in which one of the coefficients is the lambda coefficient (:math:`\lambda`).
+    All classes having the lambda coefficient should inherit from this class,
+    whereas event occurrence classes that do not have the lambda coefficient
+    must inherit from the OccurrenceBase class.
 
     """
 

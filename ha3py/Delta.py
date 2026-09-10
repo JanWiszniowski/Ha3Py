@@ -31,7 +31,6 @@ from abc import ABC, abstractmethod
 from ha3py.get_magnitude_distribution import get_magnitude_distribution
 from ha3py.utils import HaPyException
 from ha3py.constant_values import EPS
-from math import log
 
 
 class BaseDelta(ABC):
@@ -57,11 +56,14 @@ class BaseDelta(ABC):
             delta_object = KijkoSellevollDelta(params)
             delta = delta_object(t=123.0, annual_lambda=0.37)
 
-        :param n: number if events. If n is unset then it is determined as t and :math:`\lambda`
-             :math:`n=t\lambda`
+        :param n: number if events. If n is unset
+            then it is determined based on t and :math:`\lambda`: :math:`n=t\lambda`
+        :type n: float
         :param time: the time duration in years
+        :type time: float
         :param annual_lambda: annual occurrence - :math:`\lambda` value
-        :return: the :math:`\Delta` value - result of the virtual function _method_delta(m, n)
+        :type annual_lambda: float
+        :return: the :math:`\Delta` value - result of the virtual function _method_delta(n) for :math:`m=m_{max}`
 
         """
         if n is None:
@@ -103,10 +105,10 @@ class BaseDelta(ABC):
 
 class KijkoSellevoll(BaseDelta):
     r"""
-    Kijko-Sellevoll :math:`\Delta` calculation class
+    Kijko-Sellevoll :math:`\Delta` calculation class is:
 
     .. math::
-        \Delta =\int_{m_{min}}^{m_{max}}F_M\left( m \right)^ndm
+        \Delta =\int_{m_{min}}^{m_{max}}F_M\left( m | m_{max} \right)^ndm
 
     The integration is performed numerically.
     """
@@ -123,7 +125,7 @@ class KijkoSellevoll(BaseDelta):
         :return: the :math:`\Delta` value
 
         .. math::
-            \Delta =\int_{m_{min}}^{m_{max}}F_M\left( m \right)^ndm
+            \Delta =\int_{m_{min}}^{m_{max}}F_M\left( m | m_{max} \right)^ndm
 
         The integration is performed numerically.
         """
@@ -146,18 +148,19 @@ class KijkoSellevoll(BaseDelta):
         # return left >= right
 
 
-class KijkoSellevoll_m_max_obs(BaseDelta):
+class KijkoSellevollMmaxObs(BaseDelta):
     r"""
-    Kijko-Sellevoll :math:`\Delta` calculation class
+    Kijko-Sellevoll :math:`\Delta` calculation class is:
 
     .. math::
-        \Delta =\int_{m_{min}}^{m_{max}^{obs}}F_M\left( m \right)^ndm
+        \Delta =\int_{m_{min}}^{m_{max}^{obs}}F_M\left( m | m_{max} \right)^ndm
 
     The integration is performed numerically.
     """
 
     def __init__(self, configuration, magnitude_distribution=None, m_max=None, m_max_obs=None):
-        super().__init__('Kijko-Sellevoll for m_max_obs', configuration, magnitude_distribution=magnitude_distribution, m_max=m_max, m_max_obs=m_max_obs)
+        super().__init__('Kijko-Sellevoll for m_max_obs', configuration,
+                         magnitude_distribution=magnitude_distribution, m_max=m_max, m_max_obs=m_max_obs)
 
     def _delta(self, n):
         r"""
@@ -167,7 +170,7 @@ class KijkoSellevoll_m_max_obs(BaseDelta):
         :return: the :math:`\Delta` value
 
         .. math::
-            \Delta =\int_{m_{min}}^{m_{max}^{obs}}F_M\left( m \right)^ndm
+            \Delta =\int_{m_{min}}^{m_{max}^{obs}}F_M\left( m | m_{max} \right)^ndm
 
         The integration is performed numerically.
         """
@@ -177,13 +180,12 @@ class KijkoSellevoll_m_max_obs(BaseDelta):
         return delta[0]
 
 
-
 class TatePisarenko(BaseDelta):
     r"""
-    Tate-Pisarenko :math:`\Delta` calculation class
+    Tate-Pisarenko :math:`\Delta` calculation class is:
 
     .. math::
-        \Delta =\frac{1}{nf_M\left( m_{max}^{obs} \right)}
+        \Delta =\frac{1}{nf_M\left( m_{max} | m_{max} \right)}
 
     """
 
@@ -199,7 +201,7 @@ class TatePisarenko(BaseDelta):
         :return: the :math:`\Delta` value
 
         .. math::
-        \Delta =\frac{1}{nf_M\left( m_{max} \right)}
+        \Delta =\frac{1}{nf_M\left( m_{max} | m_{max} \right)}
 
         """
         pdf_m = self.magnitude_distribution.pdf(self.magnitude_distribution.m_max - EPS)
@@ -219,17 +221,23 @@ class TatePisarenko(BaseDelta):
         # return left <= right
 
 
-class TatePisarenko_m_max_obs(BaseDelta):
+class TatePisarenkoMmaxObs(BaseDelta):
     r"""
-    Tate-Pisarenko simplified :math:`\Delta` calculation class
+    Tate-Pisarenko simplified :math:`\Delta` calculation class is:
 
     .. math::
-        \Delta =\frac{1}{nf_M\left( m_{max}^{obs} \right)}
+        \Delta =\frac{1}{nf_M\left( m_{max}^{obs} | m_{max} \right)}
+
+    Please note that the original
+    Tate-Pisarenko :math:`\Delta=\frac{1}{nf_M\left( m_{max}^{obs} | m_{max}^{obs} \right)}` calculation
+    is called directly without solving the equation :math:`m_{max}=m_{max}^{obs}+\Delta(m_{max})`,
+    since :math:`\Delta(m_{max})=\text{constant}`.
 
     """
 
     def __init__(self, configuration, magnitude_distribution=None, m_max=None, m_max_obs=None):
-        super().__init__('Tate-Pisarenko m_max_obs', configuration, magnitude_distribution=magnitude_distribution, m_max=m_max, m_max_obs=m_max_obs)
+        super().__init__('Tate-Pisarenko m_max_obs', configuration, magnitude_distribution=magnitude_distribution,
+                         m_max=m_max, m_max_obs=m_max_obs)
 
     def _delta(self, n):
         r"""
@@ -258,8 +266,8 @@ def get_delta(configuration, magnitude_distribution=None, m_max=None):
     elif delta == 'Tate-Pisarenko':
         return TatePisarenko(configuration, magnitude_distribution=magnitude_distribution, m_max=m_max)
     if delta == 'Kijko-Sellevoll m_max_obs':
-        return KijkoSellevoll_m_max_obs(configuration, magnitude_distribution=magnitude_distribution, m_max=m_max)
+        return KijkoSellevollMmaxObs(configuration, magnitude_distribution=magnitude_distribution, m_max=m_max)
     elif delta == 'Tate-Pisarenko m_max_obs':
-        return TatePisarenko_m_max_obs(configuration, magnitude_distribution=magnitude_distribution, m_max=m_max)
+        return TatePisarenkoMmaxObs(configuration, magnitude_distribution=magnitude_distribution, m_max=m_max)
     else:
         raise HaPyException('Unknown delta computation')

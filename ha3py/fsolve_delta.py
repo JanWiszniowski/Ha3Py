@@ -65,11 +65,11 @@ def m_max_solve_equation(configuration, magnitude_distribution=None, m_max=None,
     :param m_max: Maximum value of the magnitude distribution.
         If missing, the maximum magnitude is taken from configuration
     :type m_max: float
-    :param delta:
-    :type delta:
-    :return:
+    :param delta: Delta :math:`\Delta` calculation object
+    :type delta: BaseDelta
     :return: Estimated maximum magnitude, standard deviation of maximum magnitude
     :rtype: (float, float)
+
     """
     if delta is None:
         delta = get_delta(configuration, magnitude_distribution=magnitude_distribution, m_max=m_max)

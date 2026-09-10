@@ -55,13 +55,7 @@ delta estimation methods, or catalogues.
 .. automodule:: robson_whitlock
    :members:
 
-.. automodule:: bayesian_normal
-   :members:
-
-.. automodule:: bayesian_by_shift
-   :members:
-
-.. automodule:: bayesian_fiducial
+.. automodule:: bayesian_estimators
    :members:
 
 .. automodule:: primitive

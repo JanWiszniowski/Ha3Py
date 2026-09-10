@@ -13,6 +13,7 @@ def get_events_occurrence(configuration, **kwargs):
         and results of all computations.
     :type configuration: dict
     :param m_min: total minimum magnitude (optional, if it is missing, m_min taken from the configuration)
+    :type m_min: float
     :param m_max: Maximum value of the magnitude distribution.
         If missing, the maximum magnitude is taken from configuration
     :type m_max: float

@@ -20,6 +20,7 @@ from ha3py.iteration import m_max_solve_by_iteration
 from ha3py.momentum import m_max_by_momentum
 from ha3py.primitive import m_max_primitive
 from ha3py.robson_whitlock import m_max_by_robson_whitlock, m_max_by_robson_whitlock_cooke
+from ha3py.tate_pisarenko import m_max_by_tate_pisarenko
 from ha3py.utils import HaPyException
 
 
@@ -55,5 +56,7 @@ def non_bayesian_m_max_estimation(configuration, magnitude_distribution=None):
         return m_max_by_robson_whitlock(configuration)
     elif m_max_assessment == 'Robson-Whitlock-Cooke':
         return m_max_by_robson_whitlock_cooke(configuration)
+    elif m_max_assessment == 'Tate-Pisarenko':
+        return m_max_by_tate_pisarenko(configuration)
     else:
         raise HaPyException(f'Wrong m_max assessment procedure name ??{m_max_assessment}')

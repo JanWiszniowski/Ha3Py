@@ -26,25 +26,25 @@ class GutenbergRichter(BaseMagnitudeDistribution):
 
     .. math::
 
-        f_{M}\left( m \right)=\left\{ \begin{matrix}
+        f_{M}\left( m \right)=\begin{cases}
         0 & \text{: for } m < m_{min} \\
         \frac {\beta\exp\left[-\beta\left(m-m_{min}\right)\right]}
         {1-\exp\left[-\beta\left(m_{max}-m_{min}\right)\right]}
         & \text{: for } m_{min} \leqslant m \leqslant m_{max} \\
         0 & \text{: for } m>m_{max}
-        \end{matrix} \right.
+        \end{cases}
 
     The Gutenberg-Richter cumulate density function is
 
     .. math::
 
-        F_{M}\left( m \right)=\left\{ \begin{matrix}
+        F_{M}\left( m \right)=\begin{cases}
         0 & \text{: for } m < m_{min} \\
         \frac{1-\exp\left[-\beta\left(m-m_{min}\right)\right]}
         {1-\exp\left[-\beta\left(m_{max}-m_{min}\right)\right]}
         & \text{: for } m_{min} \leqslant m \leqslant m_{max} \\
         1 & \text{: for } m>m_{max}
-        \end{matrix} \right.
+        \end{cases}
 
     The Gutenberg-Richter gradients for :math:`m_{max}` and :math:`\beta` are:
 
@@ -85,7 +85,10 @@ class GutenbergRichter(BaseMagnitudeDistribution):
     def __init__(self, configuration, beta=None, m_min=None, m_max=None):
         """
 
-        :param configuration:
+        :param configuration: General configuration container,
+            which is the dictionary of all parameters required for Ha3Py modules
+            and results of all computations.
+        :type configuration: dict
         :param beta:
         :param m_min:
         :param m_max:
@@ -106,13 +109,14 @@ class GutenbergRichter(BaseMagnitudeDistribution):
         Returns the probability density function
 
         .. math::
-            f_{M}(m)=\left\{ \begin{alignat*}{2}
-            & 0 && : \text{for } m<m_{min} \\
-            & \frac {\beta\exp\left[-\beta\left(m-m_{min}\right)\right]}
-            {1-\exp\left[-\beta\left(m_{max}-m_{min}\right)\right]} &&
-            : \text{for } m_{min} \leqslant m \leqslant m_{max}\\
-            & 0 && : \text{for } m>m_{max}
-            \end{alignat*} \right.
+
+            f_{M}\left( m \right)=\begin{cases}
+            0 & \text{: for } m < m_{min} \\
+            \frac {\beta\exp\left[-\beta\left(m-m_{min}\right)\right]}
+            {1-\exp\left[-\beta\left(m_{max}-m_{min}\right)\right]}
+            & \text{: for } m_{min} \leqslant m \leqslant m_{max} \\
+            0 & \text{: for } m>m_{max}
+            \end{cases}
 
         """
         return self._beta * np.exp(-self._beta * (x - self.m_min)) / self.den
@@ -121,13 +125,14 @@ class GutenbergRichter(BaseMagnitudeDistribution):
         r"""
         Returns the cumulative density function
         .. math::
-            F_{M}(m)=\left\{ \begin{alignat*}{2}
-            & 0 && : \text{for } m<m_{min} \\
-            & \frac{1-\exp\left[-\beta\left(m-m_{min}\right)\right]}
-            {1-\exp\left[-\beta\left(m_{max}-m_{min}\right)\right]} &&
-            : \text{for } m_{min} \leqslant m \leqslant m_{max}\\
-            & 1 && : \text{for } m>m_{max}
-            \end{alignat*} \right.
+
+            F_{M}\left( m \right)=\begin{cases}
+            0 & \text{: for } m < m_{min} \\
+            \frac{1-\exp\left[-\beta\left(m-m_{min}\right)\right]}
+            {1-\exp\left[-\beta\left(m_{max}-m_{min}\right)\right]}
+            & \text{: for } m_{min} \leqslant m \leqslant m_{max} \\
+            1 & \text{: for } m>m_{max}
+            \end{cases}
 
         """
         return (1 - np.exp(-self._beta * (x - self.m_min))) / self.den

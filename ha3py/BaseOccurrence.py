@@ -38,7 +38,10 @@ class OccurrenceBase(rv_continuous, ABC):
 
         **methods:** d_pmf, d_cdf, ln_d_pmf, d_grad_sf,
 
-    *   The continues probability that in the period :math:`time` magnitude of none event exceed the value :math:`m`
+    *   The continues probability the time process,
+        described by pdf :math:`f_M^{max}\left( m|t, \mathbf{\Theta} \right)`,
+        and cdf :math:`F_M^{max}\left( m|t, \mathbf{\Theta} \right)
+        that in the period :math:`time` magnitude of none event exceed the value :math:`m`
 
         **methods:** pdf, cdf, grad_sf, and other methods of the SciPy continues probability (rv_continuous).
 
@@ -56,7 +59,6 @@ class OccurrenceBase(rv_continuous, ABC):
 
 
     **Methods:**
-
 
     `_cdf`:
         Local definition of the cumulative distribution function :math:`F_M^{max}\left( m|t, \mathbf{\Theta} \right)`
@@ -92,7 +94,8 @@ class OccurrenceBase(rv_continuous, ABC):
         for magnitudes :math:`m` or greater, you must set :math:`m_{min}=m` earlier.
         Derived classes shouldn't overwrite this method but rather define the abstract `_d_cdf`.
     `d_expected`:
-        Definition of the expected value of discrete probability :math:`p_n(n|t)`
+        Definition of the expected value of discrete probability :math:`p_n(n|t)`,
+        described also by cdf :math:`F_n(n|t)`,
         of occurrence of :math:`n` event in the period :math:`t`:
     `ln_d_pmf`:
         The function compute the natural probability logarithm :math:`\ln\left[ p_n(n|t) \right]`
@@ -108,12 +111,12 @@ class OccurrenceBase(rv_continuous, ABC):
 
         .. math::
 
-            \frac{\partial S_M^{max}\left(m | t\right)}{\partial\theta_{\beta i}} =
+            \frac{\partial S_M^{max}\left(m | t\right)}{\partial\theta_{\beta j}} =
             \frac{\partial S_M^{max}\left(m | t\right)}{\partial S_M\left( m|\mathbf{\Theta_\beta} \right)}
-            \frac{\partial S_M\left(m | \mathbf{\Theta_\beta} \right)}{\partial\theta_{\beta i}},
+            \frac{\partial S_M\left(m | \mathbf{\Theta_\beta} \right)}{\partial\theta_{\beta j}},
 
         where :math:`S_M^{max}\left(m | t\right) = 1-F_M^{max}\left(m | t\right)`,
-        :math:`\theta_{\beta i} \in \Theta_\beta` are magnitude distribution coefficients,
+        :math:`\theta_{\beta j} \in \Theta_\beta` are magnitude distribution coefficients,
         and :math:`\theta_{\lambda i} \in \Theta_\lambda` are the occurrence probability own coefficients.
 
     `d_grad_sf`:
@@ -128,12 +131,12 @@ class OccurrenceBase(rv_continuous, ABC):
 
         .. math::
 
-            \frac{\partial S_n\left(n | t\right)}{\partial\theta_{\beta i}} =
+            \frac{\partial S_n\left(n | t\right)}{\partial\theta_{\beta j}} =
             \frac{\partial S_n\left(n | t\right)}{\partial S_M\left( m|\mathbf{\Theta_\beta} \right)}
-            \frac{\partial S_M\left(m | \mathbf{\Theta_\beta} \right)}{\partial\theta_{\beta i}},
+            \frac{\partial S_M\left(m | \mathbf{\Theta_\beta} \right)}{\partial\theta_{\beta j}},
 
         where :math:`S_n\left(n | t\right) = 1-F_n^{max}\left(n | t\right)`,
-        :math:`\theta_{\beta i} \in \Theta_\beta` are magnitude distribution coefficients,
+        :math:`\theta_{\beta j} \in \Theta_\beta` are magnitude distribution coefficients,
         and :math:`\theta_{\lambda i} \in \Theta_\lambda` are the occurrence probability own coefficients.
 
 
@@ -317,7 +320,7 @@ class OccurrenceBase(rv_continuous, ABC):
         :type n: int
         :param args: Optional period value. If no argument missing, one year is assumed.
         :type args: list
-        :return: The CDF for :math:`n` events
+        :return: The cdf for :math:`n` events
         :rtype: float
 
         """
@@ -364,8 +367,11 @@ class OccurrenceBase(rv_continuous, ABC):
         The function compute the expected value of occurrence of :math:`n` events
         in the period :math:`time` having magnitudes :math:`m` or greater.
 
-        :param t:
-        :return:
+        :param t: The time event does not exceed the magnitude :math:`m`
+        :type t: float
+        :return: Expected value of occurrence of :math:`n` events
+        :rtype: int
+
         """
         x = 0.0
         p = 100.0

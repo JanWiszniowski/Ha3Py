@@ -111,16 +111,16 @@ def plot_non_occurrence(configuration):
         nom_cdf = [event_occurrence.cdf(m, time_interval) for m in magnitudes]
         axis[0][idx].plot(magnitudes, nom_pdf, color='k', linewidth=2)
         axis[1][idx].plot(magnitudes, nom_cdf, color='k', linewidth=2)
-        axis[1][idx].set_xlabel("magnitide")
+        axis[1][idx].set_xlabel("magnitude")
         axis[0][idx].set_title(f"{configuration['occurrence_probability']},\nnon-occurrence,\nT = {time_interval}",
                                loc='center')
-    axis[0][0].set_ylabel("PDF")
-    axis[1][0].set_ylabel("CDF")
+    axis[0][0].set_ylabel("pdf")
+    axis[1][0].set_ylabel("cdf")
 
 
 def plot_magnitude_distribution(configuration):
     r"""
-    It plots magnitude distributions CDF and PDF according the configuration.
+    It plots magnitude distributions cdf and pdf according the configuration.
 
     :param configuration: General configuration container,
         which is the dictionary of all parameters required for Ha3Py modules
@@ -137,15 +137,15 @@ def plot_magnitude_distribution(configuration):
     figure, axis = plt.subplots(2, 1)
     axis[0].plot(magnitudes, m_pdf, color='k', linewidth=2)
     axis[1].plot(magnitudes, m_cdf, color='k', linewidth=2)
-    axis[0].set_ylabel("PDF")
-    axis[1].set_ylabel("CDF")
-    axis[1].set_xlabel("magnitide")
+    axis[0].set_ylabel("pdf")
+    axis[1].set_ylabel("cdf")
+    axis[1].set_xlabel("magnitude")
     axis[0].set_title(configuration.get('magnitude_distribution', 'Nonparametric Gaussian kernel'))
 
 
 def log_magnitude_distribution(configuration):
     r"""
-    It plots logarithm of magnitude distributions CDF and PDF according the configuration.
+    It plots logarithm of magnitude distributions cdf and pdf according the configuration.
 
     :param configuration: General configuration container,
         which is the dictionary of all parameters required for Ha3Py modules
@@ -164,7 +164,7 @@ def log_magnitude_distribution(configuration):
     axis[1].semilogy(magnitudes, m_cdf, color='k', linewidth=2)
     axis[0].set_ylabel("pdf")
     axis[1].set_ylabel("pdf")
-    axis[1].set_xlabel("magnitide")
+    axis[1].set_xlabel("magnitude")
     axis[0].set_title(configuration.get('magnitude_distribution', 'Nonparametric Gaussian kernel'))
 
 

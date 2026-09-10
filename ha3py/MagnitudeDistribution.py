@@ -26,7 +26,7 @@ class BaseMagnitudeDistribution(rv_continuous, ABC):
     `SciPy generic continuous random variable class.
     <https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.rv_continuous.html>`_
 
-    :param configuration: dictionary of Ha3Py params params
+    :param configuration: dictionary of Ha3Py params
         Required items in the params dictionary are unless they are define in the constructor:
 
         * m_min
@@ -50,7 +50,7 @@ class BaseMagnitudeDistribution(rv_continuous, ABC):
         * _prepare - preparation of probability distribution computation,
         * _parameters - return the list of all probability distribution parameters,
         * _grad_sf - return the survive function gradients of all probability distribution parameters (see grad_sf),
-        * _const_coefficients - return list of names of defined unestimated coefficients,
+        * _const_coefficients - return list of names of defined not estimated coefficients,
         * _coefficient_names - return list of names of coefficients including m_max as a last coefficient,
         * _coefficient_values -  return list of values of coefficients including m_max,
         * _pdf - return probability density function of magnitude(s),
@@ -67,7 +67,10 @@ class BaseMagnitudeDistribution(rv_continuous, ABC):
     def __init__(self, configuration, name, long_name=None, m_min=None, m_max=None):
         """
 
-        :param configuration:
+        :param configuration: General configuration container,
+            which is the dictionary of all parameters required for Ha3Py modules
+            and results of all computations.
+        :type configuration: dict
         :param name:
         :param long_name:
         :param m_min:
@@ -103,7 +106,7 @@ class BaseMagnitudeDistribution(rv_continuous, ABC):
     @m_min.setter
     def m_min(self, val):
         self._m_min = val
-        self.rv_continuous.a = val - EPS2
+        self.a = val - EPS2
         self._prepare()
 
     @m_min.getter
@@ -118,7 +121,7 @@ class BaseMagnitudeDistribution(rv_continuous, ABC):
     @m_max.setter
     def m_max(self, val):
         self._m_max = val
-        self.rv_continuous.b = val + EPS2
+        self.b = val + EPS2
         self._prepare()
 
     @m_max.getter

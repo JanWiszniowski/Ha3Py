@@ -52,7 +52,7 @@ class PoissonGammaCompoundOccurrence(LambdaOccurrence, ABC):
             + q_\lambda\ln\left( \frac{p_\lambda}{t+p_\lambda} \right)
             + n\ln\left( \frac{t}{t+p_\lambda} \right).
 
-    The PDF of Poisson-gamma compound distribution of not exceeding magnitude :math:`m`
+    The pdf of Poisson-gamma compound time process of not exceeding magnitude :math:`m`
     in time :math:`t` is
 
     .. math::
@@ -60,7 +60,7 @@ class PoissonGammaCompoundOccurrence(LambdaOccurrence, ABC):
         \frac{\lambda t q_\lambda f_M\left( m \right)F_M^{max}\left( m|\lambda,t \right)}
         {q_\lambda+\lambda t S_M\left( m \right)}
 
-    The CDF of Poisson-gamma compound distribution of not exceeding magnitude :math:`m`
+    The cdf of Poisson-gamma compound time process of not exceeding magnitude :math:`m`
     in time :math:`t` is
 
     .. math::
@@ -78,20 +78,17 @@ class PoissonGammaCompoundOccurrence(LambdaOccurrence, ABC):
         t\lambda\left(1+\frac{ \lambda t\left\{S_M\left(m \right)\right\}}{q_\lambda}\right)^{-q_\lambda-1}
         \left\{\frac{\partial S_M\left(m \right)}{\partial\theta_i}\right\}
 
-    Gradients of the :math:`n` events in the time in the time probability survive function are:
+    .. Gradients of the :math:`n` events in the time in the time probability survive function are:
 
     Poisson-gamma compound coefficient are: :math:`\lambda` ('lambda') and magnitude distribution coefficient.
-    One constant coefficient is :math:`q_\lambda` ('q_lambda'). The class overwrite the OccurrenceBase methods:
+    One constant coefficient is :math:`q_\lambda` ('q_lambda').
+    .. The class overwrite the LambdaOccurrence methods:
 
-    `_grad_sf_magnitude_distribution`:
-
-    `_d_grad_sf_magnitude_distribution`:
-
-    `_grad_sf`:
-
-    `_d_grad_sf`:
-
-    `d_mean`:
+    ..    `_grad_sf_magnitude_distribution`,
+    ..    `_d_grad_sf_magnitude_distribution`,
+    ..    `_grad_sf`,
+    ..    `_d_grad_sf`,
+    ..    `d_mean`.
 
     """
 
@@ -104,16 +101,6 @@ class PoissonGammaCompoundOccurrence(LambdaOccurrence, ABC):
         for idx in range(n):
             result *= (self.q_lambda + n - 1) / n
         return result
-
-    # def _d_pmf1(self, k, t):
-    #     p_lambda = self.q_lambda / self.lamb
-    #     den = t + p_lambda
-    #
-    #         component1 = loggamma(k + self.q_lambda) - loggamma(self.q_lambda) - loggamma(k + 1)
-    #         component2 = np.log(p_lambda / den) * self.q_lambda + np.log(t / den) * k
-    #         return np.exp(component1 + component2)
-    #     else:
-    #         return (p_lambda / den) ** self.q_lambda
 
     def _d_pmf(self, n, t):
         r"""

@@ -24,13 +24,14 @@ class CompoundGutenbergRichter(BaseMagnitudeDistribution):
     The compound Gutenberg-Richter-Bayes probability density function is:
 
     .. math::
-        f_{M}(m)=\left\{ \begin{alignat*}{2}
-        & 0 && : \text{for } m < m_{min} \\
-        & \overline{\beta} C_{\beta}\left[ \frac{q_{\beta}}{q_{\beta}+
-        \overline{\beta}\left(m-m_{min} \right)}\right ]^{q_{\beta}+1} &&
-        : \text{for } m_{min} \leqslant m \leqslant m_{max}\\
-        & 0 && : \text{for } m > m_{max}
-        \end{alignat*} \right.
+
+        f_{M}\left( m \right)=\begin{cases}
+        0 & \text{: for } m < m_{min} \\
+        \overline{\beta} C_{\beta}\left[ \frac{q_{\beta}}{q_{\beta}+
+        \overline{\beta}\left(m-m_{min} \right)}\right ]^{q_{\beta}+1}
+        & \text{: for } m_{min} \leqslant m \leqslant m_{max} \\
+        0 & \text{: for } m>m_{max}
+        \end{cases}
 
     where:
 
@@ -43,13 +44,14 @@ class CompoundGutenbergRichter(BaseMagnitudeDistribution):
     The compound Gutenberg-Richter cumulate density function is:
 
     .. math::
-        F_{M}(m)=\left\{ \begin{alignat*}{2}
-        & 0 && : \text{for } m<m_{min} \\
-        & C_{\beta} \left [1-\left ( \frac{q_{\beta}}{q_{\beta}+\overline{\beta}\left(m-m_{min}\right)} \right )
-        ^{q_{\beta}}  \right ] &&
-        : \text{for } m_{min} \leqslant m \leqslant m_{max}\\
-        & 1 && : \text{for } m>m_{max}
-        \end{alignat*} \right.
+
+        F_{M}\left( m \right)=\begin{cases}
+        0 & \text{: for } m < m_{min} \\
+        C_{\beta} \left [1-\left ( \frac{q_{\beta}}{q_{\beta}+\overline{\beta}\left(m-m_{min}\right)} \right )
+        ^{q_{\beta}}  \right ]
+        & \text{: for } m_{min} \leqslant m \leqslant m_{max} \\
+        1 & \text{: for } m>m_{max}
+        \end{cases}
 
     Gradient of the survive function for :math:`m_{max}` is:
 
@@ -84,7 +86,10 @@ class CompoundGutenbergRichter(BaseMagnitudeDistribution):
     def __init__(self, configuration, beta=None, q_beta=None, m_min=None, m_max=None):
         """
 
-        :param configuration:
+        :param configuration: General configuration container,
+            which is the dictionary of all parameters required for Ha3Py modules
+            and results of all computations.
+        :type configuration: dict
         :param beta:
         :param q_beta:
         :param m_min:

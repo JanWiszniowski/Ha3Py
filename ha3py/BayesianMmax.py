@@ -1,6 +1,6 @@
 """
-Module-based classes of Bayesian maximum magnitude likelihood
--------------------------------------------------------------
+Base class of Bayesian maximum magnitude likelihood
+---------------------------------------------------
 
 ..
     :copyright:
@@ -16,41 +16,8 @@ Module-based classes of Bayesian maximum magnitude likelihood
 import numpy as np
 from scipy.stats import truncnorm
 import scipy.integrate as integrate
-from ha3py.m_max_utils import non_bayesian_m_max_estimation
 from abc import ABC, abstractmethod
-
-
-def init_bayesian_m_max(configuration, magnitude_distribution=None, m_max_pair=None):
-    if m_max_pair is None:
-        m_max, sd_m_max = non_bayesian_m_max_estimation(configuration,
-                                                        magnitude_distribution=magnitude_distribution)
-    else:
-        m_max, sd_m_max = m_max_pair
-    if m_max is None or m_max > 9.9:
-        print("!!!!The catalogue dependent m_max can not be assessed")
-        print(f"Chose the solution:")
-        print(f"Observed m_max ({configuration['m_max_obs']}) - press o")
-        print(f"Primitive m_max ({configuration['m_max_obs'] + 0.5}) - press p")
-        print(f"Exit program - press x")
-        answer = input("Enter [o/p/x] > ")
-        if not answer:
-            exit(0)
-        if answer[0] == 'o':
-            m_max = configuration['m_max_obs']
-            sd_m_max = configuration['sd_m_max_obs']
-        elif answer[0] == 'p':
-            m_max = configuration['m_max_obs'] + 0.5
-            sd_m_max = configuration['sd_m_max_obs']
-        else:
-            exit(0)
-
-    prior_m_max = configuration['prior_m_max']
-    sd_prior_m_max = configuration['sd_prior_m_max']
-    if m_max > prior_m_max:
-        print(f"Prior m_max ({prior_m_max}) is smaller than m_max estimated from the catalog ({m_max})")
-        # raise HaPyException('Prior m_max error')
-        exit(-1)
-    return m_max, sd_m_max, prior_m_max, sd_prior_m_max
+from ha3py.bayesian_estimators import init_bayesian_m_max
 
 
 class BayesianBase(ABC):
@@ -64,6 +31,9 @@ class BayesianBase(ABC):
         which is the dictionary of all parameters required for Ha3Py modules
         and results of all computations.
     :type configuration: dict
+    :param magnitude_distribution: Optional magnitude distribution object.
+        If missing, the magnitude distribution object is created based on the configuration
+    :type magnitude_distribution: MagnitudeDistribution
 
     """
 

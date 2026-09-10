@@ -22,12 +22,13 @@ Base event occurrence probability classes
 .. automodule:: LambdaOccurrence
    :members:
 
-Users can use one from two event occurrence probability classes:
-* classic Poisson probability,
-* gamma compound Poisson probability.
+Predefined events occurrence probability classes
+================================================
 
-Predefined events event occurrence probability classes
-======================================================
+Users can use one from two event occurrence probability classes:
+
+    * classic Poisson probability,
+    * gamma compound Poisson probability.
 
 .. automodule:: PoissonOccurrence
    :members:
