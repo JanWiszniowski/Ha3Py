@@ -29,7 +29,7 @@ class PoissonOccurrence(LambdaOccurrence, ABC):
     .. math::
         p_n(n|\lambda,t)=\left( \lambda t  \right)^k \frac{\exp(-\lambda t )}{k!}
 
-    The PDF of Poisson distribution of not exceeding magnitude :math:`m`
+    The pdf of Poisson process of not exceeding magnitude :math:`m`
     in time :math:`t` is
 
     .. math::
@@ -37,7 +37,7 @@ class PoissonOccurrence(LambdaOccurrence, ABC):
         \lambda t f_m\left( m|\mathbf{\Theta_\beta} \right)
         \exp\left( \lambda t S_M\left( m|\mathbf{\Theta_\beta} \right) \right).
 
-    The CDF of Poisson distribution of not exceeding magnitude :math:`m`
+    The cdf of Poisson process of not exceeding magnitude :math:`m`
     in time :math:`t` is
 
     .. math::
@@ -65,7 +65,7 @@ class PoissonOccurrence(LambdaOccurrence, ABC):
 
     def _d_pmf(self, n, t):
         wyn = poisson.pmf(n, self.lamb * t)
-        l = self.lamb * t
+        # l = self.lamb * t
         return wyn
 
     def ln_d_pmf(self, n, *args):

@@ -34,12 +34,14 @@ from ha3py.constant_values import LN_10_
 def get_covariance(configuration, events_distribution=None, delta=0.01):
     """
 
-    :param configuration:
-    :param configuration:
-    :param events_distribution:
-    :param events_distribution:
-    :param delta:
-    :param delta:
+    :param configuration: General configuration container,
+        which is the dictionary of all parameters required for Ha3Py modules
+        and results of all computations.
+    :type configuration: dict
+    :param events_distribution: Events occurrence object. If missing the object is created based on configuration
+    :type events_distribution: OccurrenceBase
+    :param delta: The step value for gradient calculation (default 0.01)
+    :type delta: float
     :return:
     :rtype:
     """
@@ -89,10 +91,12 @@ def get_covariance(configuration, events_distribution=None, delta=0.01):
 def compute_uncertainty(configuration, events_distribution=None):
     """
 
-    :param configuration:
-    :param configuration:
-    :param events_distribution:
-    :param events_distribution:
+    :param configuration: General configuration container,
+        which is the dictionary of all parameters required for Ha3Py modules
+        and results of all computations.
+    :type configuration: dict
+    :param events_distribution: Events occurrence object. If missing the object is created based on configuration
+    :type events_distribution: OccurrenceBase
     :return:
     :rtype:
 

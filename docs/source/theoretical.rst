@@ -176,7 +176,7 @@ depends on :math:`m_{max}`. The approximate variance of the Tate-Pisarenko estim
 where :math:`\sigma_M^2` denotes the standard error of the largest observed magnitude determination.
 
 Auxiliary Tate-Pisarenko Procedure
----------------------------------
+----------------------------------
 
 In the auxiliary Tate-Pisarenko procedure (:cite:t:`Pisarenko1991`; :cite:t:`Pisarenko1996`),
 the correction factor :math:`\Delta` takes the form
@@ -219,7 +219,7 @@ for the frequency-magnitude G-R distribution is of the form
     \text{VAR}\left( \widehat{m}_{max} \right) = \sigma_M^2+\Delta^2
 
 Auxiliary Kijko-Sellevoll Procedure
----------------------------------
+-----------------------------------
 
 In the auxiliary Kijko-Sellevoll procedure (:cite:t:`KijkoSellevoll1989`; :cite:t:`KijkoSellevoll1992`),
 the correction factor :math:`\Delta` takes the form

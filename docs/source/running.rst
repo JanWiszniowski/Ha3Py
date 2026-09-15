@@ -892,23 +892,21 @@ Closing the drawings ends the program.
 The figures are also written to png files: `annual_probability.png`, `return_period.png`,
 and `probabilities.png`.
 
-..
+    .. Creating synthetic catalogues
+    .. =============================
 
-    Creating synthetic catalogues
-    =============================
+    .. The program creates synthetic catalogues based on the existing catalogue description in the configuration file
+    .. and defined seismic hazard parameters.
+    .. The program does the opposite of calculating the parameters of exceeding the magnitude.
+    .. Based on these parameters, it simulates catalogs.
+    .. The program requires catalogue's periods (begin time and end time),
+    .. completeness magnitude, and magnitude uncertainty for simulation.
 
-    The program creates synthetic catalogues based on the existing catalogue description in the configuration file
-    and defined seismic hazard parameters.
-    The program does the opposite of calculating the parameters of exceeding the magnitude.
-    Based on these parameters, it simulates catalogs.
-    The program requires catalogue's periods (begin time and end time),
-    completeness magnitude, and magnitude uncertainty for simulation.
+    .. **For creating synthetic catalogues enter** ::
 
-    **For creating synthetic catalogues enter** ::
+    ..    ha_simulate <configuration_file.json>
 
-        ha_simulate <configuration_file.json>
-
-    **WARNING! Existing earthquake lists in catalogs are overwritten.**
+    .. **WARNING! Existing earthquake lists in catalogs are overwritten.**
 
 .. File format links:
 .. _JSON: https://www.json.org

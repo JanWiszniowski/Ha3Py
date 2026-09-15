@@ -1,6 +1,6 @@
 r"""
 The :math:`m_{max}` assessment by Robson-Whitlock and Robson-Whitlock-Cooke procedure
----------------------------------------------------------------------------------
+-------------------------------------------------------------------------------------
 
 :math:`m_{max}` is assessed by adding to :math:`m_{max}^{obs}` the difference
 between :math:`m_{max}^{obs}` and the second maximum magnitude.

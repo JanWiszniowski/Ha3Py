@@ -17,15 +17,11 @@ The solution requires the Gutenberg-Richter magnitude distribution
 """
 
 from math import sqrt
-from scipy.optimize import fsolve
 from scipy import lambertw
 import numpy as np
-from ha3py.utils import HaPyException
-from ha3py.get_magnitude_distribution import get_magnitude_distribution
 
 
-
-def m_max_by_direct_tate_pisarenko(configuration, magnitude_distribution=None, m_max=None, m_min=None):
+def m_max_by_direct_tate_pisarenko(configuration, m_min=None):
     r"""
     :math:`m_{max}`, which is the direct solution of Tate-Pisarenko, is described by the solution
 
@@ -45,15 +41,9 @@ def m_max_by_direct_tate_pisarenko(configuration, magnitude_distribution=None, m
         which is the dictionary of all parameters required for Ha3Py modules
         and results of all computations.
     :type configuration: dict
-    :param m_max: Maximum value of the magnitude distribution.
-        If missing, the maximum magnitude is taken from configuration
-    :type m_max: float
     :param m_min: Minimum value of the magnitude distribution.
         If missing, the maximum magnitude is taken from configuration
     :type m_min: float
-    :param magnitude_distribution:  Optional magnitude distribution object.
-        If missing, the magnitude distribution object is created based on the configuration
-    :type magnitude_distribution: MagnitudeDistribution
     :return: Estimated maximum magnitude, standard deviation of maximum magnitude.
     :rtype: (float, float)
 
@@ -67,7 +57,7 @@ def m_max_by_direct_tate_pisarenko(configuration, magnitude_distribution=None, m
     m_max_obs = configuration['m_max_obs']
     sd_m_max_obs = configuration['sd_m_max_obs']
     if m_max_obs - m_min - np.log(n) / beta + (n - 1) / n / beta > 0:
-        print(f"The direct Tate-Pisarenko requires n >= {np.exp(beta * (m_max_obs- m_min) + 1)}")
+        print(f"The direct Tate-Pisarenko requires n >= {np.exp(beta * (m_max_obs - m_min) + 1)}")
         return None, None
     m_max = m_max_obs - lambertw(-np.exp(beta * (m_max_obs - m_min) + 1 / n) / n) / beta - 1 / n / beta
     if m_max <= m_max_obs:
